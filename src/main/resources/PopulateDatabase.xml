@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Administrator -->
+
+	<bean id="admin1" class="domain.Administrator">
+		<property name="userAccount" ref="userAccount1"/>
+		<property name="name" value="admin1" />
+		<property name="surname" value="admin1"/>
+		<property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+		<property name="email" value="emailDePrueba@gmail.com"/>
+		<property name="phoneNumber" value="+34 678123674"/>
+		<property name="address" value="Avenida Reina Mercedes"/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
+		<property name="score" value="0"/>
+		<property name="socialProfiles">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<!-- Configuration -->
+
+	<bean id="configuration1" class="domain.Configuration">
+		<property name="maxResults" value="10"/>
+		<property name="maxTime" value="1"/>
+		<property name="systemName" value="Acme Rookies"/>
+		<property name="banner" value="https://i.imgur.com/TslDk56.png"/>
+		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
+		<property name="welcomeMessageEn" value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!"/>
+		<property name="countryCode" value="34"/>
+		<property name="defaultVAT" value="21.0"/>
+		<property name="flatRate" value="10.0"/>
+		<property name="spamWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you've been selected</value>
+				<value>Nigeria</value>
+				<value>sexo</value>
+				<value>un millon</value>
+				<value>has sido seleccionado</value>
+				<value>has sido seleccionada</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
