@@ -1,5 +1,12 @@
 #./src/main/resources/Entities.map
-#Thu May 16 22:55:05 CEST 2019
-configuration1=6
-admin1=5
-userAccount1=4
+#Mon May 20 22:44:42 CEST 2019
+sponsor1=19
+admin1=16
+organizer1=17
+configuration1=20
+userAccount5=15
+referee1=18
+userAccount4=14
+userAccount3=13
+userAccount2=12
+userAccount1=11
