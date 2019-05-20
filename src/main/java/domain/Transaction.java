@@ -6,10 +6,11 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import java.util.Collection;
 import java.util.Date;
 
 public class Transaction extends DomainEntity{
@@ -60,5 +61,34 @@ public class Transaction extends DomainEntity{
 
     //Relationships-----------------------------------------------------------------------------------------------------
 
+    private Reader seller;
+    private Reader buyer;
+    private Collection<Offer> offers;
+    //private Book book;
 
+    @NotNull
+    public Reader getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Reader seller) {
+        this.seller = seller;
+    }
+
+    public Reader getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Reader buyer) {
+        this.buyer = buyer;
+    }
+
+    @OneToMany
+    public Collection<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(Collection<Offer> offers) {
+        this.offers = offers;
+    }
 }
