@@ -1,7 +1,8 @@
 
 package forms;
 
-import domain.Administrator;
+import domain.Reader;
+import domain.Referee;
 import org.hibernate.validator.constraints.*;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-public class AdministratorForm {
+public class ReaderForm {
 
 	private String	confirmPass;
 	private String	password;
@@ -27,26 +28,27 @@ public class AdministratorForm {
 	private int		id;
 	private int		version;
 	private String	surname;
+
 	private String	holder;
 	private String	brandName;
 	private String	number;
-	private Date	expirationYear;
+	private Date expirationYear;
 	private Integer	cvv;
 
-	public AdministratorForm(final Administrator admin) {
-		final AdministratorForm result = new AdministratorForm();
-		result.setAddress(admin.getAddress());
-		result.setEmail(admin.getEmail());
-		result.setId(admin.getId());
-		result.setName(admin.getName());
-		result.setPhoneNumber(admin.getPhoneNumber());
-		result.setPhoto(admin.getPhoto());
-		result.setSurname(admin.getSurname());
-		result.setVersion(admin.getVersion());
+	public ReaderForm(final Reader r) {
+		final ReaderForm result = new ReaderForm();
+		result.setAddress(r.getAddress());
+		result.setEmail(r.getEmail());
+		result.setId(r.getId());
+		result.setName(r.getName());
+		result.setPhoneNumber(r.getPhoneNumber());
+		result.setPhoto(r.getPhoto());
+		result.setSurname(r.getSurname());
+		result.setVersion(r.getVersion());
 
 	}
 
-	public AdministratorForm() {
+	public ReaderForm() {
 
 	}
 
@@ -155,6 +157,7 @@ public class AdministratorForm {
 	public void setSurname(final String surname) {
 		this.surname = surname;
 	}
+
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)

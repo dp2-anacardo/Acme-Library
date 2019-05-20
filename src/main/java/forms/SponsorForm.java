@@ -1,7 +1,8 @@
 
 package forms;
 
-import domain.Administrator;
+import domain.Referee;
+import domain.Sponsor;
 import org.hibernate.validator.constraints.*;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-public class AdministratorForm {
+public class SponsorForm {
 
 	private String	confirmPass;
 	private String	password;
@@ -27,26 +28,27 @@ public class AdministratorForm {
 	private int		id;
 	private int		version;
 	private String	surname;
+
 	private String	holder;
 	private String	brandName;
 	private String	number;
-	private Date	expirationYear;
+	private Date expirationYear;
 	private Integer	cvv;
 
-	public AdministratorForm(final Administrator admin) {
-		final AdministratorForm result = new AdministratorForm();
-		result.setAddress(admin.getAddress());
-		result.setEmail(admin.getEmail());
-		result.setId(admin.getId());
-		result.setName(admin.getName());
-		result.setPhoneNumber(admin.getPhoneNumber());
-		result.setPhoto(admin.getPhoto());
-		result.setSurname(admin.getSurname());
-		result.setVersion(admin.getVersion());
+	public SponsorForm(final Sponsor s) {
+		final SponsorForm result = new SponsorForm();
+		result.setAddress(s.getAddress());
+		result.setEmail(s.getEmail());
+		result.setId(s.getId());
+		result.setName(s.getName());
+		result.setPhoneNumber(s.getPhoneNumber());
+		result.setPhoto(s.getPhoto());
+		result.setSurname(s.getSurname());
+		result.setVersion(s.getVersion());
 
 	}
 
-	public AdministratorForm() {
+	public SponsorForm() {
 
 	}
 
@@ -155,6 +157,7 @@ public class AdministratorForm {
 	public void setSurname(final String surname) {
 		this.surname = surname;
 	}
+
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
