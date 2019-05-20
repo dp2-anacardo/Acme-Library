@@ -28,6 +28,11 @@
 		<bean class="converters.StringToConfigurationConverter"/>
 		<bean class="converters.ActorToStringConverter"/>
 		<bean class="converters.StringToActorConverter"/>
+		<bean class="converters.OfferToStringConverter"/>
+		<bean class="converters.StringToOfferConverter"/>
+		<bean class="converters.TransactionToStringConverter"/>
+		<bean class="converters.StringToTransactionConverter"/>
+
 	</util:list>
 	
 </beans>
