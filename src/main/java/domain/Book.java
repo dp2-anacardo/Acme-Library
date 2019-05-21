@@ -78,7 +78,6 @@ public class Book extends DomainEntity{
         this.description = description;
     }
 
-    @NotBlank
     @Range(min = 0)
     public int getPageNumber() {
         return pageNumber;
