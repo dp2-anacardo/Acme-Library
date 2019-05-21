@@ -16,7 +16,7 @@ public class Event extends DomainEntity {
     private Date date;
     private String address;
     private int maximumCapacity;
-    // private int actualCapacity;
+    private int actualCapacity;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -63,6 +63,15 @@ public class Event extends DomainEntity {
 
     public void setMaximumCapacity(int maximumCapacity) {
         this.maximumCapacity = maximumCapacity;
+    }
+
+    @Transient
+    public int getActualCapacity() {
+        return actualCapacity;
+    }
+
+    public void setActualCapacity(int actualCapacity) {
+        this.actualCapacity = actualCapacity;
     }
 
     // Relationships...................................................................................................

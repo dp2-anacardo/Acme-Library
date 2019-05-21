@@ -16,7 +16,7 @@ public class Book extends DomainEntity{
     private String title;
     private String author;
     private String publisher;
-    private String languaje;
+    private String language;
     private String description;
     private int pageNumber;
     private String status;
@@ -58,11 +58,11 @@ public class Book extends DomainEntity{
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getLanguaje() {
-        return languaje;
+        return language;
     }
 
     public void setLanguaje(String languaje) {
-        this.languaje = languaje;
+        this.language = language;
     }
 
     @NotBlank
