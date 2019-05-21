@@ -3,8 +3,10 @@ package domain;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
@@ -57,11 +59,11 @@ public class Book extends DomainEntity{
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    public String getLanguaje() {
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguaje(String languaje) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 
@@ -104,7 +106,9 @@ public class Book extends DomainEntity{
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
         return moment;
     }

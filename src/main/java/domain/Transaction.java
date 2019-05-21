@@ -21,6 +21,28 @@ public class Transaction extends DomainEntity{
     private Double price;
     private CreditCard creditCard;
     private Boolean isSale;
+    private Boolean isFinished;
+
+    @Transient
+    public Boolean getIsFinished(){
+        Boolean result = false;
+        if(this.isSale){
+            if(this.buyer != null && this.creditCard != null){
+                result = true;
+            }
+        }else{
+            for(Offer o : offers){
+                if(o.getStatus().equals("ACCEPTED")){
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
+    public void setIsFinished(Boolean b){
+        this.isFinished = b;
+    }
 
     public Boolean getIsSale() {
         return isSale;
@@ -31,6 +53,7 @@ public class Transaction extends DomainEntity{
     }
 
     @NotBlank
+    @Column(unique = true)
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getTicker() {
         return ticker;
@@ -39,7 +62,6 @@ public class Transaction extends DomainEntity{
     public void setTicker(String ticker) {
         this.ticker = ticker;
     }
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
