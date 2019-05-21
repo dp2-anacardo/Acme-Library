@@ -136,7 +136,7 @@ public class MessageController extends AbstractController {
         } catch (final ValidationException e) {
             result = this.createModelAndView(mesage, null);
         } catch (final Throwable oops) {
-            result = this.createModelAndView(mesage, "problem.commit.error");
+            result = this.createModelAndView(mesage, "message.commit.error");
         }
         return result;
     }

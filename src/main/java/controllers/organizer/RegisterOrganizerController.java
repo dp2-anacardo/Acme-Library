@@ -61,14 +61,7 @@ public class RegisterOrganizerController extends AbstractController {
 			result = this.createEditModelAndView(r);
 		else
 			try {
-				final CreditCard c = new CreditCard();
-				c.setBrandName(r.getBrandName());
-				c.setCvv(r.getCvv());
-				c.setExpirationYear(r.getExpirationYear());
-				c.setHolder(r.getHolder());
-				c.setNumber(r.getNumber());
 				a = this.organizerService.reconstruct(r, binding);
-				a.setCreditCard(c);
 				this.organizerService.save(a);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {

@@ -64,14 +64,7 @@ public class RegisterSponsorController extends AbstractController {
 			result = this.createEditModelAndView(sponsorForm);
 		else
 			try {
-				final CreditCard c = new CreditCard();
-				c.setBrandName(sponsorForm.getBrandName());
-				c.setCvv(sponsorForm.getCvv());
-				c.setExpirationYear(sponsorForm.getExpirationYear());
-				c.setHolder(sponsorForm.getHolder());
-				c.setNumber(sponsorForm.getNumber());
 				s = this.sponsorService.reconstruct(sponsorForm, binding);
-				s.setCreditCard(c);
 				this.sponsorService.save(s);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {

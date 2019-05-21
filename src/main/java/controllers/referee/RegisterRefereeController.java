@@ -59,14 +59,7 @@ public class RegisterRefereeController extends AbstractController {
 			result = this.createEditModelAndView(refereeForm);
 		else
 			try {
-				final CreditCard c = new CreditCard();
-				c.setBrandName(refereeForm.getBrandName());
-				c.setCvv(refereeForm.getCvv());
-				c.setExpirationYear(refereeForm.getExpirationYear());
-				c.setHolder(refereeForm.getHolder());
-				c.setNumber(refereeForm.getNumber());
 				r = this.refereeService.reconstruct(refereeForm, binding);
-				r.setCreditCard(c);
 				this.refereeService.save(r);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {

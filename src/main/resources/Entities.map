@@ -1,24 +1,32 @@
 #./src/main/resources/Entities.map
-<<<<<<< HEAD
-#Sun May 19 19:32:53 CEST 2019
-inBoxAdmin1=11
-configuration1=16
-admin1=10
-userAccount1=9
-notificationBoxAdmin1=15
-trashBoxAdmin1=14
-spamBoxAdmin1=13
-outBoxAdmin1=12
-=======
-#Tue May 21 00:52:26 CEST 2019
-sponsor1=19
-admin1=16
-organizer1=17
-configuration1=20
-userAccount5=15
-referee1=18
-userAccount4=14
-userAccount3=13
-userAccount2=12
-userAccount1=11
->>>>>>> 98c7f5e52a6d62271077789de390876451a01f66
+#Tue May 21 14:48:50 CEST 2019
+spamBoxSponsor1=57
+notificationBoxReferee1=53
+outBoxOrganizer1=44
+notificationBoxSponsor1=59
+admin1=36
+trashBoxAdmin1=40
+trashBoxSponsor1=58
+referee1=48
+sponsor1=54
+userAccount5=35
+userAccount4=34
+outBoxSponsor1=56
+userAccount3=33
+userAccount2=32
+userAccount1=31
+spamBoxAdmin1=39
+inBoxReferee1=49
+inBoxSponsor1=55
+trashBoxReferee1=52
+spamBoxOrganizer1=45
+notificationBoxOrganizer1=47
+trashBoxOrganizer1=46
+inBoxAdmin1=37
+configuration1=60
+notificationBoxAdmin1=41
+inBoxOrganizer1=43
+outBoxReferee1=50
+spamBoxReferee1=51
+organizer1=42
+outBoxAdmin1=38

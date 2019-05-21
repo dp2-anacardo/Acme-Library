@@ -1,10 +1,7 @@
 
 package services;
 
-import domain.Actor;
-import domain.Organizer;
-import domain.Reader;
-import domain.SocialProfile;
+import domain.*;
 import forms.OrganizerForm;
 import forms.ReaderForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +52,7 @@ public class ReaderService {
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
-        boxes = new ArrayList<>(MessageBox);
+        boxes = new ArrayList<MessageBox>();
 //        books = new ArrayList<Book>();
 //        finders = new ArrayList<Finder>();
 
@@ -69,7 +66,7 @@ public class ReaderService {
         a.setSocialProfiles(profiles);
 //        a.setFinder(finders);
 //        a.setBook(books);
-        a.setMessageBox(boxes);
+        a.setBoxes(boxes);
 
         return a;
     }

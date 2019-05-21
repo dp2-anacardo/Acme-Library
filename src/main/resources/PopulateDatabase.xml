@@ -165,6 +165,60 @@
             <list>
             </list>
         </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxOrganizer1"/>
+                <ref bean="outBoxOrganizer1"/>
+                <ref bean="spamBoxOrganizer1"/>
+                <ref bean="trashBoxOrganizer1"/>
+                <ref bean="notificationBoxOrganizer1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxOrganizer1" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxOrganizer1" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxOrganizer1" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxOrganizer1" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxOrganizer1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
     </bean>
 
 
@@ -185,7 +239,62 @@
             <list>
             </list>
         </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxReferee1"/>
+                <ref bean="outBoxReferee1"/>
+                <ref bean="spamBoxReferee1"/>
+                <ref bean="trashBoxReferee1"/>
+                <ref bean="notificationBoxReferee1"/>
+            </list>
+        </property>
     </bean>
+
+    <bean id="inBoxReferee1" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxReferee1" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxReferee1" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxReferee1" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxReferee1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
 
     <!-- Sponsor -->
 
@@ -201,6 +310,60 @@
         <property name="isBanned" value="false"/>
         <property name="score" value="0"/>
         <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxSponsor1"/>
+                <ref bean="outBoxSponsor1"/>
+                <ref bean="spamBoxSponsor1"/>
+                <ref bean="trashBoxSponsor1"/>
+                <ref bean="notificationBoxSponsor1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxSponsor1" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxSponsor1" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxSponsor1" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxSponsor1" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxSponsor1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
             <list>
             </list>
         </property>

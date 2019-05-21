@@ -1,10 +1,7 @@
 
 package services;
 
-import domain.Actor;
-import domain.Referee;
-import domain.SocialProfile;
-import domain.Sponsor;
+import domain.*;
 import forms.RefereeForm;
 import forms.SponsorForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +60,7 @@ public class SponsorService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
-        a.setMessageBox(boxes);
-
+        a.setBoxes(boxes);
         return a;
     }
 

@@ -46,11 +46,14 @@
 	class="displaytag">
 	<spring:message code="message.priority" var="priorityHeader" />
 	<jstl:choose>
-		<jstl:when test="${pageContext.response.locale.language == 'es'}">
-			<display:column title="${priorityHeader}" sortable="false">${row.priority.name["ES"]}</display:column>
+		<jstl:when test="${row.priority == 'HIGH'}">
+			<display:column title="${priorityHeader}" sortable="false"><spring:message code="message.priority.high"/></display:column>
 		</jstl:when>
-		<jstl:when test="${pageContext.response.locale.language == 'en'}">
-			<display:column title="${priorityHeader}" sortable="false">${row.priority.name["EN"]}</display:column>
+		<jstl:when test="${row.priority == 'MEDIUM'}">
+			<display:column title="${priorityHeader}" sortable="false"><spring:message code="message.priority.medium"/></display:column>
+		</jstl:when>
+		<jstl:when test="${row.priority == 'LOW'}">
+			<display:column title="${priorityHeader}" sortable="false"><spring:message code="message.priority.low"/></display:column>
 		</jstl:when>
 	</jstl:choose>
 </display:table>
@@ -58,7 +61,7 @@
 <display:table name="mesage" id="row" requestURI="message/display.do"
 	class="displaytag">
 	<spring:message code="message.moment" var="momentHeader" />
-	<display:column property="sendingMoment" title="${momentHeader}"
+	<display:column property="moment" title="${momentHeader}"
 		sortable="false" />
 </display:table>
 

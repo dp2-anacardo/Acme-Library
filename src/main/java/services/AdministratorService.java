@@ -60,8 +60,7 @@ public class AdministratorService {
         a.setUserAccount(userAccount);
         a.setIsBanned(false);
         a.setSocialProfiles(profiles);
-        a.setMessageBox(boxes);
-
+        a.setBoxes(boxes);
         return a;
     }
 

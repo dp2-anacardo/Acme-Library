@@ -64,14 +64,7 @@ public class RegisterReaderController extends AbstractController {
 			result = this.createEditModelAndView(r);
 		else
 			try {
-				final CreditCard c = new CreditCard();
-				c.setBrandName(r.getBrandName());
-				c.setCvv(r.getCvv());
-				c.setExpirationYear(r.getExpirationYear());
-				c.setHolder(r.getHolder());
-				c.setNumber(r.getNumber());
 				re = this.readerService.reconstruct(r, binding);
-				re.setCreditCard(c);
 				this.readerService.save(re);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {

@@ -2,6 +2,7 @@
 package services;
 
 import domain.Actor;
+import domain.MessageBox;
 import domain.Referee;
 import domain.SocialProfile;
 import forms.RefereeForm;
@@ -62,8 +63,7 @@ public class RefereeService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
-        a.setMessageBox(boxes);
-
+        a.setBoxes(boxes);
         return a;
     }
 

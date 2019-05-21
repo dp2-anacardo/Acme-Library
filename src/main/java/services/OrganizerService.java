@@ -1,10 +1,7 @@
 
 package services;
 
-import domain.Actor;
-import domain.Organizer;
-import domain.Referee;
-import domain.SocialProfile;
+import domain.*;
 import forms.OrganizerForm;
 import forms.RefereeForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +60,7 @@ public class OrganizerService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
-        a.setMessageBox(boxes);
-
+        a.setBoxes(boxes);
         return a;
     }
 

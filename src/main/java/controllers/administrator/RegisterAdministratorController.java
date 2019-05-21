@@ -55,14 +55,7 @@ public class RegisterAdministratorController extends AbstractController {
 			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
-				final CreditCard c = new CreditCard();
-				c.setBrandName(administratorForm.getBrandName());
-				c.setCvv(administratorForm.getCvv());
-				c.setExpirationYear(administratorForm.getExpirationYear());
-				c.setHolder(administratorForm.getHolder());
-				c.setNumber(administratorForm.getNumber());
 				admin = this.administratorService.reconstruct(administratorForm, binding);
-				admin.setCreditCard(c);
 				this.administratorService.save(admin);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
