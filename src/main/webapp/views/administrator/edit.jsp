@@ -34,6 +34,13 @@
 	<form:input path="surname" />
 	<form:errors cssClass="error" path="surname" />
 	<br />
+
+	<form:label path="middleName">
+		<spring:message code="actor.middleName" />
+	</form:label>
+	<form:input path="middleName" />
+	<form:errors cssClass="error" path="middleName" />
+	<br />
 	
 	<form:label path="photo">
 		<spring:message code="actor.photo" />

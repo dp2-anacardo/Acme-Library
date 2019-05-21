@@ -23,6 +23,6 @@
 
 	<definition name="reader/reader/edit" extends="master.page">
 		<put-attribute name="title" value="Editar informacion personal" />
-		<put-attribute name="body" value="/views/reader/register.jsp" />
+		<put-attribute name="body" value="/views/reader/edit.jsp" />
 	</definition>
 </tiles-definitions>

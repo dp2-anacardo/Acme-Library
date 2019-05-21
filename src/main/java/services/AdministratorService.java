@@ -59,6 +59,7 @@ public class AdministratorService {
         userAccount.setAuthorities(authorities);
         a.setUserAccount(userAccount);
         a.setIsBanned(false);
+        a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
         a.setBoxes(boxes);
         return a;
@@ -129,6 +130,7 @@ public class AdministratorService {
             result.setEmail(admin.getEmail());
             result.setAddress(admin.getAddress());
             result.setSurname(admin.getSurname());
+            result.setMiddleName(admin.getMiddleName());
 
             this.validator.validate(admin, binding);
         }
@@ -149,6 +151,7 @@ public class AdministratorService {
         final Administrator result = this.create();
         result.setAddress(admin.getAddress());
         result.setEmail(admin.getEmail());
+        result.setMiddleName(admin.getMiddleName());
         result.setId(admin.getId());
         result.setName(admin.getName());
         result.setPhoneNumber(admin.getPhoneNumber());

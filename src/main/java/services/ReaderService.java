@@ -30,6 +30,9 @@ public class ReaderService {
     //Supporting services
     @Autowired
     private MessageBoxService messageBoxService;
+
+    @Autowired
+    private FinderService finderService;
     @Autowired
     private ActorService actorService;
     @Autowired
@@ -45,16 +48,12 @@ public class ReaderService {
         final Collection<Authority> authorities;
         final Collection<SocialProfile> profiles;
         final Collection<MessageBox> boxes;
-//        final Collection<Finder> finders;
-//        Final Collection<Book> books;
         final Reader a = new Reader();
         userAccount = new UserAccount();
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
         boxes = new ArrayList<MessageBox>();
-//        books = new ArrayList<Book>();
-//        finders = new ArrayList<Finder>();
 
 
         auth.setAuthority(Authority.READER);
@@ -64,8 +63,6 @@ public class ReaderService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
-//        a.setFinder(finders);
-//        a.setBook(books);
         a.setBoxes(boxes);
 
         return a;
@@ -87,9 +84,7 @@ public class ReaderService {
     }
 
     public Reader save(final Reader r) {
-        UserAccount userAccount;
-        userAccount = LoginService.getPrincipal();
-        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("READER"));
+
         Assert.notNull(r);
         Reader result;
         final char[] c = r.getPhoneNumber().toCharArray();
@@ -103,6 +98,9 @@ public class ReaderService {
             final String res = encoder.encodePassword(r.getUserAccount().getPassword(), null);
             r.getUserAccount().setPassword(res);
             r.setBoxes(this.messageBoxService.createSystemMessageBox());
+            Finder definitivo = this.finderService.save(this.finderService.create());
+            r.setFinder(definitivo);
+
         }
         result = this.readerRepository.save(r);
         return result;
@@ -153,6 +151,7 @@ public class ReaderService {
         result.getUserAccount().setPassword(r.getPassword());
         result.getUserAccount().setUsername(r.getUsername());
         result.setVersion(r.getVersion());
+        result.setMiddleName(r.getMiddleName());
 
         this.validator.validate(result, binding);
         return result;
