@@ -7,10 +7,14 @@ import domain.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.CommentRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -30,6 +34,9 @@ public class CommentService {
 
     @Autowired
     private ReaderService readerService;
+
+    @Autowired
+    private Validator validator;
 
     public Comment create(){
         Assert.isTrue(actorService.getActorLogged() instanceof Reader
@@ -65,6 +72,20 @@ public class CommentService {
         Comment result = this.commentRepository.save(comment);
         report.getComments().add(result);
 
+        return result;
+    }
+
+    public Comment reconstruct(final Comment comment, final BindingResult binding) {
+        Comment result;
+
+        result = this.create();
+        result.setMoment(new Date());
+        result.setBody(comment.getBody());
+        result.setAuthor(actorService.getActorLogged());
+
+        this.validator.validate(result, binding);
+        if (binding.hasErrors())
+            throw new ValidationException();
         return result;
     }
 }
