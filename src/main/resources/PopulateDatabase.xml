@@ -399,7 +399,60 @@
             <list>
             </list>
         </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxReader1"/>
+                <ref bean="outBoxReader1"/>
+                <ref bean="spamBoxReader1"/>
+                <ref bean="trashBoxReader1"/>
+                <ref bean="notificationBoxReader1"/>
+            </list>
+        </property>
+    </bean>
 
+    <bean id="inBoxReader1" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxReader1" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxReader1" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxReader1" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxReader1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
     </bean>
 
     <bean id="reader2" class="domain.Reader">
@@ -415,6 +468,60 @@
         <property name="score" value="0"/>
         <property name="finder" ref="finder2"/>
         <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxReader2"/>
+                <ref bean="outBoxReader2"/>
+                <ref bean="spamBoxReader2"/>
+                <ref bean="trashBoxReader2"/>
+                <ref bean="notificationBoxReader2"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxReader2" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxReader2" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxReader2" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxReader2" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxReader2" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
             <list>
             </list>
         </property>
