@@ -1,6 +1,7 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -77,7 +78,7 @@ public class Book extends DomainEntity{
         this.description = description;
     }
 
-    // TODO: @NotBlank ?
+    @Range(min = 0)
     public int getPageNumber() {
         return pageNumber;
     }
@@ -88,7 +89,6 @@ public class Book extends DomainEntity{
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    //TODO: Revisar pattern
     @Pattern(regexp = "^VERY GOOD|GOOD|BAD|VERY BAD$")
     public String getStatus() {
         return status;
@@ -106,6 +106,7 @@ public class Book extends DomainEntity{
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
+
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -118,7 +119,6 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
-    //TODO: @URL?
     @URL
     public String getPhoto() {
         return photo;

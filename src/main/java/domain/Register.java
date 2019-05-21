@@ -1,8 +1,8 @@
 package domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -12,6 +12,8 @@ public class Register extends DomainEntity {
 
     private Date moment;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
         return moment;
     }

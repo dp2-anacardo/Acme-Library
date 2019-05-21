@@ -10,6 +10,7 @@ import security.UserAccount;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -71,6 +72,7 @@ public class BookService {
             int id = this.actorService.getActorLogged().getId();
             Reader r = this.readerService.findOne(id);
             b.setReader(r);
+            b.setMoment(new Date());
         }
         res = this.bookRepository.save(b);
         return res;
