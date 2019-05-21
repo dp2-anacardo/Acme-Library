@@ -33,6 +33,20 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
+
+		<security:authorize access="hasRole('READER')">
+			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="transaction/reader/listSales.do"><spring:message code="master.page.reader.listSales" /></a></li>
+					<li><a href="transaction/reader/listExchanges.do"><spring:message code="master.page.reader.listExchanges" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+
+		<security:authorize access="isAnonymous()">
+			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
 			<li>
