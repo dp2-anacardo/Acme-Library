@@ -2,11 +2,13 @@ package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
+
+@Entity
+@Access(AccessType.PROPERTY)
 public class Book extends DomainEntity{
     private String title;
     private String author;
