@@ -184,4 +184,25 @@ public class AdministratorService {
         this.actorService.save(actor);
     }
 
+    //DASHBOARD
+    //Q8
+    public Double getRatioOfFullFinders(){
+        return this.administratorRepository.getRatioOfFullFinders();
+    }
+
+    //Q9
+    public Double getRatioOfEmptyFinders(){
+        return this.administratorRepository.getRatioOfEmptyFinders();
+    }
+
+    //Q10
+    public Double getRatioOfEmptyVSFullFinders(){
+        return this.administratorRepository.getRatioOfEmptyVSFullFinders();
+    }
+
+    //Q13
+    public Double getRatioOfSalesVSExchangesByReader(){
+        return this.administratorRepository.getRatioOfSalesVSExchangesByReader();
+    }
+
 }
