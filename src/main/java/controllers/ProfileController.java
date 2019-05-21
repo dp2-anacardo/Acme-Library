@@ -12,8 +12,7 @@ package controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import domain.Actor;
-import domain.Administrator;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -22,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
-import services.ActorService;
-import services.AdministratorService;
+import services.*;
 
 @Controller
 @RequestMapping("/profile")
@@ -34,6 +32,18 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private RefereeService refereeService;
+
+	@Autowired
+	private SponsorService sponsorService;
+
+	@Autowired
+	private ReaderService	readerService;
+
+	@Autowired
+	private OrganizerService	organizerService;
 
 	@RequestMapping(value = "/myInformation", method = RequestMethod.GET)
 	public ModelAndView myInformation() {
@@ -46,6 +56,33 @@ public class ProfileController extends AbstractController {
 			administrador1 = this.administratorService.findOne(user.getId());
 			Assert.notNull(administrador1);
 			result.addObject("administrator", administrador1);
+		}
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("REFEREE")) {
+			Referee referee;
+			referee = this.refereeService.findOne(user.getId());
+			Assert.notNull(referee);
+			result.addObject("referee", referee);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("SPONSOR")) {
+			Sponsor sponsor;
+			sponsor = this.sponsorService.findOne(user.getId());
+			Assert.notNull(sponsor);
+			result.addObject("sponsor", sponsor);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("READER")) {
+			Reader reader;
+			reader = this.readerService.findOne(user.getId());
+			Assert.notNull(reader);
+			result.addObject("reader", reader);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER")) {
+			Organizer	organizer;
+			organizer = this.organizerService.findOne(user.getId());
+			Assert.notNull(organizer);
+			result.addObject("organizer", organizer);
 		}
 
 		return result;
@@ -77,6 +114,38 @@ public class ProfileController extends AbstractController {
 			administrador1 = this.administratorService.findOne(user.getId());
 			Assert.notNull(administrador1);
 			final String json = gson.toJson(administrador1);
+			result.addObject("json", json);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("REFEREE")) {
+			Referee referee;
+			referee = this.refereeService.findOne(user.getId());
+			Assert.notNull(referee);
+			final String json = gson.toJson(referee);
+			result.addObject("json", json);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("SPONSOR")) {
+			Sponsor sponsor;
+			sponsor = this.sponsorService.findOne(user.getId());
+			Assert.notNull(sponsor);
+			final String json = gson.toJson(sponsor);
+			result.addObject("json", json);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("READER")) {
+			Reader reader;
+			reader = this.readerService.findOne(user.getId());
+			Assert.notNull(reader);
+			final String json = gson.toJson(reader);
+			result.addObject("json", json);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER")) {
+			Organizer organizer;
+			organizer = this.organizerService.findOne(user.getId());
+			Assert.notNull(organizer);
+			final String json = gson.toJson(organizer);
 			result.addObject("json", json);
 		}
 

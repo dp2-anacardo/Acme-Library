@@ -27,6 +27,11 @@ public class AdministratorForm {
 	private int		id;
 	private int		version;
 	private String	surname;
+	private String	holder;
+	private String	brandName;
+	private String	number;
+	private Date	expirationYear;
+	private Integer	cvv;
 
 	public AdministratorForm(final Administrator admin) {
 		final AdministratorForm result = new AdministratorForm();
@@ -151,4 +156,57 @@ public class AdministratorForm {
 		this.surname = surname;
 	}
 
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getHolder() {
+		return holder;
+	}
+
+	public void setHolder(String holder) {
+		this.holder = holder;
+	}
+
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getBrandName() {
+		return brandName;
+	}
+
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
+	@NotBlank
+	@CreditCardNumber
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	@NotNull
+	@Future
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "MM/YY")
+	public Date getExpirationYear() {
+		return expirationYear;
+	}
+
+	public void setExpirationYear(Date expirationYear) {
+		this.expirationYear = expirationYear;
+	}
+
+	@NotNull
+	@Range(min = 100, max = 999)
+	public Integer getCvv() {
+		return cvv;
+	}
+
+	public void setCvv(Integer cvv) {
+		this.cvv = cvv;
+	}
 }

@@ -18,8 +18,6 @@
 <br>
 <acme:showtext code="actor.phoneNumber" value="${administrator.phoneNumber}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.vatNumber" value="${administrator.vatNumber}" fieldset="true"/>
-<br>
 <acme:showtext code="actor.address" value="${administrator.address}" fieldset="true"/>
 <br>
 
@@ -32,23 +30,21 @@
 			
 </security:authorize>
 	
-<security:authorize access="hasRole('ROOKIE')">
+<security:authorize access="hasRole('REFEREE')">
 
-<acme:showtext code="actor.name" value="${rookie.name}" fieldset="true"/>
+<acme:showtext code="actor.name" value="${referee.name}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.surname" value="${rookie.surname}" fieldset="true"/>
+<acme:showtext code="actor.surname" value="${referee.surname}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.email" value="${rookie.email}" fieldset="true"/>
+<acme:showtext code="actor.email" value="${referee.email}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.phoneNumber" value="${rookie.phoneNumber}" fieldset="true"/>
+<acme:showtext code="actor.phoneNumber" value="${referee.phoneNumber}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.vatNumber" value="${rookie.vatNumber}" fieldset="true"/>
-<br>
-<acme:showtext code="actor.address" value="${rookie.address}" fieldset="true"/>
+<acme:showtext code="actor.address" value="${referee.address}" fieldset="true"/>
 <br>
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('rookie/rookie/edit.do');" />
+			onclick="javascript: relativeRedir('referee/referee/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
@@ -58,25 +54,21 @@
 
 
 
-<security:authorize access="hasRole('COMPANY')">
+<security:authorize access="hasRole('SPONSOR')">
 
-<acme:showtext code="actor.name" value="${company.name}" fieldset="true"/>
+<acme:showtext code="actor.name" value="${sponsor.name}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.commercialName" value="${company.commercialName}" fieldset="true"/>
+<acme:showtext code="actor.surname" value="${sponsor.surname}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.surname" value="${company.surname}" fieldset="true"/>
+<acme:showtext code="actor.email" value="${sponsor.email}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.email" value="${company.email}" fieldset="true"/>
+<acme:showtext code="actor.phoneNumber" value="${sponsor.phoneNumber}" fieldset="true"/>
 <br>
-<acme:showtext code="actor.phoneNumber" value="${company.phoneNumber}" fieldset="true"/>
-<br>
-<acme:showtext code="actor.vatNumber" value="${company.vatNumber}" fieldset="true"/>
-<br>
-<acme:showtext code="actor.address" value="${company.address}" fieldset="true"/>
+<acme:showtext code="actor.address" value="${sponsor.address}" fieldset="true"/>
 <br>
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('/company/company/edit.do');" />
+			onclick="javascript: relativeRedir('/sponsor/sponsor/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
 
@@ -85,23 +77,21 @@
 
 </security:authorize>
 
-<security:authorize access="hasRole('AUDITOR')">
+<security:authorize access="hasRole('READER')">
 
-	<acme:showtext code="actor.name" value="${auditor.name}" fieldset="true"/>
+	<acme:showtext code="actor.name" value="${reader.name}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.surname" value="${auditor.surname}" fieldset="true"/>
+	<acme:showtext code="actor.surname" value="${reader.surname}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.email" value="${auditor.email}" fieldset="true"/>
+	<acme:showtext code="actor.email" value="${reader.email}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.phoneNumber" value="${auditor.phoneNumber}" fieldset="true"/>
+	<acme:showtext code="actor.phoneNumber" value="${reader.phoneNumber}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.vatNumber" value="${auditor.vatNumber}" fieldset="true"/>
-	<br>
-	<acme:showtext code="actor.address" value="${auditor.address}" fieldset="true"/>
+	<acme:showtext code="actor.address" value="${reader.address}" fieldset="true"/>
 	<br>
 
 	<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-		   onclick="javascript: relativeRedir('/auditor/auditor/edit.do');" />
+		   onclick="javascript: relativeRedir('/reader/reader/edit.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 		   onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
@@ -109,25 +99,21 @@
 
 </security:authorize>
 
-<security:authorize access="hasRole('PROVIDER')">
+<security:authorize access="hasRole('ORGANIZER')">
 
-	<acme:showtext code="actor.name" value="${provider.name}" fieldset="true"/>
+	<acme:showtext code="actor.name" value="${organizer.name}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.surname" value="${provider.surname}" fieldset="true"/>
+	<acme:showtext code="actor.surname" value="${organizer.surname}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.make" value="${provider.make}" fieldset="true"/>
+	<acme:showtext code="actor.email" value="${organizer.email}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.email" value="${provider.email}" fieldset="true"/>
+	<acme:showtext code="actor.phoneNumber" value="${organizer.phoneNumber}" fieldset="true"/>
 	<br>
-	<acme:showtext code="actor.phoneNumber" value="${provider.phoneNumber}" fieldset="true"/>
-	<br>
-	<acme:showtext code="actor.vatNumber" value="${provider.vatNumber}" fieldset="true"/>
-	<br>
-	<acme:showtext code="actor.address" value="${provider.address}" fieldset="true"/>
+	<acme:showtext code="actor.address" value="${organizer.address}" fieldset="true"/>
 	<br>
 
 	<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-		   onclick="javascript: relativeRedir('/provider/provider/edit.do');" />
+		   onclick="javascript: relativeRedir('/organizer/organizer/edit.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 		   onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"

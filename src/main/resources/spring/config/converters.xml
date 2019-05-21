@@ -32,6 +32,18 @@
 		<bean class="converters.StringToMessageBoxConverter"/>
 		<bean class="converters.MessageToStringConverter"/>
 		<bean class="converters.StringToMessageConverter"/>
+		<bean class="converters.OfferToStringConverter"/>
+		<bean class="converters.StringToOfferConverter"/>
+		<bean class="converters.TransactionToStringConverter"/>
+		<bean class="converters.StringToTransactionConverter"/>
+		<bean class="converters.SponsorToStringConverter"/>
+		<bean class="converters.StringToSponsorConverter"/>
+		<bean class="converters.RefereeToStringConverter"/>
+		<bean class="converters.StringToRefereeConverter"/>
+		<bean class="converters.ReaderToStringConverter"/>
+		<bean class="converters.StringToReaderConverter"/>
+		<bean class="converters.OrganizerToStringConverter"/>
+		<bean class="converters.StringToOrganizerConverter"/>
 	</util:list>
 	
 </beans>

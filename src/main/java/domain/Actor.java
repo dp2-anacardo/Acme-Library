@@ -1,6 +1,8 @@
 
 package domain;
 
+import com.google.gson.annotations.Expose;
+import datatype.CreditCard;
 import org.hibernate.validator.constraints.*;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import security.UserAccount;
@@ -17,17 +19,26 @@ import java.util.Collection;
 })
 public abstract class Actor extends DomainEntity {
 
+    @Expose
     private String name;
+    @Expose
     private String middleName;
+    @Expose
     private String surname;
+    @Expose
     private String photo;
+    @Expose
     private String email;
+    @Expose
     private String phoneNumber;
+    @Expose
     private String address;
+    @Expose
     private Boolean isSuspicious;
+    @Expose
     private Boolean isBanned;
+    @Expose
     private Double score;
-
 
     @NotBlank
     @SafeHtml(whitelistType = WhiteListType.NONE)
@@ -127,8 +138,11 @@ public abstract class Actor extends DomainEntity {
 
     //Relationships
 
+    @Expose
     private UserAccount userAccount;
+    @Expose
     private Collection<SocialProfile> socialProfiles;
+    @Expose
     private Collection<MessageBox> boxes;
 
     @Valid
@@ -168,4 +182,6 @@ public abstract class Actor extends DomainEntity {
                 return box;
         return result;
     }
+
+
 }

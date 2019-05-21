@@ -63,13 +63,6 @@
 	<form:errors cssClass="error" path="address" />
 	<br />
 	
-	<form:label path="vatNumber">
-		<spring:message code="actor.vatNumber" />
-	</form:label>
-	<form:input path="vatNumber" />
-	<form:errors cssClass="error" path="vatNumber" />
-	<br />
-	
 	<input type="submit" name="update"
 		value="<spring:message code="actor.save" />" />&nbsp; 
 	

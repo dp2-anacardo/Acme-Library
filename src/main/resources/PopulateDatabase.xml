@@ -11,124 +11,231 @@
  -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- User accounts -->
+    <!-- User accounts -->
 
-	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin1" />
-		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
+    <bean id="userAccount1" class="security.UserAccount">
+        <property name="username" value="admin1"/>
+        <property name="password" value="e00cf25ad42683b3df678c61f42c6bda"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="ADMIN"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
-	<!-- Administrator -->
+    <bean id="userAccount2" class="security.UserAccount">
+        <property name="username" value="referee1"/>
+        <property name="password" value="092d469d0a71c8002e32f808b861f9a4"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="REFEREE"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="admin1" class="domain.Administrator">
-		<property name="userAccount" ref="userAccount1"/>
-		<property name="name" value="admin1" />
-		<property name="surname" value="admin1"/>
-		<property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-		<property name="email" value="emailDePrueba@gmail.com"/>
-		<property name="phoneNumber" value="+34 678123674"/>
-		<property name="address" value="Avenida Reina Mercedes"/>
-		<property name="isSuspicious" value="false"/>
-		<property name="isBanned" value="false"/>
-		<property name="score" value="0"/>
-		<property name="socialProfiles">
-			<list>
-			</list>
-		</property>
-		<property name="boxes">
-			<list>
-				<ref bean="inBoxAdmin1"/>
-				<ref bean="outBoxAdmin1"/>
-				<ref bean="spamBoxAdmin1"/>
-				<ref bean="trashBoxAdmin1"/>
-				<ref bean="notificationBoxAdmin1" />
-			</list>
-		</property>
-	</bean>
+    <bean id="userAccount3" class="security.UserAccount">
+        <property name="username" value="reader1"/>
+        <property name="password" value="6e6fba5122623ea1ec36af3336cdb70c"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="READER"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="inBoxAdmin1" class="domain.MessageBox">
-		<property name="name" value="INBOX"/>
-		<property name="isSystem" value="true"/>
-		<property name="messages">
-			<list>
-			</list>
-		</property>
-	</bean>
+    <bean id="userAccount4" class="security.UserAccount">
+        <property name="username" value="organizer1"/>
+        <property name="password" value="428e8d298a100ea1d80c257ca3995b87"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="ORGANIZER"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="outBoxAdmin1" class="domain.MessageBox">
-		<property name="name" value="OUTBOX"/>
-		<property name="isSystem" value="true"/>
-		<property name="messages">
-			<list>
-			</list>
-		</property>
-	</bean>
+    <bean id="userAccount5" class="security.UserAccount">
+        <property name="username" value="sponsor1"/>
+        <property name="password" value="42c63ad66d4dc07ed17753772bef96d6"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="SPONSOR"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="spamBoxAdmin1" class="domain.MessageBox">
-		<property name="name" value="SPAMBOX"/>
-		<property name="isSystem" value="true"/>
-		<property name="messages">
-			<list>
-			</list>
-		</property>
-	</bean>
+    <!-- Administrator -->
 
-	<bean id="trashBoxAdmin1" class="domain.MessageBox">
-		<property name="name" value="TRASHBOX"/>
-		<property name="isSystem" value="true"/>
-		<property name="messages">
-			<list>
-			</list>
-		</property>
-	</bean>
+    <bean id="admin1" class="domain.Administrator">
+        <property name="userAccount" ref="userAccount1"/>
+        <property name="name" value="admin1"/>
+        <property name="surname" value="admin1"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePrueba@gmail.com"/>
+        <property name="phoneNumber" value="+34 678123674"/>
+        <property name="address" value="Avenida Reina Mercedes"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxAdmin1"/>
+                <ref bean="outBoxAdmin1"/>
+                <ref bean="spamBoxAdmin1"/>
+                <ref bean="trashBoxAdmin1"/>
+                <ref bean="notificationBoxAdmin1"/>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="notificationBoxAdmin1" class="domain.MessageBox">
-		<property name="name" value="NOTIFICATIONBOX"/>
-		<property name="isSystem" value="true"/>
-		<property name="messages">
-			<list>
-			</list>
-		</property>
-	</bean>
+    <bean id="inBoxAdmin1" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
 
-	<!-- Configuration -->
+    <bean id="notificationBoxAdmin1" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="configuration1" class="domain.Configuration">
-		<property name="maxResults" value="10"/>
-		<property name="maxTime" value="1"/>
-		<property name="systemName" value="Acme Rookies"/>
-		<property name="banner" value="https://i.imgur.com/TslDk56.png"/>
-		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
-		<property name="welcomeMessageEn" value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!"/>
-		<property name="countryCode" value="34"/>
-		<property name="defaultVAT" value="21.0"/>
-		<property name="flatRate" value="10.0"/>
-		<property name="spamWords">
-			<list>
-				<value>sex</value>
-				<value>viagra</value>
-				<value>cialis</value>
-				<value>one million</value>
-				<value>you've been selected</value>
-				<value>Nigeria</value>
-				<value>sexo</value>
-				<value>un millon</value>
-				<value>has sido seleccionado</value>
-				<value>has sido seleccionada</value>
-			</list>
-		</property>
-	</bean>
+    <bean id="outBoxAdmin1" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxAdmin1" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxAdmin1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+    <!-- Organizer -->
+
+    <bean id="organizer1" class="domain.Organizer">
+        <property name="userAccount" ref="userAccount4"/>
+        <property name="name" value="organizer1"/>
+        <property name="surname" value="organizer1"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePruebaOrganizer@gmail.com"/>
+        <property name="phoneNumber" value="+34 642558899"/>
+        <property name="address" value="Avenida Reina Mercedes"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- Referee -->
+
+    <bean id="referee1" class="domain.Referee">
+        <property name="userAccount" ref="userAccount2"/>
+        <property name="name" value="referee1"/>
+        <property name="surname" value="referee1"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePruebareferee@gmail.com"/>
+        <property name="phoneNumber" value="+34 956632244"/>
+        <property name="address" value="Avenida referees"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Sponsor -->
+
+    <bean id="sponsor1" class="domain.Sponsor">
+        <property name="userAccount" ref="userAccount5"/>
+        <property name="name" value="sponsor1"/>
+        <property name="surname" value="sponsor1"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePruebasponsor@gmail.com"/>
+        <property name="phoneNumber" value="+34 956251577"/>
+        <property name="address" value="Avenida sponsors"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Reader -->
+
+    <!-- Configuration -->
+
+    <bean id="configuration1" class="domain.Configuration">
+        <property name="maxResults" value="10"/>
+        <property name="maxTime" value="1"/>
+        <property name="systemName" value="Acme Rookies"/>
+        <property name="banner" value="https://i.imgur.com/TslDk56.png"/>
+        <property name="welcomeMessageEs"
+                  value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
+        <property name="welcomeMessageEn"
+                  value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!"/>
+        <property name="countryCode" value="34"/>
+        <property name="defaultVAT" value="21.0"/>
+        <property name="flatRate" value="10.0"/>
+        <property name="spamWords">
+            <list>
+                <value>sex</value>
+                <value>viagra</value>
+                <value>cialis</value>
+                <value>one million</value>
+                <value>you've been selected</value>
+                <value>Nigeria</value>
+                <value>sexo</value>
+                <value>un millon</value>
+                <value>has sido seleccionado</value>
+                <value>has sido seleccionada</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>

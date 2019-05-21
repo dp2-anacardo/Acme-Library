@@ -58,14 +58,12 @@
 	
 	<acme:textbox code="actor.address" path="address"/>
 	<br />
-	*
-	<acme:textbox code="actor.vatNumber" path="vatNumber"/>
-	<br />
+
 	</fieldset>
 	<fieldset>
  	<legend><spring:message code="actor.CreditCard" /></legend>
  	*
-	<acme:textbox code="credit.holderName" path="holderName"/>
+	<acme:textbox code="credit.holderName" path="holder"/>
 	<br />
 	*
 	<acme:textbox code="credit.brandName" path="brandName"/>
@@ -74,10 +72,10 @@
 	<acme:textbox code="credit.number" path="number"/>
 	<br />
 	*
-	<acme:textbox code="credit.expiration" path="expiration" placeholder="MM/YY"/>
+	<acme:textbox code="credit.expiration" path="expirationYear" placeholder="MM/YY"/>
 	<br />
 	*
-	<acme:textbox code="credit.cvvCode" path="cvvCode"/>
+	<acme:textbox code="credit.cvvCode" path="cvv"/>
 	<br />
 	</fieldset>
 	<script type="text/javascript">
