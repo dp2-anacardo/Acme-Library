@@ -30,6 +30,8 @@ public class OrganizerService {
     //Managed Repositories
     @Autowired
     private OrganizerRepository organizerRepository;
+    @Autowired
+    private MessageBoxService messageBoxService;
     //Supporting services
     @Autowired
     private ActorService actorService;
@@ -45,11 +47,13 @@ public class OrganizerService {
         final UserAccount userAccount;
         final Collection<Authority> authorities;
         final Collection<SocialProfile> profiles;
+        final Collection<MessageBox> boxes;
         final Organizer a = new Organizer();
         userAccount = new UserAccount();
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
+        boxes = new ArrayList<MessageBox>();
 
 
         auth.setAuthority(Authority.ORGANIZER);
@@ -59,6 +63,7 @@ public class OrganizerService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
+        a.setMessageBox(boxes);
 
         return a;
     }
@@ -94,6 +99,7 @@ public class OrganizerService {
             final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
             final String res = encoder.encodePassword(o.getUserAccount().getPassword(), null);
             o.getUserAccount().setPassword(res);
+            o.setBoxes(this.messageBoxService.createSystemMessageBox());
         }
         result = this.organizerRepository.save(o);
         return result;

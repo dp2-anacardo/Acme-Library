@@ -23,17 +23,17 @@
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p>
  
 <security:authorize access="isAnonymous()">
-<input type="button" name="registerRookie"
-		value="<spring:message code="welcome.register.rookie" />"
-		onclick="javascript: relativeRedir('rookie/create.do');" />&nbsp;
+<input type="button" name="registerSponsor"
+		value="<spring:message code="welcome.register.sponsor" />"
+		onclick="javascript: relativeRedir('sponsor/create.do');" />&nbsp;
 		
 <input type="button" name="registerCompany"
-		value="<spring:message code="welcome.register.company" />"
-		onclick="javascript: relativeRedir('company/create.do');" />&nbsp;
+		value="<spring:message code="welcome.register.reader" />"
+		onclick="javascript: relativeRedir('reader/create.do');" />&nbsp;
 
 	<input type="button" name="registerProvider"
-		   value="<spring:message code="welcome.register.provider" />"
-		   onclick="javascript: relativeRedir('provider/create.do');" />&nbsp;
+		   value="<spring:message code="welcome.register.organizer" />"
+		   onclick="javascript: relativeRedir('organizer/create.do');" />&nbsp;
 		
 </security:authorize>
 

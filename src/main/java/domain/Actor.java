@@ -1,6 +1,8 @@
 
 package domain;
 
+import com.google.gson.annotations.Expose;
+import datatype.CreditCard;
 import org.hibernate.validator.constraints.*;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import security.UserAccount;
@@ -17,16 +19,28 @@ import java.util.Collection;
 })
 public abstract class Actor extends DomainEntity {
 
+    @Expose
     private String name;
+    @Expose
     private String middleName;
+    @Expose
     private String surname;
+    @Expose
     private String photo;
+    @Expose
     private String email;
+    @Expose
     private String phoneNumber;
+    @Expose
     private String address;
+    @Expose
     private Boolean isSuspicious;
+    @Expose
     private Boolean isBanned;
+    @Expose
     private Double score;
+    @Expose
+    private CreditCard  creditCard;
 
 
     @NotBlank
@@ -127,8 +141,12 @@ public abstract class Actor extends DomainEntity {
 
     //Relationships
 
+    @Expose
     private UserAccount userAccount;
+    @Expose
     private Collection<SocialProfile> socialProfiles;
+    @Expose
+    private Collection<MessageBox> boxes;
 
     @Valid
     @OneToOne(optional = false, cascade = CascadeType.ALL)
@@ -150,4 +168,21 @@ public abstract class Actor extends DomainEntity {
         this.socialProfiles = socialProfiles;
     }
 
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    @Valid
+    @OneToMany(cascade = CascadeType.ALL)
+    public Collection<MessageBox> getBoxes() {
+        return boxes;
+    }
+
+    public void setBoxes(Collection<MessageBox> boxes) {
+        this.boxes = boxes;
+    }
 }

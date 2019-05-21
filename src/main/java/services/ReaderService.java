@@ -32,6 +32,8 @@ public class ReaderService {
     private ReaderRepository readerRepository;
     //Supporting services
     @Autowired
+    private MessageBoxService messageBoxService;
+    @Autowired
     private ActorService actorService;
     @Autowired
     private ConfigurationService configurationService;
@@ -45,6 +47,7 @@ public class ReaderService {
         final UserAccount userAccount;
         final Collection<Authority> authorities;
         final Collection<SocialProfile> profiles;
+        final Collection<MessageBox> boxes;
 //        final Collection<Finder> finders;
 //        Final Collection<Book> books;
         final Reader a = new Reader();
@@ -52,6 +55,7 @@ public class ReaderService {
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
+        boxes = new ArrayList<>(MessageBox);
 //        books = new ArrayList<Book>();
 //        finders = new ArrayList<Finder>();
 
@@ -65,6 +69,7 @@ public class ReaderService {
         a.setSocialProfiles(profiles);
 //        a.setFinder(finders);
 //        a.setBook(books);
+        a.setMessageBox(boxes);
 
         return a;
     }
@@ -100,6 +105,7 @@ public class ReaderService {
             final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
             final String res = encoder.encodePassword(r.getUserAccount().getPassword(), null);
             r.getUserAccount().setPassword(res);
+            r.setBoxes(this.messageBoxService.createSystemMessageBox());
         }
         result = this.readerRepository.save(r);
         return result;

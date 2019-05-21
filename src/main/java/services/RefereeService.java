@@ -31,6 +31,8 @@ public class RefereeService {
     @Autowired
     private ActorService actorService;
     @Autowired
+    private MessageBoxService messageBoxService;
+    @Autowired
     private ConfigurationService configurationService;
     @Autowired
     private Validator validator;
@@ -44,11 +46,13 @@ public class RefereeService {
         final UserAccount userAccount;
         final Collection<Authority> authorities;
         final Collection<SocialProfile> profiles;
+        final Collection<MessageBox> boxes;
         final Referee a = new Referee();
         userAccount = new UserAccount();
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
+        boxes = new ArrayList<MessageBox>();
 
 
         auth.setAuthority(Authority.REFEREE);
@@ -58,6 +62,7 @@ public class RefereeService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
+        a.setMessageBox(boxes);
 
         return a;
     }
@@ -93,6 +98,7 @@ public class RefereeService {
             final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
             final String res = encoder.encodePassword(r.getUserAccount().getPassword(), null);
             r.getUserAccount().setPassword(res);
+            r.setBoxes(this.messageBoxService.createSystemMessageBox());
         }
         result = this.refereeRepository.save(r);
         return result;
