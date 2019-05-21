@@ -371,6 +371,23 @@
 
     <!-- Reader -->
 
+    <bean id="reader1" class="domain.Reader">
+        <property name="userAccount" ref="userAccount3"/>
+        <property name="name" value="reader1"/>
+        <property name="surname" value="reader1"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePruebaReader@gmail.com"/>
+        <property name="phoneNumber" value="+34 956251574"/>
+        <property name="address" value="Avenida readers"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+    </bean>
+
     <!-- Configuration -->
 
     <bean id="configuration1" class="domain.Configuration">
@@ -384,7 +401,7 @@
                   value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!"/>
         <property name="countryCode" value="34"/>
         <property name="defaultVAT" value="21.0"/>
-        <property name="flatRate" value="10.0"/>
+        <property name="flatFee" value="10.0"/>
         <property name="spamWords">
             <list>
                 <value>sex</value>

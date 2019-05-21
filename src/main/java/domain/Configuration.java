@@ -1,11 +1,8 @@
 
 package domain;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.*;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
-import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -25,9 +22,12 @@ public class Configuration extends DomainEntity {
 	private String				welcomeMessageEn;
 	private String				welcomeMessageEs;
 	private Collection<String>	spamWords;
+	private Collection<String>	posWords;
+	private Collection<String>	negWords;
 	private String				countryCode;
 	private Double				defaultVAT;
-	private Double				flatRate;
+	private Double				flatFee;
+	private Collection<String>	brandName;
 
 
 	@Range(min = 10, max = 100)
@@ -98,6 +98,24 @@ public class Configuration extends DomainEntity {
 		this.spamWords = spamWords;
 	}
 
+	@ElementCollection
+	public Collection<String> getPosWords() {
+		return posWords;
+	}
+
+	public void setPosWords(Collection<String> posWords) {
+		this.posWords = posWords;
+	}
+
+	@ElementCollection
+	public Collection<String> getNegWords() {
+		return negWords;
+	}
+
+	public void setNegWords(Collection<String> negWords) {
+		this.negWords = negWords;
+	}
+
 	@NotBlank
 	public String getCountryCode() {
 		return this.countryCode;
@@ -118,11 +136,21 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotNull
-	public Double getFlatRate() {
-		return this.flatRate;
+	public Double getFlatFee() {
+		return this.flatFee;
 	}
 
-	public void setFlatRate(final Double flatRate) {
-		this.flatRate = flatRate;
+	public void setFlatFee(final Double flatRate) {
+		this.flatFee = flatFee;
+	}
+
+	@ElementCollection
+	@NotEmpty
+	public Collection<String> getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(Collection<String> brandName) {
+		this.brandName = brandName;
 	}
 }
