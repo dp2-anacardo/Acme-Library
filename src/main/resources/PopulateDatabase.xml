@@ -382,13 +382,9 @@
         <property name="isSuspicious" value="false"/>
         <property name="isBanned" value="false"/>
         <property name="score" value="0"/>
+        <property name="finder" ref="finder1"/>
         <property name="socialProfiles">
             <list>
-            </list>
-        </property>
-        <property name="finder">
-            <list>
-                <ref bean="finder1"/>
             </list>
         </property>
         <property name="book">

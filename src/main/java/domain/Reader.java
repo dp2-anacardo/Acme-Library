@@ -12,18 +12,17 @@ import java.util.Collection;
 public class Reader extends Actor {
 
     @Expose
-    private Collection<Finder> finder;
+    private Finder finder;
     @Expose
     private Collection<Book> book;
 
     @Valid
-    @ElementCollection
-    @OneToMany
-    public Collection<Finder> getFinder() {
+    @OneToOne(optional = false)
+    public Finder getFinder() {
         return finder;
     }
 
-    public void setFinder(Collection<Finder> finder) {
+    public void setFinder(Finder finder) {
         this.finder = finder;
     }
 
