@@ -33,6 +33,7 @@
 		<value>/views/sponsor/messages</value>
 		<value>/views/reader/messages</value>
 		<value>/views/organizer/messages</value>
+		<value>/views/sponsorship/messages</value>
 	</util:list>
 
 </beans>

@@ -44,6 +44,8 @@
 		<bean class="converters.StringToReaderConverter"/>
 		<bean class="converters.OrganizerToStringConverter"/>
 		<bean class="converters.StringToOrganizerConverter"/>
+		<bean class="converters.SponsorshipToStringConverter"/>
+		<bean class="converters.StringToSponsorshipConverter"/>
 	</util:list>
 	
 </beans>
