@@ -88,8 +88,11 @@ public class SponsorshipService {
     }
 
     public void activate(final Sponsorship sponsorship) {
+        final Date date = new Date();
+
         Assert.notNull(sponsorship);
         Assert.isTrue(sponsorship.getStatus() == false);
+        Assert.isTrue(sponsorship.getCreditCard().getExpirationYear().after(date));
 
         sponsorship.setStatus(true);
 
@@ -110,6 +113,7 @@ public class SponsorshipService {
 
         if (sponsorship.getId() == 0) {
             result = this.create();
+            result.setEvent(sponsorship.getEvent());
 
         } else
             result = this.sponsorshipRepository.findOne(sponsorship.getId());
@@ -120,9 +124,9 @@ public class SponsorshipService {
 
         this.validator.validate(result, binding);
 
-        final Date date = new Date();
-        if (result.getCreditCard().getExpirationYear() != null && result.getCreditCard().getExpirationYear().before(date))
-            binding.rejectValue("creditCard.expiration", "sponsorship.creditCard.expiration.future");
+        final Collection<String> brandNames = this.configurationService.getConfiguration().getBrandName();
+        if(!brandNames.contains(result.getCreditCard().getBrandName()))
+            binding.rejectValue("creditCard.brandName", "sponsorship.creditCard.brandName.error");
 
         if (binding.hasErrors())
             throw new ValidationException();

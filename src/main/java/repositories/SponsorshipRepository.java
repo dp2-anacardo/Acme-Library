@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface SponsorshipRepository extends JpaRepository<Sponsorship, Integer> {
 
-    @Query("select s from Sponsorship s where s.id = ?1")
+    @Query("select s from Sponsorship s where s.sponsor.id = ?1")
     Collection<Sponsorship> findBySponsor(int sponsorId);
 
     @Query("select s from Sponsorship s where s.event.id = ?1 and s.status = TRUE")

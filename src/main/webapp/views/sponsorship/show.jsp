@@ -23,15 +23,7 @@
 		requestURI="sponsorship/provider/display.do" class="displaytag">
 		<spring:message code="sponsorship.targetURL" var="targetURL" />
 		<display:column title="${targetURL}">
-			<a href="<%=request.getContextPath()%>/position/show.do?positionId=${row.position.id}">Target URL</a>
-		</display:column>
-	</display:table>
-
-	<display:table name="sponsorship" id="row"
-		requestURI="sponsorship/provider/display.do" class="displaytag">
-		<spring:message code="sponsorship.banner" var="bannerHeader" />
-		<display:column title="${bannerHeader}" sortable="false">
-			<img src="${row.banner}" />
+			<a href="event/show.do?eventId=${row.event.id}">Target URL</a>
 		</display:column>
 	</display:table>
 
@@ -64,10 +56,16 @@
 			title="${creditCardExpirationHeader}" sortable="false" format="{0,date,MM/YY}" />
 	</display:table>
 
+	<display:table name="sponsorship" id="row"
+				   requestURI="sponsorship/provider/display.do" class="displaytag">
+		<spring:message code="sponsorship.banner" var="bannerHeader" />
+		<display:column title="${bannerHeader}" sortable="false">
+			<img src="${row.banner}" />
+		</display:column>
+	</display:table>
+
 	<acme:cancel url="sponsorship/sponsor/update.do?sponsorshipId=${row.id}"
 		code="sponsorship.update" />
-
-	<acme:cancel url="sponsorship/sponsor/delete.do?sponsorshipId=${row.id}" code="problem.delete"/>
 
 	<acme:cancel url="sponsorship/sponsor/list.do" code="sponsorship.back" />
 

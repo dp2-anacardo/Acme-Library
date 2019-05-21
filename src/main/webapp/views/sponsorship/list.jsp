@@ -20,7 +20,23 @@
 
         <spring:message code="sponsorship.targetURL" var="targetURL"/>
         <display:column title="${targetURL}">
-            <a href="<%=request.getContextPath()%>/event/show.do?positionId=${row.position.id}">Target URL</a>
+            <a href="<%=request.getContextPath()%>/event/show.do?eventId=${row.event.id}">Target URL</a>
+        </display:column>
+
+        <spring:message code="sponsorship.status" var="status" />
+        <display:column title="${status}">
+            <jstl:if test="${row.status eq false}">
+                <spring:message code="sponsorship.status.off" />
+            </jstl:if>
+            <jstl:if test="${row.status eq true}">
+                <spring:message code="sponsorship.status.on" />
+            </jstl:if>
+        </display:column>
+
+        <spring:message code="sponsorship.show" var="showHeader"/>
+        <display:column title="${showHeader}">
+            <a href="sponsorship/sponsor/show.do?sponsorshipId=${row.id}"> <spring:message
+                    code="sponsorship.show"/></a>
         </display:column>
 
         <spring:message code="sponsorship.update" var="udpateHeader"/>
@@ -29,10 +45,22 @@
                     code="sponsorship.update"/></a>
         </display:column>
 
-        <spring:message code="sponsorship.show" var="showHeader"/>
-        <display:column title="${showHeader}">
-            <a href="sponsorship/sponsor/show.do?sponsorshipId=${row.id}"> <spring:message
-                    code="sponsorship.show"/></a>
+        <spring:message code="sponsorship.switch" var="switchSponsorship" />
+        <display:column title="${switchSponsorship}">
+            <jstl:choose>
+                <jstl:when test="${row.status eq false and row.creditCard.expirationYear lt date}">
+                    <spring:message code="sponsorship.creditCard.expirate"/>
+                </jstl:when>
+                <jstl:when test="${row.status eq false and row.creditCard.expirationYear gt date}">
+                    <acme:cancel url='sponsorship/sponsor/activate.do?sponsorshipId=${row.id}'
+                                 code="sponsorship.activate" />
+                </jstl:when>
+                <jstl:when test="${row.status eq true}">
+                    <acme:cancel
+                            url='sponsorship/sponsor/desactivate.do?sponsorshipId=${row.id}'
+                            code="sponsorship.desactivate" />
+                </jstl:when>
+            </jstl:choose>
         </display:column>
     </display:table>
 

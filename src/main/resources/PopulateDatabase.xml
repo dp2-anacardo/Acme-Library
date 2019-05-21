@@ -444,6 +444,16 @@
         </property>
     </bean>
 
+    <!-- Event -->
+    <bean id="event1" class="domain.Event">
+        <property name="title" value="Event 1" />
+        <property name="description" value="Event 1 Description"/>
+        <property name="address" value="Event 1 Address"/>
+        <property name="date" value="01/01/20 09:00"/>
+        <property name="maximumCapacity" value="50"/>
+        <property name="organizer" ref="organizer1"/>
+    </bean>
+
     <!-- Configuration -->
 
     <bean id="configuration1" class="domain.Configuration">

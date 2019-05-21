@@ -17,13 +17,22 @@
 
 </head>
 <body>
-<form:form action="sponsorship/provider/update.do" modelAttribute="sponsorship">
+<form:form action="sponsorship/sponsor/update.do" modelAttribute="sponsorship">
 
     <%--  Hidden properties --%>
     <form:hidden path="id"/>
 
     <%-- Banner --%>
     <acme:textbox code="sponsorship.banner" path="banner"/>
+    <br>
+
+    <%-- Status --%>
+    <spring:message code="sponsorship.status"/>
+    <form:select path="status" multiple="false">
+        <form:option value="1"><spring:message code="sponsorship.status.on"/></form:option>
+        <form:option value="0"><spring:message code="sponsorship.status.off"/></form:option>
+    </form:select>
+    <form:errors class="error" path="status"/>
     <br>
 
     <%-- CreditCard --%>
@@ -33,8 +42,15 @@
         <acme:textbox code="credit.holderName" path="creditCard.holder"/>
         <br />
 
-        <acme:textbox code="credit.brandName" path="creditCard.brandName"/>
-        <br />
+        <form:label path="creditCard.brandName">
+            <spring:message code="sponsorship.creditCard.brandName" />:
+        </form:label>
+        <form:select id="brandName" path="creditCard.brandName">
+            <form:options items="${brandList}"/>
+        </form:select>
+        <form:errors class="error" path="creditCard.brandName" />
+        <br/>
+        <br/>
 
         <acme:textbox code="credit.number" path="creditCard.number"/>
         <br />
@@ -47,12 +63,10 @@
     </fieldset>
 
     <%-- Buttons --%>
-    <security:authorize access="hasRole('PROVIDER')">
+    <security:authorize access="hasRole('SPONSOR')">
         <acme:submit name="update" code="sponsorship.save"/>
 
-        <acme:submit name="delete" code="problem.delete"/>
-
-        <acme:cancel url="sponsorship/provider/list.do" code="sponsorship.back"/>
+        <acme:cancel url="sponsorship/sponsor/list.do" code="sponsorship.back"/>
 
     </security:authorize>
 

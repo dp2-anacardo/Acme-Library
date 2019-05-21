@@ -57,6 +57,7 @@ public class Sponsorship extends DomainEntity {
     private Event event;
 
     @Valid
+    @NotNull
     @ManyToOne(optional = false)
     public Sponsor getSponsor() {
         return this.sponsor;
@@ -67,6 +68,7 @@ public class Sponsorship extends DomainEntity {
     }
 
     @Valid
+    @NotNull
     @ManyToOne(optional = false)
     public Event getEvent() {
         return this.event;
