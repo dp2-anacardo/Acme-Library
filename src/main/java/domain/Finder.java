@@ -36,7 +36,6 @@ public class Finder extends DomainEntity {
             this.keyWord = keyWord.trim();
     }
 
-    @NotBlank
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getCategoryName() {
         return categoryName;
@@ -46,7 +45,6 @@ public class Finder extends DomainEntity {
         this.categoryName = categoryName;
     }
 
-    @NotBlank
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getStatus() {
         return status;
