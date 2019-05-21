@@ -17,10 +17,16 @@ public class ConfigurationForm {
     private String				welcomeMessageEn;
     private String				welcomeMessageEs;
     private Collection<String>	spamWords;
+    private Collection<String>	posWords;
+    private Collection<String>	negWords;
     private String				countryCode;
     private String				addSW;
+    private String				addPW;
+    private String				addNW;
     private Double				defaultVAT;
-    private Double				flatRate;
+    private Double				flatFee;
+    private Collection<String>	brandName;
+    private String				addBN;
 
 
     public ConfigurationForm(final Configuration config) {
@@ -33,9 +39,12 @@ public class ConfigurationForm {
         this.welcomeMessageEn = config.getWelcomeMessageEn();
         this.welcomeMessageEs = config.getWelcomeMessageEs();
         this.spamWords = config.getSpamWords();
+        this.posWords = config.getPosWords();
+        this.negWords = config.getNegWords();
         this.countryCode = config.getCountryCode();
         this.defaultVAT = config.getDefaultVAT();
-        this.flatRate = config.getFlatRate();
+        this.flatFee = config.getFlatFee();
+        this.brandName = config.getBrandName();
     }
 
     public ConfigurationForm() {
@@ -74,6 +83,12 @@ public class ConfigurationForm {
         return this.spamWords;
     }
 
+    public Collection<String> getPosWords() { return posWords; }
+
+    public Collection<String> getNegWords() { return negWords; }
+
+    public Collection<String> getBrandName() { return brandName; }
+
     public String getCountryCode() {
         return this.countryCode;
     }
@@ -81,6 +96,21 @@ public class ConfigurationForm {
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getAddSW() {
         return this.addSW;
+    }
+
+    @SafeHtml(whitelistType = WhiteListType.NONE)
+    public String getAddPW() {
+        return addPW;
+    }
+
+    @SafeHtml(whitelistType = WhiteListType.NONE)
+    public String getAddNW() {
+        return addNW;
+    }
+
+    @SafeHtml(whitelistType = WhiteListType.NONE)
+    public String getAddBN() {
+        return addBN;
     }
 
     public void setId(final int id) {
@@ -115,6 +145,12 @@ public class ConfigurationForm {
         this.spamWords = spamWords;
     }
 
+    public void setPosWords(Collection<String> posWords) { this.posWords = posWords; }
+
+    public void setNegWords(Collection<String> negWords) { this.negWords = negWords; }
+
+    public void setBrandName(Collection<String> brandName) { this.brandName = brandName; }
+
     public void setCountryCode(final String countryCode) {
         this.countryCode = countryCode;
     }
@@ -122,6 +158,12 @@ public class ConfigurationForm {
     public void setAddSW(final String addSW) {
         this.addSW = addSW;
     }
+
+    public void setAddPW(String addPW) { this.addPW = addPW; }
+
+    public void setAddNW(String addNW) { this.addNW = addNW; }
+
+    public void setAddBN(String addBN) { this.addBN = addBN; }
 
     public Double getDefaultVAT() {
         return defaultVAT;
@@ -131,11 +173,11 @@ public class ConfigurationForm {
         this.defaultVAT = defaultVAT;
     }
 
-    public Double getFlatRate() {
-        return flatRate;
+    public Double getFlatFee() {
+        return flatFee;
     }
 
-    public void setFlatRate(Double flatRate) {
-        this.flatRate = flatRate;
+    public void setFlatFee(Double flatFee) {
+        this.flatFee = flatFee;
     }
 }

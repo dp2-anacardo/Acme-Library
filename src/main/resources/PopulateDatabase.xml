@@ -371,20 +371,55 @@
 
     <!-- Reader -->
 
+    <bean id="reader1" class="domain.Reader">
+        <property name="userAccount" ref="userAccount3"/>
+        <property name="name" value="reader1" />
+        <property name="surname" value="reader1"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePruebareader@gmail.com"/>
+        <property name="phoneNumber" value="+34 645887763"/>
+        <property name="address" value="Avenida readers"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="finder" ref="finder1"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+        <property name="book">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Finder -->
+
+    <bean id="finder1" class="domain.Finder">
+        <property name="keyWord" value="" />
+        <property name="categoryName" value=""/>
+        <property name="status" value=""/>
+        <property name="lastUpdate" value="01/01/19 09:00"/>
+        <property name="books">
+            <list>
+            </list>
+        </property>
+    </bean>
+
     <!-- Configuration -->
 
     <bean id="configuration1" class="domain.Configuration">
         <property name="maxResults" value="10"/>
         <property name="maxTime" value="1"/>
-        <property name="systemName" value="Acme Rookies"/>
+        <property name="systemName" value="Acme Library"/>
         <property name="banner" value="https://i.imgur.com/TslDk56.png"/>
         <property name="welcomeMessageEs"
-                  value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
+                  value="¡Bienvenidos a Acme Biblioteca! Tu sitio para vender libros."/>
         <property name="welcomeMessageEn"
-                  value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!"/>
+                  value="Welcome to Acme Library, the site to sell your books."/>
         <property name="countryCode" value="34"/>
         <property name="defaultVAT" value="21.0"/>
-        <property name="flatRate" value="10.0"/>
+        <property name="flatFee" value="10.0"/>
         <property name="spamWords">
             <list>
                 <value>sex</value>
@@ -397,6 +432,67 @@
                 <value>un millon</value>
                 <value>has sido seleccionado</value>
                 <value>has sido seleccionada</value>
+            </list>
+        </property>
+        <property name="posWords">
+            <list>
+                <value>good</value>
+                <value>fantastic</value>
+                <value>excellent</value>
+                <value>great</value>
+                <value>amazing</value>
+                <value>terrific</value>
+                <value>beautiful</value>
+                <value>bueno</value>
+                <value>buenos</value>
+                <value>buena</value>
+                <value>buenas</value>
+                <value>fantastico</value>
+                <value>fantasticos</value>
+                <value>fantastica</value>
+                <value>fantasticas</value>
+                <value>excelente</value>
+                <value>excelentes</value>
+                <value>genial</value>
+                <value>geniales</value>
+                <value>increible</value>
+                <value>increibles</value>
+                <value>estupendo</value>
+                <value>estupendos</value>
+                <value>estupenda</value>
+                <value>estupendas</value>
+                <value>bonito</value>
+                <value>bonitos</value>
+                <value>bonita</value>
+                <value>bonitas</value>
+            </list>
+        </property>
+        <property name="negWords">
+            <list>
+                <value>not</value>
+                <value>bad</value>
+                <value>horrible</value>
+                <value>average</value>
+                <value>disaster</value>
+                <value>no</value>
+                <value>malo</value>
+                <value>malos</value>
+                <value>mala</value>
+                <value>malas</value>
+                <value>mediocre</value>
+                <value>desastroso</value>
+                <value>desastrosos</value>
+                <value>desastrosa</value>
+                <value>desastrosas</value>
+            </list>
+        </property>
+        <property name="brandName">
+            <list>
+                <value>VISA</value>
+                <value>MCARD</value>
+                <value>DINNERS</value>
+                <value>AMEX</value>
+                <value>FLY</value>
             </list>
         </property>
     </bean>

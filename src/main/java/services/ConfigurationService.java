@@ -43,6 +43,7 @@ public class ConfigurationService {
         final Configuration result = this.configurationRepository.getConfiguration().iterator().next();
         return result;
     }
+
     public Configuration save(final Configuration configuration) {
         Assert.notNull(configuration);
 
@@ -67,6 +68,9 @@ public class ConfigurationService {
         result.setId(config.getId());
         result.setVersion(config.getVersion());
         result.setSpamWords(config.getSpamWords());
+        result.setPosWords(config.getPosWords());
+        result.setNegWords(config.getNegWords());
+        result.setBrandName(config.getBrandName());
 
         resultSetsReconstruct(result, configF);
 
@@ -84,13 +88,28 @@ public class ConfigurationService {
         resultSetsReconstruct(result, new ConfigurationForm(config));
 
         final Collection<String> sW = new ArrayList<>();
+        final Collection<String> pW = new ArrayList<>();
+        final Collection<String> nW = new ArrayList<>();
+        final Collection<String> bN = new ArrayList<>();
 
         sW.addAll(config.getSpamWords());
+        pW.addAll(config.getPosWords());
+        nW.addAll(config.getNegWords());
+        bN.addAll(config.getBrandName());
 
         result.setSpamWords(sW);
+        result.setPosWords(pW);
+        result.setNegWords(nW);
+        result.setBrandName(bN);
 
         if (!configF.getAddSW().equals(""))
             result.getSpamWords().add(configF.getAddSW());
+        if (!configF.getAddPW().equals(""))
+            result.getPosWords().add(configF.getAddPW());
+        if (!configF.getAddNW().equals(""))
+            result.getNegWords().add(configF.getAddNW());
+        if (!configF.getAddBN().equals(""))
+            result.getBrandName().add(configF.getAddBN());
 
         result.setId(config.getId());
         result.setVersion(config.getVersion());
@@ -98,15 +117,15 @@ public class ConfigurationService {
         return result;
     }
 
-    private void resultSetsReconstruct(Configuration result, ConfigurationForm config) {
-        result.setMaxResults(config.getMaxResults());
-        result.setMaxTime(config.getMaxTime());
-        result.setSystemName(config.getSystemName());
-        result.setBanner(config.getBanner());
-        result.setWelcomeMessageEn(config.getWelcomeMessageEn());
-        result.setWelcomeMessageEs(config.getWelcomeMessageEs());
-        result.setCountryCode(config.getCountryCode());
-        result.setDefaultVAT(config.getDefaultVAT());
-        result.setFlatRate(config.getFlatRate());
+    private void resultSetsReconstruct(Configuration result, ConfigurationForm configF) {
+        result.setMaxResults(configF.getMaxResults());
+        result.setMaxTime(configF.getMaxTime());
+        result.setSystemName(configF.getSystemName());
+        result.setBanner(configF.getBanner());
+        result.setWelcomeMessageEn(configF.getWelcomeMessageEn());
+        result.setWelcomeMessageEs(configF.getWelcomeMessageEs());
+        result.setCountryCode(configF.getCountryCode());
+        result.setDefaultVAT(configF.getDefaultVAT());
+        result.setFlatFee(configF.getFlatFee());
     }
 }

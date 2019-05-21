@@ -10,3 +10,5 @@ bin/
 
 # Maven
 target/
+
+src/main/resources/Entities.map

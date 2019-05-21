@@ -21,6 +21,7 @@ public class Report extends DomainEntity{
     private Collection<Url> attachments;
     private Complaint complaint;
     private Collection<Comment> comments;
+    private boolean isFinal;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -69,5 +70,13 @@ public class Report extends DomainEntity{
 
     public void setComments(Collection<Comment> comments) {
         this.comments = comments;
+    }
+
+    public boolean getIsFinal() {
+        return isFinal;
+    }
+
+    public void setIsFinal(boolean isFinal) {
+        this.isFinal = isFinal;
     }
 }

@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -38,8 +37,7 @@ public class Comment extends DomainEntity{
         this.body = body;
     }
 
-    @NotNull
-    @Valid
+    @OneToOne(optional = false)
     public Actor getAuthor() {
         return author;
     }
