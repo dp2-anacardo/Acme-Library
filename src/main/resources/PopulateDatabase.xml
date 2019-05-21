@@ -76,6 +76,18 @@
         </property>
     </bean>
 
+    <bean id="userAccount6" class="security.UserAccount">
+        <property name="username" value="reader2"/>
+        <property name="password" value="273a531832ab8a9e3c2d62cea8230e41"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="READER"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- Administrator -->
 
     <bean id="admin1" class="domain.Administrator">
@@ -387,7 +399,22 @@
             <list>
             </list>
         </property>
-        <property name="book">
+
+    </bean>
+
+    <bean id="reader2" class="domain.Reader">
+        <property name="userAccount" ref="userAccount6"/>
+        <property name="name" value="reader2" />
+        <property name="surname" value="reader2"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="emailDePruebareader@gmail.com"/>
+        <property name="phoneNumber" value="+34 645887763"/>
+        <property name="address" value="Avenida readers"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="finder" ref="finder2"/>
+        <property name="socialProfiles">
             <list>
             </list>
         </property>
@@ -396,6 +423,17 @@
     <!-- Finder -->
 
     <bean id="finder1" class="domain.Finder">
+        <property name="keyWord" value="" />
+        <property name="categoryName" value=""/>
+        <property name="status" value=""/>
+        <property name="lastUpdate" value="01/01/19 09:00"/>
+        <property name="books">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="finder2" class="domain.Finder">
         <property name="keyWord" value="" />
         <property name="categoryName" value=""/>
         <property name="status" value=""/>
@@ -495,6 +533,52 @@
                 <value>FLY</value>
             </list>
         </property>
+    </bean>
+
+    <!--Transactions-->
+    <bean id="transaction1" class="domain.Transaction">
+        <property name="ticker" value="190508-DAVID"/>
+        <property name="moment" value="10/10/2010 10:00"/>
+        <property name="price" value="20.99"/>
+        <property name="creditCard" ref="creditCard1"/>
+        <property name="isSale" value="true"/>
+        <property name="seller" ref="reader1"/>
+        <property name="buyer" ref="reader2"/>
+        <property name="book" ref="book1"/>
+    </bean>
+
+    <bean id="creditCard1" class ="datatype.CreditCard">
+        <property name = "holder" value = "Sponsor 1"/>
+        <property name = "brandName" value = "VISA"/>
+        <property name = "number" value = "4885149505523388"/>
+        <property name="expirationYear" value="01/11/2023"/>
+        <property name = "cvv" value = "891"/>
+    </bean>
+
+    <!-- Books -->
+    <bean id="book1" class="domain.Book">
+        <property name="title" value="titulito"/>
+        <property name="author" value="autorsito"/>
+        <property name="publisher" value="nolose"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="123asfd"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Category -->
+    <bean id="category1" class="domain.Category">
+        <property name="nameEn" value="category"/>
+        <property name="nameEs" value="categoria"/>
     </bean>
 
 </beans>

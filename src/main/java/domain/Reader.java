@@ -13,8 +13,7 @@ public class Reader extends Actor {
 
     @Expose
     private Finder finder;
-    @Expose
-    private Collection<Book> book;
+
 
     @Valid
     @OneToOne(optional = false)
@@ -26,14 +25,5 @@ public class Reader extends Actor {
         this.finder = finder;
     }
 
-    @Valid
-    @ElementCollection
-    @OneToMany
-    public Collection<Book> getBook() {
-        return book;
-    }
 
-    public void setBook(Collection<Book> book) {
-        this.book = book;
-    }
 }
