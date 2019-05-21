@@ -67,7 +67,7 @@ public class Event extends DomainEntity {
 
     @Transient
     public int getActualCapacity() {
-        return actualCapacity;
+        return this.getRegisters().size();
     }
 
     public void setActualCapacity(int actualCapacity) {
