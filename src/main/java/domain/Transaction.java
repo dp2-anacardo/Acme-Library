@@ -96,6 +96,16 @@ public class Transaction extends DomainEntity{
     private Reader buyer;
     private Collection<Offer> offers;
     private Book book;
+    private Collection<Complaint> complaints;
+
+    @OneToMany
+    public Collection<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(Collection<Complaint> complaints) {
+        this.complaints = complaints;
+    }
 
     @OneToOne(optional = false)
     public Book getBook() {

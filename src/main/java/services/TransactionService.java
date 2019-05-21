@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.TransactionRepository;
 
+import javax.validation.ValidationException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -28,6 +32,26 @@ public class TransactionService {
     private ReaderService readerService;
     @Autowired
     private OfferService offerService;
+    @Autowired
+    private Validator validator;
+
+
+    public Transaction reconstructSale(Transaction transaction, BindingResult binding){
+        Transaction result;
+        result = this.create();
+
+        result.setTicker(this.tickerGenerator());
+        result.setIsSale(true);
+        result.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
+        result.setMoment(new Date());
+        result.setPrice(transaction.getPrice());
+        result.setBook(transaction.getBook());
+        validator.validate(result,binding);
+        if(binding.hasErrors()){
+            throw new ValidationException();
+        }
+        return result;
+    }
 
     public Transaction create(){
         Assert.isTrue(this.actorService.getActorLogged() instanceof Reader);

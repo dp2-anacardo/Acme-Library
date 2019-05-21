@@ -20,5 +20,15 @@
 		<put-attribute name="title" value="Mis Ventas" />
 		<put-attribute name="body" value="/views/transaction/listSales.jsp" />
 	</definition>
+
+	<definition name="transaction/reader/listExchanges" extends="master.page">
+		<put-attribute name="title" value="Mis intercambios" />
+		<put-attribute name="body" value="/views/transaction/listExchanges.jsp" />
+	</definition>
+
+	<definition name="transaction/reader/createSale" extends="master.page">
+		<put-attribute name="title" value="Nueva Venta" />
+		<put-attribute name="body" value="/views/transaction/createSale.jsp" />
+	</definition>
 	
 </tiles-definitions>
