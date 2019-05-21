@@ -39,6 +39,7 @@ public class Offer extends DomainEntity{
     public void setMoment(Date moment) {
         this.moment = moment;
     }
+
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getComment() {
         return comment;
@@ -52,7 +53,27 @@ public class Offer extends DomainEntity{
     //Relationships----------------------------------------------------------------------------------------------------
 
     private Reader reader;
-    //private Book book;
+    private Book book;
+    private Transaction transaction;
+
+    @NotNull
+    @ManyToOne(optional = false)
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    @OneToOne(optional = false)
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     @NotNull
     @ManyToOne(optional = false)
@@ -63,6 +84,7 @@ public class Offer extends DomainEntity{
     public void setReader(Reader reader) {
         this.reader = reader;
     }
+
 
 
 

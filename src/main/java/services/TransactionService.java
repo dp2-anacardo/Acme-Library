@@ -1,6 +1,5 @@
 package services;
 
-import domain.Actor;
 import domain.Reader;
 import domain.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;

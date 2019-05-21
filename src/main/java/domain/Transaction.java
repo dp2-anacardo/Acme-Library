@@ -20,6 +20,15 @@ public class Transaction extends DomainEntity{
     private Date moment;
     private Double price;
     private CreditCard creditCard;
+    private Boolean isSale;
+
+    public Boolean getIsSale() {
+        return isSale;
+    }
+
+    public void setIsSale(Boolean sale) {
+        isSale = sale;
+    }
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -64,7 +73,16 @@ public class Transaction extends DomainEntity{
     private Reader seller;
     private Reader buyer;
     private Collection<Offer> offers;
-    //private Book book;
+    private Book book;
+
+    @OneToOne(optional = false)
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     @NotNull
     @ManyToOne(optional = false)
@@ -85,7 +103,7 @@ public class Transaction extends DomainEntity{
         this.buyer = buyer;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "transaction")
     public Collection<Offer> getOffers() {
         return offers;
     }
