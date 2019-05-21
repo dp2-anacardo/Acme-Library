@@ -1,5 +1,10 @@
 #./src/main/resources/Entities.map
-#Thu May 16 22:55:05 CEST 2019
-configuration1=6
-admin1=5
-userAccount1=4
+#Sun May 19 19:32:53 CEST 2019
+inBoxAdmin1=11
+configuration1=16
+admin1=10
+userAccount1=9
+notificationBoxAdmin1=15
+trashBoxAdmin1=14
+spamBoxAdmin1=13
+outBoxAdmin1=12

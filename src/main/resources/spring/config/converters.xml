@@ -28,6 +28,10 @@
 		<bean class="converters.StringToConfigurationConverter"/>
 		<bean class="converters.ActorToStringConverter"/>
 		<bean class="converters.StringToActorConverter"/>
+		<bean class="converters.MessageBoxToStringConverter"/>
+		<bean class="converters.StringToMessageBoxConverter"/>
+		<bean class="converters.MessageToStringConverter"/>
+		<bean class="converters.StringToMessageConverter"/>
 	</util:list>
 	
 </beans>

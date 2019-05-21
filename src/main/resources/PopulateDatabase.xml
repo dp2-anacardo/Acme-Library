@@ -47,7 +47,62 @@
 			<list>
 			</list>
 		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxAdmin1"/>
+				<ref bean="outBoxAdmin1"/>
+				<ref bean="spamBoxAdmin1"/>
+				<ref bean="trashBoxAdmin1"/>
+				<ref bean="notificationBoxAdmin1" />
+			</list>
+		</property>
 	</bean>
+
+	<bean id="inBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Configuration -->
 
 	<bean id="configuration1" class="domain.Configuration">

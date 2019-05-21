@@ -129,6 +129,7 @@ public abstract class Actor extends DomainEntity {
 
     private UserAccount userAccount;
     private Collection<SocialProfile> socialProfiles;
+    private Collection<MessageBox> boxes;
 
     @Valid
     @OneToOne(optional = false, cascade = CascadeType.ALL)
@@ -142,6 +143,12 @@ public abstract class Actor extends DomainEntity {
         return this.socialProfiles;
     }
 
+    @Valid
+    @OneToMany(cascade = CascadeType.ALL)
+    public Collection<MessageBox> getBoxes() {
+        return boxes;
+    }
+
     public void setUserAccount(final UserAccount userAccount) {
         this.userAccount = userAccount;
     }
@@ -150,4 +157,15 @@ public abstract class Actor extends DomainEntity {
         this.socialProfiles = socialProfiles;
     }
 
+    public void setBoxes(Collection<MessageBox> boxes) {
+        this.boxes = boxes;
+    }
+
+    public MessageBox getMessageBox(final String name) {
+        final MessageBox result = null;
+        for (final MessageBox box : this.getBoxes())
+            if (box.getName().equals(name))
+                return box;
+        return result;
+    }
 }
