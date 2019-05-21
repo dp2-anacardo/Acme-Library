@@ -67,7 +67,6 @@ public class Event extends DomainEntity {
 
     // Relationships...................................................................................................
     private Organizer organizer;
-    private Collection<Sponsorship> sponsorships;
     private Collection<Register> registers;
 
     @ManyToOne(optional = false)
@@ -77,15 +76,6 @@ public class Event extends DomainEntity {
 
     public void setOrganizer(Organizer organizer) {
         this.organizer = organizer;
-    }
-
-    @ManyToMany
-    public Collection<Sponsorship> getSponsorships() {
-        return sponsorships;
-    }
-
-    public void setSponsorships(Collection<Sponsorship> sponsorships) {
-        this.sponsorships = sponsorships;
     }
 
     @OneToMany
