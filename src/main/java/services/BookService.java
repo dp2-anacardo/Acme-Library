@@ -86,4 +86,9 @@ public class BookService {
         return res;
     }
 
+    public Collection<Book> getBooksWithNoTransactionsByReader(){
+        Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
+        return this.bookRepository.getBooksWithNoTransactionsByReader(r);
+    }
+
 }

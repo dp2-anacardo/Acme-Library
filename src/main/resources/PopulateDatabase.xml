@@ -557,6 +557,13 @@
         <property name="book" ref="book1"/>
     </bean>
 
+    <bean id="transaction2" class="domain.Transaction">
+        <property name="ticker" value="190507-DAVID"/>
+        <property name="isSale" value="false"/>
+        <property name="seller" ref="reader1"/>
+        <property name="book" ref="book2"/>
+    </bean>
+
     <bean id="creditCard1" class ="datatype.CreditCard">
         <property name = "holder" value = "Sponsor 1"/>
         <property name = "brandName" value = "VISA"/>
@@ -569,6 +576,44 @@
     <bean id="book1" class="domain.Book">
         <property name="title" value="titulito"/>
         <property name="author" value="autorsito"/>
+        <property name="publisher" value="nolose"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="123asfd"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book2" class="domain.Book">
+        <property name="title" value="titulito2"/>
+        <property name="author" value="autorsito2"/>
+        <property name="publisher" value="nolose"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="123asfd"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book3" class="domain.Book">
+        <property name="title" value="titulito3"/>
+        <property name="author" value="autorsito3"/>
         <property name="publisher" value="nolose"/>
         <property name="language" value="español"/>
         <property name="description" value="description"/>
