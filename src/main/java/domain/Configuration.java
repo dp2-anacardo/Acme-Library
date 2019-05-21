@@ -140,7 +140,7 @@ public class Configuration extends DomainEntity {
 		return this.flatFee;
 	}
 
-	public void setFlatFee(final Double flatRate) {
+	public void setFlatFee(final Double flatFee) {
 		this.flatFee = flatFee;
 	}
 
