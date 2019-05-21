@@ -36,5 +36,5 @@
 
 
 
-    <acme:cancel url="transaction/reader/createSale.do" code="transaction.create" />
+    <acme:cancel url="transaction/reader/createExchange.do" code="transaction.create" />
 </security:authorize>

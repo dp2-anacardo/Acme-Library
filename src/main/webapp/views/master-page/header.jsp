@@ -31,7 +31,7 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('READER')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.reader" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="transaction/reader/listSales.do"><spring:message code="master.page.reader.listSales" /></a></li>

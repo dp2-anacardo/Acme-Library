@@ -13,6 +13,12 @@
 <security:authorize access="hasAnyRole('READER')">
     <display:table pagesize="5" name="transactions" requestURI="${requestURI}" id="row">
 
+        <spring:message code="transaction.show" var="show" />
+        <display:column title="${delete}">
+                <a href="transaction/reader/show.do?transactionId=${row.id}">
+                    <spring:message code="transaction.show" /></a>
+        </display:column>
+
         <spring:message code="transaction.book" var="book" />
         <display:column property="book.title" title="${book}"/>
 
@@ -33,14 +39,6 @@
         <spring:message code="transaction.price" var="price" />
         <display:column property="price" title="${price}"/>
 
-        <spring:message code="transaction.delete" var="delete" />
-        <display:column title="${delete}">
-            <jstl:if test="${row.isFinished == false}">
-                <a href="transaction/reader/delete.do?transactionId=${row.id}">
-                    <spring:message code="transaction.delete" /></a>
-            </jstl:if>
-        </display:column>
-
         <spring:message code="transaction.moment" var="moment" />
         <display:column title="${moment}">
             <jstl:if test="${row.moment != null}">
@@ -52,6 +50,14 @@
         <display:column title="${buyer}">
             <jstl:if test="${row.buyer != null}">
                 <jstl:out value="${row.buyer.name}"></jstl:out>
+            </jstl:if>
+        </display:column>
+
+        <spring:message code="transaction.delete" var="delete" />
+        <display:column title="${delete}">
+            <jstl:if test="${row.isFinished == false}">
+                <a href="transaction/reader/delete.do?transactionId=${row.id}">
+                    <spring:message code="transaction.delete" /></a>
             </jstl:if>
         </display:column>
 
