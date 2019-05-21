@@ -27,6 +27,10 @@
 		<value>/views/configuration/messages</value>
 		<value>/views/socialProfile/messages</value>
 		<value>/views/gdpr/messages</value>
+		<value>/views/referee/messages</value>
+		<value>/views/sponsor/messages</value>
+		<value>/views/reader/messages</value>
+		<value>/views/organizer/messages</value>
 	</util:list>
 
 </beans>

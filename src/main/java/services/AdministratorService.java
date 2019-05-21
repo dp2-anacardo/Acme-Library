@@ -26,6 +26,8 @@ public class AdministratorService {
     //Managed Repositories
     @Autowired
     private AdministratorRepository administratorRepository;
+    @Autowired
+    private MessageBoxService messageBoxService;
     //Supporting services
     @Autowired
     private ActorService actorService;
@@ -43,11 +45,13 @@ public class AdministratorService {
         final UserAccount userAccount;
         final Collection<Authority> authorities;
         final Collection<SocialProfile> profiles;
+        final Collection<MessageBox> boxes;
         final Administrator a = new Administrator();
         userAccount = new UserAccount();
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
+        boxes = new ArrayList<MessageBox>();
 
 
         auth.setAuthority(Authority.ADMIN);
@@ -55,8 +59,8 @@ public class AdministratorService {
         userAccount.setAuthorities(authorities);
         a.setUserAccount(userAccount);
         a.setIsBanned(false);
-        a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
+        a.setMessageBox(boxes);
 
         return a;
     }
@@ -95,6 +99,7 @@ public class AdministratorService {
             final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
             final String res = encoder.encodePassword(administrator.getUserAccount().getPassword(), null);
             administrator.getUserAccount().setPassword(res);
+            administrator.setBoxes(this.messageBoxService.createSystemMessageBox());
         }
         result = this.administratorRepository.save(administrator);
         return result;

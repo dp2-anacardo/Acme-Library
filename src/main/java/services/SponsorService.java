@@ -30,6 +30,8 @@ public class SponsorService {
     //Managed Repositories
     @Autowired
     private SponsorRepository sponsorRepository;
+    @Autowired
+    private MessageBoxService messageBoxService;
     //Supporting services
     @Autowired
     private ActorService actorService;
@@ -45,11 +47,13 @@ public class SponsorService {
         final UserAccount userAccount;
         final Collection<Authority> authorities;
         final Collection<SocialProfile> profiles;
+        final Collection<MessageBox> boxes;
         final Sponsor a = new Sponsor();
         userAccount = new UserAccount();
         auth = new Authority();
         authorities = new ArrayList<Authority>();
         profiles = new ArrayList<SocialProfile>();
+        boxes = new ArrayList<MessageBox>();
 
 
         auth.setAuthority(Authority.SPONSOR);
@@ -59,6 +63,7 @@ public class SponsorService {
         a.setIsBanned(false);
         a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
+        a.setMessageBox(boxes);
 
         return a;
     }
@@ -94,6 +99,7 @@ public class SponsorService {
             final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
             final String res = encoder.encodePassword(s.getUserAccount().getPassword(), null);
             s.getUserAccount().setPassword(res);
+            s.setBoxes(this.messageBoxService.createSystemMessageBox());
         }
         result = this.sponsorRepository.save(s);
         return result;
