@@ -63,11 +63,7 @@ public class TransactionService {
 
     public void delete(Transaction t){
         Assert.isTrue(t.getBuyer().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
-        if(t.getIsSale()){
-            Assert.isTrue(t.getBuyer() == null);
-        }else{
-            Assert.isTrue(t.getOffers()== null || t.getOffers().size()<=0);
-        }
+        Assert.isTrue(t.getIsFinished() == false);
         this.transactionRepository.delete(t);
     }
 
@@ -97,5 +93,17 @@ public class TransactionService {
         }
 
         return dateRes + "-" + numericRes;
+    }
+
+    public Collection<Transaction> getSalesByReader(){
+        Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
+        Assert.notNull(r);
+        return this.transactionRepository.getSalesByReader(r);
+    }
+
+    public Collection<Transaction> getExchangesByReader(){
+        Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
+        Assert.notNull(r);
+        return this.transactionRepository.getExchangesByReader(r);
     }
 }

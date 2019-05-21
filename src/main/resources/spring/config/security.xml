@@ -48,6 +48,7 @@
         <security:intercept-url pattern="/socialProfile/**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/messageBox/**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/message/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/transaction/reader/**" access="hasRole('READER')"/>
 
 
         <security:intercept-url pattern="/gdpr/**" access="permitAll"/>
