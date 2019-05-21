@@ -6,13 +6,13 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
+@Entity
+@Access(AccessType.PROPERTY)
 public class Transaction extends DomainEntity{
 
     //Attributes---------------------------------------------------------------------
@@ -67,6 +67,7 @@ public class Transaction extends DomainEntity{
     //private Book book;
 
     @NotNull
+    @ManyToOne(optional = false)
     public Reader getSeller() {
         return seller;
     }
@@ -75,6 +76,7 @@ public class Transaction extends DomainEntity{
         this.seller = seller;
     }
 
+    @ManyToOne(optional = true)
     public Reader getBuyer() {
         return buyer;
     }

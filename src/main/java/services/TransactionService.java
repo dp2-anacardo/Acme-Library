@@ -3,6 +3,7 @@ package services;
 import domain.Actor;
 import domain.Reader;
 import domain.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -15,9 +16,12 @@ import java.util.Collection;
 public class TransactionService {
 
     //Managed repository
+    @Autowired
     private TransactionRepository transactionRepository;
     //Services
+    @Autowired
     private ActorService actorService;
+    @Autowired
     private ReaderService readerService;
 
     public Transaction create(){

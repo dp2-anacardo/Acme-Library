@@ -2,6 +2,7 @@ package services;
 
 import domain.Offer;
 import domain.Reader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -15,9 +16,12 @@ import java.util.Date;
 public class OfferService {
 
     //Managed Repository
+    @Autowired
     private OfferRepository offerRepository;
     //Services
+    @Autowired
     private ActorService actorService;
+    @Autowired
     private ReaderService readerService;
 
     public Offer create(){

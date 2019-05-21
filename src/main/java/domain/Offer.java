@@ -4,13 +4,13 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
-
+@Entity
+@Access(AccessType.PROPERTY)
 public class Offer extends DomainEntity{
 
     //Attributes----------------------------------------------------------------------
@@ -55,7 +55,7 @@ public class Offer extends DomainEntity{
     //private Book book;
 
     @NotNull
-    @Valid
+    @ManyToOne(optional = false)
     public Reader getReader() {
         return reader;
     }
