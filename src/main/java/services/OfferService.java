@@ -39,11 +39,29 @@ public class OfferService {
     }
 
     public Offer save(Offer o){
-       // Assert.isTrue(o.getBook().getReader().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
+        Assert.isTrue(o.getBook().getReader().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
+        Assert.isTrue(o.getTransaction().getIsSale() == false);
         Assert.isTrue(o.getId()==0);
         o.setReader(this.readerService.findOne(this.actorService.getActorLogged().getId()));
         o.setMoment(new Date());
         o.setStatus("PENDING");
+        Offer result = this.offerRepository.save(o);
+        return result;
+    }
+
+    public Offer accept(Offer o){
+        Assert.isTrue(o.getTransaction().getSeller().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
+        Assert.isTrue(o.getTransaction().getIsSale() == false);
+        Assert.isTrue(o.getStatus().equals("PENDING"));
+        o.setStatus("ACCEPTED");
+        Offer result = this.offerRepository.save(o);
+        return result;
+    }
+
+    public Offer reject(Offer o){
+        Assert.isTrue(o.getTransaction().getSeller().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
+        Assert.isTrue(o.getStatus().equals("PENDING"));
+        o.setStatus("REJECTED");
         Offer result = this.offerRepository.save(o);
         return result;
     }
