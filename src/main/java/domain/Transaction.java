@@ -107,6 +107,7 @@ public class Transaction extends DomainEntity{
         this.complaints = complaints;
     }
 
+    @NotNull
     @OneToOne(optional = false)
     public Book getBook() {
         return book;

@@ -17,7 +17,7 @@
 <security:authorize access="hasRole('READER')">
     <form:form action="transaction/reader/createSale.do" modelAttribute="transaction">
 
-        <acme:textbox path="price" code="transaction.price"/>
+        <acme:textbox path="price" code="transaction.price" placeholder="10.0"/>
 
         <form:label path="book">
             <spring:message code="transaction.book"/>
@@ -25,7 +25,9 @@
         <form:select path="book">
             <form:options items="${books}" itemLabel="title" itemValue="id"/>
         </form:select>
+        <form:errors cssClass="error" path="book" />
         <br/>
         <acme:submit name="save" code="transaction.save"/>
+        <acme:cancel code="transaction.cancel" url="/transaction/reader/listSales.do"/>
     </form:form>
 </security:authorize>

@@ -86,7 +86,7 @@ public class TransactionService {
     }
 
     public void delete(Transaction t){
-        Assert.isTrue(t.getBuyer().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
+        Assert.isTrue(t.getSeller().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
         Assert.isTrue(t.getIsFinished() == false);
         this.transactionRepository.delete(t);
     }
