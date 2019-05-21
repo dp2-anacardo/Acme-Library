@@ -157,4 +157,8 @@ public class ReaderService {
         return result;
     }
 
+    public void flush(){
+        this.readerRepository.flush();
+    }
+
 }

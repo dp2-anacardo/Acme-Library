@@ -149,4 +149,8 @@ public class OrganizerService {
         return result;
     }
 
+    public void flush(){
+        this.organizerRepository.flush();
+    }
+
 }

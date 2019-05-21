@@ -149,5 +149,8 @@ public class SponsorService {
         this.validator.validate(result, binding);
         return result;
     }
+    public void flush (){
+        this.sponsorRepository.flush();
+    }
 
 }
