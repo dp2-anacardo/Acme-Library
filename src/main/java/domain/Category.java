@@ -1,6 +1,7 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -15,6 +16,7 @@ public class Category extends DomainEntity {
 
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getNameEn() {
         return nameEn;
     }
@@ -24,6 +26,7 @@ public class Category extends DomainEntity {
     }
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getNameEs() {
         return nameEs;
     }

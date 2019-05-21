@@ -1,8 +1,11 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,6 +26,7 @@ public class Book extends DomainEntity{
 
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getTitle() {
         return title;
     }
@@ -32,6 +36,7 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getAuthor() {
         return author;
     }
@@ -41,6 +46,7 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getPublisher() {
         return publisher;
     }
@@ -50,6 +56,7 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getLanguaje() {
         return languaje;
     }
@@ -59,6 +66,7 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getDescription() {
         return description;
     }
@@ -67,6 +75,7 @@ public class Book extends DomainEntity{
         this.description = description;
     }
 
+    // TODO: @NotBlank ?
     public int getPageNumber() {
         return pageNumber;
     }
@@ -76,6 +85,9 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    //TODO: Revisar pattern
+    @Pattern(regexp = "^VERY GOOD|GOOD|BAD|VERY BAD$")
     public String getStatus() {
         return status;
     }
@@ -102,6 +114,8 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    //TODO: @URL?
+    @URL
     public String getPhoto() {
         return photo;
     }
