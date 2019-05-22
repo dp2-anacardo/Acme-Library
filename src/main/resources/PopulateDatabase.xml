@@ -779,14 +779,14 @@
         </property>
     </bean>
 
-    <!-- Event with capacity 0-->
+    <!-- Event in draftMode-->
     <bean id="event2" class="domain.Event">
         <property name="title" value="Cuentacuentos"/>
         <property name="description" value="Mi mama es rara. Con Victortuga."/>
         <property name="date" value="01/03/2020 19:00"/>
         <property name="address" value="Alcalá, 96, Madrid"/>
-        <property name="maximumCapacity" value="0"/>
-        <property name="isFinal" value="true"/>
+        <property name="maximumCapacity" value="40"/>
+        <property name="isFinal" value="false"/>
         <property name="organizer" ref="organizer1"/>
         <property name="registers">
             <list>

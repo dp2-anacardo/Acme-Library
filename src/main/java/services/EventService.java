@@ -89,6 +89,7 @@ public class EventService {
         Event res;
 
         e.setIsFinal(true);
+        Assert.isTrue(e.getMaximumCapacity() > 0);
         res = this.save(e);
         return res;
     }
