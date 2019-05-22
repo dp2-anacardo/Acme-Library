@@ -17,6 +17,7 @@ public class Event extends DomainEntity {
     private String address;
     private int maximumCapacity;
     private int actualCapacity;
+    private boolean isFinal;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -74,6 +75,14 @@ public class Event extends DomainEntity {
         this.actualCapacity = actualCapacity;
     }
 
+    public boolean getIsFinal() {
+        return isFinal;
+    }
+
+    public void setIsFinal(boolean aFinal) {
+        isFinal = aFinal;
+    }
+
     // Relationships...................................................................................................
     private Organizer organizer;
     private Collection<Register> registers;
@@ -95,4 +104,5 @@ public class Event extends DomainEntity {
     public void setRegisters(Collection<Register> registers) {
         this.registers = registers;
     }
+
 }

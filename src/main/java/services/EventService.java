@@ -48,7 +48,7 @@ public class EventService {
         return res;
     }
 
-    //TODO: final mode and draft mode
+
     public Event save(Event e){
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
@@ -64,4 +64,45 @@ public class EventService {
         res = this.eventRepository.save(e);
         return res;
     }
+
+    //TODO: Revisar capacidad
+    public Event saveDraft(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Event res;
+
+        e.setIsFinal(false);
+        res = this.save(e);
+        return res;
+
+    }
+
+    public Event saveFinal(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Event res;
+
+        e.setIsFinal(true);
+        res = this.save(e);
+        return res;
+    }
+
+    public void delete(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Assert.isTrue(e.getId() != 0);
+        Assert.isTrue(e.getIsFinal() == false);
+
+        this.eventRepository.delete(e);
+    }
+
 }
