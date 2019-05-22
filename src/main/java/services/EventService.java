@@ -105,4 +105,12 @@ public class EventService {
         this.eventRepository.delete(e);
     }
 
+    public Collection<Event> findAllInFinal(){
+
+        Collection<Event> result;
+
+        result = this.eventRepository.findAllInFinal();
+
+        return result;
+    }
 }

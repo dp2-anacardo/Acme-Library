@@ -17,7 +17,7 @@ import security.UserAccount;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -26,13 +26,24 @@ public class AdministratorService {
     //Managed Repositories
     @Autowired
     private AdministratorRepository administratorRepository;
-    @Autowired
-    private MessageBoxService messageBoxService;
+
     //Supporting services
     @Autowired
     private ActorService actorService;
     @Autowired
     private ConfigurationService configurationService;
+    @Autowired
+    private MessageBoxService messageBoxService;
+    @Autowired
+    private MessageService messageService;
+    @Autowired
+    private SponsorService sponsorService;
+    @Autowired
+    private ReaderService readerService;
+    @Autowired
+    private OrganizerService organizerService;
+    @Autowired
+    private SponsorshipService sponsorshipService;
     @Autowired
     private Validator validator;
 
@@ -181,6 +192,131 @@ public class AdministratorService {
         actor.setIsBanned(false);
 
         this.actorService.save(actor);
+    }
+
+
+    public void computeAllScores() {
+
+        Collection<Reader> readers;
+        Collection<Organizer> organizers;
+        Collection<Sponsor> sponsors;
+
+        // Make sure that the principal is an Admin
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        readers = this.readerService.findAll();
+        for (final Reader reader : readers) {
+            reader.setScore(this.computeScore(this.messageService.findAllSentByActor(reader.getId())));
+            this.readerService.save(reader);
+        }
+
+        organizers = this.organizerService.findAll();
+        for (final Organizer organizer : organizers) {
+            organizer.setScore(this.computeScore(this.messageService.findAllSentByActor(organizer.getId())));
+            this.organizerService.save(organizer);
+        }
+
+        sponsors = this.sponsorService.findAll();
+        for (final Sponsor sponsor : sponsors) {
+            sponsor.setScore(this.computeScore(this.messageService.findAllSentByActor(sponsor.getId())));
+            this.sponsorService.save(sponsor);
+        }
+    }
+
+    private Double computeScore(final Collection<Message> messages) {
+        final Collection<String> positiveWords = this.configurationService.getConfiguration().getPosWords();
+
+        final Collection<String> negativeWords = this.configurationService.getConfiguration().getNegWords();
+
+        Double positiveWordsValue = 0.0;
+        Double negativeWordsValue = 0.0;
+
+        for (final Message message : messages) {
+            final String body = message.getBody();
+            final String subject = message.getSubject();
+
+            for (final String positiveWord : positiveWords) {
+                System.out.println(positiveWord);
+                if (body.contains(positiveWord)) {
+                    positiveWordsValue += 1.0;
+                    System.out.println(positiveWordsValue);
+                }
+            }
+            for (final String negativeWord : negativeWords) {
+                System.out.println(negativeWord);
+                if (body.contains(negativeWord)) {
+                    negativeWordsValue += 1.0;
+                    System.out.println(negativeWordsValue);
+                }
+            }
+
+            for (final String positiveWord : positiveWords) {
+                System.out.println(positiveWord);
+                if (subject.contains(positiveWord)) {
+                    positiveWordsValue += 1.0;
+                    System.out.println(positiveWordsValue);
+                }
+            }
+            for (final String negativeWord : negativeWords) {
+                System.out.println(negativeWord);
+                if (subject.contains(negativeWord)) {
+                    negativeWordsValue += 1.0;
+                    System.out.println(negativeWordsValue);
+                }
+            }
+        }
+
+        // check for NaN values
+        if (positiveWordsValue + negativeWordsValue == 0)
+            return 0.0;
+        else if (positiveWordsValue - negativeWordsValue == 0)
+            return 0.0;
+        else
+            return (positiveWordsValue - negativeWordsValue) / (positiveWordsValue + negativeWordsValue);
+
+    }
+
+    public void computeAllSpam() {
+
+        Collection<Reader> readers;
+        Collection<Organizer> organizers;
+        Collection<Sponsor> sponsors;
+
+        // Make sure that the principal is an Admin
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        readers = this.readerService.findAll();
+        for (final Reader reader : readers) {
+            reader.setIsSuspicious(this.messageService.findSpamRatioByActor(reader.getId()) > .10);
+            this.readerService.save(reader);
+        }
+
+        organizers = this.organizerService.findAll();
+        for (final Organizer organizer : organizers) {
+            organizer.setIsSuspicious(this.messageService.findSpamRatioByActor(organizer.getId()) > .10);
+            this.organizerService.save(organizer);
+        }
+
+        sponsors = this.sponsorService.findAll();
+        for (final Sponsor sponsor : sponsors) {
+            sponsor.setIsSuspicious(this.messageService.findSpamRatioByActor(sponsor.getId()) > .10);
+            this.sponsorService.save(sponsor);
+        }
+    }
+
+    public void desactivateExpiredSponsorships() {
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllActive();
+        final Date date = new Date();
+
+        for (final Sponsorship s : sponsorships)
+            if (s.getCreditCard().getExpirationYear().before(date))
+                this.sponsorshipService.desactivate(s);
+
     }
 
     //DASHBOARD

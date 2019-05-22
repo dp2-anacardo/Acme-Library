@@ -128,6 +128,9 @@ public class SponsorshipService {
         if(!brandNames.contains(result.getCreditCard().getBrandName()))
             binding.rejectValue("creditCard.brandName", "sponsorship.creditCard.brandName.error");
 
+//        if(!result.getEvent().getIsFinal())
+//            binding.rejectValue("event", "sponsorship.event.error.notFinal");
+
         if (binding.hasErrors())
             throw new ValidationException();
 

@@ -189,7 +189,7 @@ public class SponsorshipController extends AbstractController {
     protected ModelAndView createModelAndView(final Sponsorship sponsorship, final String message) {
         ModelAndView result;
 
-        final Collection<Event> eventList = this.eventService.findAll();
+        final Collection<Event> eventList = this.eventService.findAllInFinal();
         final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
 
         result = new ModelAndView("sponsorship/sponsor/create");

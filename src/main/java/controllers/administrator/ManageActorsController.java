@@ -63,7 +63,7 @@ public class ManageActorsController extends AbstractController {
         ModelAndView result;
 
         try {
-            //this.administratorService.computeAllSpam();
+            this.administratorService.computeAllSpam();
             result = new ModelAndView("redirect:/administrator/actorList.do");
         } catch (final Throwable oops) {
             return new ModelAndView("redirect:/");
