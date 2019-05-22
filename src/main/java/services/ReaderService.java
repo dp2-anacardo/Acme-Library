@@ -108,6 +108,10 @@ public class ReaderService {
         return result;
     }
 
+    public void updateAdmin(final Reader r){
+        this.readerRepository.save(r);
+    }
+
     public void delete(final Reader r) {
 
         final Actor actor = this.actorService.getActorLogged();

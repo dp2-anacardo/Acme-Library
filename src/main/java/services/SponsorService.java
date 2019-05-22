@@ -101,6 +101,10 @@ public class SponsorService {
         return result;
     }
 
+    public void updateAdmin(final Sponsor r){
+        this.sponsorRepository.save(r);
+    }
+
     public void delete(final Sponsor s) {
 
         final Actor actor = this.actorService.getActorLogged();

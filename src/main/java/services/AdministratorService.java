@@ -210,19 +210,19 @@ public class AdministratorService {
         readers = this.readerService.findAll();
         for (final Reader reader : readers) {
             reader.setScore(this.computeScore(this.messageService.findAllSentByActor(reader.getId())));
-            this.readerService.save(reader);
+            this.readerService.updateAdmin(reader);
         }
 
         organizers = this.organizerService.findAll();
         for (final Organizer organizer : organizers) {
             organizer.setScore(this.computeScore(this.messageService.findAllSentByActor(organizer.getId())));
-            this.organizerService.save(organizer);
+            this.organizerService.updateAdmin(organizer);
         }
 
         sponsors = this.sponsorService.findAll();
         for (final Sponsor sponsor : sponsors) {
             sponsor.setScore(this.computeScore(this.messageService.findAllSentByActor(sponsor.getId())));
-            this.sponsorService.save(sponsor);
+            this.sponsorService.updateAdmin(sponsor);
         }
     }
 
@@ -292,23 +292,23 @@ public class AdministratorService {
         readers = this.readerService.findAll();
         for (final Reader reader : readers) {
             reader.setIsSuspicious(this.messageService.findSpamRatioByActor(reader.getId()) > .10);
-            this.readerService.save(reader);
+            this.readerService.updateAdmin(reader);
         }
 
         organizers = this.organizerService.findAll();
         for (final Organizer organizer : organizers) {
             organizer.setIsSuspicious(this.messageService.findSpamRatioByActor(organizer.getId()) > .10);
-            this.organizerService.save(organizer);
+            this.organizerService.updateAdmin(organizer);
         }
 
         sponsors = this.sponsorService.findAll();
         for (final Sponsor sponsor : sponsors) {
             sponsor.setIsSuspicious(this.messageService.findSpamRatioByActor(sponsor.getId()) > .10);
-            this.sponsorService.save(sponsor);
+            this.sponsorService.updateAdmin(sponsor);
         }
     }
 
-    public void desactivateExpiredSponsorships() {
+    public Integer desactivateExpiredSponsorships() {
         final Actor principal = this.actorService.getActorLogged();
         Assert.isInstanceOf(Administrator.class, principal);
 
@@ -317,9 +317,10 @@ public class AdministratorService {
         for (final Sponsorship s : sponsorships)
             this.sponsorshipService.desactivate(s);
 
+        return sponsorships.size();
     }
 
-    public void deleteInactiveBooks() {
+    public Integer deleteInactiveBooks() {
         final Actor principal = this.actorService.getActorLogged();
         Assert.isInstanceOf(Administrator.class, principal);
 
@@ -332,6 +333,7 @@ public class AdministratorService {
         for (final Book b : books)
             this.bookService.deleteAdmin(b);
 
+        return books.size();
     }
 
     //DASHBOARD

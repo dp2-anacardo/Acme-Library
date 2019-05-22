@@ -26,6 +26,7 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/administrator/create.do"><spring:message code="master.page.administrator.register" /></a></li>
 					<li><a href="administrator/referee/create.do"><spring:message code="master.page.administrator.registerReferee" /></a></li>
+					<li><a href="administrator/management.do"><spring:message code="master.page.administrator.actorList" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

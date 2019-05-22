@@ -101,6 +101,10 @@ public class OrganizerService {
         return result;
     }
 
+    public void updateAdmin(final Organizer r){
+        this.organizerRepository.save(r);
+    }
+
     public void delete(final Organizer o) {
 
         final Actor actor = this.actorService.getActorLogged();
