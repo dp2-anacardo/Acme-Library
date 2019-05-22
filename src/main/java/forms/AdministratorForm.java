@@ -19,6 +19,7 @@ public class AdministratorForm {
 	private String	confirmPass;
 	private String	password;
 	private String	username;
+	private String 	middleName;
 	private String	name;
 	private String	photo;
 	private String	email;
@@ -27,16 +28,12 @@ public class AdministratorForm {
 	private int		id;
 	private int		version;
 	private String	surname;
-	private String	holder;
-	private String	brandName;
-	private String	number;
-	private Date	expirationYear;
-	private Integer	cvv;
 
 	public AdministratorForm(final Administrator admin) {
 		final AdministratorForm result = new AdministratorForm();
 		result.setAddress(admin.getAddress());
 		result.setEmail(admin.getEmail());
+		result.setMiddleName(admin.getMiddleName());
 		result.setId(admin.getId());
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
@@ -146,8 +143,8 @@ public class AdministratorForm {
 		this.username = username;
 	}
 
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@Valid
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}
@@ -156,57 +153,12 @@ public class AdministratorForm {
 		this.surname = surname;
 	}
 
-	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getHolder() {
-		return holder;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public void setHolder(String holder) {
-		this.holder = holder;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getBrandName() {
-		return brandName;
-	}
-
-
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-
-	@NotBlank
-	@CreditCardNumber
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	@NotNull
-	@Future
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "MM/YY")
-	public Date getExpirationYear() {
-		return expirationYear;
-	}
-
-	public void setExpirationYear(Date expirationYear) {
-		this.expirationYear = expirationYear;
-	}
-
-	@NotNull
-	@Range(min = 100, max = 999)
-	public Integer getCvv() {
-		return cvv;
-	}
-
-	public void setCvv(Integer cvv) {
-		this.cvv = cvv;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 }

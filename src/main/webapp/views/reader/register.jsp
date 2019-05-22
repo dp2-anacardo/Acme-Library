@@ -45,6 +45,9 @@
 	*
 	<acme:textbox code="actor.surname" path="surname"/>
 	<br />
+
+		<acme:textbox code="actor.middleName" path="middleName"/>
+		<br />
 	
 	<acme:textbox code="actor.photo" path="photo"/>
 	<br />
@@ -59,24 +62,7 @@
 	<br />
 
 	</fieldset>
-	<fieldset>
- 	<legend><spring:message code="actor.CreditCard" /></legend>
- 	*
-	<acme:textbox code="credit.holderName" path="holder"/>
-	<br />
-	*
-	<acme:textbox code="credit.brandName" path="brandName"/>
-	<br />
-	*
-	<acme:textbox code="credit.number" path="number"/>
-	<br />
-	*
-	<acme:textbox code="credit.expiration" path="expirationYear" placeholder="MM/YY"/>
-	<br />
-	*
-	<acme:textbox code="credit.cvvCode" path="cvv"/>
-	<br />
-	</fieldset>
+
 	<script type="text/javascript">
 	function phoneValidation(){
 		var phoneNumber = document.getElementById("phoneNumber").value;

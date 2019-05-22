@@ -1,5 +1,6 @@
 #./src/main/resources/Entities.map
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Wed May 22 21:22:51 CEST 2019
 spamBoxReferee1=552
 spamBoxReader2=569
@@ -129,3 +130,44 @@ inBoxOrganizer1=542
 finder2=570
 finder1=569
 >>>>>>> 94a902baa641a9a1c674a22c92684702c12c8ac7
+=======
+#Wed May 22 11:00:26 CEST 2019
+spamBoxReferee1=227
+outBoxSponsor1=232
+trashBoxAdmin1=216
+configuration1=238
+sponsor1=230
+inBoxReferee1=225
+inBoxAdmin1=213
+trashBoxSponsor1=234
+notificationBoxReferee1=229
+outBoxOrganizer1=220
+spamBoxSponsor1=233
+category1=239
+notificationBoxAdmin1=217
+spamBoxAdmin1=215
+outBoxAdmin1=214
+book1=242
+inBoxSponsor1=231
+reader2=241
+reader1=240
+notificationBoxSponsor1=235
+trashBoxOrganizer1=222
+spamBoxOrganizer1=221
+organizer1=218
+notificationBoxOrganizer1=223
+transaction1=243
+userAccount6=211
+userAccount5=210
+userAccount4=209
+userAccount3=208
+userAccount2=207
+userAccount1=206
+outBoxReferee1=226
+referee1=224
+admin1=212
+trashBoxReferee1=228
+inBoxOrganizer1=219
+finder2=237
+finder1=236
+>>>>>>> sergi

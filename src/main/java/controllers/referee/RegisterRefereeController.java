@@ -1,21 +1,21 @@
 
 package controllers.referee;
 
-import controllers.AbstractController;
-import datatype.CreditCard;;
-import domain.Referee;
-import forms.RefereeForm;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import services.ActorService;
 import services.AdministratorService;
 import services.RefereeService;
-
-import javax.validation.Valid;
+import controllers.AbstractController;
+import domain.Referee;
+import forms.RefereeForm;
 
 @Controller
 @RequestMapping("administrator/referee")
@@ -25,12 +25,10 @@ public class RegisterRefereeController extends AbstractController {
 	private AdministratorService	administratorService;
 
 	@Autowired
-	private RefereeService	refereeService;
+	private RefereeService			refereeService;
 
 	@Autowired
 	private ActorService			actorService;
-
-
 
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

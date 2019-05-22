@@ -1,5 +1,5 @@
 /*
- * SampleTest.java
+ * RegisterAndEditAdministratorTest.java
  * 
  * Copyright (C) 2018 Universidad de Sevilla
  * 
