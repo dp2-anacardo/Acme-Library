@@ -814,4 +814,38 @@
         <property name="reader" ref="reader1"/>
     </bean>
 
+    <!-- Sponsorships -->
+    <bean id="sponsorship1" class="domain.Sponsorship">
+        <property name="sponsor" ref="sponsor1"/>
+        <property name="event" ref="event1"/>
+        <property name="status" value="1"/>
+        <property name="banner" value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Cloud_banner.jpg/1197px-Cloud_banner.jpg"/>
+        <property name="creditCard" ref="creditCard1Sponsor1"/>
+    </bean>
+
+    <bean id="sponsorship2" class="domain.Sponsorship">
+        <property name="sponsor" ref="sponsor1"/>
+        <property name="event" ref="event3"/>
+        <property name="status" value="1"/>
+        <property name="banner" value="http://educayoruba.com/wp-content/uploads/2017/01/Pricing-header-banner.jpg"/>
+        <property name="creditCard" ref="creditCard2Sponsor1"/>
+    </bean>
+
+    <bean id="creditCard1Sponsor1" class ="datatype.CreditCard">
+        <property name = "holder" value = "Sponsor 1"/>
+        <property name = "brandName" value = "VISA"/>
+        <property name = "number" value = "4885149505523388"/>
+        <property name="expirationYear" value="01/11/2023"/>
+        <property name = "cvv" value = "891"/>
+    </bean>
+
+    <bean id="creditCard2Sponsor1" class ="datatype.CreditCard">
+        <property name = "holder" value = "Sponsor 1"/>
+        <property name = "brandName" value = "VISA"/>
+        <property name = "number" value = "4885149505523388"/>
+        <property name="expirationYear" value="01/11/2018"/>
+        <property name = "cvv" value = "891"/>
+    </bean>
+
+
 </beans>

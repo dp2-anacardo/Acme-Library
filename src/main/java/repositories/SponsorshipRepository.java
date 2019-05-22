@@ -23,4 +23,7 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 
     @Query("select s from Sponsorship s where s.status = TRUE")
     Collection<Sponsorship> findAllActive();
+
+    @Query("select s from Sponsorship s join s.creditCard cc where s.status = TRUE and cc.expirationYear < CURRENT_DATE")
+    Collection<Sponsorship> findAllExpiredCreditCard();
 }

@@ -128,8 +128,12 @@ public class SponsorshipService {
         if(!brandNames.contains(result.getCreditCard().getBrandName()))
             binding.rejectValue("creditCard.brandName", "sponsorship.creditCard.brandName.error");
 
-//        if(!result.getEvent().getIsFinal())
+//        (!result.getEvent().getIsFinal())
 //            binding.rejectValue("event", "sponsorship.event.error.notFinal");
+
+        final Date date = new Date();
+        if(result.getCreditCard().getExpirationYear() != null && result.getCreditCard().getExpirationYear().before(date))
+            binding.rejectValue("creditCard.expirationYear", "sponsorship.creditCard.expiration.future");
 
         if (binding.hasErrors())
             throw new ValidationException();
@@ -160,6 +164,12 @@ public class SponsorshipService {
 
     public Collection<Sponsorship> findAllActive() {
         final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllActive();
+
+        return sponsorships;
+    }
+
+    public Collection<Sponsorship> findAllExpiredCreditCard() {
+        final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllExpiredCreditCard();
 
         return sponsorships;
     }

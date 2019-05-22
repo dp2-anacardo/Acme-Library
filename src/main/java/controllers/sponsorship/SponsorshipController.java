@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.ActorService;
-import services.ConfigurationService;
-import services.EventService;
-import services.SponsorshipService;
+import services.*;
 
 import javax.validation.ValidationException;
 import java.util.Collection;
@@ -38,6 +35,9 @@ public class SponsorshipController extends AbstractController {
 
     @Autowired
     private ConfigurationService configurationService;
+
+    @Autowired
+    private AdministratorService administratorService;
 
 
     // List -------------------------------------------------------------

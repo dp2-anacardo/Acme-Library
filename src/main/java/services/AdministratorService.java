@@ -15,9 +15,9 @@ import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 @Service
 @Transactional
@@ -44,6 +44,8 @@ public class AdministratorService {
     private OrganizerService organizerService;
     @Autowired
     private SponsorshipService sponsorshipService;
+    @Autowired
+    private BookService bookService;
     @Autowired
     private Validator validator;
 
@@ -310,33 +312,46 @@ public class AdministratorService {
         final Actor principal = this.actorService.getActorLogged();
         Assert.isInstanceOf(Administrator.class, principal);
 
-        final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllActive();
-        final Date date = new Date();
+        final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllExpiredCreditCard();
 
         for (final Sponsorship s : sponsorships)
-            if (s.getCreditCard().getExpirationYear().before(date))
-                this.sponsorshipService.desactivate(s);
+            this.sponsorshipService.desactivate(s);
+
+    }
+
+    public void deleteInactiveBooks() {
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -30);
+        java.sql.Date oneMonthOld = new java.sql.Date(cal.getTimeInMillis());
+
+        final Collection<Book> books = this.bookService.findAllInactiveBooks(oneMonthOld);
+
+        for (final Book b : books)
+            this.bookService.deleteAdmin(b);
 
     }
 
     //DASHBOARD
     //Q8
-    public Double getRatioOfFullFinders(){
+    public Double getRatioOfFullFinders() {
         return this.administratorRepository.getRatioOfFullFinders();
     }
 
     //Q9
-    public Double getRatioOfEmptyFinders(){
+    public Double getRatioOfEmptyFinders() {
         return this.administratorRepository.getRatioOfEmptyFinders();
     }
 
     //Q10
-    public Double getRatioOfEmptyVSFullFinders(){
+    public Double getRatioOfEmptyVSFullFinders() {
         return this.administratorRepository.getRatioOfEmptyVSFullFinders();
     }
 
     //Q13
-    public Double getRatioOfSalesVSExchangesByReader(){
+    public Double getRatioOfSalesVSExchangesByReader() {
         return this.administratorRepository.getRatioOfSalesVSExchangesByReader();
     }
 

@@ -16,4 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query("select b from Book b where b.reader = ?1 and not exists(select t from Transaction t where t.book = b)")
     Collection<Book> getBooksWithNoTransactionsByReader(Reader r);
+
+    @Query("select b from Book b where b.moment < ?1 and not exists(select t from Transaction t where t.book = b)")
+    Collection<Book> findAllInactiveBooks(java.sql.Date date);
 }

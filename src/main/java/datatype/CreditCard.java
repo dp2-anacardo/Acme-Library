@@ -66,8 +66,7 @@ public class CreditCard {
 	}
 
 	@NotNull
-	@Future
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/YY")
 	public Date getExpirationYear() {
 		return this.expirationYear;
