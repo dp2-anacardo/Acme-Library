@@ -763,6 +763,11 @@
         <property name="nameEs" value="Dramático"/>
     </bean>
 
+    <bean id="category8" class="domain.Category">
+        <property name="nameEn" value="Default"/>
+        <property name="nameEs" value="Por defecto"/>
+    </bean>
+
     <!-- Event -->
     <bean id="event1" class="domain.Event">
         <property name="title" value="Presentacion y firma de 'Un lugar al que volver'"/>

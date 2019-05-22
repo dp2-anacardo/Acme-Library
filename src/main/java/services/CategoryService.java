@@ -1,5 +1,6 @@
 package services;
 
+import domain.Book;
 import domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,6 @@ import security.UserAccount;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @Transactional
@@ -62,7 +62,29 @@ public class CategoryService {
         Assert.notNull(c);
         Assert.isTrue(c.getId() != 0);
 
+        Collection<Book> bookWithThisCategory = this.getBooksWithCategoryParam(c);
+
+        for (Book b: bookWithThisCategory){
+            Collection<Category> categories = b.getCategories();
+            if(b.getCategories().size() == 1) {
+                categories.add(this.getDefaultCategory());
+            }
+            categories.remove(c);
+        }
         this.categoryRepository.delete(c);
+    }
+
+    public Collection<Book> getBooksWithCategoryParam(Category category){
+        Collection<Book> res;
+        res = this.categoryRepository.getBooksWithCategoryParam(category);
+        return res;
+    }
+
+    public Category getDefaultCategory(){
+        Category res;
+        res = this.categoryRepository.getDefaultCategory();
+        Assert.notNull(res);
+        return res;
     }
 
 }

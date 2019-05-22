@@ -24,6 +24,7 @@ public class Complaint extends DomainEntity{
 
 
     @NotBlank
+    @Column(unique = true)
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getTicker() {
         return ticker;
