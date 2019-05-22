@@ -61,27 +61,19 @@ public class ComplaintService {
         return result;
     }
 
-//    public Complaint save(Complaint complaint, int transactionId){
-//        Assert.isTrue(actorService.getActorLogged() instanceof Reader);
-//        Complaint result;
-//        Transaction transaction = this.transactionService.findOne(transactionId);
-//        Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
-//        Assert.isTrue(transaction.getSeller().equals(reader));
-//
-//        //Habría que comprobar que no se pueda crear en una transaction con estado sin finalizar
-//        if(transaction.getIsSale()){
-//           Assert.notNull(transaction.getCreditCard());
-//           Assert.notNull(transaction.getBuyer());
-//        }else{
-//            //Habria que comprobar que haya una offer de la transaction con estado accepted
-//            Assert.isTrue(transaction.getIsFinished());
-//        }
-//
-//        result = this.complaintRepository.save(complaint);
-//        transaction.getComplaints().add(result);
-//
-//        return result;
-//    }
+    public Complaint save(Complaint complaint, int transactionId){
+        Assert.isTrue(actorService.getActorLogged() instanceof Reader);
+        Complaint result;
+        Transaction transaction = this.transactionService.findOne(transactionId);
+        Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
+        Assert.isTrue(transaction.getSeller().equals(reader));
+        Assert.isTrue(transaction.getIsFinished());
+
+        result = this.complaintRepository.save(complaint);
+        transaction.getComplaints().add(result);
+
+        return result;
+    }
 
     public Complaint autoAssign(Complaint complaint){
         Assert.isTrue(actorService.getActorLogged() instanceof Referee);

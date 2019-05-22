@@ -86,7 +86,7 @@ public class ComplaintController extends AbstractController {
     }
 
     @RequestMapping(value="/reader/show", method = RequestMethod.GET)
-    public ModelAndView show(@RequestParam int complaintId){
+    public ModelAndView showReader(@RequestParam int complaintId){
         ModelAndView result;
         Complaint complaint;
 
@@ -99,6 +99,24 @@ public class ComplaintController extends AbstractController {
             result.addObject("complaint", complaint);
         } catch(Throwable oops){
             result = new ModelAndView("redirect:/complaint/reader/list.do");
+        }
+        return result;
+    }
+
+    @RequestMapping(value="/referee/show", method = RequestMethod.GET)
+    public ModelAndView showReferee(@RequestParam int complaintId){
+        ModelAndView result;
+        Complaint complaint;
+
+        try {
+            Referee referee = this.refereeService.findOne(actorService.getActorLogged().getId());
+            complaint = this.complaintService.findOne(complaintId);
+            Assert.isTrue(complaint.getReferee().equals(referee));
+
+            result = new ModelAndView("complaint/referee/show");
+            result.addObject("complaint", complaint);
+        } catch(Throwable oops){
+            result = new ModelAndView("redirect:/complaint/referee/list.do");
         }
         return result;
     }
@@ -143,25 +161,25 @@ public class ComplaintController extends AbstractController {
         return result;
     }
 
-//    @RequestMapping(value="/reader/create", method = RequestMethod.POST, params = "save")
-//    public ModelAndView save(@ModelAttribute("complaint") Complaint complaint, @RequestParam int transactionId, BindingResult binding){
-//        ModelAndView result;
-//
-//        try{
-//            complaint = this.complaintService.reconstruct(complaint, binding);
-//            this.complaintService.save(complaint);
-//            result = new ModelAndView("redirect:/complaint/reader/list.do");
-//        } catch(ValidationException v){
-//            result = new ModelAndView("complaint/reader/create");
-//            result.addObject("complaint", complaint);
-//            result.addObject("transactionId", transactionId);
-//        } catch(Throwable oops){
-//            result = new ModelAndView("complaint/reader/create");
-//            result.addObject("complaint", complaint);
-//            result.addObject("transactionId", transactionId);
-//            result.addObject("message", "complaint.commit.error");
-//        }
-//        return result;
-//    }
+    @RequestMapping(value="/reader/create", method = RequestMethod.POST, params = "save")
+    public ModelAndView save(@ModelAttribute("complaint") Complaint complaint, @RequestParam int transactionId, BindingResult binding){
+        ModelAndView result;
+
+        try{
+            complaint = this.complaintService.reconstruct(complaint, binding);
+            this.complaintService.save(complaint, transactionId);
+            result = new ModelAndView("redirect:/complaint/reader/list.do");
+        } catch(ValidationException v){
+            result = new ModelAndView("complaint/reader/create");
+            result.addObject("complaint", complaint);
+            result.addObject("transactionId", transactionId);
+        } catch(Throwable oops){
+            result = new ModelAndView("complaint/reader/create");
+            result.addObject("complaint", complaint);
+            result.addObject("transactionId", transactionId);
+            result.addObject("message", "complaint.commit.error");
+        }
+        return result;
+    }
 
 }
