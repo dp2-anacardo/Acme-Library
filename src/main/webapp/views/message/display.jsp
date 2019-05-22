@@ -70,17 +70,17 @@
         </jstl:forEach>
     </select>
 
-    <acme:cancel id="moveButton" url="message/move.do?messageID=${row.id}&srcBoxID=${messageBoxID}&destBoxID="
+    <acme:cancel id="moveButton" url="message/move.do?messageID=${mesage.id}&srcBoxID=${messageBoxID}&destBoxID="
                  code="message.move"/>
 
-    <acme:cancel id="copyButton" url="message/copy.do?messageID=${row.id}&srcBoxID=${messageBoxID}&destBoxID="
+    <acme:cancel id="copyButton" url="message/copy.do?messageID=${mesage.id}&srcBoxID=${messageBoxID}&destBoxID="
                  code="message.copy"/>
 
     <br>
     <br>
 </jstl:if>
 
-<acme:cancel url="message/delete.do?messageID=${row.id}&messageBoxID=${messageBoxID}" code="message.delete"/>
+<acme:cancel url="message/delete.do?messageID=${mesage.id}&messageBoxID=${messageBoxID}" code="message.delete"/>
 <acme:cancel url="message/list.do?messageBoxID=${messageBoxID}" code="message.goBack"/>
 
 <script type="text/javascript">
@@ -94,8 +94,8 @@
     function changeLink() {
         var box = document.getElementById("actorBoxes").selectedOptions[0].value;
         var strBox = box.toString();
-        var moveUrl = "javascript: relativeRedir('message/move.do?messageID=${row.id}&srcBoxID=${messageBoxID}&destBoxID=";
-        var copyUrl = "javascript: relativeRedir('message/copy.do?messageID=${row.id}&srcBoxID=${messageBoxID}&destBoxID=";
+        var moveUrl = "javascript: relativeRedir('message/move.do?messageID=${mesage.id}&srcBoxID=${messageBoxID}&destBoxID=";
+        var copyUrl = "javascript: relativeRedir('message/copy.do?messageID=${mesage.id}&srcBoxID=${messageBoxID}&destBoxID=";
         document.getElementById("moveButton").setAttribute("onclick", moveUrl + strBox + "')");
         document.getElementById("copyButton").setAttribute("onclick", copyUrl + strBox + "')");
     }

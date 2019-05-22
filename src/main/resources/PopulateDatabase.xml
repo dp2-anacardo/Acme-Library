@@ -95,7 +95,7 @@
         <property name="name" value="admin1"/>
         <property name="surname" value="admin1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePrueba@gmail.com"/>
+        <property name="email" value="admin1@gmail.com"/>
         <property name="phoneNumber" value="+34 678123674"/>
         <property name="address" value="Avenida Reina Mercedes"/>
         <property name="isSuspicious" value="false"/>
@@ -167,7 +167,7 @@
         <property name="name" value="organizer1"/>
         <property name="surname" value="organizer1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebaOrganizer@gmail.com"/>
+        <property name="email" value="organizer1@gmail.com"/>
         <property name="phoneNumber" value="+34 642558899"/>
         <property name="address" value="Avenida Reina Mercedes"/>
         <property name="isSuspicious" value="false"/>
@@ -241,7 +241,7 @@
         <property name="name" value="referee1"/>
         <property name="surname" value="referee1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebareferee@gmail.com"/>
+        <property name="email" value="referee1@gmail.com"/>
         <property name="phoneNumber" value="+34 956632244"/>
         <property name="address" value="Avenida referees"/>
         <property name="isSuspicious" value="false"/>
@@ -315,7 +315,7 @@
         <property name="name" value="sponsor1"/>
         <property name="surname" value="sponsor1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebasponsor@gmail.com"/>
+        <property name="email" value="sponsor1@gmail.com"/>
         <property name="phoneNumber" value="+34 956251577"/>
         <property name="address" value="Avenida sponsors"/>
         <property name="isSuspicious" value="false"/>
@@ -388,7 +388,7 @@
         <property name="name" value="reader1" />
         <property name="surname" value="reader1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebareader@gmail.com"/>
+        <property name="email" value="reader1@gmail.com"/>
         <property name="phoneNumber" value="+34 645887763"/>
         <property name="address" value="Avenida readers"/>
         <property name="isSuspicious" value="false"/>
@@ -460,7 +460,7 @@
         <property name="name" value="reader2" />
         <property name="surname" value="reader2"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebareader@gmail.com"/>
+        <property name="email" value="reader2@gmail.com"/>
         <property name="phoneNumber" value="+34 645887763"/>
         <property name="address" value="Avenida readers"/>
         <property name="isSuspicious" value="false"/>
@@ -549,16 +549,6 @@
             <list>
             </list>
         </property>
-    </bean>
-
-    <!-- Event -->
-    <bean id="event1" class="domain.Event">
-        <property name="title" value="Event 1" />
-        <property name="description" value="Event 1 Description"/>
-        <property name="address" value="Event 1 Address"/>
-        <property name="date" value="01/01/20 09:00"/>
-        <property name="maximumCapacity" value="50"/>
-        <property name="organizer" ref="organizer1"/>
     </bean>
 
     <!-- Configuration -->
