@@ -671,33 +671,33 @@
 
     <!-- Books -->
     <bean id="book1" class="domain.Book">
-        <property name="title" value="titulito"/>
-        <property name="author" value="autorsito"/>
-        <property name="publisher" value="nolose"/>
-        <property name="language" value="español"/>
+        <property name="title" value="El mentiroso"/>
+        <property name="author" value="Pepe Mel"/>
+        <property name="publisher" value="Colección Mundus"/>
+        <property name="language" value="Español"/>
         <property name="description" value="description"/>
-        <property name="pageNumber" value="1"/>
+        <property name="pageNumber" value="587"/>
         <property name="status" value="VERY GOOD"/>
-        <property name="isbn" value="123asfd"/>
+        <property name="isbn" value="978-84-92868-70-4"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
         <property name="photo" value="http://www.google.com"/>
         <property name="categories">
             <list>
-                <ref bean="category1"/>
+                <ref bean="category7"/>
             </list>
         </property>
     </bean>
 
     <bean id="book2" class="domain.Book">
-        <property name="title" value="titulito2"/>
-        <property name="author" value="autorsito2"/>
-        <property name="publisher" value="nolose"/>
+        <property name="title" value="Patria"/>
+        <property name="author" value="Fernando Aramburu"/>
+        <property name="publisher" value="TUSQUETS"/>
         <property name="language" value="español"/>
         <property name="description" value="description"/>
-        <property name="pageNumber" value="1"/>
+        <property name="pageNumber" value="646"/>
         <property name="status" value="VERY GOOD"/>
-        <property name="isbn" value="123asfd"/>
+        <property name="isbn" value="9788490663196"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
         <property name="photo" value="http://www.google.com"/>
@@ -709,14 +709,14 @@
     </bean>
 
     <bean id="book3" class="domain.Book">
-        <property name="title" value="titulito3"/>
-        <property name="author" value="autorsito3"/>
-        <property name="publisher" value="nolose"/>
+        <property name="title" value="Un mundo sin fin"/>
+        <property name="author" value="Kent Follet"/>
+        <property name="publisher" value="Plaza Janés"/>
         <property name="language" value="español"/>
         <property name="description" value="description"/>
-        <property name="pageNumber" value="1"/>
+        <property name="pageNumber" value="1180"/>
         <property name="status" value="VERY GOOD"/>
-        <property name="isbn" value="123asfd"/>
+        <property name="isbn" value="978-84-9908-122-9"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
         <property name="photo" value="http://www.google.com"/>
@@ -729,8 +729,38 @@
 
     <!-- Category -->
     <bean id="category1" class="domain.Category">
-        <property name="nameEn" value="category"/>
-        <property name="nameEs" value="categoria"/>
+        <property name="nameEn" value="Sci-fi"/>
+        <property name="nameEs" value="Ciencia ficción"/>
+    </bean>
+
+    <bean id="category2" class="domain.Category">
+        <property name="nameEn" value="Scientific"/>
+        <property name="nameEs" value="Científico"/>
+    </bean>
+
+    <bean id="category3" class="domain.Category">
+        <property name="nameEn" value="Biography"/>
+        <property name="nameEs" value="Biografía"/>
+    </bean>
+
+    <bean id="category4" class="domain.Category">
+        <property name="nameEn" value="Song"/>
+        <property name="nameEs" value="Canción"/>
+    </bean>
+
+    <bean id="category5" class="domain.Category">
+        <property name="nameEn" value="Romance"/>
+        <property name="nameEs" value="Romance"/>
+    </bean>
+
+    <bean id="category6" class="domain.Category">
+        <property name="nameEn" value="Story"/>
+        <property name="nameEs" value="Cuento"/>
+    </bean>
+
+    <bean id="category7" class="domain.Category">
+        <property name="nameEn" value="Drama"/>
+        <property name="nameEs" value="Dramático"/>
     </bean>
 
 </beans>
