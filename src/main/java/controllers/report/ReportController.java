@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
@@ -122,6 +123,9 @@ public class ReportController extends AbstractController {
             result = new ModelAndView("redirect:/report/referee/list.do");
         } catch(ValidationException v){
             result = new ModelAndView("report/referee/edit");
+            for (final ObjectError e : binding.getAllErrors())
+                if (e.getDefaultMessage().equals("URL incorrecta") || e.getDefaultMessage().equals("Invalid URL"))
+                    result.addObject("attachmentError", e.getDefaultMessage());
             result.addObject("report", report);
             result.addObject("complaintId", complaintId);
         } catch(Throwable oops){

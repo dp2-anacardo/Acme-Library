@@ -14,6 +14,7 @@
 
     <form:hidden path="id" readOnly = "true"/>
     <input type="hidden" name="reportId" value="${reportId}" readonly>
+    <br>
 
     <acme:textbox code="comment.body" path="body"/>
     <form:errors cssClass="error" path="body" />
