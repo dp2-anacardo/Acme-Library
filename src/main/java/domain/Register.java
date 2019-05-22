@@ -22,4 +22,16 @@ public class Register extends DomainEntity {
         this.moment = moment;
     }
 
+
+    //Relationships...................................................
+    private Reader reader;
+
+    @ManyToOne(optional = false)
+    public Reader getReader() {
+        return reader;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
+    }
 }

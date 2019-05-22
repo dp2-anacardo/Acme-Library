@@ -11,7 +11,6 @@ import java.util.Collection;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-    //TODO: probar query
     @Query("select count(t) from Transaction t where t.book.id = ?1")
     Integer numTransaction(int bookId);
 

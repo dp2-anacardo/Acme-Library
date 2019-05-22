@@ -1,6 +1,7 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
@@ -58,6 +59,7 @@ public class Event extends DomainEntity {
         this.address = address;
     }
 
+    @Range(min = 0)
     public int getMaximumCapacity() {
         return maximumCapacity;
     }

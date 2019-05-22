@@ -65,7 +65,7 @@ public class EventService {
         return res;
     }
 
-    //TODO: Revisar capacidad
+
     public Event saveDraft(Event e){
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
