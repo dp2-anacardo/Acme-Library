@@ -17,32 +17,32 @@
 <tiles-definitions>
 
 	<definition name="complaint/referee/list" extends="master.page">
-		<put-attribute name="title" value="List of complaints" />
+		<put-attribute name="title" value="Lista de quejas" />
 		<put-attribute name="body" value="/views/complaint/list.jsp" />
 	</definition>
 
 	<definition name="complaint/reader/list" extends="master.page">
-		<put-attribute name="title" value="List of complaints" />
+		<put-attribute name="title" value="Lista de quejas" />
 		<put-attribute name="body" value="/views/complaint/list.jsp" />
 	</definition>
 
 	<definition name="complaint/list" extends="master.page">
-		<put-attribute name="title" value="List of complaints" />
+		<put-attribute name="title" value="Lista de quejas" />
 		<put-attribute name="body" value="/views/complaint/list.jsp" />
 	</definition>
 
 	<definition name="complaint/referee/show" extends="master.page">
-		<put-attribute name="title" value="Complaint" />
+		<put-attribute name="title" value="Queja" />
 		<put-attribute name="body" value="/views/complaint/show.jsp" />
 	</definition>
 
 	<definition name="complaint/reader/show" extends="master.page">
-		<put-attribute name="title" value="Complaint" />
+		<put-attribute name="title" value="Queja" />
 		<put-attribute name="body" value="/views/complaint/show.jsp" />
 	</definition>
 
 	<definition name="report/reader/create" extends="master.page">
-		<put-attribute name="title" value="Complaint" />
+		<put-attribute name="title" value="Queja" />
 		<put-attribute name="body" value="/views/complaint/create.jsp" />
 	</definition>
 	

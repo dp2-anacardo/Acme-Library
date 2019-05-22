@@ -19,7 +19,7 @@
     <form:errors cssClass="error" path="description" />
     <br>
 
-    <acme:textarea code="curricula.misc.attachments" path="attachment" />
+    <acme:textarea code="report.attachments" path="attachment" />
     <jstl:if test="${not empty attachmentError }">
         <p class="error">${attachmentError }</p>
     </jstl:if>

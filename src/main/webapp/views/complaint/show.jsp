@@ -9,17 +9,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<acme:showtext fieldset="true" code="audit.moment" value="${audit.moment}"/>
-<acme:showtext fieldset="true" code="audit.text" value="${audit.text}"/>
-<acme:showtext fieldset="true" code="audit.score" value="${audit.score}"/>
+<acme:showtext fieldset="true" code="complaint.moment" value="${complaint.moment}"/>
+<acme:showtext fieldset="true" code="complaint.text" value="${complaint.body}"/>
 
-<fieldset><legend><spring:message code="audit.isFinal"/></legend>
-    <jstl:if test="${audit.isFinal eq true}">
-        <spring:message code="audit.final"/>
-    </jstl:if>
-    <jstl:if test="${audit.isFinal eq false}">
-        <spring:message code="audit.draft"/>
-    </jstl:if>
+<fieldset><legend><spring:message code="complaint.attachments"/></legend>
+    <jstl:forEach items="${complaint.attachments}" var="url">
+        <jstl:out value="${url.link}"></jstl:out>
+    </jstl:forEach>
 </fieldset>
 
-<acme:cancel url="audit/auditor/list.do" code="audit.back"/>
+<security:authorize access="hasRole('READER')">
+    <acme:cancel url="complaint/reader/list.do" code="complaint.back"/>
+</security:authorize>
+
+<security:authorize access="hasRole('REFEREE')">
+    <acme:cancel url="complaint/referee/list.do" code="complaint.back"/>
+</security:authorize>

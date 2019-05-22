@@ -10,37 +10,23 @@
     <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
     <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="report/referee/create.do" modelAttribute="report">
+<form:form action="complaint/reader/create.do" modelAttribute="complaint">
 
     <form:hidden path="id" readOnly = "true"/>
-    <input type="hidden" name="complaintId" value="${complaintId}" readonly>
+    <input type="hidden" name="transactionId" value="${transactionId}" readonly>
 
-    <acme:textbox code="report.description" path="description"/>
-    <form:errors cssClass="error" path="description" />
+    <acme:textbox code="complaint.body" path="body"/>
+    <form:errors cssClass="error" path="body" />
     <br>
 
-    <acme:textarea code="curricula.misc.attachments" path="attachment" />
+    <acme:textarea code="complaint.attachments" path="attachment" />
     <jstl:if test="${not empty attachmentError }">
         <p class="error">${attachmentError }</p>
     </jstl:if>
     <br/>
 
-    <spring:message code="report.isFinal"/>
-    <form:select path="isFinal" multiple="false">
-        <form:option value="0"><spring:message code="report.draft"/></form:option>
-        <form:option value="1"><spring:message code="report.final"/></form:option>
-    </form:select>
-    <form:errors class="error" path="isFinal"/>
-    <br>
+    <acme:submit name="save" code="complaint.save"/>
 
-    <acme:submit name="save" code="report.save"/>
-
-    <jstl:if test="${row.id == 0}">
-    <acme:cancel url="complaint/referee/list.do" code="report.cancel"/>
-    </jstl:if>
-
-    <jstl:if test="${row.id != 0}">
-        <acme:cancel url="report/referee/list.do" code="report.cancel"/>
-    </jstl:if>
+    <acme:cancel url="/" code="complaint.cancel"/>
 
 </form:form>

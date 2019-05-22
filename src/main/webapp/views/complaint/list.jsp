@@ -11,69 +11,47 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-    <display:table name="reports" id="row" requestURI="${requestURI}"
+    <display:table name="complaints" id="row" requestURI="${requestURI}"
                    pagesize="5" class="displaytag">
 
-        <spring:message code="report.moment" var="moment"/>
+        <spring:message code="complaint.moment" var="moment"/>
         <display:column title="${moment}" sortable="true">
             <jstl:out value="${row.moment}"/>
         </display:column>
 
-        <spring:message code="report.description" var="description"/>
-        <display:column title="${description}">
-            <jstl:out value="${row.description}"/>
+        <spring:message code="complaint.body" var="body"/>
+        <display:column title="${body}">
+            <jstl:out value="${row.body}"/>
         </display:column>
 
-        <spring:message code="report.attachments" var="attachments"/>
+        <spring:message code="complaint.attachments" var="attachments"/>
         <display:column title="${attachments}">
             <jstl:forEach items="${row.attachments}" var="url">
                 <jstl:out value="${url.link}"></jstl:out>
             </jstl:forEach>
         </display:column>
 
-        <spring:message code="report.isFinal" var="isFinal"/>
-        <display:column title="${isFinal}">
-            <jstl:if test="${row.isFinal eq true}">
-                <spring:message code="report.final"/>
-            </jstl:if>
-            <jstl:if test="${row.isFinal eq false}">
-                <spring:message code="report.draft"/>
-            </jstl:if>
-        </display:column>
-
-        <spring:message code="report.comments" var="comments"/>
-        <display:column title="${comments}">
-            <a href="comment/list.do?reportId=${row.id}">
-                <spring:message code="report.comments"/></a>
-        </display:column>
-
 <security:authorize access="hasRole('READER')">
-        <spring:message code="report.complaint" var="complaint"/>
-        <display:column title="${complaint}">
-            <a href="complaint/reader/show.do?complaintId=${row.complaint.id}">
-                <spring:message code="report.complaint"/></a>
+        <spring:message code="complaint.referee" var="referee"/>
+        <display:column title="${referee}">
+            <a href="profile/show.do?actorId=${row.referee.id}">
+                <spring:message code="complaint.referee"/></a>
         </display:column>
 
         <div>
-            <acme:cancel url="complaint/reader/list.do" code="report.back"/>
+            <acme:cancel url="/" code="complaint.back"/>
         </div>
 </security:authorize>
 
 <security:authorize access="hasRole('REFEREE')">
-        <spring:message code="report.complaint" var="complaint"/>
-        <display:column title="${complaint}">
-            <a href="complaint/referee/show.do?complaintId=${row.complaint.id}">
-                <spring:message code="report.complaint"/></a>
+        <spring:message code="complaint.reader" var="reader"/>
+        <display:column title="${reader}">
+            <a href="profile/show.do?actorId=${row.reader.id}">
+                <spring:message code="complaint.reader"/></a>
         </display:column>
 
-         <spring:message code="report.edit" var="edit"/>
-         <display:column title="${edit}">
-             <a href="report/referee/edit.do?reportId=${row.id}">
-                 <spring:message code="report.edit"/></a>
-         </display:column>
-
         <div>
-            <acme:cancel url="complaint/referee/list.do" code="report.back"/>
+            <acme:cancel url="/" code="complaint.back"/>
         </div>
 </security:authorize>
 
