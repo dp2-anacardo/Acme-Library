@@ -109,4 +109,10 @@ public class BookService {
         return this.bookRepository.findAllInactiveBooks(date);
     }
 
+    public Collection<Book> getBooksByReader(int readerId){
+        Collection<Book> res;
+        res = this.bookRepository.getBooksByReader(readerId);
+        Assert.notNull(res);
+        return res;
+    }
 }

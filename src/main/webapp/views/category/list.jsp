@@ -16,13 +16,13 @@
         <spring:message code="category.name" var="columnTitle"/>
         <jstl:if test="${lang=='es' }">
             <display:column title="${columnTitle}">
-                ${row.nameEs}
+                <jstl:out value="${row.nameEs}"/>
             </display:column>
         </jstl:if>
 
         <jstl:if test="${lang=='en' }">
             <display:column title="${columnTitle}">
-                ${row.nameEn}
+                <jstl:out value="${row.nameEn}"/>
             </display:column>
         </jstl:if>
 

@@ -40,6 +40,7 @@
 					<li><a href="transaction/reader/listBuys.do"><spring:message code="master.page.reader.listBuys" /></a></li>
 					<li><a href="transaction/reader/listExchanges.do"><spring:message code="master.page.reader.listExchanges" /></a></li>
 					<li><a href="complaint/reader/list.do"><spring:message code="master.page.reader.listComplaints" /></a></li>
+					<li><a href="book/reader/list.do"><spring:message code="master.page.reader.listBooks" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
