@@ -12,7 +12,8 @@ import java.util.Collection;
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
     //TODO: Probar en ejecución
-    @Query("select b from Book b join b.categories c where ?1 member of c")
+   // @Query("select b from Book b join b.categories c where ?1 member of c")
+    @Query("select b from Book b where ?1 member of b.categories")
     Collection<Book> getBooksWithCategoryParam(Category category);
 
     @Query("select c from Category c where c.nameEs like 'Por defecto'")

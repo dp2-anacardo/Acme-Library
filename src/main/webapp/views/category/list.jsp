@@ -37,7 +37,14 @@
                 <spring:message code="category.edit"/>
             </a>
         </display:column>
+
+        <display:column>
+            <jstl:if test="${category.id != 0}">
+                <acme:cancel code="category.delete" url="category/administrator/delete.do?categoryId=${row.id}"/>
+            </jstl:if>
+        </display:column>
     </display:table>
 
-    <acme:cancel code="category.create" url="category/administrator/create.do"/>
+    <input type="button" value="<spring:message code="category.create" />"
+           onclick="javascript: relativeRedir('category/administrator/create.do');" />
 </security:authorize>

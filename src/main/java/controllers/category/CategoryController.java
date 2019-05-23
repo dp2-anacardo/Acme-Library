@@ -79,7 +79,7 @@ public class CategoryController extends AbstractController {
         }catch (ValidationException e){
           result = this.createEditModelAndView(category, null);
         } catch (Throwable oops){
-            result = new ModelAndView("redirect:/");
+            result = this.createEditModelAndView(category, "category.commit.error");
         }
         return result;
     }

@@ -76,6 +76,7 @@ public class CategoryService {
                 categories.add(this.getDefaultCategory());
             }
             categories.remove(c);
+            b.setCategories(categories);
         }
         this.categoryRepository.delete(c);
     }
@@ -97,15 +98,13 @@ public class CategoryService {
     public Category reconstruct(Category category, BindingResult binding){
         Category result;
         if (category.getId() == 0){
-         this.validator.validate(category,binding);
-         result = category;
+            result = this.create();
         }else {
-
             result = this.categoryRepository.findOne(category.getId());
+        }
             result.setNameEn(category.getNameEn());
             result.setNameEs(category.getNameEs());
             validator.validate(result, binding);
-        }
         if (binding.hasErrors()){
             throw new ValidationException();
         }
