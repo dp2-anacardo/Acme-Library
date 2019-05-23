@@ -36,6 +36,7 @@
 					<li class="arrow"></li>
 					<li><a href="transaction/reader/listSales.do"><spring:message code="master.page.reader.listSales" /></a></li>
 					<li><a href="transaction/reader/listExchanges.do"><spring:message code="master.page.reader.listExchanges" /></a></li>
+					<li><a href="complaint/reader/list.do"><spring:message code="master.page.reader.listComplaints" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -45,6 +46,16 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="sponsorship/sponsor/list.do"><spring:message code="master.page.sponsorship.list" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+
+		<security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv"><spring:message	code="master.page.referee" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="complaint/referee/list.do"><spring:message code="master.page.referee.listComplaints" /></a></li>
+					<li><a href="complaint/referee/listUnassigned.do"><spring:message code="master.page.referee.listUnassigned"/></a></li>
 				</ul>
 			</li>
 		</security:authorize>

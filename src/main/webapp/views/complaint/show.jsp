@@ -10,7 +10,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <acme:showtext fieldset="true" code="complaint.moment" value="${complaint.moment}"/>
-<acme:showtext fieldset="true" code="complaint.text" value="${complaint.body}"/>
+<acme:showtext fieldset="true" code="complaint.body" value="${complaint.body}"/>
 
 <fieldset><legend><spring:message code="complaint.attachments"/></legend>
     <jstl:forEach items="${complaint.attachments}" var="url">

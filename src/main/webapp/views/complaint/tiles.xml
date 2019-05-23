@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/complaint/list.jsp" />
 	</definition>
 
+	<definition name="complaint/referee/listUnassigned" extends="master.page">
+		<put-attribute name="title" value="List of unassigned complaints" />
+		<put-attribute name="body" value="/views/complaint/list.jsp" />
+	</definition>
+
 	<definition name="complaint/reader/list" extends="master.page">
 		<put-attribute name="title" value="List of complaints" />
 		<put-attribute name="body" value="/views/complaint/list.jsp" />
@@ -41,7 +46,7 @@
 		<put-attribute name="body" value="/views/complaint/show.jsp" />
 	</definition>
 
-	<definition name="report/reader/create" extends="master.page">
+	<definition name="complaint/reader/create" extends="master.page">
 		<put-attribute name="title" value="Complaint" />
 		<put-attribute name="body" value="/views/complaint/create.jsp" />
 	</definition>

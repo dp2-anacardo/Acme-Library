@@ -10,7 +10,7 @@
     <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
     <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="report/referee/create.do" modelAttribute="report">
+<form:form action="report/referee/edit.do" modelAttribute="report">
 
     <form:hidden path="id" readOnly = "true"/>
     <input type="hidden" name="complaintId" value="${complaintId}" readonly>
@@ -19,7 +19,7 @@
     <form:errors cssClass="error" path="description" />
     <br>
 
-    <acme:textarea code="report.attachments" path="attachment" />
+    <acme:textarea code="report.attachments" path="attachments" />
     <jstl:if test="${not empty attachmentError }">
         <p class="error">${attachmentError }</p>
     </jstl:if>
@@ -40,7 +40,7 @@
     </jstl:if>
 
     <jstl:if test="${row.id != 0}">
-        <acme:cancel url="report/referee/list.do" code="report.cancel"/>
+        <acme:cancel url="complaint/referee/list.do" code="report.cancel"/>
     </jstl:if>
 
 </form:form>

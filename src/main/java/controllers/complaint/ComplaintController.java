@@ -47,11 +47,13 @@ public class ComplaintController extends AbstractController {
     public ModelAndView listWithNoReferee(){
         ModelAndView result;
         Collection<Complaint> complaints;
+        boolean b = true;
 
         complaints = this.complaintService.getComplaintsWithNoReferee();
         result = new ModelAndView("complaint/referee/listUnassigned");
         result.addObject("complaints", complaints);
         result.addObject("requestURI", "complaint/referee/listUnassigned.do");
+        result.addObject("b", b);
 
         return result;
     }
@@ -61,12 +63,14 @@ public class ComplaintController extends AbstractController {
     public ModelAndView listReferee(){
         ModelAndView result;
         Collection<Complaint> complaints;
+        boolean b = false;
         Referee referee = this.refereeService.findOne(actorService.getActorLogged().getId());
 
         complaints = this.complaintService.getComplaintsByReferee(referee.getId());
         result = new ModelAndView("complaint/referee/list");
         result.addObject("complaints", complaints);
         result.addObject("requestURI", "complaint/referee/list.do");
+        result.addObject("b", b);
 
         return result;
     }

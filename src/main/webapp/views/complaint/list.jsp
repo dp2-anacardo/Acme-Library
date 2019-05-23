@@ -15,7 +15,7 @@
                    pagesize="5" class="displaytag">
 
         <spring:message code="complaint.moment" var="moment"/>
-        <display:column title="${moment}" sortable="true">
+        <display:column title="${moment}">
             <jstl:out value="${row.moment}"/>
         </display:column>
 
@@ -34,13 +34,19 @@
 <security:authorize access="hasRole('READER')">
         <spring:message code="complaint.referee" var="referee"/>
         <display:column title="${referee}">
+            <jstl:if test="${row.referee != null}">
             <a href="profile/show.do?actorId=${row.referee.id}">
                 <spring:message code="complaint.referee"/></a>
+            </jstl:if>
         </display:column>
 
-        <div>
+        <spring:message code="complaint.show" var="show"/>
+        <display:column title="${show}">
+            <a href="complaint/reader/show.do?complaintId=${row.id}">
+                <spring:message code="complaint.show"/></a>
+        </display:column>
+
             <acme:cancel url="/" code="complaint.back"/>
-        </div>
 </security:authorize>
 
 <security:authorize access="hasRole('REFEREE')">
@@ -49,6 +55,28 @@
             <a href="profile/show.do?actorId=${row.reader.id}">
                 <spring:message code="complaint.reader"/></a>
         </display:column>
+
+    <jstl:if test="${!b}">
+         <spring:message code="complaint.show" var="show"/>
+         <display:column title="${show}">
+             <a href="complaint/referee/show.do?complaintId=${row.id}">
+                 <spring:message code="complaint.show"/></a>
+         </display:column>
+
+        <spring:message code="report.create" var="report"/>
+        <display:column title="${report}">
+            <a href="report/referee/create.do?complaintId=${row.id}">
+                <spring:message code="report.create"/></a>
+        </display:column>
+    </jstl:if>
+
+    <jstl:if test="${b}">
+        <spring:message code="complaint.autoAssign" var="autoAssign"/>
+        <display:column title="${autoAssign}">
+            <a href="complaint/referee/autoAssign.do?complaintId=${row.id}">
+                <spring:message code="complaint.autoAssign"/></a>
+        </display:column>
+    </jstl:if>
 
         <div>
             <acme:cancel url="/" code="complaint.back"/>

@@ -15,7 +15,7 @@
                    pagesize="5" class="displaytag">
 
         <spring:message code="report.moment" var="moment"/>
-        <display:column title="${moment}" sortable="true">
+        <display:column title="${moment}">
             <jstl:out value="${row.moment}"/>
         </display:column>
 
@@ -31,6 +31,7 @@
             </jstl:forEach>
         </display:column>
 
+<security:authorize access="hasRole('REFEREE')">
         <spring:message code="report.isFinal" var="isFinal"/>
         <display:column title="${isFinal}">
             <jstl:if test="${row.isFinal eq true}">
@@ -40,6 +41,7 @@
                 <spring:message code="report.draft"/>
             </jstl:if>
         </display:column>
+</security:authorize>
 
         <spring:message code="report.comments" var="comments"/>
         <display:column title="${comments}">
@@ -53,6 +55,12 @@
             <a href="complaint/reader/show.do?complaintId=${row.complaint.id}">
                 <spring:message code="report.complaint"/></a>
         </display:column>
+
+    <spring:message code="comment.create" var="comment"/>
+    <display:column title="${comment}">
+        <a href="comment/create.do?reportId=${row.id}">
+            <spring:message code="comment.create"/></a>
+    </display:column>
 
         <div>
             <acme:cancel url="complaint/reader/list.do" code="report.back"/>
@@ -68,13 +76,22 @@
 
          <spring:message code="report.edit" var="edit"/>
          <display:column title="${edit}">
+             <jstl:if test="${!row.isFinal}">
              <a href="report/referee/edit.do?reportId=${row.id}">
                  <spring:message code="report.edit"/></a>
+             </jstl:if>
          </display:column>
 
-        <div>
+    <spring:message code="comment.create" var="comment"/>
+    <display:column title="${comment}">
+        <jstl:if test="${row.isFinal}">
+            <a href="comment/create.do?reportId=${row.id}">
+                <spring:message code="comment.create"/></a>
+        </jstl:if>
+    </display:column>
+
             <acme:cancel url="complaint/referee/list.do" code="report.back"/>
-        </div>
+
 </security:authorize>
 
     </display:table>
