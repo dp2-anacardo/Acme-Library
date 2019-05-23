@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 @Component
 @Transactional
-public class RegisterToString implements Converter<Register,String> {
+public class RegisterToStringConverter implements Converter<Register,String> {
 
     @Override
     public String convert(final Register sp) {

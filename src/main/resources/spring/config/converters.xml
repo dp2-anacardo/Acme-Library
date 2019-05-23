@@ -51,6 +51,10 @@
 		<bean class="converters.BookToStringConverter"/>
 		<bean class="converters.StringToBookConverter"/>
 		<bean class="converters.StringToDoubleConverter"/>
+		<bean class="converters.RegisterToStringConverter"/>
+		<bean class="converters.StringToRegisterConverter"/>
+		<bean class="converters.CategoryToStringConverter"/>
+		<bean class="converters.StringToCategoryConverter"/>
 	</util:list>
 	
 </beans>

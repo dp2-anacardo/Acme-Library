@@ -17,16 +17,16 @@ import java.util.Date;
 @Transactional
 public class RegisterService {
     @Autowired
-    RegisterRepository registerRepository;
+    private RegisterRepository registerRepository;
 
     @Autowired
-    ActorService actorService;
+    private ActorService actorService;
 
     @Autowired
-    EventService eventService;
+    private EventService eventService;
 
     @Autowired
-    ReaderService readerService;
+    private ReaderService readerService;
 
     public Collection<Register> findAll(){
         Collection<Register> res;

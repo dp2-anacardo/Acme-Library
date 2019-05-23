@@ -16,13 +16,13 @@ import java.util.Collection;
 public class EventService {
     //Manager repository
     @Autowired
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
 
     @Autowired
-    ActorService    actorService;
+    private ActorService    actorService;
 
     @Autowired
-    OrganizerService    organizerService;
+    private OrganizerService    organizerService;
 
     public Event create(){
         UserAccount userAccount;
