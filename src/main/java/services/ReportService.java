@@ -95,4 +95,13 @@ public class ReportService {
             throw new ValidationException();
         return result;
     }
+
+    public Collection<Report> getReportsByComplaint(final int complaintId){
+        Collection<Report> result = this.reportRepository.getReportsByComplaint(complaintId);
+        return result;
+    }
+
+    public void delete(final int reportId){
+        this.reportRepository.delete(reportId);
+    }
 }

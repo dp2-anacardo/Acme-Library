@@ -83,4 +83,12 @@ public class RegisterService {
 
         event.setRegisters(registers);
     }
+
+    public void delete(final int registerId){
+        this.registerRepository.delete(registerId);
+    }
+
+    public Collection<Register> getRegistersByReader(final int readerId){
+        return this.registerRepository.getRegistersByReader(readerId);
+    }
 }

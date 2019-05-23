@@ -278,4 +278,9 @@ public class MessageService {
 
         return result;
     }
+
+    public Collection<Message> findAllReceivedByActor (final int actorID){
+        Collection<Message> result = this.messageRepository.findAllReceivedByActor(actorID);
+        return result;
+    }
 }

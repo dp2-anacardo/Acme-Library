@@ -115,4 +115,15 @@ public class BookService {
         Assert.notNull(res);
         return res;
     }
+
+    public void deleteForced(Book b) {
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("READER"));
+
+        Assert.notNull(b);
+        Assert.isTrue(b.getId() != 0);
+
+        this.bookRepository.delete(b);
+    }
 }

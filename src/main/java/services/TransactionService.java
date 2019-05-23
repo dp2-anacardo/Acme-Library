@@ -26,6 +26,8 @@ public class TransactionService {
     @Autowired
     private ActorService actorService;
     @Autowired
+    private BookService bookService;
+    @Autowired
     private ReaderService readerService;
     @Autowired
     private OfferService offerService;
@@ -113,16 +115,18 @@ public class TransactionService {
 
     //ESTO PARA EL DELETE DE ACTOR
     public void delete2(Transaction t){
-        Assert.isTrue(t.getBuyer().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
-        if(t.getIsSale()){
-            this.transactionRepository.delete(t);
-        }else{
-            for(Offer o : t.getOffers()){
-                this.offerService.delete(o);
+        if(t.getBuyer().equals(this.readerService.findOne(this.actorService.getActorLogged().getId()))) {
+            if (t.getIsSale()) {
+                this.bookService.deleteForced(t.getBook());
+                this.transactionRepository.delete(t);
+            } else {
+                for (Offer o : t.getOffers()) {
+                    this.offerService.delete(o);
+                }
+                this.bookService.deleteForced(t.getBook());
+                this.transactionRepository.delete(t);
             }
         }
-        this.transactionRepository.delete(t);
-
     }
 
     private String tickerGenerator() {
@@ -163,5 +167,9 @@ public class TransactionService {
 
     public Collection<Transaction> getExchanges(){
         return this.transactionRepository.getExchanges();
+    }
+
+    public Transaction getTransactionByComplaint(final int complaintId){
+        return this.transactionRepository.getTransactionByComplaint(complaintId);
     }
 }

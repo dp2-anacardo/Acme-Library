@@ -198,6 +198,11 @@ public class SponsorshipService {
 
         return result;
     }
+
+    public Collection<Sponsorship> findAllByEvent(final int eventId){
+        Collection<Sponsorship> result = this.sponsorshipRepository.findAllByEvent(eventId);
+        return result;
+    }
 }
 
 
