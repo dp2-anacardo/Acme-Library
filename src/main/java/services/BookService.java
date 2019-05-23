@@ -1,16 +1,16 @@
 package services;
 
-import domain.Actor;
-import domain.Administrator;
-import domain.Book;
-import domain.Reader;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.BookRepository;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -26,6 +26,12 @@ public class BookService {
 
     @Autowired
     private ReaderService readerService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private Validator validator;
 
     public Book create() {
         UserAccount userAccount;
@@ -84,10 +90,43 @@ public class BookService {
             int id = this.actorService.getActorLogged().getId();
             Reader r = this.readerService.findOne(id);
             b.setReader(r);
-            b.setMoment(new Date());
+      //      b.setMoment(new Date());
+            if(b.getCategories().isEmpty()){
+                Collection<Category> categories = b.getCategories();
+                Category defaultCategory = this.categoryService.getDefaultCategory();
+                categories.add(defaultCategory);
+                b.setCategories(categories);
+            }
         }
         res = this.bookRepository.save(b);
         return res;
+    }
+
+    public Book reconstruct(Book book, BindingResult binding){
+        Book result;
+        if(book.getId() == 0){
+            result = this.create();
+            result.setMoment(new Date());
+        } else {
+            result = this.bookRepository.findOne(book.getId());
+        }
+
+        result.setTitle(book.getTitle());
+        result.setAuthor(book.getAuthor());
+        result.setPublisher(book.getPublisher());
+        result.setLanguage(book.getLanguage());
+        result.setDescription(book.getDescription());
+        result.setPageNumber(book.getPageNumber());
+        result.setStatus(book.getStatus());
+        result.setIsbn(book.getIsbn());
+        result.setPhoto(book.getPhoto());
+        result.setCategories(book.getCategories());
+        validator.validate(result, binding);
+
+        if (binding.hasErrors()){
+            throw new ValidationException();
+        }
+        return result;
     }
 
     public Boolean haveTransaction(int bookId) {

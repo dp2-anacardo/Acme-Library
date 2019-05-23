@@ -21,4 +21,19 @@
 		<put-attribute name="body" value="/views/book/list.jsp" />
 	</definition>
 
+	<definition name="book/reader/show" extends="master.page">
+		<put-attribute name="title" value="Show" />
+		<put-attribute name="body" value="/views/book/show.jsp" />
+	</definition>
+
+	<definition name="book/reader/create" extends="master.page">
+		<put-attribute name="title" value="Edit" />
+		<put-attribute name="body" value="/views/book/edit.jsp" />
+	</definition>
+
+	<definition name="book/reader/edit" extends="master.page">
+		<put-attribute name="title" value="Edit" />
+		<put-attribute name="body" value="/views/book/edit.jsp" />
+	</definition>
+
 </tiles-definitions>
