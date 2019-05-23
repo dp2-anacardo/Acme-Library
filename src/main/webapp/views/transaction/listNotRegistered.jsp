@@ -37,6 +37,15 @@
                         ${row.seller.name}</a>
             </display:column>
 
+        <security:authorize access="isAnonymous()">
+        <spring:message code="transaction.buy" var="buy" />
+        <display:column title="${buy}">
+            <jstl:if test="${row.isSale == true}">
+            <acme:cancel code="transaction.buy" url="reader/create.do"/>
+            </jstl:if>
+        </display:column>
+        </security:authorize>
+
     </display:table>
 
 
