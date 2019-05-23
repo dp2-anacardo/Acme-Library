@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
@@ -81,6 +82,7 @@ public class Transaction extends DomainEntity{
         this.price = price;
     }
 
+    @Valid
     public CreditCard getCreditCard() {
         return creditCard;
     }

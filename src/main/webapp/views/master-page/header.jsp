@@ -36,6 +36,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="transaction/reader/listSales.do"><spring:message code="master.page.reader.listSales" /></a></li>
+					<li><a href="transaction/reader/listBuys.do"><spring:message code="master.page.reader.listBuys" /></a></li>
 					<li><a href="transaction/reader/listExchanges.do"><spring:message code="master.page.reader.listExchanges" /></a></li>
 				</ul>
 			</li>

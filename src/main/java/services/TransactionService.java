@@ -33,20 +33,42 @@ public class TransactionService {
     @Autowired
     private OfferService offerService;
     @Autowired
+    private ConfigurationService configurationService;
+    @Autowired
     private Validator validator;
 
 
     public Transaction reconstructSale(Transaction transaction, BindingResult binding){
         Transaction result;
-        result = this.create();
+        if(transaction.getId() == 0){
+            result = this.create();
+            result.setTicker(this.tickerGenerator());
+            result.setIsSale(true);
+            result.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
+            result.setPrice(transaction.getPrice());
+            result.setBook(transaction.getBook());
+        }else{
+            result = this.findOne(transaction.getId());
+            Assert.isTrue(result.getIsSale() == true && result.getIsFinished() == false);
+            result.setBuyer(this.readerService.findOne(this.actorService.getActorLogged().getId()));
+            result.setMoment(new Date());
+            result.setCreditCard(transaction.getCreditCard());
+        }
 
-        result.setTicker(this.tickerGenerator());
-        result.setIsSale(true);
-        result.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
-        result.setMoment(new Date());
-        result.setPrice(transaction.getPrice());
-        result.setBook(transaction.getBook());
         validator.validate(result,binding);
+
+        if(transaction.getId() != 0){
+            final Collection<String> brandNames = this.configurationService.getConfiguration().getBrandName();
+            if(!brandNames.contains(result.getCreditCard().getBrandName()))
+                binding.rejectValue("creditCard.brandName", "sponsorship.creditCard.brandName.error");
+
+//        (!result.getEvent().getIsFinal())
+//            binding.rejectValue("event", "sponsorship.event.error.notFinal");
+
+            final Date date = new Date();
+            if(result.getCreditCard().getExpirationYear() != null && result.getCreditCard().getExpirationYear().before(date))
+                binding.rejectValue("creditCard.expirationYear", "sponsorship.creditCard.expiration.future");
+        }
         if(binding.hasErrors()){
             throw new ValidationException();
         }
@@ -68,10 +90,11 @@ public class TransactionService {
     }
 
     public Transaction saveSale(Transaction t){
-        Assert.isTrue(t.getId() == 0);
-        t.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
-        t.setTicker(tickerGenerator());
-        t.setIsSale(true);
+        if(t.getId() == 0){
+            t.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
+            t.setTicker(tickerGenerator());
+            t.setIsSale(true);
+        }
         Transaction result = this.transactionRepository.save(t);
         return result;
     }
@@ -123,6 +146,12 @@ public class TransactionService {
         Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
         Assert.notNull(r);
         return this.transactionRepository.getSalesByReader(r);
+    }
+
+    public Collection<Transaction> getBuysByReader(){
+        Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
+        Assert.notNull(r);
+        return this.transactionRepository.getBuysByReader(r);
     }
 
     public Collection<Transaction> getExchangesByReader(){

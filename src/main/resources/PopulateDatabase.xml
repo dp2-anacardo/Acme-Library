@@ -681,7 +681,7 @@
         <property name="isbn" value="978-84-92868-70-4"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
-        <property name="photo" value="http://www.google.com"/>
+        <property name="photo" value="http://1.bp.blogspot.com/-EJ1QsNcNB2M/TpruwDUo6UI/AAAAAAAADi0/h8_0Q3jp3NI/w1200-h630-p-k-no-nu/El%2Bmentiroso%2B-%2BPepe%2BMel.jpg"/>
         <property name="categories">
             <list>
                 <ref bean="category7"/>

@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/transaction/listSales.jsp" />
 	</definition>
 
+	<definition name="transaction/reader/listBuys" extends="master.page">
+		<put-attribute name="title" value="My Buys" />
+		<put-attribute name="body" value="/views/transaction/listSales.jsp" />
+	</definition>
+
 	<definition name="transaction/reader/listExchanges" extends="master.page">
 		<put-attribute name="title" value="My Exchanges" />
 		<put-attribute name="body" value="/views/transaction/listExchanges.jsp" />
@@ -29,6 +34,16 @@
 	<definition name="transaction/reader/createSale" extends="master.page">
 		<put-attribute name="title" value="New Sale" />
 		<put-attribute name="body" value="/views/transaction/createSale.jsp" />
+	</definition>
+
+	<definition name="transaction/reader/showSale" extends="master.page">
+		<put-attribute name="title" value="Sale" />
+		<put-attribute name="body" value="/views/transaction/showSaleR.jsp" />
+	</definition>
+
+	<definition name="transaction/reader/buy" extends="master.page">
+		<put-attribute name="title" value="Buy" />
+		<put-attribute name="body" value="/views/transaction/buy.jsp" />
 	</definition>
 
 

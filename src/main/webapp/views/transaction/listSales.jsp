@@ -15,7 +15,7 @@
 
         <spring:message code="transaction.show" var="show" />
         <display:column title="${delete}">
-                <a href="transaction/reader/show.do?transactionId=${row.id}">
+                <a href="transaction/reader/showSale.do?transactionId=${row.id}">
                     <spring:message code="transaction.show" /></a>
         </display:column>
 
@@ -46,6 +46,15 @@
             </jstl:if>
         </display:column>
 
+        <jstl:if test="${compra == true}">
+            <spring:message code="transaction.seller" var="buyer" />
+            <display:column title="${buyer}">
+                <jstl:out value="${row.seller.name}"></jstl:out>
+            </display:column>
+        </jstl:if>
+
+
+        <jstl:if test="${compra == false}">
         <spring:message code="transaction.buyer" var="buyer" />
         <display:column title="${buyer}">
             <jstl:if test="${row.buyer != null}">
@@ -53,18 +62,22 @@
             </jstl:if>
         </display:column>
 
-        <spring:message code="transaction.delete" var="delete" />
-        <display:column title="${delete}">
-            <jstl:if test="${row.isFinished == false}">
-                <a href="transaction/reader/delete.do?transactionId=${row.id}">
-                    <spring:message code="transaction.delete" /></a>
-            </jstl:if>
-        </display:column>
+
+            <spring:message code="transaction.delete" var="delete" />
+            <display:column title="${delete}">
+                <jstl:if test="${row.isFinished == false}">
+                    <a href="transaction/reader/delete.do?transactionId=${row.id}">
+                        <spring:message code="transaction.delete" /></a>
+                </jstl:if>
+            </display:column>
+        </jstl:if>
+
+
 
 
     </display:table>
 
 
 
-    <acme:cancel url="transaction/reader/createSale.do" code="transaction.create" />
+    <acme:cancel url="transaction/reader/createSale.do" code="transaction.createSale" />
 </security:authorize>

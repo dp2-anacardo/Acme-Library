@@ -2,6 +2,7 @@ package controllers.transaction;
 
 import controllers.AbstractController;
 import domain.Book;
+import domain.Reader;
 import domain.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.ActorService;
-import services.BookService;
-import services.TransactionService;
+import services.*;
 
 import javax.validation.ValidationException;
 import java.util.ArrayList;
@@ -28,6 +27,12 @@ public class TransactionController extends AbstractController {
     private TransactionService transactionService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private ReaderService readerService;
+    @Autowired
+    private ActorService actorService;
+    @Autowired
+    private ConfigurationService configurationService;
 
     /*                                             SALES                                                             */
     @RequestMapping(value = "/reader/listSales", method = RequestMethod.GET)
@@ -38,11 +43,27 @@ public class TransactionController extends AbstractController {
             result = new ModelAndView("transaction/reader/listSales");
             result.addObject("transactions",transactions);
             result.addObject("requestURI","transaction/reader/listSales.do");
+            result.addObject("compra",false);
         }catch (Throwable oops){
             result = new ModelAndView("redirect:/");
         }
         return result;
     }
+    @RequestMapping(value = "/reader/listBuys", method = RequestMethod.GET)
+    public ModelAndView listBuys(){
+        ModelAndView result;
+        try{
+            Collection<Transaction> transactions = this.transactionService.getBuysByReader();
+            result = new ModelAndView("transaction/reader/listBuys");
+            result.addObject("transactions",transactions);
+            result.addObject("requestURI","transaction/reader/listBuys.do");
+            result.addObject("compra",true);
+        }catch (Throwable oops){
+            result = new ModelAndView("redirect:/");
+        }
+        return result;
+    }
+
 
     @RequestMapping(value = "/reader/createSale", method = RequestMethod.GET)
     public ModelAndView createSale(){
@@ -99,6 +120,61 @@ public class TransactionController extends AbstractController {
             result = new ModelAndView("redirect:/transaction/reader/listSales.do");
         }catch (Throwable oops){
             result = new ModelAndView("redirect:/transaction/reader/listSales.do");
+        }
+        return result;
+    }
+    @RequestMapping(value = "/reader/buy", method = RequestMethod.GET)
+    public ModelAndView buy(@RequestParam int transactionId){
+        ModelAndView result;
+        try{
+            Transaction transaction = this.transactionService.findOne(transactionId);
+            Assert.notNull(transaction);
+            Assert.isTrue(transaction.getIsSale() == true && transaction.getIsFinished() == false);
+            Assert.isTrue(transaction.getSeller() != this.readerService.findOne(this.actorService.getActorLogged().getId()));
+            final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
+            result = new ModelAndView("transaction/reader/buy");
+            result.addObject("brandList", brandList);
+            result.addObject("transaction",transaction);
+        }catch(Throwable oops) {
+            //TODO Redirigir al list de todo el mundo en vez de la pagina principal
+            result = new ModelAndView("redirect:/");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/reader/buy", method = RequestMethod.POST)
+    public ModelAndView saveBuy(@ModelAttribute("transaction") Transaction transaction, BindingResult binding){
+        ModelAndView result;
+        try{
+            transaction = this.transactionService.reconstructSale(transaction,binding);
+            Assert.isTrue(transaction.getSeller() != transaction.getBuyer());
+            this.transactionService.saveSale(transaction);
+            result = new ModelAndView("redirect:/transaction/reader/listBuys.do");
+        }catch (ValidationException oops){
+            final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
+            result = new ModelAndView("transaction/reader/buy");
+            result.addObject("brandList", brandList);
+        }catch (Throwable oops){
+            final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
+            result = new ModelAndView("transaction/reader/buy");
+            result.addObject("brandList", brandList);
+            result.addObject("messageCode","transaction.commit.error");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/reader/showSale", method = RequestMethod.GET)
+    public ModelAndView showSaleReader(@RequestParam int transactionId){
+        ModelAndView result;
+        try{
+            Transaction transaction = this.transactionService.findOne(transactionId);
+            Assert.notNull(transaction);
+            Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
+            Assert.isTrue(transaction.getSeller() == r || transaction.getBuyer() == r);
+            result = new ModelAndView("transaction/reader/showSale");
+            result.addObject("t",transaction);
+        }catch (Throwable oops){
+            result = new ModelAndView("redirect:/");
         }
         return result;
     }
