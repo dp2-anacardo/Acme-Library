@@ -2,7 +2,7 @@ package controllers.category;
 
 import controllers.AbstractController;
 import domain.Category;
-import org.hibernate.metamodel.ValidationException;
+import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -60,6 +60,7 @@ public class CategoryController extends AbstractController {
             Category category;
             category = this.categoryService.findOne(categoryId);
             Assert.notNull(category);
+            Assert.isTrue(!category.getNameEs().equals("Por defecto") && !category.getNameEn().equals("Default"));
             result = new ModelAndView("category/administrator/edit");
             result.addObject("category", category);
         } catch (Throwable oops){
@@ -77,7 +78,7 @@ public class CategoryController extends AbstractController {
             category = this.categoryService.save(category);
             result = new ModelAndView("redirect:list.do");
         }catch (ValidationException e){
-          result = this.createEditModelAndView(category, null);
+          result = this.createEditModelAndView(category);
         } catch (Throwable oops){
             result = this.createEditModelAndView(category, "category.commit.error");
         }
@@ -90,6 +91,7 @@ public class CategoryController extends AbstractController {
         try{
             Category category = this.categoryService.findOne(categoryId);
             Assert.notNull(category);
+            Assert.isTrue(!category.getNameEs().equals("Por defecto") && !category.getNameEn().equals("Default"));
             this.categoryService.delete(category);
             result = new ModelAndView("redirect:list.do");
         } catch (Throwable oops){

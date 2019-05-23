@@ -27,7 +27,7 @@ public class CategoryService {
     @Autowired
     private Validator validator;
 
-    public Category create(){
+    public Category create() {
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
@@ -35,21 +35,21 @@ public class CategoryService {
         return res;
     }
 
-    public Collection<Category> findAll(){
+    public Collection<Category> findAll() {
         Collection<Category> res;
         res = this.categoryRepository.findAll();
         Assert.notNull(res);
         return res;
     }
 
-    public Category findOne(int categoryId){
+    public Category findOne(int categoryId) {
         Category res;
         res = this.categoryRepository.findOne(categoryId);
         Assert.notNull(res);
         return res;
     }
 
-    public Category save(Category c){
+    public Category save(Category c) {
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
@@ -60,7 +60,7 @@ public class CategoryService {
         return res;
     }
 
-    public void delete(Category c){
+    public void delete(Category c) {
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
@@ -70,9 +70,9 @@ public class CategoryService {
 
         Collection<Book> bookWithThisCategory = this.getBooksWithCategoryParam(c);
 
-        for (Book b: bookWithThisCategory){
+        for (Book b : bookWithThisCategory) {
             Collection<Category> categories = b.getCategories();
-            if(b.getCategories().size() == 1) {
+            if (b.getCategories().size() == 1) {
                 categories.add(this.getDefaultCategory());
             }
             categories.remove(c);
@@ -81,7 +81,7 @@ public class CategoryService {
         this.categoryRepository.delete(c);
     }
 
-    public Collection<String> getNamesEs(){
+    public Collection<String> getNamesEs() {
         return this.categoryRepository.getNamesEs();
     }
 
@@ -89,32 +89,67 @@ public class CategoryService {
         return this.categoryRepository.getNamesEn();
     }
 
-    public Collection<Book> getBooksWithCategoryParam(Category category){
+    public Collection<Book> getBooksWithCategoryParam(Category category) {
         Collection<Book> res;
         res = this.categoryRepository.getBooksWithCategoryParam(category);
         return res;
     }
 
-    public Category getDefaultCategory(){
+    public Category getDefaultCategory() {
         Category res;
         res = this.categoryRepository.getDefaultCategory();
         Assert.notNull(res);
         return res;
     }
 
-    public Category reconstruct(Category category, BindingResult binding){
+    public Category reconstruct(Category category, BindingResult binding) {
         Category result;
-        if (category.getId() == 0){
+        if (category.getId() == 0) {
             result = this.create();
-        }else {
+        } else {
             result = this.categoryRepository.findOne(category.getId());
         }
-            result.setNameEn(category.getNameEn());
-            result.setNameEs(category.getNameEs());
-            validator.validate(result, binding);
-        if (binding.hasErrors()){
+        final Boolean existsES = existsES(category);
+        final Boolean existsEN = existsEN(category);
+
+        result.setNameEn(category.getNameEn());
+        result.setNameEs(category.getNameEs());
+
+        validator.validate(result, binding);
+
+        if (existsES)
+            binding.rejectValue("nameEs", "category.es.duplicated");
+
+        if (existsEN)
+            binding.rejectValue("nameEn", "category.en.duplicated");
+
+        if (binding.hasErrors()) {
             throw new ValidationException();
         }
         return result;
+    }
+
+    public Boolean existsES(final Category a) {
+        Boolean exist = false;
+
+        final Collection<Category> categories = this.findAll();
+        for (final Category b : categories)
+            if (a.equalsES(b)) {
+                exist = true;
+                break;
+            }
+        return exist;
+    }
+
+    public Boolean existsEN(final Category a) {
+        Boolean exist = false;
+
+        final Collection<Category> categories = this.findAll();
+        for (final Category b : categories)
+            if (a.equalsEN(b)) {
+                exist = true;
+                break;
+            }
+        return exist;
     }
 }

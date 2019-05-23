@@ -33,13 +33,15 @@
         </display:column>
 
         <display:column>
+            <jstl:if test="${row.nameEn != 'Default'}">
             <a href="category/administrator/edit.do?categoryId=${row.id}">
                 <spring:message code="category.edit"/>
             </a>
+            </jstl:if>
         </display:column>
 
         <display:column>
-            <jstl:if test="${category.id != 0}">
+            <jstl:if test="${category.id != 0 and row.nameEn != 'Default'}">
                 <acme:cancel code="category.delete" url="category/administrator/delete.do?categoryId=${row.id}"/>
             </jstl:if>
         </display:column>

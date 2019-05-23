@@ -34,4 +34,18 @@ public class Category extends DomainEntity {
     public void setNameEs(String nameEs) {
         this.nameEs = nameEs;
     }
+
+    public boolean equalsES(final Category obj) {
+        boolean res = false;
+        if (this.getNameEs().equals(obj.getNameEs()))
+            res = true;
+        return res;
+    }
+
+    public boolean equalsEN(final Category obj) {
+        boolean res = false;
+        if (this.getNameEn().equals(obj.getNameEn()))
+            res = true;
+        return res;
+    }
 }
