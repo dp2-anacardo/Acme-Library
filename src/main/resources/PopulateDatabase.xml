@@ -649,6 +649,7 @@
         <property name="price" value="20.99"/>
         <property name="creditCard" ref="creditCard1"/>
         <property name="isSale" value="true"/>
+        <property name="isFinished" value="true"/>
         <property name="seller" ref="reader1"/>
         <property name="buyer" ref="reader2"/>
         <property name="book" ref="book1"/>
@@ -661,6 +662,7 @@
     <bean id="transaction2" class="domain.Transaction">
         <property name="ticker" value="190507-DAVID"/>
         <property name="isSale" value="false"/>
+        <property name="isFinished" value="false"/>
         <property name="seller" ref="reader1"/>
         <property name="book" ref="book2"/>
         <property name="offers">

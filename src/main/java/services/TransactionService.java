@@ -132,6 +132,10 @@ public class TransactionService {
         }
     }
 
+    public void delete3(Transaction t){
+        this.transactionRepository.delete(t);
+    }
+
     private String tickerGenerator() {
         String dateRes = "";
         String numericRes = "";
@@ -175,4 +179,9 @@ public class TransactionService {
     public Transaction getTransactionByComplaint(final int complaintId){
         return this.transactionRepository.getTransactionByComplaint(complaintId);
     }
+
+    public Collection<Transaction> getExchangesByReader(final int readerId){
+        return this.transactionRepository.getExchangesByReader(readerId);
+    }
+
 }

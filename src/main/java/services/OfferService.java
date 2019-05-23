@@ -71,4 +71,13 @@ public class OfferService {
         o.getTransaction().getOffers().remove(o);
         this.offerRepository.delete(o);
     }
+
+    public void delete2(Offer o){
+        this.offerRepository.delete(o);
+    }
+
+    public Collection<Offer> getAllByReader(final int readerId){
+        return this.offerRepository.getAllByReader(readerId);
+    }
+
 }
