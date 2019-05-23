@@ -43,6 +43,7 @@
 		<value>/views/administrator/messages</value>
 		<value>/views/finder/messages</value>
 		<value>/views/configuration/messages</value>
+		<value>/views/event/messages</value>
 	</util:list>
 
 </beans>

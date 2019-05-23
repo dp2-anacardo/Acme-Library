@@ -36,6 +36,7 @@
         <form:label path="categories">
             <spring:message code="book.categories"/>
         </form:label>
+
         <form:select path="categories">
             <form:options items="${categories}" itemValue="id" itemLabel="nameEn"/>
         </form:select>

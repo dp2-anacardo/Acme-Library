@@ -118,4 +118,11 @@ public class EventService {
     public Collection<Event> getFutureEventsFinal(){
         return this.eventRepository.getFutureEventsFinal();
     }
+
+    public Collection<Event> getEventsPerOrOrganizer(int organizerId){
+        Collection<Event> res;
+        res = this.eventRepository.getEventsPerOrOrganizer(organizerId);
+        Assert.notNull(res);
+        return res;
+    }
 }

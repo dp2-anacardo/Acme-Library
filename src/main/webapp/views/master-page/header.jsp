@@ -73,6 +73,15 @@
 			</li>
 		</security:authorize>
 
+		<security:authorize access="hasRole('ORGANIZER')">
+			<li><a class="fNiv"><spring:message	code="master.page.organizer" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="event/organizer/list.do"><spring:message code="master.page.organizer.listEvents" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="transaction/listSales.do"><spring:message code="master.page.transaction.listSalesNotRegistered" /></a></li>
