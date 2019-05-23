@@ -114,4 +114,8 @@ public class EventService {
 
         return result;
     }
+
+    public Collection<Event> getFutureEventsFinal(){
+        return this.eventRepository.getFutureEventsFinal();
+    }
 }

@@ -61,6 +61,7 @@
                 <jstl:out value="${row.buyer.name}"></jstl:out>
             </jstl:if>
         </display:column>
+        </jstl:if>
 
         <spring:message code="complaint.create" var="complaint" />
         <display:column title="${complaint}">
@@ -77,7 +78,6 @@
                     <spring:message code="transaction.delete" /></a>
             </jstl:if>
         </display:column>
-
     </display:table>
 
 

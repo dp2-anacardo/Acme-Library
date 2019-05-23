@@ -13,10 +13,7 @@ import repositories.TransactionRepository;
 
 import javax.validation.ValidationException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Transactional
@@ -158,5 +155,13 @@ public class TransactionService {
         Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
         Assert.notNull(r);
         return this.transactionRepository.getExchangesByReader(r);
+    }
+
+    public Collection<Transaction> getSalesWithoutBuyer(){
+        return this.transactionRepository.getSalesWithoutBuyer();
+    }
+
+    public Collection<Transaction> getExchanges(){
+        return this.transactionRepository.getExchanges();
     }
 }

@@ -21,4 +21,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("select t from Transaction t where t.isSale = false and t.seller = ?1")
     Collection<Transaction> getExchangesByReader(Reader r);
 
+    @Query("select t from Transaction t where t.isSale = true and t.buyer is null")
+    Collection<Transaction> getSalesWithoutBuyer();
+
+    @Query("select t from Transaction t where t.isSale = false and not exists(select o from Offer o where o.transaction = t and o.status like 'ACCEPTED')")
+    Collection<Transaction> getExchanges();
+
 }

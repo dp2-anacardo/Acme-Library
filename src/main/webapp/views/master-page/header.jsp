@@ -65,6 +65,8 @@
 
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="transaction/listSales.do"><spring:message code="master.page.transaction.listSalesNotRegistered" /></a></li>
+			<li><a class="fNiv" href="transaction/listExchanges.do"><spring:message code="master.page.transaction.listExchangesNotRegistered" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -80,6 +82,8 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="transaction/listSales.do"><spring:message code="master.page.transaction.listSalesNotRegistered" /></a></li>
+			<li><a class="fNiv" href="transaction/listExchanges.do"><spring:message code="master.page.transaction.listExchangesNotRegistered" /></a></li>
 		</security:authorize>
 	</ul>
 </div>
