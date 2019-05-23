@@ -94,7 +94,7 @@ public class MessageController extends AbstractController {
     }
 
     // Create Broadcast ------------------------------------------------------------------------
-    @RequestMapping(value = "/broadcast", method = RequestMethod.GET)
+    @RequestMapping(value = "administrator/broadcast", method = RequestMethod.GET)
     public ModelAndView broadcast() {
         ModelAndView result;
         Message mesage;
@@ -112,9 +112,10 @@ public class MessageController extends AbstractController {
         ModelAndView result;
 
         try {
+            mesage.setRecipients(this.actorService.findAll());
             mesage = this.messageService.reconstruct(mesage, binding);
-            this.messageService.save(mesage);
-            result = new ModelAndView("redirect:/message/list.do");
+            this.messageService.broadcast(mesage);
+            result = new ModelAndView("redirect:/messageBox/list.do");
         } catch (final ValidationException e) {
             result = this.createBroadcastModelAndView(mesage, null);
         } catch (final Throwable oops) {

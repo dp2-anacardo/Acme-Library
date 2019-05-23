@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="message/broadcast.do" modelAttribute="mesage">
+<form:form action="message/administrator/broadcast.do" modelAttribute="mesage">
 
 	<security:authorize access="hasRole('ADMIN')">
 
@@ -27,21 +27,13 @@
 		<acme:textbox code="message.subject" path="subject" />
 		<br>
 
-		<spring:message code="message.priority" />
+		<spring:message code="message.priority"/>
 		<form:select path="priority" multiple="false">
-			<jstl:choose>
-				<jstl:when test="${pageContext.response.locale.language == 'es'}">
-					<form:options items="${priorityList}" itemLabel="name[ES]"
-						itemValue="id" />
-				</jstl:when>
-				<jstl:when test="${pageContext.response.locale.language == 'en'}">
-					<form:options items="${priorityList}" itemLabel="name[EN]"
-						itemValue="id" />
-				</jstl:when>
-			</jstl:choose>
-
+			<form:option value="LOW"><spring:message code="message.priority.low"/></form:option>
+			<form:option value="MEDIUM"><spring:message code="message.priority.medium"/></form:option>
+			<form:option value="HIGH"><spring:message code="message.priority.high"/></form:option>
 		</form:select>
-		<form:errors class="error" path="priority" />
+		<form:errors class="error" path="priority"/>
 		<br>
 
 		<%-- Body --%>

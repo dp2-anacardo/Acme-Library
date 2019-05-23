@@ -1,26 +1,24 @@
 package services;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-
+import domain.Actor;
+import domain.Configuration;
+import domain.Message;
+import domain.MessageBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-
-import domain.Actor;
-import domain.Configuration;
-import domain.Message;
-import domain.MessageBox;
 import repositories.MessageRepository;
 import security.LoginService;
 import security.UserAccount;
 
 import javax.validation.ValidationException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.GregorianCalendar;
 
 @Service
 @Transactional
@@ -28,17 +26,17 @@ public class MessageService {
 
     // Manage Repository
     @Autowired
-    private MessageRepository		messageRepository;
+    private MessageRepository messageRepository;
 
     //Supporting devices
     @Autowired
-    private ConfigurationService	configurationService;
+    private ConfigurationService configurationService;
 
     @Autowired
-    private ActorService			actorService;
+    private ActorService actorService;
 
     @Autowired
-    private Validator				validator;
+    private Validator validator;
 
 
     // CRUD methods
@@ -68,71 +66,88 @@ public class MessageService {
         Assert.notNull(message);
         final Message result;
 
-        Actor sender = null;
-
         if (message.getId() == 0) {
             Assert.notNull(message);
 
-            final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
-            final String dropoutBrotherhood = "Drop out brotherhood \n Salida de fraternidad";
-            final String acceptedRequest = "A request changed its status \n Una petición ha cambiado su estatus";
-            final String sponsorshipFee = "A sponsorship has been shown \n Se ha mostrado un anuncio";
-            final Integer actors = this.actorService.findAll().size();
+            final Actor sender = this.actorService.getActorLogged();
 
-            if (message.getSubject().equals(sponsorshipFee) || message.getSubject().equals(acceptedRequest) || message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)
-                    || (message.getRecipients().size() == actors)) {
+            message.setSender(sender);
 
-                final Collection<Actor> recipients = message.getRecipients();
-                Assert.notNull(recipients);
-                Assert.notEmpty(recipients);
+            final Collection<Actor> recipients = message.getRecipients();
+            Assert.notNull(recipients);
+            Assert.notEmpty(recipients);
 
-                for (final Actor recipient : recipients)
-                    message.getMessageBoxes().add(recipient.getMessageBox("NOTIFICATIONBOX"));
+            final Boolean spam = this.checkSpam(message);
+            final String box;
 
-                result = this.messageRepository.save(message);
-
-                for (final Actor recipient : recipients)
-                    recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
-
+            if (spam) {
+                box = "SPAMBOX";
+                message.setIsSpam(true);
             } else {
-                final UserAccount userAccount = LoginService.getPrincipal();
-
-                sender = this.actorService.findByUserAccount(userAccount);
-                message.setSender(sender);
-
-                final Collection<Actor> recipients = message.getRecipients();
-                Assert.notNull(recipients);
-                Assert.notEmpty(recipients);
-
-                final Boolean spam = this.checkSpam(message);
-                final String box;
-
-                if (spam) {
-                    box = "SPAMBOX";
-                    message.setIsSpam(true);
-                } else {
-                    box = "INBOX";
-                    message.setIsSpam(false);
-                }
-                if (sender != null)
-                    message.getMessageBoxes().add(sender.getMessageBox("OUTBOX"));
-
-                for (final Actor recipient : recipients)
-                    message.getMessageBoxes().add(recipient.getMessageBox(box));
-
-                result = this.messageRepository.save(message);
-
-                if (sender != null)
-                    sender.getMessageBox("OUTBOX").addMessage(result);
-
-                for (final Actor recipient : recipients)
-                    recipient.getMessageBox(box).addMessage(result);
+                box = "INBOX";
+                message.setIsSpam(false);
             }
 
+            message.getMessageBoxes().add(sender.getMessageBox("OUTBOX"));
+            for (final Actor recipient : recipients)
+                message.getMessageBoxes().add(recipient.getMessageBox(box));
+
+            result = this.messageRepository.save(message);
+
+            sender.getMessageBox("OUTBOX").addMessage(result);
+            for (final Actor recipient : recipients)
+                recipient.getMessageBox(box).addMessage(result);
         } else
             result = this.messageRepository.save(message);
+
         return result;
     }
+
+    public Message broadcast(final Message message){
+        final Message result;
+
+        final Collection<Actor> recipients = message.getRecipients();
+        Assert.notNull(recipients);
+        Assert.notEmpty(recipients);
+
+
+        for (final Actor recipient : recipients)
+            message.getMessageBoxes().add(recipient.getMessageBox("NOTIFICATIONBOX"));
+
+        result = this.messageRepository.save(message);
+
+        for (final Actor recipient : recipients)
+            recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
+
+        return result;
+    }
+
+    public Message notification(){
+        //            final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
+//            final String dropoutBrotherhood = "Drop out brotherhood \n Salida de fraternidad";
+//            final String acceptedRequest = "A request changed its status \n Una petición ha cambiado su estatus";
+//            final String sponsorshipFee = "A sponsorship has been shown \n Se ha mostrado un anuncio";
+//            final Integer actors = this.actorService.findAll().size();
+//
+//            if (message.getSubject().equals(sponsorshipFee) || message.getSubject().equals(acceptedRequest) || message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)
+//                    || (message.getRecipients().size() == actors)) {
+//
+//                final Collection<Actor> recipients = message.getRecipients();
+//                Assert.notNull(recipients);
+//                Assert.notEmpty(recipients);
+//
+//                for (final Actor recipient : recipients)
+//                    message.getMessageBoxes().add(recipient.getMessageBox("NOTIFICATIONBOX"));
+//
+//                result = this.messageRepository.save(message);
+//
+//                for (final Actor recipient : recipients)
+//                    recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
+//
+//            } else {
+        return null;
+    }
+
     public void delete(final Message message, final MessageBox srcMessageBox) {
         Assert.notNull(message);
         final UserAccount userAccount = LoginService.getPrincipal();
