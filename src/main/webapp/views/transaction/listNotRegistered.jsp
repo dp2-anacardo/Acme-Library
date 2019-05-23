@@ -34,7 +34,7 @@
             <spring:message code="transaction.seller" var="seller" />
             <display:column title="${seller}">
                 <a href="profile/show.do?actorId=${row.seller.id}">
-                    <spring:message code="transaction.seller"/></a>
+                        ${row.seller.name}</a>
             </display:column>
 
     </display:table>

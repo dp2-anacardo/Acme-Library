@@ -49,7 +49,8 @@
         <jstl:if test="${compra == true}">
             <spring:message code="transaction.seller" var="buyer" />
             <display:column title="${buyer}">
-                <jstl:out value="${row.seller.name}"></jstl:out>
+                <a href="profile/show.do?actorId=${row.seller.id}">
+                    ${row.seller.name}</a>
             </display:column>
         </jstl:if>
 
@@ -58,7 +59,8 @@
         <spring:message code="transaction.buyer" var="buyer" />
         <display:column title="${buyer}">
             <jstl:if test="${row.buyer != null}">
-                <jstl:out value="${row.buyer.name}"></jstl:out>
+                <a href="profile/show.do?actorId=${row.buyer.id}">
+                        ${row.buyer.name}</a>
             </jstl:if>
         </display:column>
         </jstl:if>
