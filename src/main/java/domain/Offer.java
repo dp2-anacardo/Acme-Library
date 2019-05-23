@@ -66,6 +66,7 @@ public class Offer extends DomainEntity{
         this.transaction = transaction;
     }
 
+    @NotNull
     @OneToOne(optional = false)
     public Book getBook() {
         return book;

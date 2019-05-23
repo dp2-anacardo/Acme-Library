@@ -63,6 +63,7 @@
         <security:intercept-url pattern="/transaction/reader/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/transaction/**" access="permitAll()"/>
         <security:intercept-url pattern="/sponsorship/**" access="hasRole('SPONSOR')"/>
+        <security:intercept-url pattern="/offer/reader/**" access="hasRole('READER')"/>
 
         <security:intercept-url pattern="/gdpr/**" access="permitAll"/>
 

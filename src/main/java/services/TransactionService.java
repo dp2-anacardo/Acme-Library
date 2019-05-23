@@ -101,9 +101,11 @@ public class TransactionService {
 
     public Transaction saveExchange(Transaction t){
         Assert.isTrue(t.getId() == 0);
+        Assert.isTrue(t.getBook() != null);
         t.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
         t.setTicker(tickerGenerator());
         t.setIsSale(false);
+        t.setIsFinished(false);
         Transaction result = this.transactionRepository.save(t);
         return result;
     }

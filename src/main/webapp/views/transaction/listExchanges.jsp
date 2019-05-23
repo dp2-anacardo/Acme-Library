@@ -18,7 +18,7 @@
 
         <spring:message code="transaction.delete" var="delete" />
         <display:column title="${delete}">
-            <jstl:if test="${row.isFinished == false}">
+            <jstl:if test="${row.isFinished == false && row.offers.size() == 0}">
                 <a href="transaction/reader/delete.do?transactionId=${row.id}">
                     <spring:message code="transaction.delete" /></a>
             </jstl:if>
@@ -33,7 +33,7 @@
         </display:column>
 
         <spring:message code="transaction.offers" var="offers" />
-        <display:column title="${delete}">
+        <display:column title="${offers}">
                 <a href="offer/reader/list.do?transactionId=${row.id}">
                     <spring:message code="transaction.offers" /></a>
         </display:column>

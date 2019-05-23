@@ -61,4 +61,9 @@
 		<put-attribute name="body" value="/views/transaction/showNotRegistered.jsp" />
 	</definition>
 
+	<definition name="transaction/reader/createExchange" extends="master.page">
+		<put-attribute name="title" value="Exchange" />
+		<put-attribute name="body" value="/views/transaction/createExchange.jsp" />
+	</definition>
+
 </tiles-definitions>
