@@ -7,6 +7,7 @@ import domain.Book;
 import domain.Finder;
 import domain.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -14,10 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import services.ActorService;
-import services.ConfigurationService;
-import services.FinderService;
-import services.ReaderService;
+import services.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +33,8 @@ public class FinderController extends AbstractController {
     private ReaderService readerService;
     @Autowired
     private ConfigurationService configurationService;
+    @Autowired
+    private CategoryService categoryService;
 
 
     //LIST RESULTS
@@ -144,8 +144,14 @@ public class FinderController extends AbstractController {
     protected ModelAndView createEditModelAndView(final Finder finder, final String messageCode) {
         ModelAndView result;
 
+        String language = LocaleContextHolder.getLocale().getLanguage();
+        String[] status = {"VERY GOOD", "GOOD", "BAD", "VERY BAD"};
+
         result = new ModelAndView("finder/reader/edit");
         result.addObject("finder", finder);
+        if (language.equals("es")) result.addObject("cNames", this.categoryService.getNamesEs());
+        else result.addObject("cNames", this.categoryService.getNamesEn());
+        result.addObject("status", status);
         result.addObject("messageCode", messageCode);
 
         return result;

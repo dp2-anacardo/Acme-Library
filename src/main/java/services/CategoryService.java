@@ -65,4 +65,12 @@ public class CategoryService {
         this.categoryRepository.delete(c);
     }
 
+    public Collection<String> getNamesEs(){
+        return this.categoryRepository.getNamesEs();
+    }
+
+    public Collection<String> getNamesEn(){
+        return this.categoryRepository.getNamesEn();
+    }
+
 }

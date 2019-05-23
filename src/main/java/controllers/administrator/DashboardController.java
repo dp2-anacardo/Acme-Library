@@ -20,7 +20,24 @@ public class DashboardController extends AbstractController {
     public ModelAndView dashboard() {
         final ModelAndView result;
 
+        /* Q8 */
+        final Double RatioOfFullFinders = this.administratorService.getRatioOfFullFinders();
+        /* Q9 */
+        final Double RatioOfEmptyFinders = this.administratorService.getRatioOfEmptyFinders();
+        /* Q10 */
+        final Double RatioOfEmptyVSFullFinders = this.administratorService.getRatioOfEmptyVSFullFinders();
+        /* Q13 */
+        final Double RatioOfSalesVSExchanges = this.administratorService.getRatioOfSalesVSExchangesByReader();
+
         result = new ModelAndView("administrator/dashboard");
+
+        result.addObject("RatioOfFullFinders", RatioOfFullFinders);
+
+        result.addObject("RatioOfEmptyFinders", RatioOfEmptyFinders);
+
+        result.addObject("RatioOfEmptyVSFullFinders", RatioOfEmptyVSFullFinders);
+
+        result.addObject("RatioOfSalesVSExchanges", RatioOfSalesVSExchanges);
 
         return result;
     }
