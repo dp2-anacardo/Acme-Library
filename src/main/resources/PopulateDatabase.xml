@@ -669,6 +669,14 @@
         <property name="cvv" value="891"/>
     </bean>
 
+    <!--Complaint-->
+    <bean id="complaint1" class="domain.Complaint">
+        <property name="ticker" value="923512-DAVID"/>
+        <property name="moment" value="15/10/2010 10:00"/>
+        <property name="body" value="test"/>
+        <property name="reader" ref="reader2"/>
+    </bean>
+
     <!-- Books -->
     <bean id="book1" class="domain.Book">
         <property name="title" value="El mentiroso"/>

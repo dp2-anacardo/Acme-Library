@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="complaint/referee/list" extends="master.page">
+		<put-attribute name="title" value="Lista de quejas" />
+		<put-attribute name="body" value="/views/complaint/list.jsp" />
+	</definition>
+
+	<definition name="complaint/referee/listUnassigned" extends="master.page">
+		<put-attribute name="title" value="Lista de quejas sin asignar" />
+		<put-attribute name="body" value="/views/complaint/list.jsp" />
+	</definition>
+
+	<definition name="complaint/reader/list" extends="master.page">
+		<put-attribute name="title" value="Lista de quejas" />
+		<put-attribute name="body" value="/views/complaint/list.jsp" />
+	</definition>
+
+	<definition name="complaint/list" extends="master.page">
+		<put-attribute name="title" value="Lista de quejas" />
+		<put-attribute name="body" value="/views/complaint/list.jsp" />
+	</definition>
+
+	<definition name="complaint/referee/show" extends="master.page">
+		<put-attribute name="title" value="Queja" />
+		<put-attribute name="body" value="/views/complaint/show.jsp" />
+	</definition>
+
+	<definition name="complaint/reader/show" extends="master.page">
+		<put-attribute name="title" value="Queja" />
+		<put-attribute name="body" value="/views/complaint/show.jsp" />
+	</definition>
+
+	<definition name="complaint/reader/create" extends="master.page">
+		<put-attribute name="title" value="Queja" />
+		<put-attribute name="body" value="/views/complaint/create.jsp" />
+	</definition>
+	
+</tiles-definitions>

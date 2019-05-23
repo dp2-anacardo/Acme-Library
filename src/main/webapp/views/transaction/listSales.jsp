@@ -62,18 +62,21 @@
             </jstl:if>
         </display:column>
 
+        <spring:message code="complaint.create" var="complaint" />
+        <display:column title="${complaint}">
+            <jstl:if test="${row.isFinished == true}">
+                <a href="complaint/reader/create.do?transactionId=${row.id}">
+                    <spring:message code="complaint.create" /></a>
+            </jstl:if>
+        </display:column>
 
-            <spring:message code="transaction.delete" var="delete" />
-            <display:column title="${delete}">
-                <jstl:if test="${row.isFinished == false}">
-                    <a href="transaction/reader/delete.do?transactionId=${row.id}">
-                        <spring:message code="transaction.delete" /></a>
-                </jstl:if>
-            </display:column>
-        </jstl:if>
-
-
-
+        <spring:message code="transaction.delete" var="delete" />
+        <display:column title="${delete}">
+            <jstl:if test="${row.isFinished == false}">
+                <a href="transaction/reader/delete.do?transactionId=${row.id}">
+                    <spring:message code="transaction.delete" /></a>
+            </jstl:if>
+        </display:column>
 
     </display:table>
 

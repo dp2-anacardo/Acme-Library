@@ -59,7 +59,11 @@ public class CommentController extends AbstractController {
             }
             comments = report.getComments();
         } catch (Throwable oops){
-            result = new ModelAndView("redirect:/report/list.do");
+            if(this.actorService.getActorLogged() instanceof Referee) {
+                result = new ModelAndView("redirect:/report/referee/list.do");
+            } else{
+                result = new ModelAndView("redirect:/report/reader/list.do");
+            }
             return result;
         }
 

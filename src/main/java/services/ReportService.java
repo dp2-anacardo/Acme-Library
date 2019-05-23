@@ -58,6 +58,7 @@ public class ReportService {
         Complaint complaint = this.complaintService.findOne(complaintId);
 
         Assert.isTrue(complaint.getReferee().equals(referee));
+        Assert.isTrue(report.getComplaint().equals(complaint));
 
         Report result = this.reportRepository.save(report);
 
@@ -68,18 +69,26 @@ public class ReportService {
         return this.reportRepository.getReportsByReferee(refereeId);
     }
 
-    public Collection<Report> getReportsFinalByReader(int readerId){
-        return this.reportRepository.getReportsFinalByReader(readerId);
+    public Collection<Report> getReportsFinalByComplaint(int complaintId){
+        return this.reportRepository.getReportsFinalByComplaint(complaintId);
     }
 
-    public Report reconstruct(final Report report, final BindingResult binding) {
+    public Report reconstruct(final Report report, int complaintId, final BindingResult binding) {
         Report result;
-        result = this.create();
-        result.setMoment(new Date());
-        result.setDescription(report.getDescription());
-        result.setIsFinal(report.getIsFinal());
-        result.setAttachments(report.getAttachments());
-        result.setComments(report.getComments());
+        if(report.getId()==0) {
+            result = this.create();
+            result.setMoment(new Date());
+            result.setDescription(report.getDescription());
+            result.setIsFinal(report.getIsFinal());
+            result.setAttachments(report.getAttachments());
+            result.setComplaint(complaintService.findOne(complaintId));
+            result.setComments(report.getComments());
+        } else{
+            result = this.findOne(report.getId());
+            result.setDescription(report.getDescription());
+            result.setAttachments(report.getAttachments());
+            result.setIsFinal(report.getIsFinal());
+        }
 
         this.validator.validate(result, binding);
         if (binding.hasErrors())
