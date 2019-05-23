@@ -91,6 +91,9 @@ public class TransactionService {
             t.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
             t.setTicker(tickerGenerator());
             t.setIsSale(true);
+            t.setIsFinished(false);
+        } else {
+            t.setIsFinished(true);
         }
         Transaction result = this.transactionRepository.save(t);
         return result;

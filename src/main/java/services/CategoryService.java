@@ -81,6 +81,14 @@ public class CategoryService {
         this.categoryRepository.delete(c);
     }
 
+    public Collection<String> getNamesEs(){
+        return this.categoryRepository.getNamesEs();
+    }
+
+    public Collection<String> getNamesEn() {
+        return this.categoryRepository.getNamesEn();
+    }
+
     public Collection<Book> getBooksWithCategoryParam(Category category){
         Collection<Book> res;
         res = this.categoryRepository.getBooksWithCategoryParam(category);
@@ -93,7 +101,6 @@ public class CategoryService {
         Assert.notNull(res);
         return res;
     }
-
 
     public Category reconstruct(Category category, BindingResult binding){
         Category result;

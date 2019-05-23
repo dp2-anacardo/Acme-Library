@@ -3,6 +3,7 @@ package services;
 import domain.Book;
 import domain.Configuration;
 import domain.Finder;
+import domain.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +39,8 @@ public class FinderService {
     public Finder create() {
         Finder result;
         result = new Finder();
-        final Collection<Book> books = new ArrayList<>();
-        result.setBooks(books);
+        final Collection<Transaction> transactions = new ArrayList<>();
+        result.setTransactions(transactions);
         result.setLastUpdate(new Date());
         return result;
     }
@@ -60,14 +61,14 @@ public class FinderService {
             Assert.isTrue(this.readerService.findOne(this.actorService.getActorLogged().getId()).getFinder().equals(finder));
         }
 
-        Collection<Book> result = this.search(finder);
+        Collection<Transaction> result = this.search(finder);
 
         Configuration conf;
         conf = this.configurationService.getConfiguration();
 
         result = this.maxPosition(result, conf);
 
-        finder.setBooks(result);
+        finder.setTransactions(result);
         finder.setLastUpdate(new Date());
 
         finder = this.finderRepository.save(finder);
@@ -95,48 +96,48 @@ public class FinderService {
         this.finderRepository.delete(f);
     }
 
-    public Collection<Book> getBooksByKeyWord(String keyword) {
-        return this.finderRepository.getBooksByKeyWord(keyword);
+    public Collection<Transaction> getTransactionsByKeyWord(String keyword) {
+        return this.finderRepository.getTransactionsByKeyWord(keyword);
     }
 
-    public Collection<Book> getBooksContainsKeyWord(String keyword) {
-        return this.finderRepository.getBooksContainsKeyWord(keyword);
+    public Collection<Transaction> getTransactionsContainsKeyWord(String keyword) {
+        return this.finderRepository.getTransactionsContainsKeyWord(keyword);
     }
 
-    public Collection<Book> maxPosition(Collection<Book> result, Configuration configuration) {
+    public Collection<Transaction> maxPosition(Collection<Transaction> result, Configuration configuration) {
         if (result.size() > configuration.getMaxResults()) {
 
-            final List<Book> copy = (List<Book>) result;
+            final List<Transaction> copy = (List<Transaction>) result;
 
-            final List<Book> booksLim = new ArrayList<>();
+            final List<Transaction> transLim = new ArrayList<>();
             for (int i = 0; i < configuration.getMaxResults(); i++)
-                booksLim.add(copy.get(i));
-            result = booksLim;
+                transLim.add(copy.get(i));
+            result = transLim;
         }
 
         return result;
     }
 
-    public Collection<Book> search(Finder finder) {
-        Collection<Book> result = Collections.emptyList();
-        List<Book> pro1 = null;
-        List<Book> pro2 = null;
-        List<Book> pro3 = null;
-        List<Book> proAux1;
-        List<Book> proAux2;
+    public Collection<Transaction> search(Finder finder) {
+        Collection<Transaction> result = Collections.emptyList();
+        List<Transaction> pro1 = null;
+        List<Transaction> pro2 = null;
+        List<Transaction> pro3 = null;
+        List<Transaction> proAux1;
+        List<Transaction> proAux2;
 
         if (!(finder.getKeyWord() == null || finder.getKeyWord().equals(""))) {
-            proAux1 = (List<Book>) this.finderRepository.getBooksByKeyWord(finder.getKeyWord());
-            proAux2 = (List<Book>) this.finderRepository.getBooksContainsKeyWord(finder.getKeyWord());
+            proAux1 = (List<Transaction>) this.finderRepository.getTransactionsByKeyWord(finder.getKeyWord());
+            proAux2 = (List<Transaction>) this.finderRepository.getTransactionsContainsKeyWord(finder.getKeyWord());
 
-            Set<Book> set = new LinkedHashSet<>(proAux1);
+            Set<Transaction> set = new LinkedHashSet<>(proAux1);
             set.addAll(proAux2);
             pro1 = new ArrayList<>(set);
         }
-        if (finder.getCategoryName() != null)
-            pro2 = (List<Book>) this.finderRepository.getBooksByCategory(finder.getCategoryName());
-        if (finder.getStatus() != null)
-            pro3 = (List<Book>) this.finderRepository.getBooksByStatus(finder.getStatus());
+        if (finder.getCategoryName() != null && !finder.getCategoryName().equals(""))
+            pro2 = (List<Transaction>) this.finderRepository.getTransactionsByCategory(finder.getCategoryName());
+        if (finder.getStatus() != null && !finder.getCategoryName().equals(""))
+            pro3 = (List<Transaction>) this.finderRepository.getTransactionsByStatus(finder.getStatus());
         if (!(pro1 == null && pro2 == null && pro3 == null)) {
             pro1.retainAll(pro2);
             pro1.retainAll(pro3);
@@ -150,7 +151,7 @@ public class FinderService {
 
         Collection<Finder> result;
 
-        result = this.finderRepository.findAllByBook(bookId);
+        result = this.finderRepository.findAllByTransaction(bookId);
 
         return result;
     }

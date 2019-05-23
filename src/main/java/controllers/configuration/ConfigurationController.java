@@ -53,6 +53,63 @@ public class ConfigurationController extends AbstractController {
         return result;
     }
 
+    @RequestMapping(value = "/deletePWord", method = RequestMethod.GET)
+    public ModelAndView deletePWord(@RequestParam(value = "posWord") final String posWord) {
+        final ModelAndView result;
+        final Configuration config = this.configurationService.findAll().get(0);
+
+        final Actor user = this.actorService.getActorLogged();
+        final Administrator admin = this.administratorService.findOne(user.getId());
+        Assert.notNull(admin);
+
+        final Collection<String> pW = config.getPosWords();
+        pW.remove(posWord);
+        config.setPosWords(pW);
+
+        this.configurationService.save(config);
+        result = new ModelAndView("redirect:/configuration/administrator/edit.do");
+
+        return result;
+    }
+
+    @RequestMapping(value = "/deleteNWord", method = RequestMethod.GET)
+    public ModelAndView deleteNWord(@RequestParam(value = "negWord") final String negWord) {
+        final ModelAndView result;
+        final Configuration config = this.configurationService.findAll().get(0);
+
+        final Actor user = this.actorService.getActorLogged();
+        final Administrator admin = this.administratorService.findOne(user.getId());
+        Assert.notNull(admin);
+
+        final Collection<String> nW = config.getNegWords();
+        nW.remove(negWord);
+        config.setNegWords(nW);
+
+        this.configurationService.save(config);
+        result = new ModelAndView("redirect:/configuration/administrator/edit.do");
+
+        return result;
+    }
+
+    @RequestMapping(value = "/deleteBName", method = RequestMethod.GET)
+    public ModelAndView deleteBName(@RequestParam(value = "BN") final String BN) {
+        final ModelAndView result;
+        final Configuration config = this.configurationService.findAll().get(0);
+
+        final Actor user = this.actorService.getActorLogged();
+        final Administrator admin = this.administratorService.findOne(user.getId());
+        Assert.notNull(admin);
+
+        final Collection<String> bN = config.getBrandName();
+        bN.remove(BN);
+        config.setBrandName(bN);
+
+        this.configurationService.save(config);
+        result = new ModelAndView("redirect:/configuration/administrator/edit.do");
+
+        return result;
+    }
+
 
     // WORD ADDS
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addWord")
@@ -72,6 +129,9 @@ public class ConfigurationController extends AbstractController {
                 config = this.configurationService.findAll().get(0);
 
                 configF.setSpamWords(config.getSpamWords());
+                configF.setPosWords(config.getPosWords());
+                configF.setNegWords(config.getNegWords());
+                configF.setBrandName(config.getBrandName());
 
                 result = this.editModelAndView(configF, null);
             } else {
@@ -107,6 +167,9 @@ public class ConfigurationController extends AbstractController {
             config = this.configurationService.reconstructEdit(configF, binding);
 
             configF.setSpamWords(config.getSpamWords());
+            configF.setPosWords(config.getPosWords());
+            configF.setNegWords(config.getNegWords());
+            configF.setBrandName(config.getBrandName());
 
             if (binding.hasErrors())
                 result = this.editModelAndView(configF, null);

@@ -43,6 +43,13 @@
 					<li><a href="book/reader/list.do"><spring:message code="master.page.reader.listBooks" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.finder" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="finder/reader/edit.do"><spring:message code="master.page.reader.finder.edit" /></a></li>
+					<li><a href="finder/reader/list.do"><spring:message code="master.page.reader.finder.list" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('SPONSOR')">

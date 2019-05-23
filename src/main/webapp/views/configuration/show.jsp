@@ -79,6 +79,42 @@
         </jstl:forEach>
     </table>
 
+    <table>
+        <tr>
+            <th><spring:message code="configuration.edit.posWords" /></th>
+        </tr>
+        <jstl:forEach items="${config.posWords}"
+                      var="posWords">
+            <tr>
+                <td><jstl:out value="${posWords}"/></td>
+            </tr>
+        </jstl:forEach>
+    </table>
+
+    <table>
+        <tr>
+            <th><spring:message code="configuration.edit.negWords" /></th>
+        </tr>
+        <jstl:forEach items="${config.negWords}"
+                      var="negWords">
+            <tr>
+                <td><jstl:out value="${negWords}"/></td>
+            </tr>
+        </jstl:forEach>
+    </table>
+
+    <table>
+        <tr>
+            <th><spring:message code="configuration.edit.brandName" /></th>
+        </tr>
+        <jstl:forEach items="${config.brandName}"
+                      var="brandName">
+            <tr>
+                <td><jstl:out value="${brandName}"/></td>
+            </tr>
+        </jstl:forEach>
+    </table>
+
     <!-- Buttons -->
 
     <acme:cancel url="/configuration/administrator/edit.do" code="configuration.edit"/>

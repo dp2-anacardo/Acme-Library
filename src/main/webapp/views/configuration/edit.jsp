@@ -32,7 +32,7 @@
                         path="welcomeMessageEs"/>
         <acme:textboxbs code="configuration.edit.defaultCC" path="countryCode"/>
         <acme:textboxbs code="configuration.edit.defaultVAT" path="defaultVAT"/>
-        <acme:textboxbs code="configuration.edit.flatRate" path="flatRate"/>
+        <acme:textboxbs code="configuration.edit.flatFee" path="flatFee"/>
 
         <!-- Edit words -->
 
@@ -43,7 +43,7 @@
             </tr>
             <jstl:forEach items="${configF.spamWords}"
                           var="spamWords">
-                <tr>
+                <tr>p
                     <td><jstl:out value="${spamWords}"/></td>
                     <td><acme:cancel url="/configuration/administrator/deleteSWord.do?spamWord=${spamWords}"
                                      code="configuration.edit.delete"/></td>
@@ -54,6 +54,69 @@
         <form:input path="addSW"/>
         <form:errors path="addSW" cssClass="error" />
         <acme:submit name="addWord" code="configuration.edit.addSW"/>&nbsp;
+        <br>
+        <br>
+
+        <table>
+            <tr>
+                <th><spring:message code="configuration.edit.posWords" /></th>
+                <th></th>
+            </tr>
+            <jstl:forEach items="${configF.posWords}"
+                          var="posWords">
+                <tr>
+                    <td><jstl:out value="${posWords}"/></td>
+                    <td><acme:cancel url="/configuration/administrator/deletePWord.do?posWord=${posWords}"
+                                     code="configuration.edit.delete"/></td>
+                </tr>
+            </jstl:forEach>
+        </table>
+
+        <form:input path="addPW"/>
+        <form:errors path="addPW" cssClass="error" />
+        <acme:submit name="addWord" code="configuration.edit.addPW"/>&nbsp;
+        <br>
+        <br>
+
+        <table>
+            <tr>
+                <th><spring:message code="configuration.edit.negWords" /></th>
+                <th></th>
+            </tr>
+            <jstl:forEach items="${configF.negWords}"
+                          var="negWords">
+                <tr>
+                    <td><jstl:out value="${negWords}"/></td>
+                    <td><acme:cancel url="/configuration/administrator/deleteNWord.do?negWord=${negWords}"
+                                     code="configuration.edit.delete"/></td>
+                </tr>
+            </jstl:forEach>
+        </table>
+
+        <form:input path="addNW"/>
+        <form:errors path="addNW" cssClass="error" />
+        <acme:submit name="addWord" code="configuration.edit.addNW"/>&nbsp;
+        <br>
+        <br>
+
+        <table>
+            <tr>
+                <th><spring:message code="configuration.edit.brandName" /></th>
+                <th></th>
+            </tr>
+            <jstl:forEach items="${configF.brandName}"
+                          var="brandName">
+                <tr>
+                    <td><jstl:out value="${brandName}"/></td>
+                    <td><acme:cancel url="/configuration/administrator/deleteBName.do?BN=${brandName}"
+                                     code="configuration.edit.delete"/></td>
+                </tr>
+            </jstl:forEach>
+        </table>
+
+        <form:input path="addBN"/>
+        <form:errors path="addBN" cssClass="error" />
+        <acme:submit name="addWord" code="configuration.edit.addBN"/>&nbsp;
         <br>
         <br>
 

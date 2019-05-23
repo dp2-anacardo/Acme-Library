@@ -24,25 +24,13 @@ public class Transaction extends DomainEntity{
     private Boolean isSale;
     private Boolean isFinished;
 
-    @Transient
+
     public Boolean getIsFinished(){
-        Boolean result = false;
-        if(this.isSale){
-            if(this.buyer != null && this.creditCard != null){
-                result = true;
-            }
-        }else{
-            for(Offer o : offers){
-                if(o.getStatus().equals("ACCEPTED")){
-                    result = true;
-                }
-            }
-        }
-        return result;
+        return this.isFinished;
     }
 
-    public void setIsFinished(Boolean b){
-        this.isFinished = b;
+    public void setIsFinished(Boolean isFinished){
+        this.isFinished = isFinished;
     }
 
     public Boolean getIsSale() {

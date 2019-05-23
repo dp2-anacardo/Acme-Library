@@ -534,7 +534,7 @@
         <property name="categoryName" value=""/>
         <property name="status" value=""/>
         <property name="lastUpdate" value="01/01/19 09:00"/>
-        <property name="books">
+        <property name="transactions">
             <list>
             </list>
         </property>
@@ -545,7 +545,7 @@
         <property name="categoryName" value=""/>
         <property name="status" value=""/>
         <property name="lastUpdate" value="01/01/19 09:00"/>
-        <property name="books">
+        <property name="transactions">
             <list>
             </list>
         </property>
@@ -652,6 +652,10 @@
         <property name="seller" ref="reader1"/>
         <property name="buyer" ref="reader2"/>
         <property name="book" ref="book1"/>
+        <property name="offers">
+            <list>
+            </list>
+        </property>
     </bean>
 
     <bean id="transaction2" class="domain.Transaction">
@@ -659,6 +663,10 @@
         <property name="isSale" value="false"/>
         <property name="seller" ref="reader1"/>
         <property name="book" ref="book2"/>
+        <property name="offers">
+            <list>
+            </list>
+        </property>
     </bean>
 
     <bean id="creditCard1" class="datatype.CreditCard">

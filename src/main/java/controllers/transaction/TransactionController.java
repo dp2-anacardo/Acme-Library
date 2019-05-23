@@ -130,7 +130,7 @@ public class TransactionController extends AbstractController {
             result.addObject("books",books);
         }catch(Throwable oops){
             result = new ModelAndView("transaction/reader/createSale");
-            result.addObject("messageCode","transaction.commit.error");
+            result.addObject("messageCode",binding.getAllErrors().get(0));
             result.addObject("books",books);
         }
         return result;

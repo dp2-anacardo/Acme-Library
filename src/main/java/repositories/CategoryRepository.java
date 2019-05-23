@@ -11,6 +11,12 @@ import java.util.Collection;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
+    @Query("select c.nameEn from Category c")
+    Collection<String> getNamesEn();
+
+    @Query("select c.nameEs from Category c")
+    Collection<String> getNamesEs();
+
     //TODO: Probar en ejecución
    // @Query("select b from Book b join b.categories c where ?1 member of c")
     @Query("select b from Book b where ?1 member of b.categories")
