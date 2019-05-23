@@ -22,3 +22,7 @@
     <b><spring:message code="book.numPag"/></b>: <jstl:out value="${transaction.book.pageNumber}"/><br>
     <b><spring:message code="book.photo"/></b>: <img src="${transaction.book.photo}" height="200" width="200"/>
 </fieldset>
+<br>
+<jstl:if test="${transaction.isSale == true}">
+    <acme:cancel code="transaction.buy" url="transaction/reader/buy.do?transactionId=${transaction.id}"/>
+</jstl:if>

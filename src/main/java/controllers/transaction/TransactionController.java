@@ -162,8 +162,7 @@ public class TransactionController extends AbstractController {
             result.addObject("brandList", brandList);
             result.addObject("transaction",transaction);
         }catch(Throwable oops) {
-            //TODO Redirigir al list de todo el mundo en vez de la pagina principal
-            result = new ModelAndView("redirect:/");
+            result = new ModelAndView("redirect:/transaction/listSales.do");
         }
         return result;
     }

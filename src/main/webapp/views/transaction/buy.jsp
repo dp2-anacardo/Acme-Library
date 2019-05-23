@@ -38,7 +38,7 @@
 
         <acme:textbox code="credit.cvvCode" path="creditCard.cvv"/>
         <acme:submit name="save" code="transaction.buy"/>
-        <acme:cancel code="transaction.cancel" url="/"/>
+        <acme:cancel code="transaction.cancel" url="/transaction/listSales.do"/>
     </form:form>
 
     </security:authorize>
