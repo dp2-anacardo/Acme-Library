@@ -39,6 +39,7 @@
 		<value>/views/comment/messages</value>
 		<value>/views/report/messages</value>
 		<value>/views/complaint/messages</value>
+		<value>/views/category/messages</value>
 	</util:list>
 
 </beans>

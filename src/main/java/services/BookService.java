@@ -19,13 +19,13 @@ import java.util.Date;
 public class BookService {
     //Manager repository
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @Autowired
-    ActorService actorService;
+    private ActorService actorService;
 
     @Autowired
-    ReaderService readerService;
+    private ReaderService readerService;
 
     public Book create() {
         UserAccount userAccount;

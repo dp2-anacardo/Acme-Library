@@ -5,10 +5,13 @@ import domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.CategoryRepository;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import java.util.Collection;
 
 @Service
@@ -16,10 +19,13 @@ import java.util.Collection;
 public class CategoryService {
     //Manager repository
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    ActorService actorService;
+    private ActorService actorService;
+
+    @Autowired
+    private Validator validator;
 
     public Category create(){
         UserAccount userAccount;
@@ -70,6 +76,7 @@ public class CategoryService {
                 categories.add(this.getDefaultCategory());
             }
             categories.remove(c);
+            b.setCategories(categories);
         }
         this.categoryRepository.delete(c);
     }
@@ -87,4 +94,20 @@ public class CategoryService {
         return res;
     }
 
+
+    public Category reconstruct(Category category, BindingResult binding){
+        Category result;
+        if (category.getId() == 0){
+            result = this.create();
+        }else {
+            result = this.categoryRepository.findOne(category.getId());
+        }
+            result.setNameEn(category.getNameEn());
+            result.setNameEs(category.getNameEs());
+            validator.validate(result, binding);
+        if (binding.hasErrors()){
+            throw new ValidationException();
+        }
+        return result;
+    }
 }

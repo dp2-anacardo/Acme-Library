@@ -59,6 +59,10 @@
 		<bean class="converters.StringToComplaintConverter"/>
 		<bean class="converters.ReportToStringConverter"/>
 		<bean class="converters.StringToReportConverter"/>
+		<bean class="converters.RegisterToStringConverter"/>
+		<bean class="converters.StringToRegisterConverter"/>
+		<bean class="converters.CategoryToStringConverter"/>
+		<bean class="converters.StringToCategoryConverter"/>
 	</util:list>
 	
 </beans>
