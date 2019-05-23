@@ -15,8 +15,7 @@
     <form:hidden path="id" readOnly = "true"/>
     <input type="hidden" name="complaintId" value="${complaintId}" readonly>
 
-    <acme:textbox code="report.description" path="description"/>
-    <form:errors cssClass="error" path="description" />
+    <acme:textarea code="report.description" path="description"/>
     <br>
 
     <acme:textarea code="report.attachments" path="attachments" />

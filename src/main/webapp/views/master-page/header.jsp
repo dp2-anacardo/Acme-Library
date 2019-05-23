@@ -56,6 +56,7 @@
 					<li class="arrow"></li>
 					<li><a href="complaint/referee/list.do"><spring:message code="master.page.referee.listComplaints" /></a></li>
 					<li><a href="complaint/referee/listUnassigned.do"><spring:message code="master.page.referee.listUnassigned"/></a></li>
+					<li><a href="report/referee/list.do"><spring:message code="master.page.referee.listReports"/></a></li>
 				</ul>
 			</li>
 		</security:authorize>

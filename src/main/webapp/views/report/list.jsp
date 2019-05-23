@@ -45,8 +45,10 @@
 
         <spring:message code="report.comments" var="comments"/>
         <display:column title="${comments}">
+            <jstl:if test="${row.isFinal}">
             <a href="comment/list.do?reportId=${row.id}">
                 <spring:message code="report.comments"/></a>
+            </jstl:if>
         </display:column>
 
 <security:authorize access="hasRole('READER')">

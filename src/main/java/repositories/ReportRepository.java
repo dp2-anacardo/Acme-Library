@@ -13,6 +13,6 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
     @Query("select r from Report r join r.complaint c join c.referee referee where referee.id=?1")
     Collection<Report> getReportsByReferee(int refereeId);
 
-    @Query("select r from Report r join r.complaint c join c.reader reader where r.isFinal=true and reader.id=?1")
-    Collection<Report> getReportsFinalByReader(int readerId);
+    @Query("select r from Report r join r.complaint c where r.isFinal=true and c.id=?1")
+    Collection<Report> getReportsFinalByComplaint(int readerId);
 }

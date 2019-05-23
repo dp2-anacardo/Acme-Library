@@ -16,21 +16,16 @@
     <input type="hidden" name="reportId" value="${reportId}" readonly>
     <br>
 
-    <acme:textbox code="comment.body" path="body"/>
-    <form:errors cssClass="error" path="body" />
+    <acme:textarea code="comment.body" path="body"/>
 
     <acme:submit name="save" code="comment.save"/>
 
     <security:authorize access="hasRole('READER')">
-        <div>
-            <acme:cancel url="report/reader/list.do" code="comment.cancel"/>
-        </div>
+            <acme:cancel url="report/reader/list.do?complaintId=${complaintId}" code="comment.cancel"/>
     </security:authorize>
 
     <security:authorize access="hasRole('REFEREE')">
-        <div>
             <acme:cancel url="report/referee/list.do" code="comment.cancel"/>
-        </div>
     </security:authorize>
 
 </form:form>

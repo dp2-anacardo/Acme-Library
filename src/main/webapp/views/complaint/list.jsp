@@ -40,6 +40,12 @@
             </jstl:if>
         </display:column>
 
+    <spring:message code="complaint.reports" var="reports"/>
+    <display:column title="${reports}">
+        <a href="report/reader/list.do?complaintId=${row.id}">
+            <spring:message code="complaint.reports"/></a>
+    </display:column>
+
         <spring:message code="complaint.show" var="show"/>
         <display:column title="${show}">
             <a href="complaint/reader/show.do?complaintId=${row.id}">
