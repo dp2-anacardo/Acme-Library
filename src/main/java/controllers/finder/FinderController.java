@@ -104,7 +104,6 @@ public class FinderController extends AbstractController {
     public ModelAndView clear() {
         final ModelAndView result;
 
-        //Sacar finder del Member
         final Actor user = this.actorService.getActorLogged();
         final Reader reader = this.readerService.findOne(user.getId());
 
@@ -117,7 +116,7 @@ public class FinderController extends AbstractController {
 
         this.finderService.save(finder);
 
-        result = new ModelAndView("redirect:/reader/list.do");
+        result = new ModelAndView("redirect:/finder/reader/edit.do");
 
         return result;
     }

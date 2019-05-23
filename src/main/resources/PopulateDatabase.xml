@@ -652,6 +652,7 @@
         <property name="seller" ref="reader1"/>
         <property name="buyer" ref="reader2"/>
         <property name="book" ref="book1"/>
+        <property name="isFinished" value="true"/>
         <property name="offers">
             <list>
             </list>
@@ -663,6 +664,7 @@
         <property name="isSale" value="false"/>
         <property name="seller" ref="reader1"/>
         <property name="book" ref="book2"/>
+        <property name="isFinished" value="false"/>
         <property name="offers">
             <list>
             </list>
@@ -839,7 +841,7 @@
     <bean id="sponsorship1" class="domain.Sponsorship">
         <property name="sponsor" ref="sponsor1"/>
         <property name="event" ref="event1"/>
-        <property name="status" value="1"/>
+        <property name="status" value="true"/>
         <property name="banner"
                   value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Cloud_banner.jpg/1197px-Cloud_banner.jpg"/>
         <property name="creditCard" ref="creditCard1Sponsor1"/>
@@ -848,7 +850,7 @@
     <bean id="sponsorship2" class="domain.Sponsorship">
         <property name="sponsor" ref="sponsor1"/>
         <property name="event" ref="event1"/>
-        <property name="status" value="1"/>
+        <property name="status" value="true"/>
         <property name="banner" value="http://educayoruba.com/wp-content/uploads/2017/01/Pricing-header-banner.jpg"/>
         <property name="creditCard" ref="creditCard2Sponsor1"/>
     </bean>

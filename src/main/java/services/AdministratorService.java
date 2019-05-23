@@ -3,6 +3,7 @@ package services;
 
 import domain.*;
 import forms.AdministratorForm;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -340,6 +342,63 @@ public class AdministratorService {
     }
 
     //DASHBOARD
+    //Q2
+    public Collection<Organizer> getTop5OrganizersWithMoreEvents(){
+        List<Organizer> o = (List<Organizer>) this.administratorRepository.getOrganizersWithMoreEvents();
+        Collection<Organizer> result = new ArrayList<>();
+        if(o.size()>5){
+            for(int i=0; i<5; i++){
+                result.add(o.get(i));
+            }
+        } else result = o;
+        return result;
+    }
+
+    //Q3
+    public List<Double> getTransactionsPrice(){
+        List<Double> result = new ArrayList<>();
+        result.add(this.administratorRepository.getAvgTransactionsPrice());
+        result.add(this.administratorRepository.getMinTransactionsPrice());
+        result.add(this.administratorRepository.getMaxTransactionsPrice());
+        result.add(this.administratorRepository.getStddevTransactionsPrice());
+        return result;
+    }
+
+    //Q4
+    public List<Double> getBooksPerReader(){
+        List<Double> result = new ArrayList<>();
+        result.add(this.administratorRepository.getAvgBooksPerReader());
+        result.add(this.administratorRepository.getMinBooksPerReader());
+        result.add(this.administratorRepository.getMaxBooksPerReader());
+        result.add(this.administratorRepository.getStddevBooksPerReader());
+        return result;
+    }
+
+    //Q5
+    public List<Double> getTransactionsComplaint(){
+        List<Double> result = new ArrayList<>();
+        result.add(this.administratorRepository.getAvgNumberTransactionsComplaints());
+        result.add(this.administratorRepository.getMinNumberTransactionsComplaints());
+        result.add(this.administratorRepository.getMaxNumberTransactionsComplaints());
+        result.add(this.administratorRepository.getStddevNumberTransactionsComplaints());
+        return result;
+    }
+
+    //Q6
+    public List<Double> getSponsorPerEvent(){
+        List<Double> result = new ArrayList<>();
+        result.add(this.administratorRepository.getAvgNumberSponsorsPerEvent());
+        result.add(this.administratorRepository.getMinNumberSponsorsPerEvent());
+        result.add(this.administratorRepository.getMaxNumberSponsorsPerEvent());
+        result.add(this.administratorRepository.getStddevNumberSponsorsPerEvent());
+        return result;
+    }
+
+    //Q7
+    public Double getRatioOfActiveVSInnactiveSpons(){
+        return this.administratorRepository.getRatioOfActiveVSInnactiveSpons();
+    }
+
     //Q8
     public Double getRatioOfFullFinders() {
         return this.administratorRepository.getRatioOfFullFinders();
@@ -353,6 +412,23 @@ public class AdministratorService {
     //Q10
     public Double getRatioOfEmptyVSFullFinders() {
         return this.administratorRepository.getRatioOfEmptyVSFullFinders();
+    }
+
+    //Q11
+    public Double getRatioOfEmptyVSFullTransactionsComplaints(){
+        return this.administratorRepository.getRatioOfEmptyVSFullTransactionsComplaints();
+    }
+
+    //Q12
+    public Collection<Reader> getTop5ReadersWithMoreComplaints(){
+        List<Reader> o = (List<Reader>) this.administratorRepository.getReadersWithMoreComplaints();
+        Collection<Reader> result = new ArrayList<>();
+        if(o.size()>5){
+            for(int i=0; i<5; i++){
+                result.add(o.get(i));
+            }
+        } else result = o;
+        return result;
     }
 
     //Q13

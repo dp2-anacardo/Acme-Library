@@ -7,6 +7,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('READER')">
 	<display:table pagesize="5" name="transactions" requestURI="finder/reader/list.do" id="row">
@@ -21,30 +22,29 @@
 		</display:column>
 
 		<spring:message code="transaction.moment" var="moment" />
-		<display:column property="moment" title="${moment}" format="{0,date,dd/MM/yyyy HH:mm}"/>
+        <display:column title="${moment}" format="{0,date,dd/MM/yyyy HH:mm}">
+            <jstl:out value="${row.moment}"></jstl:out>
+        </display:column>
 
 		<spring:message code="transaction.book.status" var="status" />
 		<display:column title="${status}">
 			<jstl:out value="${row.book.status}"></jstl:out>
 		</display:column>
 
-		<spring:message code="transaction.book.category" var="category" />
-		<display:column title="${category}">
-			<jstl:out value="${row.book.category}"></jstl:out>
-		</display:column>
-
 		<spring:message code="transaction.price" var="price" />
+        <display:column title="${price}">
 		<jstl:if test="${row.isSale = true}">
-			<display:column property="price" title="${price}"/>
+            <jstl:out value="${row.price}"></jstl:out>
 		</jstl:if>
+        </display:column>
 
 		<display:column>
 			<jstl:choose>
 				<jstl:when test="${row.isSale = true}">
-					<a href="/transaction/reader/showSaleR.do?transactionId=${row.id}">
+                    <acme:cancel url="/transaction/reader/showSaleR.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
 				</jstl:when>
 				<jstl:otherwise>
-					<a href="/transaction/reader/showExchangeR.do?transactionId=${row.id}">
+                    <acme:cancel url="/transaction/reader/showExchangeR.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>

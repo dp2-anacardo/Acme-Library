@@ -43,7 +43,7 @@
             </tr>
             <jstl:forEach items="${configF.spamWords}"
                           var="spamWords">
-                <tr>p
+                <tr>
                     <td><jstl:out value="${spamWords}"/></td>
                     <td><acme:cancel url="/configuration/administrator/deleteSWord.do?spamWord=${spamWords}"
                                      code="configuration.edit.delete"/></td>
