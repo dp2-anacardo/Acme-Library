@@ -51,7 +51,7 @@
 
         <spring:message code="offer.exchange" var="buyer" />
         <display:column title="${buyer}">
-            <a href="transaction/show.do?actorId=${row.transaction.id}">
+            <a href="transaction/show.do?transactionId=${row.transaction.id}">
                     ${buyer}</a>
         </display:column>
 

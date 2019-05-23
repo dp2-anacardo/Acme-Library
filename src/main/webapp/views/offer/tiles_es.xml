@@ -21,5 +21,15 @@
 		<put-attribute name="body" value="/views/offer/list.jsp" />
 	</definition>
 
+	<definition name="offer/reader/create" extends="master.page">
+		<put-attribute name="title" value="Oferta" />
+		<put-attribute name="body" value="/views/offer/create.jsp" />
+	</definition>
+
+	<definition name="offer/reader/show" extends="master.page">
+		<put-attribute name="title" value="Oferta" />
+		<put-attribute name="body" value="/views/offer/show.jsp" />
+	</definition>
+
 	
 </tiles-definitions>

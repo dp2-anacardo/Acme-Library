@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.OfferRepository;
 
+import javax.validation.ValidationException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,6 +26,24 @@ public class OfferService {
     private ActorService actorService;
     @Autowired
     private ReaderService readerService;
+    @Autowired
+    Validator validator;
+
+    public Offer reconstruct(Offer offer, BindingResult binding){
+        Offer result = this.create();
+        result.setReader(this.readerService.findOne(this.actorService.getActorLogged().getId()));
+        result.setMoment(new Date());
+        result.setStatus("PENDING");
+        result.setComment(offer.getComment());
+        result.setBook(offer.getBook());
+        result.setTransaction(offer.getTransaction());
+
+        validator.validate(result,binding);
+        if(binding.hasErrors())
+            throw new ValidationException();
+        return result;
+    }
+
 
     public Offer create(){
         Assert.isTrue(this.actorService.getActorLogged() instanceof Reader);
@@ -42,9 +63,11 @@ public class OfferService {
         Assert.isTrue(o.getBook().getReader().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
         Assert.isTrue(o.getTransaction().getIsSale() == false);
         Assert.isTrue(o.getId()==0);
-        o.setReader(this.readerService.findOne(this.actorService.getActorLogged().getId()));
-        o.setMoment(new Date());
-        o.setStatus("PENDING");
+        for(Offer of : o.getTransaction().getOffers()){
+            if(of.getReader() == this.readerService.findOne(this.actorService.getActorLogged().getId()) || of.getStatus().equals("ACCEPTED") ){
+                Assert.isTrue(false);
+            }
+        }
         Offer result = this.offerRepository.save(o);
         return result;
     }
@@ -53,6 +76,14 @@ public class OfferService {
         Assert.isTrue(o.getTransaction().getSeller().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
         Assert.isTrue(o.getTransaction().getIsSale() == false);
         Assert.isTrue(o.getStatus().equals("PENDING"));
+        for(Offer of : o.getTransaction().getOffers()){
+            if(of.getReader() == this.readerService.findOne(this.actorService.getActorLogged().getId()) || of.getStatus().equals("ACCEPTED") ){
+                Assert.isTrue(false);
+            }
+            if(of != o)
+                of.setStatus("REJECTED");
+        }
+        o.getTransaction().setIsFinished(true);
         o.setStatus("ACCEPTED");
         Offer result = this.offerRepository.save(o);
         return result;
@@ -70,5 +101,11 @@ public class OfferService {
         Assert.isTrue(o.getReader().equals(this.actorService.getActorLogged()));
         o.getTransaction().getOffers().remove(o);
         this.offerRepository.delete(o);
+    }
+
+
+    public Collection<Offer> getOffersByReader(){
+        Reader r = this.readerService.findOne(actorService.getActorLogged().getId());
+        return this.offerRepository.getOffersByReader(r);
     }
 }

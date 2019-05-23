@@ -649,6 +649,7 @@
         <property name="price" value="20.99"/>
         <property name="creditCard" ref="creditCard1"/>
         <property name="isSale" value="true"/>
+        <property name="isFinished" value="false"/>
         <property name="seller" ref="reader1"/>
         <property name="buyer" ref="reader2"/>
         <property name="book" ref="book1"/>
@@ -661,6 +662,7 @@
     <bean id="transaction2" class="domain.Transaction">
         <property name="ticker" value="190507-DAVID"/>
         <property name="isSale" value="false"/>
+        <property name="isFinished" value="false"/>
         <property name="seller" ref="reader1"/>
         <property name="book" ref="book2"/>
         <property name="offers">
@@ -756,6 +758,25 @@
     </bean>
 
     <bean id="book4" class="domain.Book">
+        <property name="title" value="Un mundo sin fin"/>
+        <property name="author" value="Kent Follet"/>
+        <property name="publisher" value="Plaza Janés"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1180"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="978-84-9908-122-9"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader2"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book5" class="domain.Book">
         <property name="title" value="Un mundo sin fin"/>
         <property name="author" value="Kent Follet"/>
         <property name="publisher" value="Plaza Janés"/>

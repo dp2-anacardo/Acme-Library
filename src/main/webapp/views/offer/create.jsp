@@ -14,22 +14,19 @@
     <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
     <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
-
-<security:authorize access="hasRole('READER')">
-    <form:form action="transaction/reader/createSale.do" modelAttribute="transaction">
-
-        <acme:textbox path="price" code="transaction.price" placeholder="10.0"/>
-
-        <form:label path="book">
-            <spring:message code="transaction.book"/>
-        </form:label>
-        <form:select path="book">
-            <form:options items="${books}" itemLabel="title" itemValue="id"/>
-        </form:select>
-        <form:errors cssClass="error" path="book" />
-        <br/>
-        <acme:submit name="save" code="transaction.save"/>
-        <acme:cancel code="transaction.cancel" url="/transaction/reader/listSales.do"/>
-    </form:form>
-</security:authorize>
+    <security:authorize access="hasRole('READER')">
+        <form:form action="offer/reader/create.do" modelAttribute="offer">
+            <acme:textarea path="comment" code="offer.comment"/>
+            <form:hidden path="transaction"/>
+            <form:label path="book">
+                <spring:message code="transaction.book"/>
+            </form:label>
+            <form:select path="book">
+                <form:options items="${books}" itemLabel="title" itemValue="id"/>
+            </form:select>
+            <form:errors cssClass="error" path="book" />
+            <br/>
+            <acme:submit name="save" code="transaction.save"/>
+            <acme:cancel code="transaction.cancel" url="transaction/listExchanges.do"/>
+        </form:form>
+    </security:authorize>

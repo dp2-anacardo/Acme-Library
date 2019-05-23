@@ -130,7 +130,7 @@ public class TransactionController extends AbstractController {
             result.addObject("books",books);
         }catch(Throwable oops){
             result = new ModelAndView("transaction/reader/createSale");
-            result.addObject("messageCode",binding.getAllErrors().get(0));
+            result.addObject("message","transaction.commit.error");
             result.addObject("books",books);
         }
         return result;
@@ -183,7 +183,7 @@ public class TransactionController extends AbstractController {
             final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
             result = new ModelAndView("transaction/reader/buy");
             result.addObject("brandList", brandList);
-            result.addObject("messageCode","transaction.commit.error");
+            result.addObject("message","transaction.commit.error");
         }
         return result;
     }
@@ -234,4 +234,39 @@ public class TransactionController extends AbstractController {
         }
         return result;
     }
+
+    @RequestMapping(value = "/reader/createExchange", method = RequestMethod.GET)
+    public ModelAndView createExchange(){
+        ModelAndView result;
+        try{
+            Transaction transaction = this.transactionService.create();
+            Collection<Book> books = new ArrayList<Book>();
+            books = this.bookService.getBooksWithNoTransactionsByReader();
+            result = new ModelAndView("transaction/reader/createExchange");
+            result.addObject("books",books);
+            result.addObject("transaction",transaction);
+        }catch(Throwable oops){
+            result = new ModelAndView("redirect:/");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/reader/createExchange", method = RequestMethod.POST)
+    public ModelAndView saveExchange(@ModelAttribute("transaction")Transaction transaction, BindingResult binding){
+        ModelAndView result;
+        Collection<Book> books = new ArrayList<Book>();
+        books = this.bookService.getBooksWithNoTransactionsByReader();
+        try {
+            this.transactionService.saveExchange(transaction);
+            result = new ModelAndView("redirect:/transaction/reader/listExchanges.do");
+            result.addObject("books",books);
+        }catch(Throwable oops){
+            result = new ModelAndView("transaction/reader/createExchange");
+            result.addObject("message","transaction.commit.error");
+            result.addObject("books",books);
+        }
+        return result;
+    }
+
+
 }

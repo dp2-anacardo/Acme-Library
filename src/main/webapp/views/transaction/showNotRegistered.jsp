@@ -26,3 +26,7 @@
 <jstl:if test="${transaction.isSale == true}">
     <acme:cancel code="transaction.buy" url="transaction/reader/buy.do?transactionId=${transaction.id}"/>
 </jstl:if>
+
+<jstl:if test="${transaction.isSale == false}">
+    <acme:cancel code="transaction.Offer" url="offer/reader/create.do?transactionId=${transaction.id}"/>
+</jstl:if>

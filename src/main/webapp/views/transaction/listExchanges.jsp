@@ -18,7 +18,7 @@
 
         <spring:message code="transaction.delete" var="delete" />
         <display:column title="${delete}">
-            <jstl:if test="${row.isFinished == false}">
+            <jstl:if test="${row.isFinished == false && row.offers.size() == 0}">
                 <a href="transaction/reader/delete.do?transactionId=${row.id}">
                     <spring:message code="transaction.delete" /></a>
             </jstl:if>
