@@ -15,4 +15,7 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 
     @Query("select e from Event e where e.isFinal = true and CURRENT_DATE < e.date")
     Collection<Event> getFutureEventsFinal();
+
+    @Query("select e from Event e where e.organizer.id = ?1")
+    Collection<Event> getEventsPerOrOrganizer(int organizerId);
 }

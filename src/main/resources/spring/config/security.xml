@@ -50,7 +50,7 @@
         <security:intercept-url pattern="/administrator/referee/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/book/reader/**" access="hasRole('READER')"/>
-
+        <security:intercept-url pattern="/event/organizer/**" access="hasRole('ORGANIZER')"/>
 
         <security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/finder/reader/**" access="hasRole('READER')"/>
