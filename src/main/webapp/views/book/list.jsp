@@ -42,5 +42,5 @@
     </display:table>
 
     <input type="button" value="<spring:message code="book.create" />"
-           onclick="javascript: relativeRedir('book/readerr/create.do');" />
+           onclick="javascript: relativeRedir('book/reader/create.do');" />
 </security:authorize>
