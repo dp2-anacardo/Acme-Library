@@ -2,49 +2,28 @@
 
 <!-- 
  * tiles.xml
+ * Copyright (C) 2017 Universidad de Sevilla
+ * Author (A) 2012 Rafael Corchuelo (corchu@us.es)
  *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
  -->
 
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+		"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+		"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
 <tiles-definitions>
 
-<definition name="administrator/administrator/create" extends="master.page">
-		<put-attribute name="title" value="Register" />
-		<put-attribute name="body" value="/views/administrator/register.jsp" />
-	</definition>
-	
-	<definition name="administrator/administrator/edit" extends="master.page">
-		<put-attribute name="title" value="Edit personal data" />
-		<put-attribute name="body" value="/views/administrator/edit.jsp" />
+	<definition name="finder/reader/edit" extends="master.page">
+		<put-attribute name="title" value="Changes filters finder" />
+		<put-attribute name="body" value="/views/finder/edit.jsp" />
 	</definition>
 
-	<definition name="administrator/actorList" extends="master.page">
-		<put-attribute name="title" value="Actor List" />
-		<put-attribute name="body" value="/views/administrator/actorList.jsp" />
+	<definition name="finder/reader/list" extends="master.page">
+		<put-attribute name="title" value="Show result finder" />
+		<put-attribute name="body" value="/views/finder/list.jsp" />
 	</definition>
-
-	<definition name="administrator/actorList/showActor" extends="master.page">
-		<put-attribute name="title" value="Show actor" />
-		<put-attribute name="body" value="/views/administrator/showActor.jsp" />
-	</definition>
-
-	<definition name="administrator/dashboard" extends="master.page">
-		<put-attribute name="title" value="Dashboard" />
-		<put-attribute name="body" value="/views/administrator/dashboard.jsp" />
-	</definition>
-
-	<definition name="administrator/auditor/create" extends="master.page">
-		<put-attribute name="title" value="Register" />
-		<put-attribute name="body" value="/views/administrator/registerAuditor.jsp" />
-	</definition>
-
 
 </tiles-definitions>

@@ -76,6 +76,18 @@
         </property>
     </bean>
 
+    <bean id="userAccount6" class="security.UserAccount">
+        <property name="username" value="reader2"/>
+        <property name="password" value="273a531832ab8a9e3c2d62cea8230e41"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="READER"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- Administrator -->
 
     <bean id="admin1" class="domain.Administrator">
@@ -83,7 +95,7 @@
         <property name="name" value="admin1"/>
         <property name="surname" value="admin1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePrueba@gmail.com"/>
+        <property name="email" value="admin1@gmail.com"/>
         <property name="phoneNumber" value="+34 678123674"/>
         <property name="address" value="Avenida Reina Mercedes"/>
         <property name="isSuspicious" value="false"/>
@@ -155,7 +167,7 @@
         <property name="name" value="organizer1"/>
         <property name="surname" value="organizer1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebaOrganizer@gmail.com"/>
+        <property name="email" value="organizer1@gmail.com"/>
         <property name="phoneNumber" value="+34 642558899"/>
         <property name="address" value="Avenida Reina Mercedes"/>
         <property name="isSuspicious" value="false"/>
@@ -229,7 +241,7 @@
         <property name="name" value="referee1"/>
         <property name="surname" value="referee1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebareferee@gmail.com"/>
+        <property name="email" value="referee1@gmail.com"/>
         <property name="phoneNumber" value="+34 956632244"/>
         <property name="address" value="Avenida referees"/>
         <property name="isSuspicious" value="false"/>
@@ -303,7 +315,7 @@
         <property name="name" value="sponsor1"/>
         <property name="surname" value="sponsor1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebasponsor@gmail.com"/>
+        <property name="email" value="sponsor1@gmail.com"/>
         <property name="phoneNumber" value="+34 956251577"/>
         <property name="address" value="Avenida sponsors"/>
         <property name="isSuspicious" value="false"/>
@@ -373,10 +385,10 @@
 
     <bean id="reader1" class="domain.Reader">
         <property name="userAccount" ref="userAccount3"/>
-        <property name="name" value="reader1" />
+        <property name="name" value="reader1"/>
         <property name="surname" value="reader1"/>
         <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
-        <property name="email" value="emailDePruebareader@gmail.com"/>
+        <property name="email" value="reader1@gmail.com"/>
         <property name="phoneNumber" value="+34 645887763"/>
         <property name="address" value="Avenida readers"/>
         <property name="isSuspicious" value="false"/>
@@ -387,7 +399,129 @@
             <list>
             </list>
         </property>
-        <property name="book">
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxReader1"/>
+                <ref bean="outBoxReader1"/>
+                <ref bean="spamBoxReader1"/>
+                <ref bean="trashBoxReader1"/>
+                <ref bean="notificationBoxReader1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxReader1" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxReader1" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxReader1" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxReader1" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxReader1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="reader2" class="domain.Reader">
+        <property name="userAccount" ref="userAccount6"/>
+        <property name="name" value="reader2"/>
+        <property name="surname" value="reader2"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="reader2@gmail.com"/>
+        <property name="phoneNumber" value="+34 645887763"/>
+        <property name="address" value="Avenida readers"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="finder" ref="finder2"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxReader2"/>
+                <ref bean="outBoxReader2"/>
+                <ref bean="spamBoxReader2"/>
+                <ref bean="trashBoxReader2"/>
+                <ref bean="notificationBoxReader2"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxReader2" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxReader2" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxReader2" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxReader2" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxReader2" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
             <list>
             </list>
         </property>
@@ -396,11 +530,22 @@
     <!-- Finder -->
 
     <bean id="finder1" class="domain.Finder">
-        <property name="keyWord" value="" />
+        <property name="keyWord" value=""/>
         <property name="categoryName" value=""/>
         <property name="status" value=""/>
         <property name="lastUpdate" value="01/01/19 09:00"/>
-        <property name="books">
+        <property name="transactions">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="finder2" class="domain.Finder">
+        <property name="keyWord" value=""/>
+        <property name="categoryName" value=""/>
+        <property name="status" value=""/>
+        <property name="lastUpdate" value="01/01/19 09:00"/>
+        <property name="transactions">
             <list>
             </list>
         </property>
@@ -496,5 +641,225 @@
             </list>
         </property>
     </bean>
+
+    <!--Transactions-->
+    <bean id="transaction1" class="domain.Transaction">
+        <property name="ticker" value="190508-DAVID"/>
+        <property name="moment" value="10/10/2010 10:00"/>
+        <property name="price" value="20.99"/>
+        <property name="creditCard" ref="creditCard1"/>
+        <property name="isSale" value="true"/>
+        <property name="seller" ref="reader1"/>
+        <property name="buyer" ref="reader2"/>
+        <property name="book" ref="book1"/>
+        <property name="offers">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="transaction2" class="domain.Transaction">
+        <property name="ticker" value="190507-DAVID"/>
+        <property name="isSale" value="false"/>
+        <property name="seller" ref="reader1"/>
+        <property name="book" ref="book2"/>
+        <property name="offers">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="creditCard1" class="datatype.CreditCard">
+        <property name="holder" value="Sponsor 1"/>
+        <property name="brandName" value="VISA"/>
+        <property name="number" value="4885149505523388"/>
+        <property name="expirationYear" value="01/11/2023"/>
+        <property name="cvv" value="891"/>
+    </bean>
+
+    <!-- Books -->
+    <bean id="book1" class="domain.Book">
+        <property name="title" value="El mentiroso"/>
+        <property name="author" value="Pepe Mel"/>
+        <property name="publisher" value="Colección Mundus"/>
+        <property name="language" value="Español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="587"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="978-84-92868-70-4"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://1.bp.blogspot.com/-EJ1QsNcNB2M/TpruwDUo6UI/AAAAAAAADi0/h8_0Q3jp3NI/w1200-h630-p-k-no-nu/El%2Bmentiroso%2B-%2BPepe%2BMel.jpg"/>
+        <property name="categories">
+            <list>
+                <ref bean="category7"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book2" class="domain.Book">
+        <property name="title" value="Patria"/>
+        <property name="author" value="Fernando Aramburu"/>
+        <property name="publisher" value="TUSQUETS"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="646"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="9788490663196"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book3" class="domain.Book">
+        <property name="title" value="Un mundo sin fin"/>
+        <property name="author" value="Kent Follet"/>
+        <property name="publisher" value="Plaza Janés"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1180"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="978-84-9908-122-9"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Category -->
+    <bean id="category1" class="domain.Category">
+        <property name="nameEn" value="Sci-fi"/>
+        <property name="nameEs" value="Ciencia ficción"/>
+    </bean>
+
+    <bean id="category2" class="domain.Category">
+        <property name="nameEn" value="Scientific"/>
+        <property name="nameEs" value="Científico"/>
+    </bean>
+
+    <bean id="category3" class="domain.Category">
+        <property name="nameEn" value="Biography"/>
+        <property name="nameEs" value="Biografía"/>
+    </bean>
+
+    <bean id="category4" class="domain.Category">
+        <property name="nameEn" value="Song"/>
+        <property name="nameEs" value="Canción"/>
+    </bean>
+
+    <bean id="category5" class="domain.Category">
+        <property name="nameEn" value="Romance"/>
+        <property name="nameEs" value="Romance"/>
+    </bean>
+
+    <bean id="category6" class="domain.Category">
+        <property name="nameEn" value="Story"/>
+        <property name="nameEs" value="Cuento"/>
+    </bean>
+
+    <bean id="category7" class="domain.Category">
+        <property name="nameEn" value="Drama"/>
+        <property name="nameEs" value="Dramático"/>
+    </bean>
+
+    <bean id="category8" class="domain.Category">
+        <property name="nameEn" value="Default"/>
+        <property name="nameEs" value="Por defecto"/>
+    </bean>
+
+    <!-- Event -->
+    <bean id="event1" class="domain.Event">
+        <property name="title" value="Presentacion y firma de 'Un lugar al que volver'"/>
+        <property name="description" value="José A Pérez Ledo presentará su libro Un lugar al que volver."/>
+        <property name="date" value="03/09/2020 19:00"/>
+        <property name="address" value="Av. De la Libertad, 12, San Sebastián"/>
+        <property name="maximumCapacity" value="100"/>
+        <property name="isFinal" value="true"/>
+        <property name="organizer" ref="organizer1"/>
+        <property name="registers">
+            <list>
+                <ref bean="register1"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Event in draftMode-->
+    <bean id="event2" class="domain.Event">
+        <property name="title" value="Cuentacuentos"/>
+        <property name="description" value="Mi mama es rara. Con Victortuga."/>
+        <property name="date" value="01/03/2020 19:00"/>
+        <property name="address" value="Alcalá, 96, Madrid"/>
+        <property name="maximumCapacity" value="40"/>
+        <property name="isFinal" value="false"/>
+        <property name="organizer" ref="organizer1"/>
+        <property name="registers">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="event3" class="domain.Event">
+        <property name="title" value="Tarde con autora"/>
+        <property name="description" value="Estela Bono nos acerca Dictado desde el corazón."/>
+        <property name="date" value="20/10/2019 19:00"/>
+        <property name="address" value="Poeta Vila y Blanco, 8, Alicante"/>
+        <property name="maximumCapacity" value="50"/>
+        <property name="isFinal" value="true"/>
+        <property name="organizer" ref="organizer1"/>
+        <property name="registers">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Register -->
+    <bean id="register1" class="domain.Register">
+        <property name="moment" value="22/05/2019 16:47"/>
+        <property name="reader" ref="reader1"/>
+    </bean>
+
+    <!-- Sponsorships -->
+    <bean id="sponsorship1" class="domain.Sponsorship">
+        <property name="sponsor" ref="sponsor1"/>
+        <property name="event" ref="event1"/>
+        <property name="status" value="1"/>
+        <property name="banner"
+                  value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Cloud_banner.jpg/1197px-Cloud_banner.jpg"/>
+        <property name="creditCard" ref="creditCard1Sponsor1"/>
+    </bean>
+
+    <bean id="sponsorship2" class="domain.Sponsorship">
+        <property name="sponsor" ref="sponsor1"/>
+        <property name="event" ref="event1"/>
+        <property name="status" value="1"/>
+        <property name="banner" value="http://educayoruba.com/wp-content/uploads/2017/01/Pricing-header-banner.jpg"/>
+        <property name="creditCard" ref="creditCard2Sponsor1"/>
+    </bean>
+
+    <bean id="creditCard1Sponsor1" class="datatype.CreditCard">
+        <property name="holder" value="Sponsor 1"/>
+        <property name="brandName" value="VISA"/>
+        <property name="number" value="4885149505523388"/>
+        <property name="expirationYear" value="01/11/2023"/>
+        <property name="cvv" value="891"/>
+    </bean>
+
+    <bean id="creditCard2Sponsor1" class="datatype.CreditCard">
+        <property name="holder" value="Sponsor 1"/>
+        <property name="brandName" value="VISA"/>
+        <property name="number" value="4885149505523388"/>
+        <property name="expirationYear" value="01/11/2018"/>
+        <property name="cvv" value="891"/>
+    </bean>
+
 
 </beans>

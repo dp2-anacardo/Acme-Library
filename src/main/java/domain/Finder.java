@@ -1,6 +1,5 @@
 package domain;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +20,7 @@ public class Finder extends DomainEntity {
 
     //Relationships
 
-    private Collection<Book>	books;
+    private Collection<Transaction>	transactions;
 
 
     @SafeHtml(whitelistType = WhiteListType.NONE)
@@ -68,11 +67,11 @@ public class Finder extends DomainEntity {
 
     @Valid
     @ManyToMany
-    public Collection<Book> getBooks() {
-        return books;
+    public Collection<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setBooks(Collection<Book> books) {
-        this.books = books;
+    public void setTransactions(Collection<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

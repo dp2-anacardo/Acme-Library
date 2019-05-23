@@ -1,10 +1,13 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
@@ -57,11 +60,11 @@ public class Book extends DomainEntity{
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    public String getLanguaje() {
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguaje(String languaje) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 
@@ -75,7 +78,7 @@ public class Book extends DomainEntity{
         this.description = description;
     }
 
-    // TODO: @NotBlank ?
+    @Range(min = 0)
     public int getPageNumber() {
         return pageNumber;
     }
@@ -86,7 +89,6 @@ public class Book extends DomainEntity{
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    //TODO: Revisar pattern
     @Pattern(regexp = "^VERY GOOD|GOOD|BAD|VERY BAD$")
     public String getStatus() {
         return status;
@@ -97,6 +99,7 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
+    @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
     public String getIsbn() {
         return isbn;
     }
@@ -105,6 +108,9 @@ public class Book extends DomainEntity{
         this.isbn = isbn;
     }
 
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
         return moment;
     }
@@ -114,7 +120,6 @@ public class Book extends DomainEntity{
     }
 
     @NotBlank
-    //TODO: @URL?
     @URL
     public String getPhoto() {
         return photo;

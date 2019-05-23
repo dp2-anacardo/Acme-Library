@@ -1,8 +1,8 @@
 package domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -12,6 +12,8 @@ public class Register extends DomainEntity {
 
     private Date moment;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
         return moment;
     }
@@ -20,4 +22,16 @@ public class Register extends DomainEntity {
         this.moment = moment;
     }
 
+
+    //Relationships...................................................
+    private Reader reader;
+
+    @ManyToOne(optional = false)
+    public Reader getReader() {
+        return reader;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
+    }
 }

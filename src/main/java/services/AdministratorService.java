@@ -15,9 +15,9 @@ import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @Transactional
@@ -26,13 +26,26 @@ public class AdministratorService {
     //Managed Repositories
     @Autowired
     private AdministratorRepository administratorRepository;
-    @Autowired
-    private MessageBoxService messageBoxService;
+
     //Supporting services
     @Autowired
     private ActorService actorService;
     @Autowired
     private ConfigurationService configurationService;
+    @Autowired
+    private MessageBoxService messageBoxService;
+    @Autowired
+    private MessageService messageService;
+    @Autowired
+    private SponsorService sponsorService;
+    @Autowired
+    private ReaderService readerService;
+    @Autowired
+    private OrganizerService organizerService;
+    @Autowired
+    private SponsorshipService sponsorshipService;
+    @Autowired
+    private BookService bookService;
     @Autowired
     private Validator validator;
 
@@ -59,6 +72,7 @@ public class AdministratorService {
         userAccount.setAuthorities(authorities);
         a.setUserAccount(userAccount);
         a.setIsBanned(false);
+        a.setIsSuspicious(false);
         a.setSocialProfiles(profiles);
         a.setBoxes(boxes);
         return a;
@@ -129,6 +143,7 @@ public class AdministratorService {
             result.setEmail(admin.getEmail());
             result.setAddress(admin.getAddress());
             result.setSurname(admin.getSurname());
+            result.setMiddleName(admin.getMiddleName());
 
             this.validator.validate(admin, binding);
         }
@@ -149,6 +164,7 @@ public class AdministratorService {
         final Administrator result = this.create();
         result.setAddress(admin.getAddress());
         result.setEmail(admin.getEmail());
+        result.setMiddleName(admin.getMiddleName());
         result.setId(admin.getId());
         result.setName(admin.getName());
         result.setPhoneNumber(admin.getPhoneNumber());
@@ -183,24 +199,164 @@ public class AdministratorService {
         this.actorService.save(actor);
     }
 
+
+    public void computeAllScores() {
+
+        Collection<Reader> readers;
+        Collection<Organizer> organizers;
+        Collection<Sponsor> sponsors;
+
+        // Make sure that the principal is an Admin
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        readers = this.readerService.findAll();
+        for (final Reader reader : readers) {
+            reader.setScore(this.computeScore(this.messageService.findAllSentByActor(reader.getId())));
+            this.readerService.updateAdmin(reader);
+        }
+
+        organizers = this.organizerService.findAll();
+        for (final Organizer organizer : organizers) {
+            organizer.setScore(this.computeScore(this.messageService.findAllSentByActor(organizer.getId())));
+            this.organizerService.updateAdmin(organizer);
+        }
+
+        sponsors = this.sponsorService.findAll();
+        for (final Sponsor sponsor : sponsors) {
+            sponsor.setScore(this.computeScore(this.messageService.findAllSentByActor(sponsor.getId())));
+            this.sponsorService.updateAdmin(sponsor);
+        }
+    }
+
+    private Double computeScore(final Collection<Message> messages) {
+        final Collection<String> positiveWords = this.configurationService.getConfiguration().getPosWords();
+
+        final Collection<String> negativeWords = this.configurationService.getConfiguration().getNegWords();
+
+        Double positiveWordsValue = 0.0;
+        Double negativeWordsValue = 0.0;
+
+        for (final Message message : messages) {
+            final String body = message.getBody();
+            final String subject = message.getSubject();
+
+            for (final String positiveWord : positiveWords) {
+                System.out.println(positiveWord);
+                if (body.contains(positiveWord)) {
+                    positiveWordsValue += 1.0;
+                    System.out.println(positiveWordsValue);
+                }
+            }
+            for (final String negativeWord : negativeWords) {
+                System.out.println(negativeWord);
+                if (body.contains(negativeWord)) {
+                    negativeWordsValue += 1.0;
+                    System.out.println(negativeWordsValue);
+                }
+            }
+
+            for (final String positiveWord : positiveWords) {
+                System.out.println(positiveWord);
+                if (subject.contains(positiveWord)) {
+                    positiveWordsValue += 1.0;
+                    System.out.println(positiveWordsValue);
+                }
+            }
+            for (final String negativeWord : negativeWords) {
+                System.out.println(negativeWord);
+                if (subject.contains(negativeWord)) {
+                    negativeWordsValue += 1.0;
+                    System.out.println(negativeWordsValue);
+                }
+            }
+        }
+
+        // check for NaN values
+        if (positiveWordsValue + negativeWordsValue == 0)
+            return 0.0;
+        else if (positiveWordsValue - negativeWordsValue == 0)
+            return 0.0;
+        else
+            return (positiveWordsValue - negativeWordsValue) / (positiveWordsValue + negativeWordsValue);
+
+    }
+
+    public void computeAllSpam() {
+
+        Collection<Reader> readers;
+        Collection<Organizer> organizers;
+        Collection<Sponsor> sponsors;
+
+        // Make sure that the principal is an Admin
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        readers = this.readerService.findAll();
+        for (final Reader reader : readers) {
+            reader.setIsSuspicious(this.messageService.findSpamRatioByActor(reader.getId()) > .10);
+            this.readerService.updateAdmin(reader);
+        }
+
+        organizers = this.organizerService.findAll();
+        for (final Organizer organizer : organizers) {
+            organizer.setIsSuspicious(this.messageService.findSpamRatioByActor(organizer.getId()) > .10);
+            this.organizerService.updateAdmin(organizer);
+        }
+
+        sponsors = this.sponsorService.findAll();
+        for (final Sponsor sponsor : sponsors) {
+            sponsor.setIsSuspicious(this.messageService.findSpamRatioByActor(sponsor.getId()) > .10);
+            this.sponsorService.updateAdmin(sponsor);
+        }
+    }
+
+    public Integer desactivateExpiredSponsorships() {
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllExpiredCreditCard();
+
+        for (final Sponsorship s : sponsorships)
+            this.sponsorshipService.desactivate(s);
+
+        return sponsorships.size();
+    }
+
+    public Integer deleteInactiveBooks() {
+        final Actor principal = this.actorService.getActorLogged();
+        Assert.isInstanceOf(Administrator.class, principal);
+
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -30);
+        java.sql.Date oneMonthOld = new java.sql.Date(cal.getTimeInMillis());
+
+        final Collection<Book> books = this.bookService.findAllInactiveBooks(oneMonthOld);
+
+        for (final Book b : books)
+            this.bookService.deleteAdmin(b);
+
+        return books.size();
+    }
+
     //DASHBOARD
     //Q8
-    public Double getRatioOfFullFinders(){
+    public Double getRatioOfFullFinders() {
         return this.administratorRepository.getRatioOfFullFinders();
     }
 
     //Q9
-    public Double getRatioOfEmptyFinders(){
+    public Double getRatioOfEmptyFinders() {
         return this.administratorRepository.getRatioOfEmptyFinders();
     }
 
     //Q10
-    public Double getRatioOfEmptyVSFullFinders(){
+    public Double getRatioOfEmptyVSFullFinders() {
         return this.administratorRepository.getRatioOfEmptyVSFullFinders();
     }
 
     //Q13
-    public Double getRatioOfSalesVSExchangesByReader(){
+    public Double getRatioOfSalesVSExchangesByReader() {
         return this.administratorRepository.getRatioOfSalesVSExchangesByReader();
     }
 

@@ -85,7 +85,7 @@ public class RefereeService {
     public Referee save(final Referee r) {
         UserAccount userAccount;
         userAccount = LoginService.getPrincipal();
-        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("REFEREE") || userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
         Assert.notNull(r);
         Referee result;
         final char[] c = r.getPhoneNumber().toCharArray();
@@ -149,6 +149,7 @@ public class RefereeService {
         result.getUserAccount().setPassword(r.getPassword());
         result.getUserAccount().setUsername(r.getUsername());
         result.setVersion(r.getVersion());
+        result.setMiddleName(r.getMiddleName());
 
         this.validator.validate(result, binding);
         return result;

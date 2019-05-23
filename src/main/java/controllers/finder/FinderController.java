@@ -2,10 +2,7 @@ package controllers.finder;
 
 
 import controllers.AbstractController;
-import domain.Actor;
-import domain.Book;
-import domain.Finder;
-import domain.Reader;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,7 +19,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Controller
-@RequestMapping("finder/rookie")
+@RequestMapping("finder/reader")
 public class FinderController extends AbstractController {
 
     @Autowired
@@ -41,7 +38,7 @@ public class FinderController extends AbstractController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView result;
-        Collection<Book> books;
+        Collection<Transaction> transactions;
         result = new ModelAndView("finder/reader/list");
 
         //Sacar finder del Member
@@ -58,21 +55,14 @@ public class FinderController extends AbstractController {
         final Date fechaLimite = new Date(lastUpdate.getTime() + (horasDeGuardado * 3600000L));
 
         if (fechaActual.after(fechaLimite)) {
-            finder.setBooks(new ArrayList<Book>());
+            finder.setTransactions(new ArrayList<Transaction>());
             this.finderService.save(finder);
         }
 
-        if (finder.getBooks().isEmpty()) {
-            result = new ModelAndView("redirect:/book/listNotLogged.do");
-
-        } else {
-
-            books = finder.getBooks();
-
-            result.addObject("books", books);
-            result.addObject("finder", finder);
-            result.addObject("requestURI", "finder/book/list.do");
-        }
+        transactions = finder.getTransactions();
+        result.addObject("transactions", transactions);
+        result.addObject("finder", finder);
+        result.addObject("requestURI", "finder/reader/list.do");
 
         return result;
     }
@@ -127,7 +117,7 @@ public class FinderController extends AbstractController {
 
         this.finderService.save(finder);
 
-        result = new ModelAndView("redirect:/reader/listNotLogged.do");
+        result = new ModelAndView("redirect:/reader/list.do");
 
         return result;
     }

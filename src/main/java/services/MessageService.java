@@ -244,6 +244,21 @@ public class MessageService {
         return result;
     }
 
+    public Collection<Message> findAllSentByActor(final int actorID) {
+        final Collection<Message> result = this.messageRepository.findAllSentByActor(actorID);
+        Assert.notNull(result);
+
+        return result;
+    }
+
+    public Double findSpamRatioByActor(final int actorID) {
+        Double result = this.messageRepository.findSpamRatioByActor(actorID);
+        if (result == null)
+            result = 0.0;
+
+        return result;
+    }
+
     public Message reconstruct(final Message message, final BindingResult binding) {
 
         final Message result;

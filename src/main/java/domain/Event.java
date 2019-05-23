@@ -1,6 +1,7 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Event extends DomainEntity {
     private String address;
     private int maximumCapacity;
     private int actualCapacity;
+    private boolean isFinal;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -57,6 +59,7 @@ public class Event extends DomainEntity {
         this.address = address;
     }
 
+    @Range(min = 0)
     public int getMaximumCapacity() {
         return maximumCapacity;
     }
@@ -67,11 +70,19 @@ public class Event extends DomainEntity {
 
     @Transient
     public int getActualCapacity() {
-        return actualCapacity;
+        return this.getRegisters().size();
     }
 
     public void setActualCapacity(int actualCapacity) {
         this.actualCapacity = actualCapacity;
+    }
+
+    public boolean getIsFinal() {
+        return isFinal;
+    }
+
+    public void setIsFinal(boolean aFinal) {
+        isFinal = aFinal;
     }
 
     // Relationships...................................................................................................
@@ -95,4 +106,5 @@ public class Event extends DomainEntity {
     public void setRegisters(Collection<Register> registers) {
         this.registers = registers;
     }
+
 }

@@ -17,12 +17,12 @@
 		fieldset="true" />
 	<br>
 
-	<acme:showtext code="actor.surname" value="${actor.surname}"
-		fieldset="true" />
+	<acme:showtext code="actor.middleName" value="${actor.middleName}"
+				   fieldset="true" />
 	<br>
 
-	<acme:showtext code="actor.vatNumber" value="${actor.vatNumber}"
-				   fieldset="true" />
+	<acme:showtext code="actor.surname" value="${actor.surname}"
+		fieldset="true" />
 	<br>
 
 	<acme:showtext code="actor.email" value="${actor.email}"
@@ -35,18 +35,32 @@
 		fieldset="true" />
 	<br>
 
-	<jstl:if test="${actor.isSpammer != null}">
-		<acme:showtext code="actor.isSpammer" value="${actor.isSpammer}"
+	<jstl:if test="${actor.isSuspicious != null}">
+		<acme:showtext code="actor.isSpammer" value="${actor.isSuspicious}"
 			fieldset="true" />
 		<br>
 	</jstl:if>
 
-	<jstl:if test="${actor.isSpammer == null}">
+	<jstl:if test="${actor.isSuspicious == null}">
 		<acme:showtext code="actor.isSpammer" value="N/A" fieldset="true" />
 		<br>
 	</jstl:if>
-	
-	<acme:cancel url="/administrator/actorList.do" code="message.goBack" />
+
+	<jstl:if test="${actor.score != null}">
+		<acme:showtext code="actor.score" value="${actor.score}"
+					   fieldset="true" />
+		<br>
+	</jstl:if>
+
+	<jstl:if test="${actor.score == null}">
+		<acme:showtext code="actor.score" value="N/A" fieldset="true" />
+		<br>
+	</jstl:if>
+
+	<acme:showtext code="actor.isBanned" value="${actor.isBanned}" fieldset="true" />
+	<br>
+
+	<acme:cancel url="/administrator/management.do" code="message.goBack" />
 	
 </security:authorize>
 

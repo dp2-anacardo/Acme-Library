@@ -28,12 +28,7 @@ public class ReaderForm {
 	private int		id;
 	private int		version;
 	private String	surname;
-
-	private String	holder;
-	private String	brandName;
-	private String	number;
-	private Date expirationYear;
-	private Integer	cvv;
+	private String	middleName;
 
 	public ReaderForm(final Reader r) {
 		final ReaderForm result = new ReaderForm();
@@ -45,6 +40,8 @@ public class ReaderForm {
 		result.setPhoto(r.getPhoto());
 		result.setSurname(r.getSurname());
 		result.setVersion(r.getVersion());
+		result.setMiddleName(r.getMiddleName());
+
 
 	}
 
@@ -158,58 +155,12 @@ public class ReaderForm {
 		this.surname = surname;
 	}
 
-
-	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getHolder() {
-		return holder;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public void setHolder(String holder) {
-		this.holder = holder;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getBrandName() {
-		return brandName;
-	}
-
-
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-
-	@NotBlank
-	@CreditCardNumber
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	@NotNull
-	@Future
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "MM/YY")
-	public Date getExpirationYear() {
-		return expirationYear;
-	}
-
-	public void setExpirationYear(Date expirationYear) {
-		this.expirationYear = expirationYear;
-	}
-
-	@NotNull
-	@Range(min = 100, max = 999)
-	public Integer getCvv() {
-		return cvv;
-	}
-
-	public void setCvv(Integer cvv) {
-		this.cvv = cvv;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 }

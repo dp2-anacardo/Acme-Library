@@ -80,9 +80,7 @@ public class SponsorService {
     }
 
     public Sponsor save(final Sponsor s) {
-        UserAccount userAccount;
-        userAccount = LoginService.getPrincipal();
-        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("SPONSOR"));
+
         Assert.notNull(s);
         Sponsor result;
         final char[] c = s.getPhoneNumber().toCharArray();
@@ -99,6 +97,10 @@ public class SponsorService {
         }
         result = this.sponsorRepository.save(s);
         return result;
+    }
+
+    public void updateAdmin(final Sponsor r){
+        this.sponsorRepository.save(r);
     }
 
     public void delete(final Sponsor s) {
@@ -146,9 +148,13 @@ public class SponsorService {
         result.getUserAccount().setPassword(s.getPassword());
         result.getUserAccount().setUsername(s.getUsername());
         result.setVersion(s.getVersion());
+        result.setMiddleName(s.getMiddleName());
 
         this.validator.validate(result, binding);
         return result;
+    }
+    public void flush (){
+        this.sponsorRepository.flush();
     }
 
 }

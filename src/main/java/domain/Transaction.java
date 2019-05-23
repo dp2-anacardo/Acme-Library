@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
@@ -21,6 +22,16 @@ public class Transaction extends DomainEntity{
     private Double price;
     private CreditCard creditCard;
     private Boolean isSale;
+    private Boolean isFinished;
+
+
+    public Boolean getIsFinished(){
+        return this.isFinished;
+    }
+
+    public void setIsFinished(Boolean isFinished){
+        this.isFinished = isFinished;
+    }
 
     public Boolean getIsSale() {
         return isSale;
@@ -31,6 +42,7 @@ public class Transaction extends DomainEntity{
     }
 
     @NotBlank
+    @Column(unique = true)
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getTicker() {
         return ticker;
@@ -39,7 +51,6 @@ public class Transaction extends DomainEntity{
     public void setTicker(String ticker) {
         this.ticker = ticker;
     }
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
@@ -59,6 +70,7 @@ public class Transaction extends DomainEntity{
         this.price = price;
     }
 
+    @Valid
     public CreditCard getCreditCard() {
         return creditCard;
     }
@@ -74,7 +86,18 @@ public class Transaction extends DomainEntity{
     private Reader buyer;
     private Collection<Offer> offers;
     private Book book;
+    private Collection<Complaint> complaints;
 
+    @OneToMany
+    public Collection<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(Collection<Complaint> complaints) {
+        this.complaints = complaints;
+    }
+
+    @NotNull
     @OneToOne(optional = false)
     public Book getBook() {
         return book;

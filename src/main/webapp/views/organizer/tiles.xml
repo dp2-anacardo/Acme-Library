@@ -23,7 +23,7 @@
 
 	<definition name="organizer/organizer/edit" extends="master.page">
 		<put-attribute name="title" value="Edit personal data" />
-		<put-attribute name="body" value="/views/organizer/register.jsp" />
+		<put-attribute name="body" value="/views/organizer/edit.jsp" />
 	</definition>
 
 </tiles-definitions>

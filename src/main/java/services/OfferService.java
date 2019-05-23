@@ -68,6 +68,7 @@ public class OfferService {
 
     public void delete(Offer o){
         Assert.isTrue(o.getReader().equals(this.actorService.getActorLogged()));
+        o.getTransaction().getOffers().remove(o);
         this.offerRepository.delete(o);
     }
 }

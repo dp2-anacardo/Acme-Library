@@ -1,6 +1,7 @@
 package services;
 
 import domain.Event;
+import domain.Organizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -19,6 +20,9 @@ public class EventService {
 
     @Autowired
     ActorService    actorService;
+
+    @Autowired
+    OrganizerService    organizerService;
 
     public Event create(){
         UserAccount userAccount;
@@ -42,5 +46,72 @@ public class EventService {
         res = this.eventRepository.findOne(eventId);
         Assert.notNull(res);
         return res;
+    }
+
+
+    public Event save(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Event res;
+        if (e.getId() == 0){
+            int id = this.actorService.getActorLogged().getId();
+            Organizer o = this.organizerService.findOne(id);
+            e.setOrganizer(o);
+        }
+        res = this.eventRepository.save(e);
+        return res;
+    }
+
+
+    public Event saveDraft(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Event res;
+
+        e.setIsFinal(false);
+        res = this.save(e);
+        return res;
+
+    }
+
+    public Event saveFinal(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Event res;
+
+        e.setIsFinal(true);
+        Assert.isTrue(e.getMaximumCapacity() > 0);
+        res = this.save(e);
+        return res;
+    }
+
+    public void delete(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Assert.isTrue(e.getId() != 0);
+        Assert.isTrue(e.getIsFinal() == false);
+
+        this.eventRepository.delete(e);
+    }
+
+    public Collection<Event> findAllInFinal(){
+
+        Collection<Event> result;
+
+        result = this.eventRepository.findAllInFinal();
+
+        return result;
     }
 }

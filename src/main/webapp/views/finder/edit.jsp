@@ -20,7 +20,7 @@
         <acme:textbox code="finder.update.keyword" path="keyWord"/>
 
         <form:label path="categoryName">
-            <spring:message code="finder.update.category" />:
+            <spring:message code="transaction.book.category" />:
         </form:label>
         <form:select path="categoryName">
             <form:option value="" label="----" />
@@ -31,7 +31,7 @@
         <br />
 
         <form:label path="status">
-            <spring:message code="finder.update.status" />:
+            <spring:message code="transaction.book.status" />:
         </form:label>
         <form:select path="status">
             <form:option value="" label="----" />
@@ -39,7 +39,8 @@
             />
         </form:select>
         <form:errors cssClass="error" path="status" />
-        <br />
+        <br>
+        <br>
 
         <!-- Submit and Cancel -->
 

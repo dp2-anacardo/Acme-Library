@@ -80,9 +80,6 @@ public class OrganizerService {
     }
 
     public Organizer save(final Organizer o) {
-        UserAccount userAccount;
-        userAccount = LoginService.getPrincipal();
-        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
         Assert.notNull(o);
         Organizer result;
         final char[] c = o.getPhoneNumber().toCharArray();
@@ -99,6 +96,10 @@ public class OrganizerService {
         }
         result = this.organizerRepository.save(o);
         return result;
+    }
+
+    public void updateAdmin(final Organizer r){
+        this.organizerRepository.save(r);
     }
 
     public void delete(final Organizer o) {
@@ -146,9 +147,14 @@ public class OrganizerService {
         result.getUserAccount().setPassword(o.getPassword());
         result.getUserAccount().setUsername(o.getUsername());
         result.setVersion(o.getVersion());
+        result.setMiddleName(o.getMiddleName());
 
         this.validator.validate(result, binding);
         return result;
+    }
+
+    public void flush(){
+        this.organizerRepository.flush();
     }
 
 }

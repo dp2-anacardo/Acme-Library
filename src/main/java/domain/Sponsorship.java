@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 public class Sponsorship extends DomainEntity {
 
     private String banner;
-    private Boolean activated;
+    private Boolean status;
     private CreditCard creditCard;
 
     @NotBlank
@@ -34,12 +34,12 @@ public class Sponsorship extends DomainEntity {
     }
 
     @NotNull
-    public Boolean getActivated() {
-        return activated;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setActivated(Boolean activated) {
-        this.activated = activated;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     @Valid
@@ -57,6 +57,7 @@ public class Sponsorship extends DomainEntity {
     private Event event;
 
     @Valid
+    @NotNull
     @ManyToOne(optional = false)
     public Sponsor getSponsor() {
         return this.sponsor;
@@ -67,6 +68,7 @@ public class Sponsorship extends DomainEntity {
     }
 
     @Valid
+    @NotNull
     @ManyToOne(optional = false)
     public Event getEvent() {
         return this.event;

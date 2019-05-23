@@ -26,6 +26,34 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/administrator/create.do"><spring:message code="master.page.administrator.register" /></a></li>
 					<li><a href="administrator/referee/create.do"><spring:message code="master.page.administrator.registerReferee" /></a></li>
+					<li><a href="administrator/management.do"><spring:message code="master.page.administrator.actorList" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+
+		<security:authorize access="hasRole('READER')">
+			<li><a class="fNiv"><spring:message	code="master.page.reader" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="transaction/reader/listSales.do"><spring:message code="master.page.reader.listSales" /></a></li>
+					<li><a href="transaction/reader/listBuys.do"><spring:message code="master.page.reader.listBuys" /></a></li>
+					<li><a href="transaction/reader/listExchanges.do"><spring:message code="master.page.reader.listExchanges" /></a></li>
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.finder" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="finder/reader/edit.do"><spring:message code="master.page.reader.finder.edit" /></a></li>
+					<li><a href="finder/reader/list.do"><spring:message code="master.page.reader.finder.list" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+
+		<security:authorize access="hasRole('SPONSOR')">
+			<li><a class="fNiv"><spring:message	code="master.page.sponsor" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="sponsorship/sponsor/list.do"><spring:message code="master.page.sponsorship.list" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
