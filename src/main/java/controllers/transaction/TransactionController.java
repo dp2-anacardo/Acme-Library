@@ -64,6 +64,32 @@ public class TransactionController extends AbstractController {
         return result;
     }
 
+    @RequestMapping(value="/listSales", method = RequestMethod.GET)
+    public ModelAndView listSalesNotRegistered(){
+        ModelAndView result;
+
+        Collection<Transaction> transactions = this.transactionService.getSalesWithoutBuyer();
+
+        result = new ModelAndView("transaction/listSales");
+        result.addObject("transactions", transactions);
+        result.addObject("requestURI", "transaction/listSales.do");
+
+        return result;
+    }
+
+    @RequestMapping(value="/listExchanges", method = RequestMethod.GET)
+    public ModelAndView listExchangesNotRegistered(){
+        ModelAndView result;
+
+        Collection<Transaction> transactions = this.transactionService.getExchanges();
+
+        result = new ModelAndView("transaction/listExchanges");
+        result.addObject("transactions", transactions);
+        result.addObject("requestURI", "transaction/listExchanges.do");
+
+        return result;
+    }
+
 
     @RequestMapping(value = "/reader/createSale", method = RequestMethod.GET)
     public ModelAndView createSale(){
@@ -174,6 +200,22 @@ public class TransactionController extends AbstractController {
             result = new ModelAndView("transaction/reader/showSale");
             result.addObject("t",transaction);
         }catch (Throwable oops){
+            result = new ModelAndView("redirect:/");
+        }
+        return result;
+    }
+
+    @RequestMapping(value="/show")
+    public ModelAndView showNotRegistered(@RequestParam int transactionId){
+        ModelAndView result;
+        Transaction transaction;
+
+        try{
+            transaction = this.transactionService.findOne(transactionId);
+
+            result = new ModelAndView("transaction/show");
+            result.addObject("transaction", transaction);
+        } catch (Throwable oops){
             result = new ModelAndView("redirect:/");
         }
         return result;

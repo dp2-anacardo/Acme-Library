@@ -12,4 +12,7 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 
     @Query("select e from Event e where e.isFinal = TRUE")
     Collection<Event> findAllInFinal();
+
+    @Query("select e from Event e where e.isFinal = true and CURRENT_DATE < e.date")
+    Collection<Event> getFutureEventsFinal();
 }

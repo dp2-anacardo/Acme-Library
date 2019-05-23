@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
@@ -149,6 +150,24 @@ public class ProfileController extends AbstractController {
 			result.addObject("json", json);
 		}
 
+		return result;
+	}
+
+	@RequestMapping(value="/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam int actorId){
+		ModelAndView result;
+		Actor actor;
+
+		try{
+			actor = this.actorService.findOne(actorId);
+
+			result = new ModelAndView("profile/show");
+			result.addObject("actor", actor);
+
+			return result;
+		} catch(Throwable oops){
+			result = new ModelAndView("redirect:/");
+		}
 		return result;
 	}
 
