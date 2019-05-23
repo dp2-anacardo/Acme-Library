@@ -167,4 +167,6 @@ public class TransactionService {
     public Collection<Transaction> getExchanges(){
         return this.transactionRepository.getExchanges();
     }
+
+    public Collection<Transaction> findAllNotFinished() {return this.transactionRepository.findAllNotFinished();}
 }

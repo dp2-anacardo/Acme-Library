@@ -29,6 +29,8 @@ public class FinderService {
     private ActorService actorService;
     @Autowired
     private ReaderService readerService;
+    @Autowired
+    private TransactionService transactionService;
 
     //Validator
     @Autowired
@@ -62,6 +64,11 @@ public class FinderService {
         }
 
         Collection<Transaction> result = this.search(finder);
+
+        if (result.isEmpty() && (finder.getKeyWord() == null || finder.getKeyWord().equals(""))
+                && (finder.getCategoryName() == null || finder.getCategoryName().equals(""))
+                && (finder.getStatus() == null || finder.getCategoryName().equals("")))
+            result = this.transactionService.findAllNotFinished();
 
         Configuration conf;
         conf = this.configurationService.getConfiguration();
@@ -134,16 +141,24 @@ public class FinderService {
             set.addAll(proAux2);
             pro1 = new ArrayList<>(set);
         }
-        if (finder.getCategoryName() != null && !finder.getCategoryName().equals(""))
+        if (!(finder.getCategoryName() == null || finder.getCategoryName().equals("")))
             pro2 = (List<Transaction>) this.finderRepository.getTransactionsByCategory(finder.getCategoryName());
-        if (finder.getStatus() != null && !finder.getCategoryName().equals(""))
+        if (!(finder.getStatus() == null || finder.getStatus().equals("")))
             pro3 = (List<Transaction>) this.finderRepository.getTransactionsByStatus(finder.getStatus());
+
         if (!(pro1 == null && pro2 == null && pro3 == null)) {
+            if (pro1 == null)
+                pro1 = (List<Transaction>) this.transactionService.findAllNotFinished();
+            if (pro2 == null)
+                pro2 = (List<Transaction>) this.transactionService.findAllNotFinished();
+            if (pro3 == null)
+                pro3 = (List<Transaction>) this.transactionService.findAllNotFinished();
             pro1.retainAll(pro2);
             pro1.retainAll(pro3);
 
             result = pro1;
         }
+
         return result;
     }
 

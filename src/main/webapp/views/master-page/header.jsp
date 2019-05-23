@@ -30,6 +30,8 @@
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.listCategory" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+			<li><a class="fNiv" href="administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('READER')">

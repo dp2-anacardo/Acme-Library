@@ -60,8 +60,8 @@
                        fieldset="true"/>
     </p>
     <p>
-        <acme:showtext code="configuration.edit.flatRate"
-                       value="${config.flatRate}"
+        <acme:showtext code="configuration.edit.flatFee"
+                       value="${config.flatFee}"
                        fieldset="true"/>
     </p>
 
