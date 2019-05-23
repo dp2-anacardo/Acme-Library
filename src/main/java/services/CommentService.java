@@ -88,4 +88,8 @@ public class CommentService {
             throw new ValidationException();
         return result;
     }
+
+    public void delete (final int commentId){
+        this.commentRepository.delete(commentId);
+    }
 }

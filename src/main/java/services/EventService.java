@@ -5,11 +5,13 @@ import domain.Organizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.w3c.dom.events.EventException;
 import repositories.EventRepository;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -117,5 +119,24 @@ public class EventService {
 
     public Collection<Event> getFutureEventsFinal(){
         return this.eventRepository.getFutureEventsFinal();
+    }
+
+    public List<Event> findAllByOrganizer (final int organizerId){
+        List<Event> result = this.eventRepository.findAllByOrganizer(organizerId);
+        return result;
+    }
+    public void deleteForced(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Assert.isTrue(e.getId() != 0);
+
+        this.eventRepository.delete(e);
+    }
+
+    public Event findByRegister(final int registerId){
+        return this.eventRepository.findByRegister(registerId);
     }
 }

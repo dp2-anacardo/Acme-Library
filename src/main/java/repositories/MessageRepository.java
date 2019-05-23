@@ -20,4 +20,7 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
     @Query("select (count(s))/(select (count(t)*1.0) from Message t where t.sender.id=?1) from Message s where s.sender.id=?1 and s.isSpam=TRUE")
     Double findSpamRatioByActor(int actorID);
 
+    @Query("select m from Message m join m.recipients r where r.id=?1")
+    Collection<Message> findAllReceivedByActor(int actorID);
+
 }

@@ -135,4 +135,8 @@ public class ComplaintService {
     public Collection<Complaint> getComplaintsByReader(int readerId){
         return this.complaintRepository.getComplaintsByReader(readerId);
     }
+
+    public void delete(final int complaintId){
+        this.complaintRepository.delete(complaintId);
+    }
 }

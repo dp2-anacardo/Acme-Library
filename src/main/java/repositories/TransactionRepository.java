@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import services.TransactionService;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
@@ -26,5 +27,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     @Query("select t from Transaction t where t.isSale = false and not exists(select o from Offer o where o.transaction = t and o.status like 'ACCEPTED')")
     Collection<Transaction> getExchanges();
+
+    @Query("select t from Transaction t join t.complaints c where c.id=?1")
+    Transaction getTransactionByComplaint(final int complaintId);
 
 }
