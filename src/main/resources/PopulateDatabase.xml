@@ -665,6 +665,7 @@
         <property name="book" ref="book2"/>
         <property name="offers">
             <list>
+                <ref bean="offer1"/>
             </list>
         </property>
     </bean>
@@ -675,6 +676,17 @@
         <property name="number" value="4885149505523388"/>
         <property name="expirationYear" value="01/11/2023"/>
         <property name="cvv" value="891"/>
+    </bean>
+
+    <!-- Offer -->
+
+    <bean id ="offer1" class="domain.Offer">
+        <property name="reader" ref="reader2"/>
+        <property name="moment" value="10/10/2010 10:00"/>
+        <property name="status" value="PENDING"/>
+        <property name="book" ref="book4"/>
+        <property name="comment" value="hola"/>
+        <property name="transaction" ref="transaction2"/>
     </bean>
 
     <!--Complaint-->
@@ -735,6 +747,25 @@
         <property name="isbn" value="978-84-9908-122-9"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
+        <property name="photo" value="http://www.google.com"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book4" class="domain.Book">
+        <property name="title" value="Un mundo sin fin"/>
+        <property name="author" value="Kent Follet"/>
+        <property name="publisher" value="Plaza Janés"/>
+        <property name="language" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1180"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="978-84-9908-122-9"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader2"/>
         <property name="photo" value="http://www.google.com"/>
         <property name="categories">
             <list>

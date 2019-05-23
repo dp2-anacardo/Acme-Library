@@ -33,7 +33,7 @@
         </display:column>
 
         <spring:message code="transaction.offers" var="offers" />
-        <display:column title="${delete}">
+        <display:column title="${offers}">
                 <a href="offer/reader/list.do?transactionId=${row.id}">
                     <spring:message code="transaction.offers" /></a>
         </display:column>
