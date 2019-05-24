@@ -652,6 +652,11 @@
         <property name="seller" ref="reader1"/>
         <property name="buyer" ref="reader2"/>
         <property name="book" ref="book1"/>
+        <property name="complaints">
+            <list>
+                <ref bean = "complaint1"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="transaction2" class="domain.Transaction">
