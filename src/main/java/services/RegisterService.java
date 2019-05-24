@@ -44,7 +44,7 @@ public class RegisterService {
     }
 
 
-    public void save(int eventId){
+    public Register save(int eventId){
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("READER"));
@@ -59,12 +59,15 @@ public class RegisterService {
         register.setMoment(new Date());
         Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
         register.setReader(r);
+        Register result = this.registerRepository.save(register);
         Collection<Event> events = this.getEventsPerReader(r);
         Assert.isTrue(events.contains(event) == false);
 
         Collection<Register> registers = event.getRegisters();
-        registers.add(register);
+        registers.add(result);
         event.setRegisters(registers);
+
+        return result;
     }
 
     public void cancel(int registerId, int eventId){

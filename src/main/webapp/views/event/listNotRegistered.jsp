@@ -39,6 +39,11 @@
             </a>
         </display:column>
 
+        <security:authorize access="hasRole('READER')">
+            <display:column>
+                <acme:cancel code="event.checkIn" url="register/reader/checkIn.do?eventId=${row.id}"/>
+            </display:column>
+        </security:authorize>
         <acme:cancel code="event.back" url="/"/>
 
     </display:table>
