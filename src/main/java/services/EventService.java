@@ -5,10 +5,13 @@ import domain.Organizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.EventRepository;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import java.util.Collection;
 
 @Service
@@ -23,6 +26,9 @@ public class EventService {
 
     @Autowired
     private OrganizerService    organizerService;
+
+    @Autowired
+    private Validator validator;
 
     public Event create(){
         UserAccount userAccount;
@@ -61,6 +67,7 @@ public class EventService {
             Organizer o = this.organizerService.findOne(id);
             e.setOrganizer(o);
         }
+        Assert.isTrue(e.getOrganizer().getId() == this.actorService.getActorLogged().getId());
         res = this.eventRepository.save(e);
         return res;
     }
@@ -102,8 +109,32 @@ public class EventService {
         Assert.notNull(e);
         Assert.isTrue(e.getId() != 0);
         Assert.isTrue(e.getIsFinal() == false);
+        Assert.isTrue(e.getOrganizer().getId() == this.actorService.getActorLogged().getId());
 
         this.eventRepository.delete(e);
+    }
+
+    public Event reconstruct(Event event, BindingResult binding){
+        Event result;
+        if (event.getId() == 0){
+            result = this.create();
+        } else{
+            result = this.eventRepository.findOne(event.getId());
+
+        }
+        result.setTitle(event.getTitle());
+        result.setDescription(event.getDescription());
+        result.setDate(event.getDate());
+        result.setAddress(event.getAddress());
+        result.setMaximumCapacity(event.getMaximumCapacity());
+        result.setRegisters(event.getRegisters());
+
+        validator.validate(result, binding);
+
+        if (binding.hasErrors()){
+            throw new ValidationException();
+        }
+        return result;
     }
 
     public Collection<Event> findAllInFinal(){
