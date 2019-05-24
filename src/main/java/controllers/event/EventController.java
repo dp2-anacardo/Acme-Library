@@ -6,6 +6,7 @@ import domain.Register;
 import org.hibernate.metamodel.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,19 @@ public class EventController extends AbstractController {
         return result;
     }
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView listNotRegitered(){
+        ModelAndView result;
+
+        Collection<Event> events = this.eventService.getFutureEventsFinal();
+
+        result = new ModelAndView("event/list");
+        result.addObject("events", events);
+        result.addObject("requestURI", "event/list.do");
+
+        return result;
+    }
+
     @RequestMapping(value = "/organizer/show", method = RequestMethod.GET)
     public ModelAndView show(@RequestParam int eventId){
         ModelAndView result;
@@ -58,6 +72,26 @@ public class EventController extends AbstractController {
             result.addObject("event", event);
             result.addObject("registers", registers);
             result.addObject("requestURI", "event/organizer/show.do");
+        } catch (Throwable oops){
+            result = new ModelAndView("redirect:/");
+        }
+        return result;
+    }
+
+    @RequestMapping(value="/show", method = RequestMethod.GET)
+    public ModelAndView showNotRegistered(@RequestParam int eventId){
+        ModelAndView result;
+        Collection<Event> events;
+        Event event;
+
+        try{
+            event = this.eventService.findOne(eventId);
+            events = this.eventService.getFutureEventsFinal();
+            Assert.isTrue(event.getIsFinal());
+            Assert.isTrue(events.contains(event));
+
+            result = new ModelAndView("event/show");
+            result.addObject("event", event);
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/");
         }
