@@ -44,6 +44,7 @@
 		<value>/views/finder/tiles.xml</value>
 		<value>/views/offer/tiles.xml</value>
 		<value>/views/event/tiles.xml</value>
+		<value>/views/register/tiles.xml</value>
 	</util:list>
 
 </beans>

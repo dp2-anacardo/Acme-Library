@@ -10,6 +10,7 @@ import repositories.RegisterRepository;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -58,6 +59,8 @@ public class RegisterService {
         register.setMoment(new Date());
         Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
         register.setReader(r);
+        Collection<Event> events = this.getEventsPerReader(r);
+        Assert.isTrue(events.contains(event) == false);
 
         Collection<Register> registers = event.getRegisters();
         registers.add(register);
@@ -75,6 +78,11 @@ public class RegisterService {
         Register register = this.registerRepository.findOne(registerId);
         Assert.notNull(register);
 
+        Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
+        Collection<Event> events = this.getEventsPerReader(r);
+        Assert.isTrue(events.contains(event));
+
+
         Date now = new Date();
         Assert.isTrue(now.before(register.getMoment()));
 
@@ -84,11 +92,11 @@ public class RegisterService {
         event.setRegisters(registers);
     }
 
-    public void delete(final int registerId){
-        this.registerRepository.delete(registerId);
-    }
+   public Collection<Event> getEventsPerReader(Reader reader){
+        Collection<Event> res;
+        res = this.registerRepository.getEventsPerReader(reader);
+        Assert.notNull(res);
+        return res;
+   }
 
-    public Collection<Register> getRegistersByReader(final int readerId){
-        return this.registerRepository.getRegistersByReader(readerId);
-    }
 }
