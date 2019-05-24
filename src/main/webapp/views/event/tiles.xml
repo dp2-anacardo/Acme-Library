@@ -26,5 +26,14 @@
 		<put-attribute name="body" value="/views/event/show.jsp" />
 	</definition>
 
+	<definition name="event/organizer/create" extends="master.page">
+		<put-attribute name="title" value="Edit" />
+		<put-attribute name="body" value="/views/event/edit.jsp" />
+	</definition>
+
+	<definition name="event/organizer/edit" extends="master.page">
+		<put-attribute name="title" value="Edit" />
+		<put-attribute name="body" value="/views/event/edit.jsp" />
+	</definition>
 
 </tiles-definitions>
