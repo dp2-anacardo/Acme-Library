@@ -45,6 +45,7 @@
 					<li><a href="complaint/reader/list.do"><spring:message code="master.page.reader.listComplaints" /></a></li>
 					<li><a href="book/reader/list.do"><spring:message code="master.page.reader.listBooks" /></a></li>
 					<li><a href="offer/reader/listB.do"><spring:message code="master.page.reader.offersMade" /></a></li>
+					<li><a href="register/reader/list.do"><spring:message code="master.page.reader.registers" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.finder" /></a>
