@@ -154,6 +154,7 @@ public class ComplaintController extends AbstractController {
             Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
             Assert.isTrue(transaction.getBuyer().equals(reader) ||
                     transaction.getSeller().equals(reader));
+            Assert.isTrue(transaction.getIsFinished());
 
             complaint = this.complaintService.create();
 

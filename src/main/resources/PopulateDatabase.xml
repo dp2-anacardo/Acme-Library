@@ -655,6 +655,12 @@
         <property name="isFinished" value="true"/>
         <property name="offers">
             <list>
+                <ref bean="offer1"/>
+            </list>
+        </property>
+        <property name="complaints">
+            <list>
+                <ref bean = "complaint1"/>
             </list>
         </property>
     </bean>
