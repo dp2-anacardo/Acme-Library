@@ -103,9 +103,15 @@ public class OfferService {
         this.offerRepository.delete(o);
     }
 
-
     public Collection<Offer> getOffersByReader(){
         Reader r = this.readerService.findOne(actorService.getActorLogged().getId());
         return this.offerRepository.getOffersByReader(r);
+    }
+    public void delete2(Offer o){
+        this.offerRepository.delete(o);
+    }
+
+    public Collection<Offer> getAllByReader(final int readerId){
+        return this.offerRepository.getAllByReader(readerId);
     }
 }

@@ -150,10 +150,24 @@ public class EventService {
         return this.eventRepository.getFutureEventsFinal();
     }
 
-    public Collection<Event> getEventsPerOrOrganizer(int organizerId){
+    public Collection<Event> getEventsPerOrOrganizer(int organizerId) {
         Collection<Event> res;
         res = this.eventRepository.getEventsPerOrOrganizer(organizerId);
         Assert.notNull(res);
         return res;
+    }
+    public void deleteForced(Event e){
+        UserAccount userAccount;
+        userAccount = this.actorService.getActorLogged().getUserAccount();
+        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
+
+        Assert.notNull(e);
+        Assert.isTrue(e.getId() != 0);
+
+        this.eventRepository.delete(e);
+    }
+
+    public Event findByRegister(final int registerId){
+        return this.eventRepository.findByRegister(registerId);
     }
 }

@@ -162,11 +162,11 @@ public class FinderService {
         return result;
     }
 
-    public Collection<Finder> findAllByBook(final int bookId){
+    public Collection<Finder> findAllByTransaction(final int transactionId){
 
         Collection<Finder> result;
 
-        result = this.finderRepository.findAllByTransaction(bookId);
+        result = this.finderRepository.findAllByTransaction(transactionId);
 
         return result;
     }

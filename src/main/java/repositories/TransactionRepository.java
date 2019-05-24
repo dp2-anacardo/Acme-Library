@@ -5,7 +5,6 @@ import domain.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import services.TransactionService;
 
 import java.util.Collection;
 
@@ -29,5 +28,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     @Query("select t from Transaction t where t.isFinished=FALSE")
     Collection<Transaction> findAllNotFinished();
+
+    @Query("select t from Transaction t join t.complaints c where c.id=?1")
+    Transaction getTransactionByComplaint(final int complaintId);
+
+    @Query("select t from Transaction t where t.isSale = false and t.seller.id =?1")
+    Collection<Transaction> getExchangesByReader(final int readerId);
 
 }
