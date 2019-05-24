@@ -62,7 +62,7 @@ public class RegisterController extends AbstractController {
     public ModelAndView delete(@RequestParam int registerId, @RequestParam int eventId){
         ModelAndView result;
         try{
-            this.registerService.delete(registerId, eventId);
+            this.registerService.cancel(registerId, eventId);
             result = new ModelAndView("redirect:list.do");
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/");

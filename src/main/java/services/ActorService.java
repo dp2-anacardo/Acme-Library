@@ -268,7 +268,7 @@ public class ActorService {
                 this.complaintService.delete(c.getId());
             }
 
-            Collection<Register> registers = this.registerService.getRegistersByReader(reader.getId());
+            Collection<Register> registers = this.registerService.getRegistersPerReader(reader.getId());
             if (registers.size() > 0) {
                 for (final Register r : registers) {
                     Event e = this.eventService.findByRegister(r.getId());

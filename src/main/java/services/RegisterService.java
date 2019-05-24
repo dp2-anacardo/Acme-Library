@@ -67,7 +67,7 @@ public class RegisterService {
         event.setRegisters(registers);
     }
 
-    public void delete(int registerId, int eventId){
+    public void cancel(int registerId, int eventId){
         UserAccount userAccount;
         userAccount = this.actorService.getActorLogged().getUserAccount();
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("READER"));
@@ -92,11 +92,20 @@ public class RegisterService {
         event.setRegisters(registers);
     }
 
+    public void delete(final int registerId){
+        this.registerRepository.delete(registerId);
+    }
+
    public Collection<Event> getEventsPerReader(Reader reader){
         Collection<Event> res;
         res = this.registerRepository.getEventsPerReader(reader);
         Assert.notNull(res);
         return res;
    }
+
+    public Collection<Register> getRegistersPerReader(final int readerId){
+        return this.registerRepository.getRegistersPerReader(readerId);
+    }
+
 
 }
