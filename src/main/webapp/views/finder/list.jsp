@@ -33,20 +33,13 @@
 
 		<spring:message code="transaction.price" var="price" />
         <display:column title="${price}">
-		<jstl:if test="${row.isSale = true}">
+		<jstl:if test="${row.isSale == true}">
             <jstl:out value="${row.price}"></jstl:out>
 		</jstl:if>
         </display:column>
 
 		<display:column>
-			<jstl:choose>
-				<jstl:when test="${row.isSale = true}">
-                    <acme:cancel url="/transaction/reader/showSaleR.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
-				</jstl:when>
-				<jstl:otherwise>
-                    <acme:cancel url="/transaction/reader/showExchangeR.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
-				</jstl:otherwise>
-			</jstl:choose>
+            <acme:cancel url="/transaction/reader/showNotRegistered.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
 		</display:column>
 
 	</display:table>

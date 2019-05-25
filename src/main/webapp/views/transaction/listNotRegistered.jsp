@@ -14,7 +14,7 @@
 
         <spring:message code="transaction.show" var="show" />
         <display:column title="${show}">
-            <a href="transaction/show.do?transactionId=${row.id}">
+            <a href="transaction/showNotRegistered.do?transactionId=${row.id}">
                 <spring:message code="transaction.show" /></a>
         </display:column>
 
