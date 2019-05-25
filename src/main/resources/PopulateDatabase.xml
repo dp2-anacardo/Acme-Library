@@ -705,6 +705,23 @@
         <property name="reader" ref="reader2"/>
     </bean>
 
+    <bean id="complaint2" class="domain.Complaint">
+        <property name="ticker" value="123456-HOALS"/>
+        <property name="moment" value="15/10/2010 10:00"/>
+        <property name="body" value="test"/>
+        <property name="reader" ref="reader1"/>
+        <property name="referee" ref="referee1"/>
+    </bean>
+
+    <!--Reports-->
+
+    <bean id="report1" class="domain.Report">
+        <property name="moment" value="16/10/2010 10:00"/>
+        <property name="description" value="test"/>
+        <property name="complaint" ref="complaint2"/>
+        <property name="isFinal" value="true"/>
+    </bean>
+
     <!-- Books -->
     <bean id="book1" class="domain.Book">
         <property name="title" value="El mentiroso"/>
