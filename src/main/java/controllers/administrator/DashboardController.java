@@ -1,16 +1,20 @@
 package controllers.administrator;
 
 import controllers.AbstractController;
+import domain.Category;
 import domain.Organizer;
 import domain.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
+import services.CategoryService;
 
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("administrator")
@@ -18,11 +22,17 @@ public class DashboardController extends AbstractController {
 
     @Autowired
     private AdministratorService	administratorService;
+    @Autowired
+    private CategoryService categoryService;
 
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard() {
         final ModelAndView result;
+
+        /* Q1 */
+        String language = LocaleContextHolder.getLocale().getLanguage();
+        List<Object> lists = this.administratorService.getNumberOfSoldBooksByCategory(language);
 
         /* Q2 */
         Collection<Organizer> Top5OrganizersWithMoreEvents = this.administratorService.getTop5OrganizersWithMoreEvents();
@@ -68,6 +78,11 @@ public class DashboardController extends AbstractController {
 
         result = new ModelAndView("administrator/dashboard");
 
+        /* Q1 */
+        result.addObject("categories",lists.get(1));
+        result.addObject("numberOfSoldBooksByCategory",lists.get(0));
+
+        /* Q2 */
         result.addObject("Top5OrganizersWithMoreEvents", Top5OrganizersWithMoreEvents);
 
         /* Q3 */

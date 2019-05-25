@@ -49,6 +49,8 @@ public class AdministratorService {
     @Autowired
     private BookService bookService;
     @Autowired
+    private CategoryService categoryService;
+    @Autowired
     private Validator validator;
 
 
@@ -424,9 +426,7 @@ public class AdministratorService {
         List<Reader> o = (List<Reader>) this.administratorRepository.getReadersWithMoreComplaints();
         Collection<Reader> result = new ArrayList<>();
         if(o.size()>5){
-            for(int i=0; i<5; i++){
-                result.add(o.get(i));
-            }
+            result = o.subList(0,5);
         } else result = o;
         return result;
     }
@@ -434,6 +434,26 @@ public class AdministratorService {
     //Q13
     public Double getRatioOfSalesVSExchangesByReader() {
         return this.administratorRepository.getRatioOfSalesVSExchangesByReader();
+    }
+
+    //Q1
+    public List<Object> getNumberOfSoldBooksByCategory(String language){
+        List<Double> result = new ArrayList<Double>();
+        Collection<Category> categories = this.categoryService.findAll();
+        List<String> names = new ArrayList<String>();
+        List<Object> lists = new ArrayList<Object>();
+
+        for (Category c: categories){
+            result.add(this.administratorRepository.getNumberOfSoldBooksByCategory(c));
+            if(language.equals("es")){
+                names.add(c.getNameEs());
+            }else{
+                names.add(c.getNameEn());
+            }
+        }
+        lists.add(result);
+        lists.add(names);
+        return lists;
     }
 
 }

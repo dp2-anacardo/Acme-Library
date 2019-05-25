@@ -95,4 +95,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     /*Q13*/
     @Query("select (count(t1)*100.0)/(select count(t2) from Transaction t2 where t2.isSale = FALSE) from Transaction t1 where t1.isSale = TRUE")
     Double getRatioOfSalesVSExchangesByReader();
+
+    @Query("select count(t) from Transaction t join t.book.categories c where t.isSale=true and t.isFinished= true and ?1 IN c")
+    Double getNumberOfSoldBooksByCategory(Category category);
 }
