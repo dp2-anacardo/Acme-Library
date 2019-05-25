@@ -99,10 +99,10 @@ public class TransactionService {
             final Message message = this.messageService.create();
             final Collection<Actor> recipients = new ArrayList<Actor>();
             recipients.add(t.getSeller());
-            recipients.add(t.getBuyer());
             message.setRecipients(recipients);
-            message.setSubject("Mensaje de compra/venta");
-            message.setBody("Mensaje de compra/venta");
+            message.setSubject("Your book has been sold. \n Tu libro ha sido vendido.");
+            message.setBody("Your book: "+t.getBook().getTitle()+" has been sold. \n Tu libro: "+t.getBook().getTitle()+
+                    " ha sido vendido.");
             this.messageService.notification(message);
         }
         Transaction result = this.transactionRepository.save(t);

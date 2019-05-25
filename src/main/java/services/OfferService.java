@@ -94,11 +94,11 @@ public class OfferService {
 
         final Message message = this.messageService.create();
         final Collection<Actor> recipients = new ArrayList<Actor>();
-        recipients.add(o.getTransaction().getSeller());
         recipients.add(o.getReader());
         message.setRecipients(recipients);
-        message.setSubject("Mensaje de intercambio");
-        message.setBody("Mensaje de intercambio");
+        message.setSubject("Your offer has been accepted. \n Tu libro oferta ha sido aceptada.");
+        message.setBody("Your offer for the book: "+o.getTransaction().getBook().getTitle()+" has been accepted. \n Tu oferta por el libro: "+o.getTransaction().getBook().getTitle()+
+                " ha sido aceptada.");
         this.messageService.notification(message);
         return result;
     }
