@@ -1,8 +1,6 @@
 package services;
 
-import domain.Offer;
-import domain.Reader;
-import domain.Transaction;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +29,8 @@ public class TransactionService {
     private ReaderService readerService;
     @Autowired
     private OfferService offerService;
+    @Autowired
+    private MessageService messageService;
     @Autowired
     private ConfigurationService configurationService;
     @Autowired
@@ -96,6 +96,14 @@ public class TransactionService {
             t.setIsFinished(false);
         } else {
             t.setIsFinished(true);
+            final Message message = this.messageService.create();
+            final Collection<Actor> recipients = new ArrayList<Actor>();
+            recipients.add(t.getSeller());
+            recipients.add(t.getBuyer());
+            message.setRecipients(recipients);
+            message.setSubject("Mensaje de compra/venta");
+            message.setBody("Mensaje de compra/venta");
+            this.messageService.notification(message);
         }
         Transaction result = this.transactionRepository.save(t);
         return result;

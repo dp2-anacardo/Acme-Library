@@ -103,7 +103,7 @@ public class MessageService {
         return result;
     }
 
-    public Message broadcast(final Message message){
+    public Message broadcast(final Message message) {
         final Message result;
 
         final Collection<Actor> recipients = message.getRecipients();
@@ -122,30 +122,23 @@ public class MessageService {
         return result;
     }
 
-    public Message notification(){
-        //            final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
-//            final String dropoutBrotherhood = "Drop out brotherhood \n Salida de fraternidad";
-//            final String acceptedRequest = "A request changed its status \n Una petición ha cambiado su estatus";
-//            final String sponsorshipFee = "A sponsorship has been shown \n Se ha mostrado un anuncio";
-//            final Integer actors = this.actorService.findAll().size();
-//
-//            if (message.getSubject().equals(sponsorshipFee) || message.getSubject().equals(acceptedRequest) || message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)
-//                    || (message.getRecipients().size() == actors)) {
-//
-//                final Collection<Actor> recipients = message.getRecipients();
-//                Assert.notNull(recipients);
-//                Assert.notEmpty(recipients);
-//
-//                for (final Actor recipient : recipients)
-//                    message.getMessageBoxes().add(recipient.getMessageBox("NOTIFICATIONBOX"));
-//
-//                result = this.messageRepository.save(message);
-//
-//                for (final Actor recipient : recipients)
-//                    recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
-//
-//            } else {
-        return null;
+    public Message notification(final Message message) {
+
+        final Message result;
+        final Collection<Actor> recipients = message.getRecipients();
+
+        message.getTags().add("NOTIFICATION");
+        message.setPriority("HIGH");
+
+        for (final Actor recipient : recipients)
+            message.getMessageBoxes().add(recipient.getMessageBox("NOTIFICATIONBOX"));
+
+        result = this.messageRepository.save(message);
+
+        for (final Actor recipient : recipients)
+            recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
+
+        return result;
     }
 
     public void delete(final Message message, final MessageBox srcMessageBox) {
@@ -294,7 +287,7 @@ public class MessageService {
         return result;
     }
 
-    public Collection<Message> findAllReceivedByActor (final int actorID){
+    public Collection<Message> findAllReceivedByActor(final int actorID) {
         Collection<Message> result = this.messageRepository.findAllReceivedByActor(actorID);
         return result;
     }
