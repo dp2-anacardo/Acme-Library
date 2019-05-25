@@ -33,6 +33,9 @@ public class CommentController extends AbstractController {
     @Autowired
     private ReaderService readerService;
 
+    @Autowired
+    private TransactionService transactionService;
+
     @ExceptionHandler(BindException.class)
     public ModelAndView handleMismatchException(final BindException oops) {
         return new ModelAndView("redirect:/");
@@ -55,7 +58,8 @@ public class CommentController extends AbstractController {
                 Assert.isTrue(report.getComplaint().getReferee().equals(referee));
             }else {
                 Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
-                Assert.isTrue(report.getComplaint().getReader().equals(reader));
+                Transaction transaction = this.transactionService.getTransactionByComplaint(report.getComplaint().getId());
+                Assert.isTrue(transaction.getBuyer().equals(reader) || transaction.getSeller().equals(reader));
             }
             comments = report.getComments();
         } catch (Throwable oops){
@@ -88,7 +92,8 @@ public class CommentController extends AbstractController {
                 Assert.isTrue(report.getComplaint().getReferee().equals(referee));
             }else {
                 Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
-                Assert.isTrue(report.getComplaint().getReader().equals(reader));
+                Transaction transaction = this.transactionService.getTransactionByComplaint(report.getComplaint().getId());
+                Assert.isTrue(transaction.getBuyer().equals(reader) || transaction.getSeller().equals(reader));
             }
             comment = this.commentService.create();
             result = new ModelAndView("comment/create");

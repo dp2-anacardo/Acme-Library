@@ -791,7 +791,7 @@
 
     <bean id="complaint2" class="domain.Complaint">
         <property name="ticker" value="123456-HOALS"/>
-        <property name="moment" value="15/10/2010 10:00"/>
+        <property name="moment" value="15/10/2010 12:00"/>
         <property name="body" value="test"/>
         <property name="reader" ref="reader1"/>
         <property name="referee" ref="referee1"/>
