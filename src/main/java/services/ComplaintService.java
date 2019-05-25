@@ -66,7 +66,7 @@ public class ComplaintService {
         Complaint result;
         Transaction transaction = this.transactionService.findOne(transactionId);
         Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
-        Assert.isTrue(transaction.getSeller().equals(reader));
+        Assert.isTrue(transaction.getSeller().equals(reader) || transaction.getBuyer().equals(reader));
         Assert.isTrue(transaction.getIsFinished());
 
         result = this.complaintRepository.save(complaint);
