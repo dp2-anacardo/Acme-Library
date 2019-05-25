@@ -75,11 +75,9 @@ public class BookController extends AbstractController {
             Assert.notNull(book);
             Collection<Category> categories = this.categoryService.findAll();
             Assert.notNull(categories);
-            final String language = LocaleContextHolder.getLocale().getLanguage();
             result = new ModelAndView("book/reader/edit");
             result.addObject("book", book);
             result.addObject("categories", categories);
-            result.addObject("lang", language);
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/");
         }

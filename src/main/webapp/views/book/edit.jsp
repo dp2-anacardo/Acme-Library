@@ -26,19 +26,34 @@
 
         <acme:textbox code="book.pageNumber" path="pageNumber" />
 
+        <%--
         <acme:textbox code="book.status" path="status" placeholder="VERY GOOD, GOOD, BAD or VERY BAD" />
+        --%>
+
+        <spring:message code="book.status"/>
+        <form:select path="status" multiple="false">
+            <form:option value="VERY GOOD"><spring:message code="book.status.veryGood"/></form:option>
+            <form:option value="GOOD"><spring:message code="book.status.good"/></form:option>
+            <form:option value="BAD"><spring:message code="book.status.bad"/></form:option>
+            <form:option value="VERY BAD"><spring:message code="book.status.veryBad"/></form:option>
+        </form:select>
+        <form:errors class="error" path="status"/>
+        <br>
 
         <acme:textbox code="book.isbn" path="isbn"/>
 
         <acme:textbox code="book.photo" path="photo" />
 
-
         <form:label path="categories">
             <spring:message code="book.categories"/>
         </form:label>
-
         <form:select path="categories">
-            <form:options items="${categories}" itemValue="id" itemLabel="nameEn"/>
+            <jstl:if test="${pageContext.response.locale.language == 'es'}">
+                <form:options items="${categories}" itemValue="id" itemLabel="nameEs"/>
+            </jstl:if>
+            <jstl:if test="${pageContext.response.locale.language == 'en'}">
+                <form:options items="${categories}" itemValue="id" itemLabel="nameEn"/>
+            </jstl:if>
         </form:select>
         <br/>
 
