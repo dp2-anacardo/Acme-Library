@@ -76,7 +76,6 @@ public class ComplaintController extends AbstractController {
     }
 
     //Lista de todas las complaints de un reader
-    //TODO: Hay que coger todas las complaints que esten relacionadas con un reader
     @RequestMapping(value="/reader/list", method = RequestMethod.GET)
     public ModelAndView listReader(){
         ModelAndView result;
