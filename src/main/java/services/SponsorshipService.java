@@ -189,11 +189,9 @@ public class SponsorshipService {
             final Collection<Actor> recipients = new ArrayList<Actor>();
             recipients.add(result.getSponsor());
             message.setRecipients(recipients);
-            message.getTags().add("NOTIFICATION");
-            message.getMessageBoxes().add(result.getSponsor().getMessageBox("NOTIFICATIONBOX"));
             message.setSubject("A sponsorship has been shown \n Se ha mostrado un anuncio");
             message.setBody("Se le cargará un importe de: " + totalAmount + "\n Se le cargará un importe de:" + totalAmount);
-            this.messageService.save(message);
+            this.messageService.notification(message);
         }
 
         return result;

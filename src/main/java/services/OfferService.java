@@ -1,5 +1,7 @@
 package services;
 
+import domain.Actor;
+import domain.Message;
 import domain.Offer;
 import domain.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.validation.Validator;
 import repositories.OfferRepository;
 
 import javax.validation.ValidationException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -24,6 +27,8 @@ public class OfferService {
     //Services
     @Autowired
     private ActorService actorService;
+    @Autowired
+    private MessageService messageService;
     @Autowired
     private ReaderService readerService;
     @Autowired
@@ -86,6 +91,15 @@ public class OfferService {
         o.getTransaction().setIsFinished(true);
         o.setStatus("ACCEPTED");
         Offer result = this.offerRepository.save(o);
+
+        final Message message = this.messageService.create();
+        final Collection<Actor> recipients = new ArrayList<Actor>();
+        recipients.add(o.getReader());
+        message.setRecipients(recipients);
+        message.setSubject("Your offer has been accepted. \n Tu libro oferta ha sido aceptada.");
+        message.setBody("Your offer for the book: "+o.getTransaction().getBook().getTitle()+" has been accepted. \n Tu oferta por el libro: "+o.getTransaction().getBook().getTitle()+
+                " ha sido aceptada.");
+        this.messageService.notification(message);
         return result;
     }
 

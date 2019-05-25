@@ -20,4 +20,9 @@
         <spring:message code="event.organizer"/></a>
 </fieldset>
 
+<jstl:if test="${not empty sponsorshipBanner}">
+    <img src="${sponsorshipBanner}"/>
+</jstl:if>
+<br>
+
     <acme:cancel code="event.back" url="/event/list.do"/>

@@ -3,10 +3,10 @@ package controllers.event;
 import controllers.AbstractController;
 import domain.Event;
 import domain.Register;
+import domain.Sponsorship;
 import org.hibernate.metamodel.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.EventService;
+import services.SponsorshipService;
 
 import java.util.Collection;
 
@@ -28,11 +29,14 @@ public class EventController extends AbstractController {
     @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private SponsorshipService sponsorshipService;
+
 
     @RequestMapping(value = "/organizer/list", method = RequestMethod.GET)
-    public ModelAndView list(){
+    public ModelAndView list() {
         ModelAndView result;
-        try{
+        try {
             int organizerId = this.actorService.getActorLogged().getId();
             Collection<Event> events = this.eventService.getEventsPerOrOrganizer(organizerId);
             Assert.notNull(events);
@@ -40,14 +44,14 @@ public class EventController extends AbstractController {
             result.addObject("events", events);
             result.addObject("requestURI", "event/organizer/list.do");
 
-        }catch (Throwable oops){
+        } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");
         }
         return result;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView listNotRegitered(){
+    public ModelAndView listNotRegitered() {
         ModelAndView result;
 
         Collection<Event> events = this.eventService.getFutureEventsFinal();
@@ -60,9 +64,9 @@ public class EventController extends AbstractController {
     }
 
     @RequestMapping(value = "/organizer/show", method = RequestMethod.GET)
-    public ModelAndView show(@RequestParam int eventId){
+    public ModelAndView show(@RequestParam int eventId) {
         ModelAndView result;
-        try{
+        try {
             int organizerId = this.actorService.getActorLogged().getId();
             Event event = this.eventService.findOne(eventId);
             Assert.notNull(event);
@@ -72,19 +76,19 @@ public class EventController extends AbstractController {
             result.addObject("event", event);
             result.addObject("registers", registers);
             result.addObject("requestURI", "event/organizer/show.do");
-        } catch (Throwable oops){
+        } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");
         }
         return result;
     }
 
-    @RequestMapping(value="/show", method = RequestMethod.GET)
-    public ModelAndView showNotRegistered(@RequestParam int eventId){
+    @RequestMapping(value = "/show", method = RequestMethod.GET)
+    public ModelAndView showNotRegistered(@RequestParam int eventId) {
         ModelAndView result;
         Collection<Event> events;
         Event event;
 
-        try{
+        try {
             event = this.eventService.findOne(eventId);
             events = this.eventService.getFutureEventsFinal();
             Assert.isTrue(event.getIsFinal());
@@ -92,29 +96,35 @@ public class EventController extends AbstractController {
 
             result = new ModelAndView("event/show");
             result.addObject("event", event);
-        } catch (Throwable oops){
+
+            final Sponsorship banner = this.sponsorshipService.showSponsorship(eventId);
+
+            if (banner != null)
+                result.addObject("sponsorshipBanner", banner.getBanner());
+
+        } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");
         }
         return result;
     }
 
     @RequestMapping(value = "/organizer/create", method = RequestMethod.GET)
-    public ModelAndView create(){
+    public ModelAndView create() {
         ModelAndView result;
-        try{
+        try {
             Event event = this.eventService.create();
             result = new ModelAndView("event/organizer/create");
             result.addObject("event", event);
-        } catch (Throwable oops){
+        } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");
         }
         return result;
     }
 
     @RequestMapping(value = "/organizer/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam int eventId){
+    public ModelAndView edit(@RequestParam int eventId) {
         ModelAndView result;
-        try{
+        try {
             Event event;
             event = this.eventService.findOne(eventId);
             Assert.notNull(event);
@@ -122,54 +132,54 @@ public class EventController extends AbstractController {
             int organizerId = this.actorService.getActorLogged().getId();
             Assert.isTrue(event.getOrganizer().getId() == organizerId);
             result = new ModelAndView("event/organizer/edit");
-            result.addObject("event",event);
-        } catch (Throwable oops){
+            result.addObject("event", event);
+        } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");
         }
         return result;
     }
 
     @RequestMapping(value = "/organizer/edit", method = RequestMethod.POST, params = "saveDraft")
-    public ModelAndView saveDraft(Event event, BindingResult binding){
+    public ModelAndView saveDraft(Event event, BindingResult binding) {
         ModelAndView result;
-        try{
+        try {
             Assert.notNull(event);
             event = this.eventService.reconstruct(event, binding);
             event = this.eventService.saveDraft(event);
             result = new ModelAndView("redirect:list.do");
-        }catch (ValidationException e){
+        } catch (ValidationException e) {
             result = this.createEditModelAndView(event, null);
-        } catch (Throwable oops){
+        } catch (Throwable oops) {
             result = this.createEditModelAndView(event, "event.commit.error");
         }
         return result;
     }
 
     @RequestMapping(value = "/organizer/edit", method = RequestMethod.POST, params = "saveFinal")
-    public ModelAndView saveFinal(Event event, BindingResult binding){
+    public ModelAndView saveFinal(Event event, BindingResult binding) {
         ModelAndView result;
-        try{
+        try {
             Assert.notNull(event);
             event = this.eventService.reconstruct(event, binding);
             event = this.eventService.saveFinal(event);
             result = new ModelAndView("redirect:list.do");
-        }catch (ValidationException e){
+        } catch (ValidationException e) {
             result = this.createEditModelAndView(event, null);
-        } catch (Throwable oops){
+        } catch (Throwable oops) {
             result = this.createEditModelAndView(event, "event.commit.error");
         }
         return result;
     }
 
     @RequestMapping(value = "/organizer/delete", method = RequestMethod.GET)
-    public ModelAndView delete(@RequestParam int eventId){
+    public ModelAndView delete(@RequestParam int eventId) {
         ModelAndView result;
-        try{
+        try {
             Event event = this.eventService.findOne(eventId);
             Assert.notNull(event);
             this.eventService.delete(event);
             result = new ModelAndView("redirect:list.do");
-        } catch (Throwable oops){
+        } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");
         }
         return result;
