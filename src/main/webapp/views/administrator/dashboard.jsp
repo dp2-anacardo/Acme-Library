@@ -18,6 +18,41 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
+    <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <spring:message code="administrator.numberOfSoldBooksByCategory" var="histograma"/>
+
+    <canvas id="myChart" width="10" height="2" aria-label="coza"
+    role="img"></canvas>
+
+    <br />
+    <script>
+    var positions = '<jstl:out value="${categories}"/>';
+    console.log(positions);
+    var sillyString = positions.substr(1).slice(0, -1);
+    positions2 = sillyString.split(",");
+    var numberArray = '<jstl:out value="${numberOfSoldBooksByCategory}"/>';
+    console.log(numberArray);
+    var sillyString2 = numberArray.substr(1).slice(0, -1);
+    numberArray2 = sillyString2.split(",").map(Number);
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var label = '<jstl:out value="${histograma}"/>';
+    var myChart = new Chart(ctx, {
+    type : 'bar',
+    data : {
+    labels : positions2,
+    datasets : [
+    {
+    label : label,
+    data : numberArray2,
+    backgroundColor : 'rgba(0, 0, 255, 1)',
+    }
+    ]
+    }
+    });
+    </script>
+
     <b><spring:message code="administrator.Top5OrganizersWithMoreEvents" /></b>
     <jstl:forEach var="x" items="${Top5OrganizersWithMoreEvents}">
         <br>
