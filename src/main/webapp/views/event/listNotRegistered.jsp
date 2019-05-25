@@ -48,3 +48,5 @@
     <acme:cancel code="event.back" url="/"/>
 
 </display:table>
+
+<acme:cancel code="event.back" url="/"/>
