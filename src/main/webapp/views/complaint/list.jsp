@@ -42,8 +42,10 @@
 
     <spring:message code="complaint.reports" var="reports"/>
     <display:column title="${reports}">
+    <jstl:if test="${row.referee != null}">
         <a href="report/reader/list.do?complaintId=${row.id}">
             <spring:message code="complaint.reports"/></a>
+    </jstl:if>
     </display:column>
 
         <spring:message code="complaint.show" var="show"/>
