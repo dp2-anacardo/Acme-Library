@@ -88,6 +88,18 @@
         </property>
     </bean>
 
+    <bean id="userAccount7" class="security.UserAccount">
+        <property name="username" value="referee2"/>
+        <property name="password" value="4f556d5a66f4fe0d058523a7b8e19d91"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="REFEREE"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- Administrator -->
 
     <bean id="admin1" class="domain.Administrator">
@@ -299,6 +311,77 @@
     </bean>
 
     <bean id="trashBoxReferee1" class="domain.MessageBox">
+        <property name="name" value="TRASHBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="referee2" class="domain.Referee">
+        <property name="userAccount" ref="userAccount7"/>
+        <property name="name" value="referee2"/>
+        <property name="surname" value="referee2"/>
+        <property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+        <property name="email" value="referee2@gmail.com"/>
+        <property name="phoneNumber" value="+34 946632244"/>
+        <property name="address" value="Avenida referees"/>
+        <property name="isSuspicious" value="false"/>
+        <property name="isBanned" value="false"/>
+        <property name="score" value="0"/>
+        <property name="socialProfiles">
+            <list>
+            </list>
+        </property>
+        <property name="boxes">
+            <list>
+                <ref bean="inBoxReferee2"/>
+                <ref bean="outBoxReferee2"/>
+                <ref bean="spamBoxReferee2"/>
+                <ref bean="trashBoxReferee2"/>
+                <ref bean="notificationBoxReferee2"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxReferee2" class="domain.MessageBox">
+        <property name="name" value="INBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="notificationBoxReferee2" class="domain.MessageBox">
+        <property name="name" value="NOTIFICATIONBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="outBoxReferee2" class="domain.MessageBox">
+        <property name="name" value="OUTBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxReferee2" class="domain.MessageBox">
+        <property name="name" value="SPAMBOX"/>
+        <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxReferee2" class="domain.MessageBox">
         <property name="name" value="TRASHBOX"/>
         <property name="isSystem" value="true"/>
         <property name="messages">
@@ -661,6 +744,7 @@
         <property name="complaints">
             <list>
                 <ref bean = "complaint1"/>
+                <ref bean ="complaint2"/>
             </list>
         </property>
     </bean>
