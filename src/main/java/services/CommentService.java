@@ -1,9 +1,6 @@
 package services;
 
-import domain.Comment;
-import domain.Reader;
-import domain.Referee;
-import domain.Report;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -38,6 +35,9 @@ public class CommentService {
     @Autowired
     private Validator validator;
 
+    @Autowired
+    private TransactionService transactionService;
+
     public Comment create(){
         Assert.isTrue(actorService.getActorLogged() instanceof Reader
                 || actorService.getActorLogged() instanceof Referee);
@@ -66,7 +66,9 @@ public class CommentService {
             Assert.isTrue(report.getComplaint().getReferee().equals(referee));
         }else{
             Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
-            Assert.isTrue(report.getComplaint().getReader().equals(reader));
+            Transaction transaction = this.transactionService.getTransactionByComplaint(report.getComplaint().getId());
+            Assert.isTrue(transaction.getBuyer().equals(reader) || transaction.getSeller().equals(reader));
+
         }
 
         Comment result = this.commentRepository.save(comment);

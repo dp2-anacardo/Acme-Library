@@ -1,10 +1,7 @@
 package controllers.report;
 
 import controllers.AbstractController;
-import domain.Complaint;
-import domain.Reader;
-import domain.Referee;
-import domain.Report;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -37,6 +34,9 @@ public class ReportController extends AbstractController {
     @Autowired
     private ReaderService readerService;
 
+    @Autowired
+    private TransactionService transactionService;
+
     @ExceptionHandler(BindException.class)
     public ModelAndView handleMismatchException(final BindException oops) {
         return new ModelAndView("redirect:/");
@@ -62,12 +62,12 @@ public class ReportController extends AbstractController {
     public ModelAndView listReader(@RequestParam int complaintId){
         ModelAndView result;
         Collection<Report> reports;
-        Complaint complaint;
+        Transaction transaction;
 
         try {
-            complaint = this.complaintService.findOne(complaintId);
             Reader reader = this.readerService.findOne(actorService.getActorLogged().getId());
-            Assert.isTrue(complaint.getReader().equals(reader));
+            transaction = this.transactionService.getTransactionByComplaint(complaintId);
+            Assert.isTrue(transaction.getBuyer().equals(reader) || transaction.getSeller().equals(reader));
 
             reports = this.reportService.getReportsFinalByComplaint(complaintId);
 
