@@ -581,6 +581,7 @@
         <property name="isSystem" value="true"/>
         <property name="messages">
             <list>
+                <ref bean="message1"/>
             </list>
         </property>
     </bean>
@@ -599,7 +600,6 @@
         <property name="isSystem" value="true"/>
         <property name="messages">
             <list>
-                <ref bean="message1"/>
             </list>
         </property>
     </bean>
@@ -645,6 +645,7 @@
                 <ref bean="spamBoxReader2"/>
                 <ref bean="trashBoxReader2"/>
                 <ref bean="notificationBoxReader2"/>
+                <ref bean="customBoxReader2"/>
             </list>
         </property>
     </bean>
@@ -654,7 +655,6 @@
         <property name="isSystem" value="true"/>
         <property name="messages">
             <list>
-                <ref bean="message1"/>
             </list>
         </property>
     </bean>
@@ -673,6 +673,7 @@
         <property name="isSystem" value="true"/>
         <property name="messages">
             <list>
+                <ref bean="message1"/>
             </list>
         </property>
     </bean>
@@ -689,6 +690,15 @@
     <bean id="trashBoxReader2" class="domain.MessageBox">
         <property name="name" value="TRASHBOX"/>
         <property name="isSystem" value="true"/>
+        <property name="messages">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="customBoxReader2" class="domain.MessageBox">
+        <property name="name" value="Custom Box"/>
+        <property name="isSystem" value="false"/>
         <property name="messages">
             <list>
             </list>
@@ -1117,24 +1127,24 @@
 
 
     <bean id="message1" class="domain.Message">
-        <property name="subject" value="Message 1"/>
-        <property name="body" value="Message 1"/>
+        <property name="subject" value="Message 1 - Spam"/>
+        <property name="body" value="sex nigeria viagra"/>
         <property name="priority" value="LOW"/>
         <property name="moment" value="05/05/2019 19:00"/>
-        <property name="isSpam" value="false"/>
-        <property name="sender" ref="reader1"/>
+        <property name="isSpam" value="true"/>
+        <property name="sender" ref="reader2"/>
         <property name="tags">
                 <list></list>
         </property>
         <property name="recipients">
             <list>
-                <ref bean="reader2"/>
+                <ref bean="reader1"/>
             </list>
         </property>
         <property name="messageBoxes">
             <list>
-                <ref bean="outBoxReader1"/>
-                <ref bean="inBoxReader2"/>
+                <ref bean="outBoxReader2"/>
+                <ref bean="inBoxReader1"/>
             </list>
         </property>
     </bean>

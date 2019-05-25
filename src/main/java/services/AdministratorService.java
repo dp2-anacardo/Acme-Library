@@ -246,14 +246,12 @@ public class AdministratorService {
             final String subject = message.getSubject();
 
             for (final String positiveWord : positiveWords) {
-                System.out.println(positiveWord);
                 if (body.contains(positiveWord)) {
                     positiveWordsValue += 1.0;
                     System.out.println(positiveWordsValue);
                 }
             }
             for (final String negativeWord : negativeWords) {
-                System.out.println(negativeWord);
                 if (body.contains(negativeWord)) {
                     negativeWordsValue += 1.0;
                     System.out.println(negativeWordsValue);
@@ -261,14 +259,12 @@ public class AdministratorService {
             }
 
             for (final String positiveWord : positiveWords) {
-                System.out.println(positiveWord);
                 if (subject.contains(positiveWord)) {
                     positiveWordsValue += 1.0;
                     System.out.println(positiveWordsValue);
                 }
             }
             for (final String negativeWord : negativeWords) {
-                System.out.println(negativeWord);
                 if (subject.contains(negativeWord)) {
                     negativeWordsValue += 1.0;
                     System.out.println(negativeWordsValue);
