@@ -20,7 +20,7 @@
 
         <spring:message code="sponsorship.targetURL" var="targetURL"/>
         <display:column title="${targetURL}">
-            <a href="<%=request.getContextPath()%>/event/show.do?eventId=${row.event.id}">Target URL</a>
+            <a href="event/show.do?eventId=${row.event.id}">Target URL</a>
         </display:column>
 
         <spring:message code="sponsorship.status" var="status" />

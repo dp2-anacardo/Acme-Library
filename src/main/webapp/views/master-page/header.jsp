@@ -24,27 +24,27 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
+					<li><a href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+					<li><a href="administrator/management.do"><spring:message code="master.page.administrator.actorList" /></a></li>
+					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.listCategory" /></a></li>
+					<li><a href="message/administrator/broadcast.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
 					<li><a href="administrator/administrator/create.do"><spring:message code="master.page.administrator.register" /></a></li>
 					<li><a href="administrator/referee/create.do"><spring:message code="master.page.administrator.registerReferee" /></a></li>
-					<li><a href="administrator/management.do"><spring:message code="master.page.administrator.actorList" /></a></li>
-					<li><a href="message/administrator/broadcast.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
-					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.listCategory" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
-			<li><a class="fNiv" href="administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('READER')">
 			<li><a class="fNiv"><spring:message	code="master.page.reader" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="book/reader/list.do"><spring:message code="master.page.reader.listBooks" /></a></li>
 					<li><a href="transaction/reader/listSales.do"><spring:message code="master.page.reader.listSales" /></a></li>
 					<li><a href="transaction/reader/listBuys.do"><spring:message code="master.page.reader.listBuys" /></a></li>
 					<li><a href="transaction/reader/listExchanges.do"><spring:message code="master.page.reader.listExchanges" /></a></li>
-					<li><a href="complaint/reader/list.do"><spring:message code="master.page.reader.listComplaints" /></a></li>
-					<li><a href="book/reader/list.do"><spring:message code="master.page.reader.listBooks" /></a></li>
 					<li><a href="offer/reader/listB.do"><spring:message code="master.page.reader.offersMade" /></a></li>
+					<li><a href="complaint/reader/list.do"><spring:message code="master.page.reader.listComplaints" /></a></li>
 					<li><a href="register/reader/list.do"><spring:message code="master.page.reader.registers" /></a></li>
 				</ul>
 			</li>
@@ -94,10 +94,13 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="transaction/listSales.do"><spring:message code="master.page.transaction.listSalesNotRegistered" /></a></li>
+			<li><a class="fNiv" href="transaction/listExchanges.do"><spring:message code="master.page.transaction.listExchangesNotRegistered" /></a></li>
+			<li><a class="fNiv" href="event/list.do"><spring:message code="master.page.event.listNotRegistered" /></a></li>
 			<li>
-				<a class="fNiv"> 
-					<spring:message code="master.page.profile" /> 
-			        (<security:authentication property="principal.username" />)
+				<a class="fNiv">
+					<spring:message code="master.page.profile" />
+					(<security:authentication property="principal.username" />)
 				</a>
 				<ul>
 					<li class="arrow"></li>
@@ -106,9 +109,6 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="transaction/listSales.do"><spring:message code="master.page.transaction.listSalesNotRegistered" /></a></li>
-			<li><a class="fNiv" href="transaction/listExchanges.do"><spring:message code="master.page.transaction.listExchangesNotRegistered" /></a></li>
-			<li><a class="fNiv" href="event/list.do"><spring:message code="master.page.event.listNotRegistered" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

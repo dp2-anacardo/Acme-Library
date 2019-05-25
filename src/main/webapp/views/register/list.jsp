@@ -29,7 +29,8 @@
             </jstl:forEach>
         </display:column>
 
-        <display:column >
+        <spring:message code="register.delete" var="cancelTitle"/>
+        <display:column title="${cancelTitle}">
             <acme:cancel code="register.delete" url="register/reader/delete.do?registerId=${regId}&eventId=${row.id}"/>
         </display:column>
 

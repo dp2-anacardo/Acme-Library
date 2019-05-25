@@ -36,7 +36,8 @@
 					sortable="true" />
 
 	<!-- Display -->
-	<display:column>
+	<spring:message code="message.display" var="display"/>
+	<display:column title="${display}">
 		<a
 			href="message/display.do?messageID=${row.id}&messageBoxID=${messageBox}">
 			<spring:message code="message.display" />

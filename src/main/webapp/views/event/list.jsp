@@ -41,13 +41,15 @@
             </jstl:if>
         </display:column>
 
-        <display:column>
+        <spring:message code="event.show" var="columTitle"/>
+        <display:column title="${columTitle}">
             <a href="event/organizer/show.do?eventId=${row.id}">
                 <spring:message code="event.show"/>
             </a>
         </display:column>
 
-        <display:column>
+        <spring:message code="event.edit" var="columTitle"/>
+        <display:column title="${columTitle}">
             <jstl:if test="${row.isFinal == false}">
                 <a href="event/organizer/edit.do?eventId=${row.id}">
                     <spring:message code="event.edit"/>

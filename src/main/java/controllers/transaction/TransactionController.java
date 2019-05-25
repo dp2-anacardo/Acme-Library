@@ -211,6 +211,7 @@ public class TransactionController extends AbstractController {
 
         try{
             transaction = this.transactionService.findOne(transactionId);
+            Assert.isTrue(!transaction.getIsFinished());
 
             result = new ModelAndView("transaction/show");
             result.addObject("transaction", transaction);

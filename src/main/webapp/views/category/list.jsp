@@ -26,13 +26,15 @@
             </display:column>
         </jstl:if>
 
-        <display:column>
+        <spring:message code="category.view" var="columnTitle"/>
+        <display:column title="${columnTitle}">
             <a href="category/administrator/show.do?categoryId=${row.id}">
                 <spring:message code="category.view"/>
             </a>
         </display:column>
 
-        <display:column>
+        <spring:message code="category.edit" var="columnTitle"/>
+        <display:column title="${columnTitle}">
             <jstl:if test="${row.nameEn != 'Default'}">
             <a href="category/administrator/edit.do?categoryId=${row.id}">
                 <spring:message code="category.edit"/>
@@ -40,7 +42,8 @@
             </jstl:if>
         </display:column>
 
-        <display:column>
+        <spring:message code="category.delete" var="columnTitle"/>
+        <display:column title="${columnTitle}">
             <jstl:if test="${category.id != 0 and row.nameEn != 'Default'}">
                 <acme:cancel code="category.delete" url="category/administrator/delete.do?categoryId=${row.id}"/>
             </jstl:if>

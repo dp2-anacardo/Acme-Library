@@ -38,7 +38,8 @@
 		</jstl:if>
         </display:column>
 
-		<display:column>
+		<spring:message code="transaction.show" var="show" />
+		<display:column title="${show}">
             <acme:cancel url="/transaction/reader/showNotRegistered.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
 		</display:column>
 

@@ -28,13 +28,15 @@
             <jstl:out value="${row.isbn}"/>
         </display:column>
 
-        <display:column>
+        <spring:message code="book.show" var="showTitle"/>
+        <display:column title="${showTitle}">
             <a href="book/reader/show.do?bookId=${row.id}">
                 <spring:message code="book.show"/>
             </a>
         </display:column>
 
-        <display:column>
+        <spring:message code="book.edit" var="editTitle"/>
+        <display:column title="${editTitle}">
             <a href="book/reader/edit.do?bookId=${row.id}">
                 <spring:message code="book.edit"/>
             </a>
