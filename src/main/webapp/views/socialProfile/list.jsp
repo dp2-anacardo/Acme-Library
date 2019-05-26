@@ -10,12 +10,12 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<security:authorize access="hasAnyRole('ADMIN, COMPANY, ROOKIE')">
+<security:authorize access="hasAnyRole('ADMIN, ORGANIZER, SPONSOR, READER')">
     <display:table pagesize="5" class="socialProfiles" name="socialProfiles" requestURI="${requestURI}" id="row">
 
         <spring:message code="socialProfile.edit" var="editTitle"/>
         <display:column title="${editTitle}">
-            <a href="socialProfile/admin,company,rookie/edit.do?socialProfileId=${row.id}"><spring:message
+            <a href="socialProfile/administrator,organizer,sponsor,reader/edit.do?socialProfileId=${row.id}"><spring:message
                     code="socialProfile.edit"/></a>
         </display:column>
 
@@ -31,7 +31,7 @@
     </display:table>
 
     <input type="button" value="<spring:message code="socialProfile.create" />"
-           onclick="javascript: relativeRedir('socialProfile/admin,company,rookie/create.do');"/>
+           onclick="javascript: relativeRedir('socialProfile/administrator,organizer,sponsor,reader/create.do');"/>
 
 
     <acme:cancel url="profile/myInformation.do" code="messageBox.goBack"/>

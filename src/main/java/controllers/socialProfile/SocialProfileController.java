@@ -19,7 +19,7 @@ import javax.validation.ValidationException;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/socialProfile/admin,company,rookie")
+@RequestMapping("/socialProfile/administrator,organizer,sponsor,reader")
 public class SocialProfileController extends AbstractController {
 
 	@Autowired
@@ -39,9 +39,9 @@ public class SocialProfileController extends AbstractController {
 		final Actor user = this.actorService.getActorLogged();
 		profiles = user.getSocialProfiles();
 
-		result = new ModelAndView("socialProfile/admin,company,rookie/list");
+		result = new ModelAndView("socialProfile/administrator,organizer,sponsor,reader/list");
 		result.addObject("socialProfiles", profiles);
-		result.addObject("requestURI", "socialProfile/admin,company,rookie/list.do");
+		result.addObject("requestURI", "socialProfile/administrator,organizer,sponsor,reader/list.do");
 
 		return result;
 	}
@@ -124,7 +124,7 @@ public class SocialProfileController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final SocialProfile profile, final String messageCode) {
 
 		ModelAndView result;
-		result = new ModelAndView("socialProfile/admin,company,rookie/edit");
+		result = new ModelAndView("socialProfile/administrator,organizer,sponsor,reader/edit");
 		result.addObject("socialProfile", profile);
 		result.addObject("message", messageCode);
 		return result;

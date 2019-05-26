@@ -24,7 +24,7 @@
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 			onclick="javascript: relativeRedir('/administrator/administrator/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
-			onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
+			onclick="javascript: relativeRedir('/socialProfile/administrator,organizer,sponsor,reader/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 		   onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 			
@@ -46,7 +46,7 @@
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 			onclick="javascript: relativeRedir('referee/referee/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
-			onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
+			onclick="javascript: relativeRedir('/socialProfile/administrator,organizer,sponsor,reader/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 		   onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 			
@@ -70,7 +70,7 @@
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 			onclick="javascript: relativeRedir('/sponsor/sponsor/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
-			onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
+			onclick="javascript: relativeRedir('/socialProfile/administrator,organizer,sponsor,reader/list.do');" />
 
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 		   onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
@@ -93,7 +93,7 @@
 	<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 		   onclick="javascript: relativeRedir('/reader/reader/edit.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
-		   onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
+		   onclick="javascript: relativeRedir('/socialProfile/administrator,organizer,sponsor,reader/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 		   onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 
@@ -115,7 +115,7 @@
 	<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 		   onclick="javascript: relativeRedir('/organizer/organizer/edit.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
-		   onclick="javascript: relativeRedir('/socialProfile/admin,company,rookie/list.do');" />
+		   onclick="javascript: relativeRedir('/socialProfile/administrator,organizer,sponsor,reader/list.do');" />
 	<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 		   onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 

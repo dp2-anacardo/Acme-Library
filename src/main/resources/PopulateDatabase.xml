@@ -127,6 +127,7 @@
         <property name="score" value="0"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileAdmin1"/>
             </list>
         </property>
         <property name="boxes">
@@ -199,6 +200,7 @@
         <property name="score" value="0"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileOrganizer1"/>
             </list>
         </property>
         <property name="boxes">
@@ -273,6 +275,7 @@
         <property name="score" value="0"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileReferee1"/>
             </list>
         </property>
         <property name="boxes">
@@ -344,6 +347,7 @@
         <property name="score" value="0"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileReferee2"/>
             </list>
         </property>
         <property name="boxes">
@@ -418,6 +422,7 @@
         <property name="score" value="0"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileSponsor1"/>
             </list>
         </property>
         <property name="boxes">
@@ -489,6 +494,7 @@
         <property name="score" value="0"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileSponsor2"/>
             </list>
         </property>
         <property name="boxes">
@@ -563,6 +569,7 @@
         <property name="finder" ref="finder1"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileReader1"/>
             </list>
         </property>
         <property name="boxes">
@@ -636,6 +643,7 @@
         <property name="finder" ref="finder2"/>
         <property name="socialProfiles">
             <list>
+                <ref bean="socialProfileReader2"/>
             </list>
         </property>
         <property name="boxes">
@@ -1089,6 +1097,56 @@
         <property name="moment" value="22/05/2019 16:47"/>
         <property name="reader" ref="reader1"/>
     </bean>
+
+    <!-- Social Profiles -->
+    <bean id="socialProfileAdmin1" class="domain.SocialProfile">
+        <property name="nick" value="admin1Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileOrganizer1" class="domain.SocialProfile">
+        <property name="nick" value="organizer1Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileReferee1" class="domain.SocialProfile">
+        <property name="nick" value="referee1Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileReferee2" class="domain.SocialProfile">
+        <property name="nick" value="referee2Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileSponsor1" class="domain.SocialProfile">
+        <property name="nick" value="sponsor1Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileSponsor2" class="domain.SocialProfile">
+        <property name="nick" value="sponsor2Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileReader1" class="domain.SocialProfile">
+        <property name="nick" value="reader1Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
+    <bean id="socialProfileReader2" class="domain.SocialProfile">
+        <property name="nick" value="reader2Nick" />
+        <property name="socialNetworkName" value="twitter" />
+        <property name="profileLink" value="http://www.twitter.com" />
+    </bean>
+
 
 
     <!-- Sponsorships -->
