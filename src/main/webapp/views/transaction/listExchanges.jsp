@@ -16,10 +16,10 @@
         <spring:message code="transaction.book" var="book" />
         <display:column property="book.title" title="${book}"/>
 
-        <spring:message code="transaction.delete" var="delete" />
+        <spring:message code="transaction.delete2" var="delete" />
         <display:column title="${delete}">
             <jstl:if test="${row.isFinished == false && row.offers.size() == 0}">
-                <a href="transaction/reader/delete.do?transactionId=${row.id}">
+                <a href="transaction/reader/estoNoVa.do?transactionId=${row.id}">
                     <spring:message code="transaction.delete" /></a>
             </jstl:if>
         </display:column>
