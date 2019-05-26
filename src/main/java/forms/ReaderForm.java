@@ -80,8 +80,6 @@ public class ReaderForm {
 		this.photo = photo;
 	}
 
-	@NotBlank
-	@Email
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getEmail() {
 		return this.email;

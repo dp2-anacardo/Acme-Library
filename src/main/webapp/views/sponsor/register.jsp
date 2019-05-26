@@ -89,7 +89,7 @@
 	
 	
 	 <div class=terms>
-	 <input type="checkbox" required name="terms">
+	 <input type="checkbox" name="terms">
 	 <label for="terms"><spring:message code="terms" /></label>
 	 </div>
 	
