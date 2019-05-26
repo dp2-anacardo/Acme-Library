@@ -29,6 +29,16 @@
     <spring:message code="actor.phoneNumber" var="phoneNumber"/>
     <display:column property="phoneNumber" title="${phoneNumber}"/>
 
+    <spring:message code="actor.score" var="score" />
+    <display:column title="${score}">
+        <jstl:if test="${row.score == null}">
+            <jstl:out value="N/A"></jstl:out>
+        </jstl:if>
+        <jstl:if test="${row.score != null}">
+            <jstl:out value="${row.score}"></jstl:out>
+        </jstl:if>
+    </display:column>
+
     <spring:message code="actor.isSpammer" var="isSpammer"/>
     <display:column title="${isSpammer}">
         <jstl:if test="${row.isSuspicious == null}">
@@ -39,17 +49,17 @@
         </jstl:if>
     </display:column>
 
-    <spring:message code="actor.ban" var="ban"/>
+    <spring:message code="actor.ban" var="ban" />
     <display:column title="${ban}">
         <jstl:if
-                test="${row.isSuspicious == true && row.isBanned == false}">
+                test="${(row.isSuspicious == true || (row.score <= -0.5 )) && row.isBanned == false}">
             <acme:cancel url='administrator/management/ban.do?actorId=${row.id}'
-                         code="administrator.ban"/>
+                         code="administrator.ban" />
         </jstl:if>
         <jstl:if
-                test="${row.isSuspicious == true && row.isBanned == true}">
+                test="${(row.isSuspicious == true || (row.score <= -0.5 )) && row.isBanned == true}">
             <acme:cancel url='administrator/management/unban.do?actorId=${row.id}'
-                         code="administrator.unban"/>
+                         code="administrator.unban" />
         </jstl:if>
     </display:column>
 </display:table>
