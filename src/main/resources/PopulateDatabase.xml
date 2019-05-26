@@ -743,7 +743,7 @@
         <property name="maxResults" value="10"/>
         <property name="maxTime" value="1"/>
         <property name="systemName" value="Acme Library"/>
-        <property name="banner" value="https://i.imgur.com/TslDk56.png"/>
+        <property name="banner" value="https://tinyurl.com/acme-library"/>
         <property name="welcomeMessageEs"
                   value="¡Bienvenidos a Acme Biblioteca! Tu sitio para vender libros."/>
         <property name="welcomeMessageEn"
