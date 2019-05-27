@@ -46,7 +46,6 @@ public class Message extends DomainEntity {
         this.moment = moment;
     }
 
-    @NotBlank
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getSubject() {
         return this.subject;
@@ -57,7 +56,6 @@ public class Message extends DomainEntity {
     }
 
     @NotBlank
-    @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getBody() {
         return this.body;
     }

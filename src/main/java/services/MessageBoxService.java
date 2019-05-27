@@ -69,7 +69,6 @@ public class MessageBoxService {
             result = this.messageBoxRepository.save(messageBox);
             actor.getBoxes().add(result);
         } else {
-            Assert.isTrue(messageBox.getIsSystem() == false);
             result = this.messageBoxRepository.save(messageBox);
         }
         return result;
@@ -78,7 +77,6 @@ public class MessageBoxService {
     public MessageBox update(final MessageBox messageBox) {
         Assert.notNull(messageBox);
         Assert.isTrue(this.actorService.getActorLogged().getBoxes().contains(messageBox));
-        Assert.isTrue(messageBox.getIsSystem() == false);
 
         return this.messageBoxRepository.save(messageBox);
     }
