@@ -1186,7 +1186,7 @@
 
     <bean id="message1" class="domain.Message">
         <property name="subject" value="Message 1 - Spam"/>
-        <property name="body" value="sex nigeria viagra"/>
+        <property name="body" value="sex nigeria viagra bad disaster no"/>
         <property name="priority" value="LOW"/>
         <property name="moment" value="05/05/2019 19:00"/>
         <property name="isSpam" value="true"/>
