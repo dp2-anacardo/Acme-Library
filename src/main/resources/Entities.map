@@ -1,5 +1,9 @@
 #./src/main/resources/Entities.map
+<<<<<<< HEAD
 #Mon May 27 00:55:51 CEST 2019
+=======
+#Mon May 27 13:04:02 CEST 2019
+>>>>>>> 38a137e4b121a867cc7468212c91105d186681ee
 notificationBoxReader1=1214
 inBoxReferee2=1196
 inBoxReferee1=1190

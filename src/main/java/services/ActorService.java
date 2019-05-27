@@ -303,17 +303,20 @@ public class ActorService {
 
 //            Borra las transacciones de compra del reader, pero no sé si es necesario,
 //            ya que al estar en finalizada tampoco debería pasar nada.
-//            Collection<Transaction> buysByReader = this.transactionService.getBuysByReader();
-//            for (Transaction tb : buysByReader)
-//                this.transactionService.delete3(tb);
+            Collection<Transaction> buysByReader = this.transactionService.getBuysByReader();
+            for (Transaction tb : buysByReader)
+                this.transactionService.updateDelete(tb);
+
 
             // Borra las transacciones de intercambio del reader, se borran todas las ofertas.
             Collection<Transaction> exchangesByReader = this.transactionService.getExchangesByReader();
             for (Transaction te : exchangesByReader) {
-                for (Offer oe : te.getOffers()) {
-                    te.getOffers().remove(oe);
-                    this.offerService.delete(oe);
+                final Collection<Offer> offers = te.getOffers();
+                te.setOffers(new ArrayList<Offer>());
+                for (final Offer oe : offers) {
+                    this.offerService.deleteForce(oe);
                 }
+                te.setBuyer(null);
                 if (!te.getIsFinished()) {
                     Collection<Finder> finders = this.finderService.findAllByTransaction(te.getId());
                     for (Finder f : finders)

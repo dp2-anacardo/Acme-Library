@@ -146,6 +146,11 @@ public class TransactionService {
         this.transactionRepository.delete(t);
     }
 
+    public void updateDelete(Transaction t){
+        t.setBuyer(null);
+        this.transactionRepository.save(t);
+    }
+
     private String tickerGenerator() {
         String dateRes = "";
         String numericRes = "";
