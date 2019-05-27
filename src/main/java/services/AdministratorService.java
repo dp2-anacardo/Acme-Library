@@ -248,26 +248,22 @@ public class AdministratorService {
             for (final String positiveWord : positiveWords) {
                 if (body.contains(positiveWord)) {
                     positiveWordsValue += 1.0;
-                    System.out.println(positiveWordsValue);
                 }
             }
             for (final String negativeWord : negativeWords) {
                 if (body.contains(negativeWord)) {
                     negativeWordsValue += 1.0;
-                    System.out.println(negativeWordsValue);
                 }
             }
 
             for (final String positiveWord : positiveWords) {
                 if (subject.contains(positiveWord)) {
                     positiveWordsValue += 1.0;
-                    System.out.println(positiveWordsValue);
                 }
             }
             for (final String negativeWord : negativeWords) {
                 if (subject.contains(negativeWord)) {
                     negativeWordsValue += 1.0;
-                    System.out.println(negativeWordsValue);
                 }
             }
         }

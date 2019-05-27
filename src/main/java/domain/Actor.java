@@ -84,7 +84,7 @@ public abstract class Actor extends DomainEntity {
         return this.isSuspicious;
     }
 
-    @Range(min = 0, max = 1)
+    @Range(min = -1, max = 1)
     public Double getScore() {
         return this.score;
     }
