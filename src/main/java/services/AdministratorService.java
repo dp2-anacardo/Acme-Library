@@ -187,6 +187,7 @@ public class AdministratorService {
         Assert.isTrue(principal instanceof Administrator);
         Assert.isTrue(!actor.getIsBanned());
         Assert.isTrue(actor.getIsSuspicious() || actor.getScore() < -0.5);
+        //Assert.isTrue(actor.getIsSuspicious());
 
         actor.setIsBanned(true);
 

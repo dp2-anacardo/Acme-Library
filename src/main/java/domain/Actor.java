@@ -40,7 +40,6 @@ public abstract class Actor extends DomainEntity {
     @Expose
     private Double score;
 
-    @NotBlank
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getName() {
         return this.name;
@@ -63,8 +62,7 @@ public abstract class Actor extends DomainEntity {
         return this.photo;
     }
 
-    @NotBlank
-    @Email
+
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getEmail() {
         return this.email;

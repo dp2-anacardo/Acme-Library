@@ -46,7 +46,6 @@ public class Complaint extends DomainEntity{
     }
 
     @NotBlank
-    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getBody() {
         return body;
     }

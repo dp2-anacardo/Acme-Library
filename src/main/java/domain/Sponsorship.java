@@ -22,7 +22,6 @@ public class Sponsorship extends DomainEntity {
     private Boolean status;
     private CreditCard creditCard;
 
-    @NotBlank
     @URL
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getBanner() {

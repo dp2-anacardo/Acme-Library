@@ -50,7 +50,8 @@ public class RegisterController extends AbstractController {
         ModelAndView result;
         try{
             this.registerService.save(eventId);
-            result = new ModelAndView("redirect:list.do");
+            //result = new ModelAndView("redirect:list.do");
+            result = new ModelAndView("redirect: /event/list.do");
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/");
         }

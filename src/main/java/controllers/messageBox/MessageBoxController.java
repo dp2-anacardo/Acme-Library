@@ -67,7 +67,6 @@ public class MessageBoxController extends AbstractController {
             final Actor principal = this.actorService.getActorLogged();
             messageBox = this.messageBoxService.findOne(messageBoxID);
             Assert.isTrue(principal.getBoxes().contains(messageBox));
-            Assert.isTrue(messageBox.getIsSystem() == false);
             result = this.createEditModelAndView(messageBox);
         } catch (final Throwable oops) {
             result = new ModelAndView("redirect:/");
@@ -87,7 +86,6 @@ public class MessageBoxController extends AbstractController {
             if (messageBox.getId() != 0) {
                 security = this.messageBoxService.findOne(messageBox.getId());
                 Assert.isTrue(principal.getBoxes().contains(security));
-                Assert.isTrue(security.getIsSystem() == false);
             }
             msgBox = this.messageBoxService.reconstruct(messageBox, binding);
             this.messageBoxService.save(msgBox);
