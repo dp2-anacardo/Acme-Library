@@ -941,7 +941,7 @@
         <property name="isbn" value="9788490663196"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
-        <property name="photo" value="http://www.google.com"/>
+        <property name="photo" value="https://imagessl6.casadellibro.com/a/l/t5/96/9788490663196.jpg"/>
         <property name="categories">
             <list>
                 <ref bean="category1"/>
@@ -960,7 +960,7 @@
         <property name="isbn" value="978-84-9908-122-9"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader1"/>
-        <property name="photo" value="http://www.google.com"/>
+        <property name="photo" value="https://imagessl0.casadellibro.com/a/l/t5/60/9788401336560.jpg"/>
         <property name="categories">
             <list>
                 <ref bean="category1"/>
