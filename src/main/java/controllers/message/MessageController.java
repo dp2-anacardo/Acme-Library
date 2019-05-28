@@ -53,7 +53,7 @@ public class MessageController extends AbstractController {
                     //From the database 'element' will be a Long
                     id = (Integer) element;
 
-                return id != null ? MessageController.this.actorService.findOne(id) : null;
+                return id != null ? MessageController.this.actorService.findOne(id) : 0;
             }
         });
     }

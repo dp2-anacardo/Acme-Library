@@ -7,18 +7,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
-public class StringToDoubleConverter implements Converter<String,Double> {
+public class StringToIntegerConverter implements Converter<String,Integer> {
     @Override
-    public Double convert(final String text) {
-        Double result;
+    public Integer convert(final String text) {
+        Integer result;
         try {
             if (StringUtils.isEmpty(text))
                 result = null;
             else
-                result = Double.parseDouble(text);
+                result = Integer.valueOf(text);
 
         } catch (final Throwable oops) {
-            result = 0.0;
+            result = 0;
         }
         return result;
     }

@@ -4,9 +4,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,7 +19,7 @@ public class Event extends DomainEntity {
     private String description;
     private Date date;
     private String address;
-    private int maximumCapacity;
+    private Integer maximumCapacity;
     private int actualCapacity;
     private boolean isFinal;
 
@@ -44,6 +46,7 @@ public class Event extends DomainEntity {
     @Future
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @NotNull
     public Date getDate() {
         return date;
     }
@@ -63,11 +66,12 @@ public class Event extends DomainEntity {
     }
 
     @Range(min = 0)
-    public int getMaximumCapacity() {
+    @NotNull
+    public Integer getMaximumCapacity() {
         return maximumCapacity;
     }
 
-    public void setMaximumCapacity(int maximumCapacity) {
+    public void setMaximumCapacity(Integer maximumCapacity) {
         this.maximumCapacity = maximumCapacity;
     }
 

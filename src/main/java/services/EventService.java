@@ -122,6 +122,7 @@ public class EventService {
             result = this.eventRepository.findOne(event.getId());
 
         }
+
         result.setTitle(event.getTitle());
         result.setDescription(event.getDescription());
         result.setDate(event.getDate());

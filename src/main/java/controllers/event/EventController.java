@@ -4,7 +4,6 @@ import controllers.AbstractController;
 import domain.Event;
 import domain.Register;
 import domain.Sponsorship;
-import org.hibernate.metamodel.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -17,6 +16,7 @@ import services.ActorService;
 import services.EventService;
 import services.SponsorshipService;
 
+import javax.validation.ValidationException;
 import java.util.Collection;
 
 @Controller

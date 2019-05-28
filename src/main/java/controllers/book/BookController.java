@@ -3,7 +3,6 @@ package controllers.book;
 import controllers.AbstractController;
 import domain.Book;
 import domain.Category;
-import org.hibernate.metamodel.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,7 @@ import services.ActorService;
 import services.BookService;
 import services.CategoryService;
 
+import javax.validation.ValidationException;
 import java.util.Collection;
 
 @Controller

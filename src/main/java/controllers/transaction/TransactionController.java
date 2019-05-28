@@ -260,7 +260,7 @@ public class TransactionController extends AbstractController {
         try {
             this.transactionService.saveExchange(transaction);
             result = new ModelAndView("redirect:/transaction/reader/listExchanges.do");
-            result.addObject("books",books);
+            result.addObject("books", books);
         }catch(Throwable oops){
             result = new ModelAndView("transaction/reader/createExchange");
             result.addObject("message","transaction.commit.error");

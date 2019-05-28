@@ -15,8 +15,8 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 public class Configuration extends DomainEntity {
 
-	private int					maxResults;
-	private int					maxTime;
+	private Integer maxResults;
+	private Integer maxTime;
 	private String				systemName;
 	private String				banner;
 	private String				welcomeMessageEn;
@@ -31,20 +31,22 @@ public class Configuration extends DomainEntity {
 
 
 	@Range(min = 10, max = 100)
-	public int getMaxResults() {
+	@NotNull
+	public Integer getMaxResults() {
 		return this.maxResults;
 	}
 
-	public void setMaxResults(final int maxResults) {
+	public void setMaxResults(final Integer maxResults) {
 		this.maxResults = maxResults;
 	}
 
 	@Range(min = 1, max = 24)
-	public int getMaxTime() {
+	@NotNull
+	public Integer getMaxTime() {
 		return this.maxTime;
 	}
 
-	public void setMaxTime(final int maxTime) {
+	public void setMaxTime(final Integer maxTime) {
 		this.maxTime = maxTime;
 	}
 

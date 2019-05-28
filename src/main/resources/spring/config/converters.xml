@@ -51,8 +51,7 @@
 		<bean class="converters.BookToStringConverter"/>
 		<bean class="converters.StringToBookConverter"/>
 		<bean class="converters.StringToDoubleConverter"/>
-		<bean class="converters.StringToBookConverter"/>
-		<bean class="converters.StringToDoubleConverter"/>
+		<bean class="converters.StringToIntegerConverter"/>
 		<bean class="converters.CommentToStringConverter"/>
 		<bean class="converters.StringToCommentConverter"/>
 		<bean class="converters.ComplaintToStringConverter"/>
