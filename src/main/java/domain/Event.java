@@ -64,7 +64,7 @@ public class Event extends DomainEntity {
         this.address = address;
     }
 
-    @Range(min = 0)
+    @Range(min = 1)
     public int getMaximumCapacity() {
         return maximumCapacity;
     }
