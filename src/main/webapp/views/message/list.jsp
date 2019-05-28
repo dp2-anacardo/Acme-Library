@@ -9,46 +9,57 @@
  --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+        pageEncoding="ISO-8859-1" %>
 
-<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+          uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="display" uri="http://displaytag.sf.net" %>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
 <display:table name="messages" id="row" requestURI="message/list.do"
-	pagesize="5" class="displaytag">
+               pagesize="5" class="displaytag">
 
 
-	<spring:message code="message.subject" var="subjectHeader" />
-	<display:column property="subject" title="${subjectHeader}" />
+    <spring:message code="message.subject" var="subjectHeader"/>
+    <display:column property="subject" title="${subjectHeader}"/>
 
-	<spring:message code="message.sender" var="senderHeader" />
-	<display:column property="sender.name" title="${senderHeader}"
-		sortable="true" />
+    <spring:message code="message.sender" var="senderHeader"/>
+    <display:column property="sender.name" title="${senderHeader}"
+                    sortable="true"/>
 
-	<spring:message code="message.priority" var="priorityHeader" />
-	<display:column property="priority" title="${priorityHeader}"
-					sortable="true" />
+    <spring:message code="message.priority" var="priorityHeader"/>
+    <display:column title="${priorityHeader}" sortable="true">
+        <jstl:choose>
+            <jstl:when test="${row.priority == 'HIGH'}">
+                <spring:message code="message.priority.high"/>
+            </jstl:when>
+            <jstl:when test="${row.priority == 'MEDIUM'}">
+                <spring:message code="message.priority.medium"/>
+            </jstl:when>
+            <jstl:when test="${row.priority == 'LOW'}">
+                <spring:message code="message.priority.low"/>
+            </jstl:when>
+        </jstl:choose>
+    </display:column>
 
-	<!-- Display -->
-	<spring:message code="message.display" var="display"/>
-	<display:column title="${display}">
-		<a
-			href="message/display.do?messageID=${row.id}&messageBoxID=${messageBox}">
-			<spring:message code="message.display" />
-		</a>
-	</display:column>
+    <!-- Display -->
+    <spring:message code="message.display" var="display"/>
+    <display:column title="${display}">
+        <a
+                href="message/display.do?messageID=${row.id}&messageBoxID=${messageBox}">
+            <spring:message code="message.display"/>
+        </a>
+    </display:column>
 
 </display:table>
 
 <security:authorize
-	access="isAuthenticated()">
-	<acme:cancel url="message/create.do" code="message.create"/>
+        access="isAuthenticated()">
+    <acme:cancel url="message/create.do" code="message.create"/>
 </security:authorize>
 
 <acme:cancel url="messageBox/list.do" code="messageBox.goBack"/>
