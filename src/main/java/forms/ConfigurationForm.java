@@ -10,8 +10,8 @@ public class ConfigurationForm {
 
     private int					id;
     private int					version;
-    private Integer maxResults;
-    private Integer maxTime;
+    private int maxResults;
+    private int maxTime;
     private String				systemName;
     private String				banner;
     private String				welcomeMessageEn;
@@ -59,9 +59,9 @@ public class ConfigurationForm {
         return this.version;
     }
 
-    public Integer getMaxResults() { return this.maxResults; }
+    public int getMaxResults() { return this.maxResults; }
 
-    public Integer getMaxTime() { return this.maxTime; }
+    public int getMaxTime() { return this.maxTime; }
 
     public String getSystemName() {
         return this.systemName;
@@ -121,9 +121,9 @@ public class ConfigurationForm {
         this.version = version;
     }
 
-    public void setMaxResults(final Integer maxResults) { this.maxResults = maxResults; }
+    public void setMaxResults(final int maxResults) { this.maxResults = maxResults; }
 
-    public void setMaxTime(final Integer maxTime) { this.maxTime = maxTime; }
+    public void setMaxTime(final int maxTime) { this.maxTime = maxTime; }
 
     public void setSystemName(final String systemName) {
         this.systemName = systemName;
