@@ -85,8 +85,15 @@ public class FinderController extends AbstractController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
     public ModelAndView save(@ModelAttribute("finder") Finder finder, final BindingResult binding) {
         ModelAndView result;
+        String language = LocaleContextHolder.getLocale().getLanguage();
 
         try {
+            if (language.equals("es")){
+                if(finder.getStatus().equals("MUY BUENO")) finder.setStatus("VERY GOOD");
+                else if(finder.getStatus().equals("BUENO")) finder.setStatus("GOOD");
+                else if(finder.getStatus().equals("MALO")) finder.setStatus("BAD");
+                else if(finder.getStatus().equals("MUY MALO")) finder.setStatus("VERY BAD");
+            }
             finder = this.finderService.reconstruct(finder, binding);
             if (binding.hasErrors())
                 result = this.createEditModelAndView(finder);
@@ -135,12 +142,14 @@ public class FinderController extends AbstractController {
 
         String language = LocaleContextHolder.getLocale().getLanguage();
         String[] status = {"VERY GOOD", "GOOD", "BAD", "VERY BAD"};
+        String[] statusEs = {"MUY BUENO", "BUENO", "MALO", "MUY MALO"};
 
         result = new ModelAndView("finder/reader/edit");
         result.addObject("finder", finder);
         if (language.equals("es")) result.addObject("cNames", this.categoryService.getNamesEs());
         else result.addObject("cNames", this.categoryService.getNamesEn());
-        result.addObject("status", status);
+        if (language.equals("es")) result.addObject("status", statusEs);
+        else result.addObject("status", status);
         result.addObject("messageCode", messageCode);
 
         return result;
