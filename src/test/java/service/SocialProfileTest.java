@@ -23,7 +23,6 @@ public class SocialProfileTest extends AbstractTest {
     @Autowired
     private SocialProfileService socialProfileService;
 
-
     /*
      * Testing functional requirement : 23.1 An actor that is authenticated must be able to manage their social profiles
      * Positive: A admin create a social profile

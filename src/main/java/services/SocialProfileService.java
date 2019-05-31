@@ -62,6 +62,8 @@ public class SocialProfileService {
 		result = this.socialProfileRepository.save(socialProfile);
 		if (socialProfile.getId() == 0)
 			user.getSocialProfiles().add(result);
+		else
+			Assert.isTrue(user.getSocialProfiles().contains(socialProfile));
 		return result;
 
 	}

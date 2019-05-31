@@ -120,7 +120,6 @@ public class EventService {
             result = this.create();
         } else{
             result = this.eventRepository.findOne(event.getId());
-
         }
 
         result.setTitle(event.getTitle());
