@@ -11,72 +11,26 @@
 
 <security:authorize access="hasRole('ORGANIZER')">
 
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.title" var="title"/>
-        <display:column property="title" title="${title}"
-                        sortable="false"/>
-    </display:table>
+    <acme:showtext fieldset="true" code="event.title" value="${event.title}"/>
+    <acme:showtext fieldset="true" code="event.description" value="${event.description}"/>
+    <acme:showtext fieldset="true" code="event.date" value="${event.date}"/>
+    <acme:showtext fieldset="true" code="event.address" value="${event.address}"/>
+    <acme:showtext fieldset="true" code="event.maximumCapacity" value="${event.maximumCapacity}"/>
+    <acme:showtext fieldset="true" code="event.actualCapacity" value="${event.actualCapacity}"/>
 
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.description" var="title"/>
-        <display:column property="description" title="${title}"
-                        sortable="false"/>
-    </display:table>
+    <fieldset><legend><b> <spring:message code="event.status"/> </b></legend>
+        <jstl:choose>
+            <jstl:when test="${event.isFinal == false}">
+                <spring:message code="event.draft"/>
+               </jstl:when>
 
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.date" var="title"/>
-        <display:column property="date" title="${title}"
-                        sortable="false"/>
-    </display:table>
+            <jstl:when test="${event.isFinal == true}">
+                <spring:message code="event.final"/>
+            </jstl:when>
+        </jstl:choose>
+    </fieldset>
 
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.address" var="title"/>
-        <display:column property="address" title="${title}"
-                        sortable="false"/>
-    </display:table>
-
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.maximumCapacity" var="title"/>
-        <display:column property="maximumCapacity" title="${title}"
-                        sortable="false"/>
-    </display:table>
-
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.actualCapacity" var="title"/>
-        <display:column property="actualCapacity" title="${title}"
-                        sortable="false"/>
-    </display:table>
-
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.status" var="title"/>
-        <display:column title="${title}">
-            <jstl:if test="${row.isFinal == false}">
-                <spring:message code="event.draft" var = "Draft"/>
-                <jstl:out value="${Draft}"/>
-            </jstl:if>
-            <jstl:if test="${row.isFinal == true}">
-                <spring:message code="event.final" var = "Final"/>
-                <jstl:out value="${Final}"/>
-            </jstl:if>
-        </display:column>
-    </display:table>
-
-    <display:table name="event" id="row" requestURI="event/show.do"
-                   class="displaytag">
-        <spring:message code="event.organizer" var="title"/>
-        <display:column  title="${title}" sortable="false">
-            <jstl:out value="${row.organizer.name}"/>
-        </display:column>
-    </display:table>
-
-
+    <acme:showtext fieldset="true" code="event.organizer" value="${event.organizer.name}"/>
     <h2><spring:message code="event.registers"/></h2>
     <display:table name="registers" id="row" requestURI="event/show.do"
                     class="displaytag">

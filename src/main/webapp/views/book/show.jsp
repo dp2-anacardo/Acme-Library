@@ -11,90 +11,57 @@
 
 <security:authorize access="hasRole('READER')">
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.title" var="title"/>
-        <display:column property="title" title="${title}"
-                        sortable="false"/>
-    </display:table>
+    <acme:showtext fieldset="true" code="book.title" value="${book.title}"/>
+    <acme:showtext fieldset="true" code="book.author" value="${book.author}"/>
+    <acme:showtext fieldset="true" code="book.publisher" value="${book.publisher}"/>
+    <acme:showtext fieldset="true" code="book.language" value="${book.language}"/>
+    <acme:showtext fieldset="true" code="book.description" value="${book.description}"/>
+    <acme:showtext fieldset="true" code="book.pageNumber" value="${book.pageNumber}"/>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.author" var="title"/>
-        <display:column property="author" title="${title}"
-                        sortable="false"/>
-    </display:table>
+    <jstl:if test="${lang == 'en'}">
+        <acme:showtext fieldset="true" code="book.status" value="${book.status}"/>
+    </jstl:if>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.publisher" var="title"/>
-        <display:column property="publisher" title="${title}"
-                        sortable="false"/>
-    </display:table>
+    <jstl:if test="${lang == 'es'}">
+        <fieldset><legend><b> <spring:message code="book.categories"/> </b></legend>
+            <jstl:choose>
+                <jstl:when test="${book.status == 'VERY GOOD'}">
+                    <spring:message code="book.status.veryGood"/>
+                </jstl:when>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.language" var="title"/>
-        <display:column property="language" title="${title}"
-                        sortable="false"/>
-    </display:table>
+                <jstl:when test="${book.status == 'GOOD'}">
+                    <spring:message code="book.status.good"/>
+                </jstl:when>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.description" var="title"/>
-        <display:column property="description" title="${title}"
-                        sortable="false"/>
-    </display:table>
+                <jstl:when test="${book.status == 'BAD'}">
+                    <spring:message code="book.status.bad"/>
+                </jstl:when>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.pageNumber" var="title"/>
-        <display:column property="pageNumber" title="${title}"
-                        sortable="false"/>
-    </display:table>
+                <jstl:when test="${book.status == 'VERY BAD'}">
+                    <spring:message code="book.status.veryBad"/>
+                </jstl:when>
+            </jstl:choose>
+        </fieldset>
+    </jstl:if>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.status" var="title"/>
-        <display:column property="status" title="${title}"
-                        sortable="false"/>
-    </display:table>
+    <acme:showtext fieldset="true" code="book.isbn" value="${book.isbn}"/>
+    <acme:showtext fieldset="true" code="book.moment" value="${book.moment}"/>
+    <fieldset><legend><b> <spring:message code="book.photo"/></b></legend><br>
+        <img src="${book.photo}" height="300" width="200"/>
+    </fieldset>
+   <fieldset><legend><b> <spring:message code="book.categories"/> </b></legend>
+       <jstl:if test="${lang=='en' }">
+           <jstl:forEach var="x" items="${categories}">
+               <jstl:out value="${x.nameEn}"/>
+           </jstl:forEach>
+       </jstl:if>
 
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.isbn" var="title"/>
-        <display:column property="isbn" title="${title}"
-                        sortable="false"/>
-    </display:table>
-
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.moment" var="title"/>
-        <display:column property="moment" title="${title}"
-                        sortable="false"/>
-    </display:table>
-
-    <display:table name="book" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.photo" var="title"/>
-        <display:column title="${title}" sortable="false">
-            <img src="${row.photo}" height="300" width="200"/>
-        </display:column>
-    </display:table>
-
-    <display:table name="categories" id="row" requestURI="book/show.do"
-                   class="displaytag">
-        <spring:message code="book.categories" var="title"/>
-        <display:column title="${title}" sortable="false">
-            <jstl:if test="${lang=='en' }">
-                <jstl:out value="${row.nameEn}"/>
-            </jstl:if>
-
-            <jstl:if test="${lang=='es' }">
-                <jstl:out value="${row.nameEs}"/>
-            </jstl:if>
-        </display:column>
-    </display:table>
+       <jstl:if test="${lang=='es' }">
+           <jstl:forEach var="x" items="${categories}">
+               <jstl:out value="${x.nameEs}"/>
+           </jstl:forEach>
+       </jstl:if>
+   </fieldset>
 
     <acme:cancel code="book.back" url="/book/reader/list.do"/>
 </security:authorize>

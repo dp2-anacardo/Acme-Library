@@ -5,6 +5,7 @@ import domain.Event;
 import domain.Register;
 import domain.Sponsorship;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -72,9 +73,11 @@ public class EventController extends AbstractController {
             Assert.notNull(event);
             Assert.isTrue(event.getOrganizer().getId() == organizerId);
             Collection<Register> registers = event.getRegisters();
+            final String language = LocaleContextHolder.getLocale().getLanguage();
             result = new ModelAndView("event/organizer/show");
             result.addObject("event", event);
             result.addObject("registers", registers);
+            result.addObject("lang", language);
             result.addObject("requestURI", "event/organizer/show.do");
         } catch (Throwable oops) {
             result = new ModelAndView("redirect:/");

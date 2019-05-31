@@ -20,6 +20,6 @@
     <b><spring:message code="book.author"/></b>: <jstl:out value="${t.book.author}"/><br>
     <b><spring:message code="book.publisher"/></b>: <jstl:out value="${t.book.publisher}"/><br>
     <b><spring:message code="book.numPag"/></b>: <jstl:out value="${t.book.pageNumber}"/><br>
-    <b><spring:message code="book.photo"/></b>: <img src="${t.book.photo}" height="200" width="200"/>
+    <b><spring:message code="book.photo"/></b>: <img src="${t.book.photo}" height="300" width="200"/>
 </fieldset>
 </security:authorize>
