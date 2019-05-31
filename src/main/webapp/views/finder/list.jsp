@@ -21,14 +21,30 @@
 			<jstl:out value="${row.book.title}"></jstl:out>
 		</display:column>
 
-		<spring:message code="transaction.moment" var="moment" />
-        <display:column title="${moment}" format="{0,date,dd/MM/yyyy HH:mm}">
-            <jstl:out value="${row.moment}"></jstl:out>
+        <display:column title="ISBN">
+            <jstl:out value="${row.book.isbn}"></jstl:out>
         </display:column>
 
 		<spring:message code="transaction.book.status" var="status" />
 		<display:column title="${status}">
-			<jstl:out value="${row.book.status}"></jstl:out>
+            <jstl:choose>
+                <jstl:when test="${row.book.status == 'VERY GOOD'}">
+                    <spring:message code="transaction.book.VERYGOOD" var="veryGood" />
+                    <jstl:out value="${veryGood}"/>
+                </jstl:when>
+                <jstl:when test="${row.book.status == 'GOOD'}">
+                    <spring:message code="transaction.book.GOOD" var="good" />
+                    <jstl:out value="${good}"/>
+                </jstl:when>
+                <jstl:when test="${row.book.status == 'BAD'}">
+                    <spring:message code="transaction.book.BAD" var="bad" />
+                    <jstl:out value="${bad}"/>
+                </jstl:when>
+                <jstl:when test="${row.book.status == 'VERY BAD'}">
+                    <spring:message code="transaction.book.VERYBAD" var="veryBad" />
+                    <jstl:out value="${veryBad}"/>
+                </jstl:when>
+            </jstl:choose>
 		</display:column>
 
 		<spring:message code="transaction.price" var="price" />
@@ -40,7 +56,7 @@
 
 		<spring:message code="transaction.show" var="show" />
 		<display:column title="${show}">
-            <acme:cancel url="/transaction/reader/showNotRegistered.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
+            <acme:cancel url="/transaction/show.do?transactionId=${row.id}" code="transaction.show"/>&nbsp
 		</display:column>
 
 	</display:table>

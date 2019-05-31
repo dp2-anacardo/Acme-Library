@@ -15,8 +15,8 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 public class Configuration extends DomainEntity {
 
-	private int					maxResults;
-	private int					maxTime;
+	private int maxResults;
+	private int maxTime;
 	private String				systemName;
 	private String				banner;
 	private String				welcomeMessageEn;

@@ -10,8 +10,8 @@ public class ConfigurationForm {
 
     private int					id;
     private int					version;
-    private int					maxResults;
-    private int					maxTime;
+    private int maxResults;
+    private int maxTime;
     private String				systemName;
     private String				banner;
     private String				welcomeMessageEn;

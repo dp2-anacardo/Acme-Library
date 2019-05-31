@@ -78,7 +78,7 @@
                    class="displaytag">
         <spring:message code="book.photo" var="title"/>
         <display:column title="${title}" sortable="false">
-            <img src="${row.photo}" height="200" width="200"/>
+            <img src="${row.photo}" height="300" width="200"/>
         </display:column>
     </display:table>
 

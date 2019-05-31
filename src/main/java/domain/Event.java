@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -44,6 +45,7 @@ public class Event extends DomainEntity {
     @Future
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @NotNull
     public Date getDate() {
         return date;
     }
@@ -62,7 +64,7 @@ public class Event extends DomainEntity {
         this.address = address;
     }
 
-    @Range(min = 0)
+    @Range(min = 1)
     public int getMaximumCapacity() {
         return maximumCapacity;
     }
