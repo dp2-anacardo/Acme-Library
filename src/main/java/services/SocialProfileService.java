@@ -73,6 +73,7 @@ public class SocialProfileService {
 		Assert.isTrue(this.socialProfileRepository.exists(socialProfile.getId()));
 		final Collection<SocialProfile> result = actor.getSocialProfiles();
 		Assert.notEmpty(result);
+		Assert.isTrue(result.contains(socialProfile));
 		result.remove(socialProfile);
 		this.socialProfileRepository.delete(socialProfile.getId());
 	}
