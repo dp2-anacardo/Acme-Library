@@ -90,11 +90,15 @@ public class CategoryTest extends AbstractTest {
         try {
             this.authenticate(user);
             Category category = this.categoryService.findOne(entityId);
-            category.setNameEs(nameEs);
-            category.setNameEn(nameEn);
+            Category n = new Category();
+            n.setId(category.getId());
+            //category.setNameEs(nameEs);
+            //category.setNameEn(nameEn);
+            n.setNameEn(nameEn);
+            n.setNameEs(nameEs);
             final DataBinder binding = new DataBinder(new Category());
-            category = this.categoryService.reconstruct(category, binding.getBindingResult());
-            this.categoryService.save(category);
+            n = this.categoryService.reconstruct(n, binding.getBindingResult());
+            this.categoryService.save(n);
         } catch (final Throwable oops) {
             caught = oops.getClass();
         }
