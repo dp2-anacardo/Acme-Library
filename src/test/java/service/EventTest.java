@@ -11,7 +11,6 @@ import services.EventService;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
-import javax.validation.ValidationException;
 import java.util.Date;
 
 @ContextConfiguration(locations = {
