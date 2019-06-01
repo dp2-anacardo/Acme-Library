@@ -110,8 +110,8 @@ public class CategoryService {
             result = this.categoryRepository.findOne(category.getId());
 
         }
-        final Boolean existsES = existsES(result);
-        final Boolean existsEN = existsEN(result);
+        final Boolean existsES = existsES(category);
+        final Boolean existsEN = existsEN(category);
 
         result.setNameEn(category.getNameEn());
         result.setNameEs(category.getNameEs());

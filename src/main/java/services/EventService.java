@@ -79,6 +79,7 @@ public class EventService {
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
 
         Assert.notNull(e);
+
         Event res;
 
         e.setIsFinal(false);

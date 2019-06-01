@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.BookService;
 import services.CategoryService;
+import services.ReaderService;
 
 import javax.validation.ValidationException;
 import java.util.Collection;
@@ -31,6 +32,9 @@ public class BookController extends AbstractController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private ReaderService readerService;
 
     @RequestMapping(value = "/reader/list", method = RequestMethod.GET)
     public ModelAndView list(){
@@ -73,6 +77,7 @@ public class BookController extends AbstractController {
             Book book;
             book = this.bookService.findOne(bookId);
             Assert.notNull(book);
+            Assert.isTrue(this.readerService.findOne(this.actorService.getActorLogged().getId()).equals(book.getReader()));
             Collection<Category> categories = this.categoryService.findAll();
             Assert.notNull(categories);
             result = new ModelAndView("book/reader/edit");

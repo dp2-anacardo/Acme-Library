@@ -11,6 +11,9 @@ import services.EventService;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+import javax.validation.ValidationException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @ContextConfiguration(locations = {
@@ -26,17 +29,17 @@ public class EventTest extends AbstractTest {
     public void createDraftEventDriver() {
         final Object testingData[][] = {
                 {
-                        "prueba", "prueba", new Date(02/02/2025),"prueba",5, "organizer1", null
+                        "prueba", "prueba", "02/02/2025 19:00","prueba",5, "organizer1", null
                 }, {
-                        "prueba", "prueba", new Date(02/02/2025),"prueba",5, "reader1", IllegalArgumentException.class
+                        "prueba", "prueba", "02/02/2025 19:00","prueba",5, "reader1", IllegalArgumentException.class
         }
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.createDraftEventTemplate((String) testingData[i][0], (String) testingData[i][1], (Date) testingData[i][2], (String) testingData[i][3],(int) testingData[i][4], (String) testingData[i][5],  (Class<?>) testingData[i][6]);
+            this.createDraftEventTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3],(int) testingData[i][4], (String) testingData[i][5],  (Class<?>) testingData[i][6]);
     }
 
-    private void createDraftEventTemplate(final String title, final String description, final Date date, String address, int maximumCapacity, String user, final Class<?> expected) {
+    private void createDraftEventTemplate(final String title, final String description, final String date, String address, int maximumCapacity, String user, final Class<?> expected) {
         Class<?> caught;
         caught = null;
 
@@ -45,7 +48,9 @@ public class EventTest extends AbstractTest {
             Event event = this.eventService.create();
             event.setTitle(title);
             event.setDescription(description);
-            event.setDate(date);
+            final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            final Date res = sdf.parse(date);
+            event.setDate(res);
             event.setAddress(address);
             event.setMaximumCapacity(maximumCapacity);
             final DataBinder binding = new DataBinder(new Event());
@@ -57,4 +62,102 @@ public class EventTest extends AbstractTest {
 
         super.checkExceptions(expected, caught);
     }
+
+    @Test
+    public void createFinalEventDriver() {
+        final Object testingData[][] = {
+                {
+                        "prueba", "prueba", "02/02/2025 19:00","prueba",5, "organizer1", null
+                }, {
+                "prueba", "prueba", "02/02/2025 19:00","prueba",5, "reader1", IllegalArgumentException.class
+        }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.createFinalEventTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3],(int) testingData[i][4], (String) testingData[i][5],  (Class<?>) testingData[i][6]);
+    }
+
+    private void createFinalEventTemplate(final String title, final String description, final String date, String address, int maximumCapacity, String user, final Class<?> expected) {
+        Class<?> caught;
+        caught = null;
+
+        try {
+            this.authenticate(user);
+            Event event = this.eventService.create();
+            event.setTitle(title);
+            event.setDescription(description);
+            final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            final Date res = sdf.parse(date);
+            event.setDate(res);
+            event.setAddress(address);
+            event.setMaximumCapacity(maximumCapacity);
+            final DataBinder binding = new DataBinder(new Event());
+            event = this.eventService.reconstruct(event, binding.getBindingResult());
+            this.eventService.saveFinal(event);
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+        }
+
+        super.checkExceptions(expected, caught);
+    }
+
+    @Test
+    public void editEventDriver() {
+        final Object testingData[][] = {
+                {
+                        "event2", "pruebaEdit", "organizer1", null
+                }, {
+                        "event2", "pruebaEdit", "reader1", IllegalArgumentException.class
+                }, {
+                        "event2", "", "organizer1", ValidationException.class
+                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.editEventTemplate(super.getEntityId((String) testingData[i][0]), (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+    }
+    private void editEventTemplate(int entityId, String title, String user, Class<?> expected ){
+        Class<?> caught;
+        caught = null;
+
+        try{
+            this.authenticate(user);
+            Event event = this.eventService.findOne(entityId);
+            event.setTitle(title);
+            DataBinder binding = new DataBinder(new Event());
+            event = this.eventService.reconstruct(event, binding.getBindingResult());
+            this.eventService.saveFinal(event);
+        } catch (Throwable oops){
+            caught = oops.getClass();
+        }
+        super.checkExceptions(expected,caught);
+    }
+
+    @Test
+    public void deleteEventDriver() {
+        final Object testingData[][] = {
+                {
+                        "event2", "organizer1", null
+                }, {
+                "event2", "reader1", IllegalArgumentException.class
+        }
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.deleteEventTemplate(super.getEntityId((String) testingData[i][0]), (String) testingData[i][1], (Class<?>) testingData[i][2]);
+    }
+
+    private void deleteEventTemplate(int entityId, String user, Class<?> expected){
+        Class<?> caught;
+        caught = null;
+
+        try {
+            this.authenticate(user);
+            Event event = this.eventService.findOne(entityId);
+            this.eventService.delete(event);
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+        }
+        super.checkExceptions(expected, caught);
+    }
 }
+

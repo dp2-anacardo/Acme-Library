@@ -11,6 +11,7 @@ import security.UserAccount;
 
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -39,6 +40,8 @@ public class BookService {
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("READER"));
 
         Book res = new Book();
+        Collection<Category> categories = new ArrayList<>();
+        res.setCategories(categories);
 
         return res;
     }
@@ -97,6 +100,8 @@ public class BookService {
                 categories.add(defaultCategory);
                 b.setCategories(categories);
             }
+        }else{
+            Assert.isTrue(this.readerService.findOne(this.actorService.getActorLogged().getId()).equals(b.getReader()));
         }
         res = this.bookRepository.save(b);
         return res;

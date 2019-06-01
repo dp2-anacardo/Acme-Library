@@ -75,14 +75,13 @@ public class CategoryTest extends AbstractTest {
                 {
                         "category1", "prueba", "pruebass", "admin1", null
                 }, {
-                        "category2", "", "", "admin1", ConstraintViolationException.class
+                        "category2", "", "", "admin1", ValidationException.class
                 }
         };
         for (int i = 0; i < testingData.length; i++)
             this.editCategoryTemplate(super.getEntityId((String) testingData[i][0]), (String) testingData[i][1], (String) testingData[i][2],(String) testingData[i][3], (Class<?>) testingData[i][4]);
     }
 
-    //TODO: Revisar reconstruct
     private void editCategoryTemplate(final int entityId, final String nameEs, String nameEn, final String user, final Class<?> expected) {
         Class<?> caught;
         caught = null;
@@ -92,8 +91,6 @@ public class CategoryTest extends AbstractTest {
             Category category = this.categoryService.findOne(entityId);
             Category n = new Category();
             n.setId(category.getId());
-            //category.setNameEs(nameEs);
-            //category.setNameEn(nameEn);
             n.setNameEn(nameEn);
             n.setNameEs(nameEs);
             final DataBinder binding = new DataBinder(new Category());
