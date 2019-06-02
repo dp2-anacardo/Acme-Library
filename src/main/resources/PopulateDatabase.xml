@@ -890,6 +890,18 @@
         </property>
     </bean>
 
+    <bean id="transaction4" class="domain.Transaction">
+        <property name="ticker" value="190507-DAVIR"/>
+        <property name="isSale" value="false"/>
+        <property name="seller" ref="reader2"/>
+        <property name="book" ref="book7"/>
+        <property name="isFinished" value="false"/>
+        <property name="offers">
+            <list>
+            </list>
+        </property>
+    </bean>
+
     <!-- Offer -->
 
     <bean id="offer1" class="domain.Offer">
@@ -1024,6 +1036,25 @@
     </bean>
 
     <bean id="book6" class="domain.Book">
+        <property name="title" value="Un mundo sin fin"/>
+        <property name="author" value="Kent Follet"/>
+        <property name="publisher" value="Plaza Janés"/>
+        <property name="languageB" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1180"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="978-84-9908-122-9"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader2"/>
+        <property name="photo" value="https://imagessl0.casadellibro.com/a/l/t5/60/9788401336560.jpg"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book7" class="domain.Book">
         <property name="title" value="Un mundo sin fin"/>
         <property name="author" value="Kent Follet"/>
         <property name="publisher" value="Plaza Janés"/>
