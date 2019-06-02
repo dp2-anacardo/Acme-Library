@@ -25,6 +25,13 @@ public class EventTest extends AbstractTest {
     @Autowired
     EventService eventService;
 
+    /*
+     * Testing functional requirement : 32.1 An actor who is authenticated as organizer must be able to manage their events
+     * Positive: An organizer create an event in draft mode
+     * Negative: A reader try create an event in draft mode
+     * Sentence coverage:
+     * Data coverage:
+     */
     @Test
     public void createDraftEventDriver() {
         final Object testingData[][] = {
@@ -63,6 +70,13 @@ public class EventTest extends AbstractTest {
         super.checkExceptions(expected, caught);
     }
 
+    /*
+     * Testing functional requirement : 32.1 An actor who is authenticated as organizer must be able to manage their events
+     * Positive: An organizer create an event in final mode
+     * Negative: A reader try create an event in final mode
+     * Sentence coverage:
+     * Data coverage:
+     */
     @Test
     public void createFinalEventDriver() {
         final Object testingData[][] = {
@@ -101,6 +115,13 @@ public class EventTest extends AbstractTest {
         super.checkExceptions(expected, caught);
     }
 
+    /*
+     * Testing functional requirement : 32.1 An actor who is authenticated as organizer must be able to manage their events
+     * Positive: An organizer edit an event
+     * Negative: A reader try edit an event. An organizer try edit an event with invalid data.
+     * Sentence coverage:
+     * Data coverage:
+     */
     @Test
     public void editEventDriver() {
         final Object testingData[][] = {
@@ -133,6 +154,13 @@ public class EventTest extends AbstractTest {
         super.checkExceptions(expected,caught);
     }
 
+    /*
+     * Testing functional requirement : 32.1 An actor who is authenticated as organizer must be able to manage their events
+     * Positive: An organizer delete an event
+     * Negative: A reader try delete an event
+     * Sentence coverage:
+     * Data coverage:
+     */
     @Test
     public void deleteEventDriver() {
         final Object testingData[][] = {

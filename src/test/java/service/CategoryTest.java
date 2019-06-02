@@ -11,7 +11,6 @@ import services.CategoryService;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 
 
