@@ -18,6 +18,7 @@ import services.CategoryService;
 import services.ReaderService;
 
 import javax.validation.ValidationException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -41,7 +42,7 @@ public class BookController extends AbstractController {
         ModelAndView result;
         try {
             int readerId = this.actorService.getActorLogged().getId();
-            Collection<Book> books = this.bookService.getBooksByReader(readerId);
+            Collection<Book> books = this.bookService.getBooksWithNoTransactionsByReader();
             Assert.notNull(books);
             result = new ModelAndView("book/reader/list");
             result.addObject("books", books);
@@ -78,11 +79,13 @@ public class BookController extends AbstractController {
             book = this.bookService.findOne(bookId);
             Assert.notNull(book);
             Assert.isTrue(this.readerService.findOne(this.actorService.getActorLogged().getId()).equals(book.getReader()));
+            final String language = LocaleContextHolder.getLocale().getLanguage();
             Collection<Category> categories = this.categoryService.findAll();
             Assert.notNull(categories);
             result = new ModelAndView("book/reader/edit");
             result.addObject("book", book);
             result.addObject("categories", categories);
+            result.addObject("lang", language);
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/");
         }
@@ -96,14 +99,21 @@ public class BookController extends AbstractController {
         try{
             Assert.notNull(categories);
             Assert.notNull(book);
+            if(book.getCategories()==null){
+                book.setCategories(new ArrayList<Category>());
+            }
             book = this.bookService.reconstruct(book, binding);
             book = this.bookService.save(book);
             result = new ModelAndView("redirect:list.do");
         }catch (ValidationException e){
             result = this.createEditModelAndView(book, null);
+            final String language = LocaleContextHolder.getLocale().getLanguage();
+            result.addObject("lang", language);
             result.addObject("categories", categories);
         } catch (Throwable oops){
             result = this.createEditModelAndView(book, "book.commit.error");
+            final String language = LocaleContextHolder.getLocale().getLanguage();
+            result.addObject("lang", language);
             result.addObject("categories", categories);
         }
         return result;

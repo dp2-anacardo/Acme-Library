@@ -20,9 +20,37 @@
     <b><spring:message code="book.author"/></b>: <jstl:out value="${transaction.book.author}"/><br>
     <b><spring:message code="book.publisher"/></b>: <jstl:out value="${transaction.book.publisher}"/><br>
     <b><spring:message code="book.numPag"/></b>: <jstl:out value="${transaction.book.pageNumber}"/><br>
-    <b><spring:message code="book.photo"/></b>: <img src="${transaction.book.photo}" height="200" width="200"/>
+    <b><spring:message code="book.numPag"/></b>: <jstl:out value="${transaction.book.pageNumber}"/><br>
+    <b><spring:message code="book.language"/></b>: <jstl:out value="${transaction.book.languageB}"/><br>
+    <b> <spring:message code="book.status"/> </b>
+    <jstl:if test="${lang == 'en'}">
+        <jstl:out value="${transaction.book.status}"/>
+    </jstl:if>
+
+    <jstl:if test="${lang == 'es'}">
+            <jstl:choose>
+                <jstl:when test="${transaction.book.status == 'VERY GOOD'}">
+                    <spring:message code="book.status.veryGood"/>
+                </jstl:when>
+
+                <jstl:when test="${transaction.book.status == 'GOOD'}">
+                    <spring:message code="book.status.good"/>
+                </jstl:when>
+
+                <jstl:when test="${transaction.book.status == 'BAD'}">
+                    <spring:message code="book.status.bad"/>
+                </jstl:when>
+
+                <jstl:when test="${transaction.book.status == 'VERY BAD'}">
+                    <spring:message code="book.status.veryBad"/>
+                </jstl:when>
+            </jstl:choose>
+    </jstl:if>
+    <br>
+    <b><spring:message code="book.photo"/></b>: <img src="${transaction.book.photo}" height="300" width="200"/>
 </fieldset>
 <br>
+<security:authorize access="hasRole('READER')">
 <jstl:if test="${transaction.isSale == true}">
     <acme:cancel code="transaction.buy" url="transaction/reader/buy.do?transactionId=${transaction.id}"/>
 </jstl:if>
@@ -30,3 +58,4 @@
 <jstl:if test="${transaction.isSale == false}">
     <acme:cancel code="transaction.Offer" url="offer/reader/create.do?transactionId=${transaction.id}"/>
 </jstl:if>
+</security:authorize>

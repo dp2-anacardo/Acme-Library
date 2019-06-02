@@ -841,7 +841,6 @@
         <property name="isFinished" value="true"/>
         <property name="offers">
             <list>
-                <ref bean="offer1"/>
             </list>
         </property>
         <property name="complaints">
@@ -871,6 +870,24 @@
         <property name="number" value="4885149505523388"/>
         <property name="expirationYear" value="01/11/2023"/>
         <property name="cvv" value="891"/>
+    </bean>
+
+    <bean id="transaction3" class="domain.Transaction">
+        <property name="ticker" value="190528-DAVIF"/>
+        <property name="moment" value="10/10/2010 10:00"/>
+        <property name="price" value="20.99"/>
+        <property name="isSale" value="true"/>
+        <property name="seller" ref="reader2"/>
+        <property name="book" ref="book6"/>
+        <property name="isFinished" value="false"/>
+        <property name="offers">
+            <list>
+            </list>
+        </property>
+        <property name="complaints">
+            <list>
+            </list>
+        </property>
     </bean>
 
     <!-- Offer -->
@@ -914,7 +931,7 @@
         <property name="title" value="El mentiroso"/>
         <property name="author" value="Pepe Mel"/>
         <property name="publisher" value="Colección Mundus"/>
-        <property name="language" value="Español"/>
+        <property name="languageB" value="Español"/>
         <property name="description" value="description"/>
         <property name="pageNumber" value="587"/>
         <property name="status" value="VERY GOOD"/>
@@ -934,7 +951,7 @@
         <property name="title" value="Patria"/>
         <property name="author" value="Fernando Aramburu"/>
         <property name="publisher" value="TUSQUETS"/>
-        <property name="language" value="español"/>
+        <property name="languageB" value="español"/>
         <property name="description" value="description"/>
         <property name="pageNumber" value="646"/>
         <property name="status" value="VERY GOOD"/>
@@ -953,7 +970,7 @@
         <property name="title" value="Un mundo sin fin"/>
         <property name="author" value="Kent Follet"/>
         <property name="publisher" value="Plaza Janés"/>
-        <property name="language" value="español"/>
+        <property name="languageB" value="español"/>
         <property name="description" value="description"/>
         <property name="pageNumber" value="1180"/>
         <property name="status" value="VERY GOOD"/>
@@ -972,14 +989,14 @@
         <property name="title" value="Un mundo sin fin"/>
         <property name="author" value="Kent Follet"/>
         <property name="publisher" value="Plaza Janés"/>
-        <property name="language" value="español"/>
+        <property name="languageB" value="español"/>
         <property name="description" value="description"/>
         <property name="pageNumber" value="1180"/>
         <property name="status" value="VERY GOOD"/>
         <property name="isbn" value="978-84-9908-122-9"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader2"/>
-        <property name="photo" value="http://www.google.com"/>
+        <property name="photo" value="https://imagessl0.casadellibro.com/a/l/t5/60/9788401336560.jpg"/>
         <property name="categories">
             <list>
                 <ref bean="category1"/>
@@ -991,14 +1008,33 @@
         <property name="title" value="Un mundo sin fin"/>
         <property name="author" value="Kent Follet"/>
         <property name="publisher" value="Plaza Janés"/>
-        <property name="language" value="español"/>
+        <property name="languageB" value="español"/>
         <property name="description" value="description"/>
         <property name="pageNumber" value="1180"/>
         <property name="status" value="VERY GOOD"/>
         <property name="isbn" value="978-84-9908-122-9"/>
         <property name="moment" value="10/10/2009 10:00"/>
         <property name="reader" ref="reader2"/>
-        <property name="photo" value="http://www.google.com"/>
+        <property name="photo" value="https://imagessl0.casadellibro.com/a/l/t5/60/9788401336560.jpg"/>
+        <property name="categories">
+            <list>
+                <ref bean="category1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book6" class="domain.Book">
+        <property name="title" value="Un mundo sin fin"/>
+        <property name="author" value="Kent Follet"/>
+        <property name="publisher" value="Plaza Janés"/>
+        <property name="languageB" value="español"/>
+        <property name="description" value="description"/>
+        <property name="pageNumber" value="1180"/>
+        <property name="status" value="VERY GOOD"/>
+        <property name="isbn" value="978-84-9908-122-9"/>
+        <property name="moment" value="10/10/2009 10:00"/>
+        <property name="reader" ref="reader2"/>
+        <property name="photo" value="https://imagessl0.casadellibro.com/a/l/t5/60/9788401336560.jpg"/>
         <property name="categories">
             <list>
                 <ref bean="category1"/>

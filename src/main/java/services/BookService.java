@@ -68,8 +68,11 @@ public class BookService {
         Assert.notNull(b);
         Assert.isTrue(b.getId() != 0);
 
-        if (haveTransaction(b.getId()) == false)
+        if (haveTransaction(b.getId()) == false) {
             this.bookRepository.delete(b);
+        }else{
+            Assert.isTrue(false);
+        }
     }
 
     public void deleteAdmin(Book b) {
@@ -94,14 +97,17 @@ public class BookService {
             Reader r = this.readerService.findOne(id);
             b.setReader(r);
       //      b.setMoment(new Date());
-            if(b.getCategories().isEmpty()){
-                Collection<Category> categories = b.getCategories();
+            if(b.getCategories() == null || b.getCategories().isEmpty()){
+                Collection<Category> categories = new ArrayList<Category>();
                 Category defaultCategory = this.categoryService.getDefaultCategory();
                 categories.add(defaultCategory);
                 b.setCategories(categories);
             }
         }else{
             Assert.isTrue(this.readerService.findOne(this.actorService.getActorLogged().getId()).equals(b.getReader()));
+            if(this.getBooksWithNoTransactionsByReader().contains(b) == false){
+                Assert.isTrue(false);
+            }
         }
         res = this.bookRepository.save(b);
         return res;
@@ -119,7 +125,7 @@ public class BookService {
         result.setTitle(book.getTitle());
         result.setAuthor(book.getAuthor());
         result.setPublisher(book.getPublisher());
-        result.setLanguage(book.getLanguage());
+        result.setLanguageB(book.getLanguageB());
         result.setDescription(book.getDescription());
         result.setPageNumber(book.getPageNumber());
         result.setStatus(book.getStatus());

@@ -15,7 +15,7 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
             "or t.book.publisher like %?1% or t.book.description like %?1%) and t.isFinished=FALSE")
     Collection<Transaction> getTransactionsByKeyWord(String keyWord);
 
-    @Query("select t from Transaction t where (t.book.language like ?1 or t.book.isbn like ?1) and t.isFinished=FALSE")
+    @Query("select t from Transaction t where (t.book.languageB like ?1 or t.book.isbn like ?1) and t.isFinished=FALSE")
     Collection<Transaction> getTransactionsContainsKeyWord(String keyWord);
 
     @Query("select t from Transaction t join t.book.categories c where (c.nameEs like ?1 or c.nameEn like ?1) " +

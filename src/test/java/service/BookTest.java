@@ -61,7 +61,7 @@ public class BookTest extends AbstractTest {
             book.setTitle(title);
             book.setAuthor(author);
             book.setPublisher(publisher);
-            book.setLanguage(language);
+            book.setLanguageB(language);
             book.setDescription(description);
             book.setPageNumber(pageNumber);
             book.setStatus(status);
