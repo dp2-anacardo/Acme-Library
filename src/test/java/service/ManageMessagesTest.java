@@ -36,11 +36,11 @@ public class ManageMessagesTest extends AbstractTest {
     private MessageBoxService messageBoxService;
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
-     * Positive: An actor deletes a message
-     * Negative: A company tries to delete a message that not exists
-     * Sentence coverage: 75.5%
-     * Data coverage: Not applicable
+     * Testing functional requirement : 30.5 An actor must be able to manage his or her message boxes, which includes creating one.
+     * Positive: An actor creates a message box
+     * Negative: An actor tries to create a message box with invalid attributes.
+     * Sentence coverage: 96%
+     * Data coverage: 100%
      */
 
     @Test
@@ -80,11 +80,11 @@ public class ManageMessagesTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
-     * Positive: An actor deletes a message
-     * Negative: A company tries to delete a message that not exists
-     * Sentence coverage: 75.5%
-     * Data coverage: Not applicable
+     * Testing functional requirement : 30.5 An actor must be able to manage his or her message boxes, which includes editing one.
+     * Positive: An actor edits a message box
+     * Negative: An actor tries to edit a system box.
+     * Sentence coverage: 96%
+     * Data coverage: 66.6%
      */
 
     @Test
@@ -125,11 +125,11 @@ public class ManageMessagesTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
-     * Positive: An actor deletes a message
-     * Negative: A company tries to delete a message that not exists
-     * Sentence coverage: 75.5%
-     * Data coverage: Not applicable
+     * Testing functional requirement : 30.5 An actor must be able to manage his or her message boxes, which includes deleting one.
+     * Positive: An actor deletes a message box
+     * Negative: An actor tries to delete a system box.
+     * Sentence coverage: 100%
+     * Data coverage: Not applicable.
      */
 
     @Test
@@ -163,11 +163,12 @@ public class ManageMessagesTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
+     * Testing functional requirement : 30.4 An actor who is authenticated must be able to exchange messages with other actors and manage them
+     * which includes sending them.
      * Positive: An actor sends a message
      * Negative: An actor tries to send a message with invalid data
-     * Sentence coverage: 84%
-     * Data coverage: 20%
+     * Sentence coverage: 90%
+     * Data coverage: 33%
      */
 
     @Test
@@ -218,12 +219,14 @@ public class ManageMessagesTest extends AbstractTest {
 
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
+     * Testing functional requirement : 30.4 An actor who is authenticated must be able to exchange messages with other actors and manage them
+     * which includes deleting them.
      * Positive: An actor deletes a message
-     * Negative: A company tries to delete a message that not exists
-     * Sentence coverage: 75.5%
-     * Data coverage: Not applicable
+     * Negative: An actor tries to delete a message of other actor
+     * Sentence coverage: 51%
+     * Data coverage: Not applicable.
      */
+
 
     @Test
     public void deleteMessageDriver() {
@@ -231,7 +234,7 @@ public class ManageMessagesTest extends AbstractTest {
                 {
                         "reader1", "message1", "INBOX", null
                 }, {
-                "reader2", "message2", "INBOX", AssertionError.class
+                "organizer1", "message1", "INBOX", IllegalArgumentException.class
         }
         };
         for (int i = 0; i < testingData.length; i++) {
@@ -256,11 +259,12 @@ public class ManageMessagesTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
-     * Positive: An actor deletes a message
-     * Negative: A company tries to delete a message that not exists
-     * Sentence coverage: 75.5%
-     * Data coverage: Not applicable
+     * Testing functional requirement : 30.4 An actor who is authenticated must be able to exchange messages with other actors and manage them
+     * which includes moving them.
+     * Positive: An actor moves a message.
+     * Negative: An actor tries to move a message to a system box.
+     * Sentence coverage: 88.5%
+     * Data coverage: Not applicable.
      */
 
     @Test
@@ -296,11 +300,12 @@ public class ManageMessagesTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 23.2 An actor that is authenticated must be able to manage their messages
-     * Positive: An actor deletes a message
-     * Negative: A company tries to delete a message that not exists
-     * Sentence coverage: 75.5%
-     * Data coverage: Not applicable
+     * Testing functional requirement : 30.4 An actor who is authenticated must be able to exchange messages with other actors and manage them
+     * which includes moving them.
+     * Positive: An actor copies a message
+     * Negative: An actor tries to copy a message to a system box.
+     * Sentence coverage: 94.8%
+     * Data coverage: Not applicable.
      */
 
     @Test

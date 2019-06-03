@@ -33,30 +33,41 @@ public class ManageSponsorshipsTest extends AbstractTest {
     private EventService eventService;
 
     /*
-     * Testing functional requirement : 9.2 An actor that is authenticated as a sponsor must be able to manage their sponsorships
+     * Testing functional requirement : 33.1 An actor that is authenticated as a sponsor must be able to manage their sponsorships which includes
+     * creating them.
      * Positive: A sponsor creates a sponsorship
      * Negative: A sponsor tries to create a sponsorship with invalid data
      * Sentence coverage: 99%
-     * Data coverage: 50%
+     * Data coverage: 80%
      */
 
     @Test
     public void createSponsorshipDriver() {
         Object testingData[][] = {
                 {
-                        "https://www.sponsorship5-link.com", "Sponsor 1", "VISA", 856, "4934124580909324", "2026/10/20", "event1", "sponsor1",true, null
+                        "https://www.sponsorship5-link.com", "Sponsor 1", "VISA", 856, "4934124580909324", "2026/10/20", "event1", "sponsor1", true, null
                 }, {
-                "https://www.sponsorship6-link.com", "Sponsor 2", "VISA", 856, "4934124580909324", "2026/10/20", "event1", "sponsor2",true, null
+                "https://www.sponsorship6-link.com", "Sponsor 2", "VISA", 856, "4934124580909324", "2026/10/20", "event1", "sponsor2", true, null
         }, {
-                "", "Sponsor 1", "VISA", 856, "4934124580909324", "2026/10/20", "event1", "sponsor1",true, ValidationException.class
+                "", "Sponsor 1", "VISA", 856, "4934124580909324", "2026/10/20", "event1", "sponsor1", true, ValidationException.class
         }, {
-                "https://www.sponsorship8-link.com", "Sponsor 2", "VISA", 856, "", "2026/10/20", "event1", "sponsor2",true, ValidationException.class
+                "https://www.sponsorship8-link.com", "Sponsor 2", "VISA", 856, "", "2026/10/20", "event1", "sponsor2", true, ValidationException.class
+        }, {
+                "https://www.sponsorship8-link.com", "Sponsor 1", "", 856, "4934124580909324", "2026/10/20", "event1", "sponsor1", true, ValidationException.class
+        }, {
+                "https://www.sponsorship8-link.com", "Sponsor 1", "VISA", 000, "4934124580909324", "2026/10/20", "event1", "sponsor1", true, ValidationException.class
+        }, {
+                "https://www.sponsorship8-link.com", "Sponsor 1", "VISA", 856, "1234", "2026/10/20", "event1", "sponsor1", true, ValidationException.class
+        }, {
+                "https://www.sponsorship8-link.com", "Sponsor 1", "VISA", 856, "4934124580909324", "2018/10/20", "event1", "sponsor1", true, ValidationException.class
+        }, {
+                "https://www.sponsorship8-link.com", "Sponsor 1", "VISA", 856, "4934124580909324", "2022/10/20", "event1", "sponsor1", null, ValidationException.class
         }
         };
         for (int i = 0; i < testingData.length; i++) {
             this.createSponsorshipTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (int) testingData[i][3],
                     (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6], (String) testingData[i][7]
-                    , (Boolean) testingData[i][8],(Class<?>) testingData[i][9]);
+                    , (Boolean) testingData[i][8], (Class<?>) testingData[i][9]);
         }
     }
 
@@ -101,11 +112,12 @@ public class ManageSponsorshipsTest extends AbstractTest {
 
 
     /*
-     * Testing functional requirement : 9.2 An actor that is authenticated as a sponsor must be able to manage their sponsorships
+     * Testing functional requirement : 33.1 An actor that is authenticated as a sponsor must be able to manage their sponsorships which includes
+     * editing them.
      * Positive: A sponsor edits a sponsorship
      * Negative: A sponsor tries to edit a sponsorship with invalid data
      * Sentence coverage: 99%
-     * Data coverage: 33%
+     * Data coverage: 30%
      */
 
     @Test
@@ -145,11 +157,12 @@ public class ManageSponsorshipsTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : An actor who is authenticated as a sponsor must be able to de-activate his sponsorships.
-     * Positive: A sponsor successfully de-activate his sponsorship
-     * Negative: A sponsor tries to de-activate a de-activated sponsorship
+     * Testing functional requirement : 33.1 An actor that is authenticated as a sponsor must be able to manage their sponsorships which includes
+     * deactivating them.
+     * Positive: A sponsor deactivates a sponsorship.
+     * Negative: A sponsor tries to deactivate a deactivated sponsorship.
      * Sentence coverage: 100%
-     * Data coverage: Not applicable
+     * Data coverage: Not applicable.
      */
 
     @Test
@@ -186,13 +199,13 @@ public class ManageSponsorshipsTest extends AbstractTest {
     }
 
 
-
     /*
-     * Testing functional requirement : An actor who is authenticated as a sponsor must be able to activate his sponsorships.
-     * Positive: A sponsor successfully activate his sponsorship
-     * Negative: A sponsor tries to activate an activated sponsorship
+     * Testing functional requirement : 33.1 An actor that is authenticated as a sponsor must be able to manage their sponsorships which includes
+     * activating them.
+     * Positive: A sponsor activates a sponsorship.
+     * Negative: A sponsor tries to activate a activated sponsorship.
      * Sentence coverage: 100%
-     * Data coverage: Not applicable
+     * Data coverage: Not applicable.
      */
 
     @Test
@@ -229,11 +242,12 @@ public class ManageSponsorshipsTest extends AbstractTest {
 
 
     /*
-     * Testing functional requirement : An actor who is authenticated as a sponsor must be able to activate his sponsorships.
-     * Positive: A sponsor successfully activate his sponsorship
-     * Negative: A sponsor tries to activate an activated sponsorship
+     * Testing functional requirement : 33.1 An actor that is authenticated as a sponsor must be able to manage their sponsorships which includes
+     * listing them.
+     * Positive: A sponsor list his sponsorships.
+     * Negative: A reader tries to list sponsorships.
      * Sentence coverage: 100%
-     * Data coverage: Not applicable
+     * Data coverage: Not applicable.
      */
 
     @Test
@@ -249,6 +263,7 @@ public class ManageSponsorshipsTest extends AbstractTest {
             this.templateListSponsorship((String) testingData[i][0], (Class<?>) testingData[i][1]);
 
     }
+
     public void templateListSponsorship(final String sponsor, final Class<?> expected) {
 
         Class<?> caught;

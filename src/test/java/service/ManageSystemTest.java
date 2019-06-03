@@ -34,10 +34,10 @@ public class ManageSystemTest extends AbstractTest {
 
     /*
      * Testing functional requirement : 35.10 An actor who is authenticated as an administrator must be able to launch a process that flags the actor
-     * of the system as spammerr or not-spammers
-     * Positive: An admin launch the process
-     * Negative: A rookie tries to launch the process
-     * Sentence coverage: 70.9%
+     * of the system as spammer or not-spammers.
+     * Positive: An admin launches the process.
+     * Negative: A referee tries to launch the process.
+     * Sentence coverage: 96%
      * Data coverage: Not applicable
      */
 
@@ -71,11 +71,11 @@ public class ManageSystemTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 35.?? An actor who is authenticated as an administrator must be able to launch a process that flags the actor
-     * of the system as spammerr or not-spammers
-     * Positive: An admin launch the process
-     * Negative: A rookie tries to launch the process
-     * Sentence coverage: 70.9%
+     * Testing functional requirement : 35.1 An actor who is authenticated as an administrator must be able to launch a process that calculates
+     * the score of the users.
+     * Positive: An admin launches the process
+     * Negative: An organizer tries to launch the process
+     * Sentence coverage: 68%
      * Data coverage: Not applicable
      */
 
@@ -110,9 +110,9 @@ public class ManageSystemTest extends AbstractTest {
 
     /*
      * Testing functional requirement : 35.5 An actor who is authenticated as an administrator must be able to ban an actor with the spammer flag
-     * Positive: An administrator bans a rookie with spammer flag
-     * Negative: An administrator tries to bans a rookie with not-spammer flag
-     * Sentence coverage: 93.1%
+     * Positive: An administrator bans a reader with spammer flag
+     * Negative: An administrator tries to bans a reader with not-spammer flag
+     * Sentence coverage: 94.9%
      * Data coverage: Not applicable
      */
 
@@ -151,7 +151,7 @@ public class ManageSystemTest extends AbstractTest {
      * Testing functional requirement : 35.6 An actor who is authenticated as an administrator must be able to unban an actor who was
      * previously banned.
      * Positive: An administrator unbans an actor who was previously banned
-     * Negative: An administrator tries to unban an acto who is not banned.
+     * Negative: An administrator tries to unban an actor who is not banned.
      * Sentence coverage: 100%
      * Data coverage: Not applicable
      */
@@ -189,11 +189,11 @@ public class ManageSystemTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 35.9 An actor who is authenticated as an administrator must be able to launch a process that flags the actor
-     * of the system as spammerr or not-spammers
+     * Testing functional requirement : 35.9 An actor who is authenticated as an administrator must be able to launch a process that automatically deletes
+     * inactive books.
      * Positive: An admin launch the process
-     * Negative: A rookie tries to launch the process
-     * Sentence coverage: 70.9%
+     * Negative: A referee tries to launch the process
+     * Sentence coverage: 100%
      * Data coverage: Not applicable
      */
 
@@ -227,11 +227,11 @@ public class ManageSystemTest extends AbstractTest {
     }
 
     /*
-     * Testing functional requirement : 35.8 An actor who is authenticated as an administrator must be able to launch a process that flags the actor
-     * of the system as spammerr or not-spammers
+     * Testing functional requirement : 35.8 An actor who is authenticated as an administrator must be able to launch a process automatically that de-activates the sponsorships whose credit
+     * cards have expired.
      * Positive: An admin launch the process
-     * Negative: A rookie tries to launch the process
-     * Sentence coverage: 70.9%
+     * Negative: A referee tries to launch the process
+     * Sentence coverage: 73.3%
      * Data coverage: Not applicable
      */
 
@@ -256,7 +256,7 @@ public class ManageSystemTest extends AbstractTest {
 
         try {
             this.authenticate(user);
-            this.administratorService.computeAllSpam();
+            this.administratorService.desactivateExpiredSponsorships();
         } catch (Throwable oops) {
             caught = oops.getClass();
         }
@@ -268,7 +268,7 @@ public class ManageSystemTest extends AbstractTest {
      * Testing functional requirement : 35.3 An actor that is authenticated as a administraotr must be able to broadcast a message
      * Positive: An administrator broadcast a message.
      * Negative: An administrator tries to broadcast a message with invalid fields.
-     * Sentence coverage: 92%
+     * Sentence coverage: 100%
      * Data coverage: 50%
      */
 
