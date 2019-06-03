@@ -16,6 +16,7 @@ import utilities.AbstractTest;
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 @ContextConfiguration(locations = {
@@ -207,6 +208,7 @@ public class ManageSponsorshipsTest extends AbstractTest {
             this.templateActivateSponsorship((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 
     }
+
     public void templateActivateSponsorship(final String sponsor, final String sponsorship, final Class<?> expected) {
 
         Class<?> caught;
@@ -226,7 +228,42 @@ public class ManageSponsorshipsTest extends AbstractTest {
     }
 
 
+    /*
+     * Testing functional requirement : An actor who is authenticated as a sponsor must be able to activate his sponsorships.
+     * Positive: A sponsor successfully activate his sponsorship
+     * Negative: A sponsor tries to activate an activated sponsorship
+     * Sentence coverage: 100%
+     * Data coverage: Not applicable
+     */
 
+    @Test
+    public void listSponsorshipDriver() {
+        final Object testingData[][] = {
+                {
+                        "sponsor1", null
+                }, {
+                "reader1", IllegalArgumentException.class
+        }
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.templateListSponsorship((String) testingData[i][0], (Class<?>) testingData[i][1]);
+
+    }
+    public void templateListSponsorship(final String sponsor, final Class<?> expected) {
+
+        Class<?> caught;
+        caught = null;
+        try {
+
+            super.authenticate(sponsor);
+
+            final Collection<Sponsorship> sp = this.sponsorshipService.findBySponsor(super.getEntityId(sponsor));
+
+        } catch (final Throwable e) {
+            caught = e.getClass();
+        }
+        super.checkExceptions(expected, caught);
+    }
 
 
 }
