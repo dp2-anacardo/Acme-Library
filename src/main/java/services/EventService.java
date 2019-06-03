@@ -79,6 +79,7 @@ public class EventService {
         Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ORGANIZER"));
 
         Assert.notNull(e);
+
         Event res;
 
         e.setIsFinal(false);
@@ -120,7 +121,6 @@ public class EventService {
             result = this.create();
         } else{
             result = this.eventRepository.findOne(event.getId());
-
         }
 
         result.setTitle(event.getTitle());

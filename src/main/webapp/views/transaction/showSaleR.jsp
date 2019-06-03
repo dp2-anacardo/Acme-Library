@@ -20,6 +20,32 @@
     <b><spring:message code="book.author"/></b>: <jstl:out value="${t.book.author}"/><br>
     <b><spring:message code="book.publisher"/></b>: <jstl:out value="${t.book.publisher}"/><br>
     <b><spring:message code="book.numPag"/></b>: <jstl:out value="${t.book.pageNumber}"/><br>
+    <b><spring:message code="book.language"/></b>: <jstl:out value="${t.book.languageB}"/><br>
+    <b> <spring:message code="book.status"/> </b>
+    <jstl:if test="${lang == 'en'}">
+        <jstl:out value="${t.book.status}"/>
+    </jstl:if>
+
+    <jstl:if test="${lang == 'es'}">
+        <jstl:choose>
+            <jstl:when test="${t.book.status == 'VERY GOOD'}">
+                <spring:message code="book.status.veryGood"/>
+            </jstl:when>
+
+            <jstl:when test="${t.book.status == 'GOOD'}">
+                <spring:message code="book.status.good"/>
+            </jstl:when>
+
+            <jstl:when test="${t.book.status == 'BAD'}">
+                <spring:message code="book.status.bad"/>
+            </jstl:when>
+
+            <jstl:when test="${t.book.status == 'VERY BAD'}">
+                <spring:message code="book.status.veryBad"/>
+            </jstl:when>
+        </jstl:choose>
+    </jstl:if>
+    <br>
     <b><spring:message code="book.photo"/></b>: <img src="${t.book.photo}" height="300" width="200"/>
 </fieldset>
 </security:authorize>

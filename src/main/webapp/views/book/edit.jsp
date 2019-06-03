@@ -20,7 +20,7 @@
 
         <acme:textbox code="book.publisher" path="publisher" />
 
-        <acme:textbox code="book.language" path="language" />
+        <acme:textbox code="book.language" path="languageB" />
 
         <acme:textarea code="book.description" path="description" />
 
@@ -48,10 +48,10 @@
             <spring:message code="book.categories"/>
         </form:label>
         <form:select path="categories">
-            <jstl:if test="${pageContext.response.locale.language == 'es'}">
+            <jstl:if test="${lang =='es'}">
                 <form:options items="${categories}" itemValue="id" itemLabel="nameEs"/>
             </jstl:if>
-            <jstl:if test="${pageContext.response.locale.language == 'en'}">
+            <jstl:if test="${lang == 'en'}">
                 <form:options items="${categories}" itemValue="id" itemLabel="nameEn"/>
             </jstl:if>
         </form:select>

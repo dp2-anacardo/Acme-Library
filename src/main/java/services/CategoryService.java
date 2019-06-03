@@ -108,12 +108,14 @@ public class CategoryService {
             result = this.create();
         } else {
             result = this.categoryRepository.findOne(category.getId());
+
         }
         final Boolean existsES = existsES(category);
         final Boolean existsEN = existsEN(category);
 
         result.setNameEn(category.getNameEn());
         result.setNameEs(category.getNameEs());
+
 
         validator.validate(result, binding);
 

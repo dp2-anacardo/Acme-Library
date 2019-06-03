@@ -14,7 +14,7 @@
     <acme:showtext fieldset="true" code="book.title" value="${book.title}"/>
     <acme:showtext fieldset="true" code="book.author" value="${book.author}"/>
     <acme:showtext fieldset="true" code="book.publisher" value="${book.publisher}"/>
-    <acme:showtext fieldset="true" code="book.language" value="${book.language}"/>
+    <acme:showtext fieldset="true" code="book.language" value="${book.languageB}"/>
     <acme:showtext fieldset="true" code="book.description" value="${book.description}"/>
     <acme:showtext fieldset="true" code="book.pageNumber" value="${book.pageNumber}"/>
 
@@ -23,7 +23,7 @@
     </jstl:if>
 
     <jstl:if test="${lang == 'es'}">
-        <fieldset><legend><b> <spring:message code="book.categories"/> </b></legend>
+        <fieldset><legend><b> <spring:message code="book.status"/> </b></legend>
             <jstl:choose>
                 <jstl:when test="${book.status == 'VERY GOOD'}">
                     <spring:message code="book.status.veryGood"/>

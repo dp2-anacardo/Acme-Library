@@ -5,6 +5,7 @@ import domain.Book;
 import domain.Reader;
 import domain.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -197,6 +198,8 @@ public class TransactionController extends AbstractController {
             Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
             Assert.isTrue(transaction.getSeller() == r || transaction.getBuyer() == r);
             result = new ModelAndView("transaction/reader/showSale");
+            final String language = LocaleContextHolder.getLocale().getLanguage();
+            result.addObject("lang", language);
             result.addObject("t",transaction);
         }catch (Throwable oops){
             result = new ModelAndView("redirect:/");
@@ -214,6 +217,8 @@ public class TransactionController extends AbstractController {
             Assert.isTrue(!transaction.getIsFinished());
 
             result = new ModelAndView("transaction/show");
+            final String language = LocaleContextHolder.getLocale().getLanguage();
+            result.addObject("lang", language);
             result.addObject("transaction", transaction);
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/");
