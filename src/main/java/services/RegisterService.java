@@ -54,6 +54,7 @@ public class RegisterService {
         Assert.isTrue(event.getMaximumCapacity() > 0);
 
         Assert.isTrue(event.getActualCapacity() < event.getMaximumCapacity());
+        Assert.isTrue(new Date().before(event.getDate()));
 
         Register register = new Register();
         register.setMoment(new Date());
