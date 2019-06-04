@@ -16,7 +16,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
-
+@Table(indexes = {
+        @Index(columnList = "isSpam")
+})
 public class Message extends DomainEntity {
 
     // Attributes -------------------------------------------------------------
