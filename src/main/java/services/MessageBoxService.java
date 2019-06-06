@@ -92,6 +92,12 @@ public class MessageBoxService {
         this.messageBoxRepository.delete(messageBox);
     }
 
+    public void deleteInformation(final MessageBox messageBox) {
+        Assert.notNull(messageBox);
+
+        this.messageBoxRepository.delete(messageBox);
+    }
+
     // Other methods
 
     public Collection<MessageBox> findAllByActor(final int actorID) {

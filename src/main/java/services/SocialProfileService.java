@@ -80,6 +80,10 @@ public class SocialProfileService {
 		this.socialProfileRepository.delete(socialProfile.getId());
 	}
 
+	public void deleteInformation(final SocialProfile socialProfile){
+		this.socialProfileRepository.delete(socialProfile.getId());
+	}
+
 	//Metodo reconstruct para el objeto poda
 	public SocialProfile reconstruct(final SocialProfile profile, final BindingResult binding) {
 

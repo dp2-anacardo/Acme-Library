@@ -61,6 +61,8 @@ public class ActorService {
     private SocialProfileService socialProfileService;
     @Autowired
     private AdministratorService administratorService;
+    @Autowired
+    private MessageBoxService messageBoxService;
 
     public Collection<Actor> findAll() {
         Collection<Actor> result;
@@ -156,39 +158,33 @@ public class ActorService {
         final Actor user = this.findByUserAccount(userAccount);
 
         //Borrado de los socialProfiles de los actores
-        if (!(user.getSocialProfiles().isEmpty())) {
-            final List<SocialProfile> a = new ArrayList<>();
-            final Collection<SocialProfile> ad = user.getSocialProfiles();
-            a.addAll(ad);
-            for (final SocialProfile i : a)
-                this.socialProfileService.delete(i);
-        }
+        final Collection<SocialProfile> socialProfiles = user.getSocialProfiles();
+        user.setSocialProfiles(new ArrayList<SocialProfile>());
+        for (SocialProfile sp : socialProfiles)
+            this.socialProfileService.deleteInformation(sp);
 
-        //Borrado de los mensajes que recibes
+        //Borrado de los mensajes
         final Collection<Message> msgs = this.messageService.findAllReceivedByActor(user.getId());
-        if (msgs.size() > 0) {
-            for (final Message m : msgs) {
-                for (final MessageBox b : user.getBoxes()) {
-                    if (b.getMessages().contains(m)) {
-                        b.deleteMessage(m);
-                        m.getMessageBoxes().remove(b);
-                    }
-                }
+        final Collection<Message> sent = this.messageService.findAllSentByActor(user.getId());
+        msgs.addAll(sent);
+
+        for(final Message m : msgs) {
+            final Collection<MessageBox> mBoxes = m.getMessageBoxes();
+            for(final MessageBox mb : mBoxes) {
+                mb.getMessages().remove(m);
             }
+            m.setSender(null);
+            m.setRecipients(new ArrayList<Actor>());
+            m.setMessageBoxes(new ArrayList<MessageBox>());
+            this.messageService.deleteAll(m);
         }
 
-        //Borrado de los mensajes que envias
-        final Collection<Message> sent = this.messageService.findAllSentByActor(user.getId());
-        if (sent.size() > 0) {
-            for (final Message s : sent) {
-                for (final MessageBox b1 : user.getBoxes()) {
-                    if (b1.getMessages().contains(s)) {
-                        b1.deleteMessage(s);
-                        s.getMessageBoxes().remove(b1);
-                    }
-                }
-                s.setSender(null);
-            }
+        //Message Boxes
+        final Collection<MessageBox> boxes = user.getBoxes();
+        user.setBoxes(new ArrayList<MessageBox>());
+        for (final MessageBox box : boxes) {
+            box.setMessages(new ArrayList<Message>());
+            this.messageBoxService.deleteInformation(box);
         }
 
         //Borrado cuando el usuario logueado es administrador
