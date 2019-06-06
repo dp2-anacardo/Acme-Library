@@ -14,6 +14,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "isSale, price, isFinished")
+})
 public class Transaction extends DomainEntity{
 
     //Attributes---------------------------------------------------------------------

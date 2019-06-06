@@ -53,6 +53,7 @@ public class RegisterService {
         Assert.isTrue(event.getMaximumCapacity() > 0);
 
         Assert.isTrue(event.getActualCapacity() < event.getMaximumCapacity());
+        Assert.isTrue(new Date().before(event.getDate()));
 
         Register register = new Register();
         register.setMoment(new Date());
@@ -70,15 +71,13 @@ public class RegisterService {
     }
 
     public void cancel(int registerId, int eventId){
-        UserAccount userAccount;
-        userAccount = this.actorService.getActorLogged().getUserAccount();
-        Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("READER"));
 
         Event event = this.eventService.findOne(eventId);
         Assert.notNull(event);
 
         Register register = this.registerRepository.findOne(registerId);
         Assert.notNull(register);
+        Assert.isTrue(register.getReader().equals(this.readerService.findOne(this.actorService.getActorLogged().getId())));
 
         Reader r = this.readerService.findOne(this.actorService.getActorLogged().getId());
         Collection<Event> events = this.getEventsPerReader(r);
@@ -86,12 +85,13 @@ public class RegisterService {
 
 
         Date now = new Date();
-        Assert.isTrue(now.before(register.getMoment()));
+        Assert.isTrue(now.before(event.getDate()));
 
         Collection<Register> registers = event.getRegisters();
         registers.remove(register);
 
-        event.setRegisters(registers);
+        //event.setRegisters(registers);
+        this.delete(registerId);
     }
 
     public void delete(final int registerId){

@@ -13,6 +13,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "isFinal, date")
+})
 public class Event extends DomainEntity {
     private String title;
     private String description;

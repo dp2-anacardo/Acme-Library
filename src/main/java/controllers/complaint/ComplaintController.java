@@ -137,7 +137,7 @@ public class ComplaintController extends AbstractController {
             complaint = this.complaintService.autoAssign(complaint);
             this.complaintService.saveAutoassign(complaint);
 
-            result = new ModelAndView("redirect:/complaint/referee/listUnassigned.do");
+            result = new ModelAndView("redirect:/complaint/referee/list.do");
         } catch (Throwable oops){
             result = new ModelAndView("redirect:/complaint/referee/listUnassigned.do");
         }

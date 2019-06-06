@@ -15,6 +15,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "title, author, description, status")
+})
 public class Book extends DomainEntity{
     private String title;
     private String author;

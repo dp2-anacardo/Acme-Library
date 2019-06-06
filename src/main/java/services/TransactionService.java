@@ -87,6 +87,7 @@ public class TransactionService {
     public Transaction saveSale(Transaction t){
         if(t.getId() == 0){
             t.setSeller(this.readerService.findOne(this.actorService.getActorLogged().getId()));
+            Assert.isTrue(t.getBook().getReader().equals(t.getSeller()));
             t.setTicker(tickerGenerator());
             t.setIsSale(true);
             t.setIsFinished(false);

@@ -1,4 +1,5 @@
 #./src/main/resources/Entities.map
+<<<<<<< HEAD
 #Thu Jun 06 13:39:32 CEST 2019
 notificationBoxReader1=1620
 inBoxReferee2=1602
@@ -98,3 +99,22 @@ sponsor1=1607
 inBoxReader2=1624
 notificationBoxReader2=1625
 inBoxReader1=1619
+=======
+#Thu Jun 06 03:11:06 CEST 2019
+admin1=18
+spamBoxAdmin1=21
+outBoxAdmin1=20
+category8=31
+trashBoxAdmin1=22
+configuration1=32
+category7=30
+category6=29
+category5=28
+inBoxAdmin1=19
+category4=27
+category3=26
+notificationBoxAdmin1=23
+category2=25
+userAccount1=17
+category1=24
+>>>>>>> c0039adedb7744dedc9d3fdf25eda254eb3dc8d2

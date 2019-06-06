@@ -14,6 +14,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "isFinal")
+})
 public class Report extends DomainEntity{
 
     private Date moment;
