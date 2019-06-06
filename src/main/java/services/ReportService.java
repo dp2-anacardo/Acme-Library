@@ -6,7 +6,6 @@ import domain.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import repositories.ReportRepository;

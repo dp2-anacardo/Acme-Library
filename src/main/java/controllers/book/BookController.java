@@ -153,12 +153,6 @@ public class BookController extends AbstractController {
         return result;
     }
 
-    private ModelAndView createEditModelAndView(final Book book) {
-        ModelAndView result;
-        result = this.createEditModelAndView(book, null);
-        return result;
-    }
-
     private ModelAndView createEditModelAndView(final Book book, final String messageCode) {
         ModelAndView result;
 

@@ -32,7 +32,4 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("select t from Transaction t join t.complaints c where c.id=?1")
     Transaction getTransactionByComplaint(final int complaintId);
 
-    @Query("select t from Transaction t where t.isSale = false and t.seller.id =?1")
-    Collection<Transaction> getExchangesByReader(final int readerId);
-
 }

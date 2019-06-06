@@ -1,13 +1,11 @@
 package converters;
 
 import domain.Offer;
-import domain.SocialProfile;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import repositories.OfferRepository;
-import repositories.SocialProfileRepository;
 
 import javax.transaction.Transactional;
 

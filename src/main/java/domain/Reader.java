@@ -3,9 +3,11 @@ package domain;
 
 import com.google.gson.annotations.Expose;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
-import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)

@@ -1,7 +1,6 @@
 
 package converters;
 
-import domain.Administrator;
 import domain.Reader;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

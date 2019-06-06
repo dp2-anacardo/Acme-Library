@@ -1,7 +1,6 @@
 package converters;
 
 import domain.Book;
-import domain.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

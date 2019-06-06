@@ -104,14 +104,26 @@ public class CategoryService {
 
     public Category reconstruct(Category category, BindingResult binding) {
         Category result;
+
+        Boolean existsES = false;
+        Boolean existsEN = false;
+
         if (category.getId() == 0) {
             result = this.create();
         } else {
             result = this.categoryRepository.findOne(category.getId());
 
         }
-        final Boolean existsES = existsES(category);
-        final Boolean existsEN = existsEN(category);
+
+        if (result.getId() == 0) {
+            existsES = existsES(category);
+            existsEN = existsEN(category);
+        } else {
+            if (!result.equalsES(category))
+                existsES = existsES(category);
+            if (!result.equalsEN(category))
+                existsEN = existsEN(category);
+        }
 
         result.setNameEn(category.getNameEn());
         result.setNameEs(category.getNameEs());

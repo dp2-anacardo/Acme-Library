@@ -152,22 +152,6 @@ public class SponsorshipService {
         return sponsorships;
     }
 
-    public List<Sponsorship> findAllByParade(final int eventID) {
-        Assert.notNull(eventID);
-
-        List<Sponsorship> sponsorships;
-
-        sponsorships = this.sponsorshipRepository.findAllByEvent(eventID);
-
-        return sponsorships;
-    }
-
-    public Collection<Sponsorship> findAllActive() {
-        final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllActive();
-
-        return sponsorships;
-    }
-
     public Collection<Sponsorship> findAllExpiredCreditCard() {
         final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllExpiredCreditCard();
 

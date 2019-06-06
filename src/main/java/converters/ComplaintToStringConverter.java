@@ -1,7 +1,6 @@
 package converters;
 
 import domain.Complaint;
-import domain.Offer;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

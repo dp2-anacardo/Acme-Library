@@ -1,7 +1,6 @@
 package controllers.administrator;
 
 import controllers.AbstractController;
-import domain.Category;
 import domain.Organizer;
 import domain.Reader;
 import org.springframework.beans.factory.annotation.Autowired;

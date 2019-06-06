@@ -2,11 +2,8 @@
 package controllers.reader;
 
 import controllers.AbstractController;
-import datatype.CreditCard;
 import domain.Reader;
-import domain.Referee;
 import forms.ReaderForm;
-import forms.RefereeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AdministratorService;
 import services.ReaderService;
-import services.RefereeService;
 
 import javax.validation.Valid;
 

@@ -2,7 +2,10 @@ package controllers.finder;
 
 
 import controllers.AbstractController;
-import domain.*;
+import domain.Actor;
+import domain.Finder;
+import domain.Reader;
+import domain.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;

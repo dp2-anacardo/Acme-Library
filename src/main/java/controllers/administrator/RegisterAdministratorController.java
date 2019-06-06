@@ -2,7 +2,6 @@
 package controllers.administrator;
 
 import controllers.AbstractController;
-import datatype.CreditCard;
 import domain.Administrator;
 import forms.AdministratorForm;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -33,7 +33,7 @@
 
 	<definition name="administrator/management/showActor" extends="master.page">
 		<put-attribute name="title" value="Show actor" />
-		<put-attribute name="body" value="/views/management/showActor.jsp" />
+		<put-attribute name="body" value="/views/administrator/showActor.jsp" />
 	</definition>
 
 	<definition name="administrator/dashboard" extends="master.page">

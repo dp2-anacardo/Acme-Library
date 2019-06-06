@@ -2,7 +2,6 @@ package controllers.category;
 
 import controllers.AbstractController;
 import domain.Category;
-import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.CategoryService;
 
-
+import javax.validation.ValidationException;
 import java.util.Collection;
 
 @Controller

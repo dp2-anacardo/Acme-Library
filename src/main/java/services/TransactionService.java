@@ -24,11 +24,7 @@ public class TransactionService {
     @Autowired
     private ActorService actorService;
     @Autowired
-    private BookService bookService;
-    @Autowired
     private ReaderService readerService;
-    @Autowired
-    private OfferService offerService;
     @Autowired
     private MessageService messageService;
     @Autowired
@@ -126,22 +122,6 @@ public class TransactionService {
         this.transactionRepository.delete(t);
     }
 
-    //ESTO PARA EL DELETE DE ACTOR
-    public void delete2(Transaction t){
-        if(t.getBuyer().equals(this.readerService.findOne(this.actorService.getActorLogged().getId()))) {
-            if (t.getIsSale()) {
-                this.bookService.deleteForced(t.getBook());
-                this.transactionRepository.delete(t);
-            } else {
-                for (Offer o : t.getOffers()) {
-                    this.offerService.delete(o);
-                }
-                this.bookService.deleteForced(t.getBook());
-                this.transactionRepository.delete(t);
-            }
-        }
-    }
-
     public void delete3(Transaction t){
         this.transactionRepository.delete(t);
     }
@@ -196,7 +176,4 @@ public class TransactionService {
         return this.transactionRepository.getTransactionByComplaint(complaintId);
     }
 
-    public Collection<Transaction> getExchangesByReader(final int readerId){
-        return this.transactionRepository.getExchangesByReader(readerId);
-    }
 }

@@ -188,12 +188,6 @@ public class EventController extends AbstractController {
         return result;
     }
 
-    private ModelAndView createEditModelAndView(Event event) {
-        ModelAndView result;
-        result = this.createEditModelAndView(event, null);
-        return result;
-    }
-
     private ModelAndView createEditModelAndView(Event event, final String messageCode) {
         ModelAndView result;
 

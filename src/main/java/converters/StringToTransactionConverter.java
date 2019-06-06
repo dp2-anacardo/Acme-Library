@@ -1,12 +1,10 @@
 package converters;
 
-import domain.Offer;
 import domain.Transaction;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import repositories.OfferRepository;
 import repositories.TransactionRepository;
 
 import javax.transaction.Transactional;

@@ -1,6 +1,5 @@
 package services;
 
-import domain.Book;
 import domain.Configuration;
 import domain.Finder;
 import domain.Transaction;

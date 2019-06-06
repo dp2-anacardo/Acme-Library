@@ -2,14 +2,12 @@
 package domain;
 
 import com.google.gson.annotations.Expose;
-import datatype.CreditCard;
 import org.hibernate.validator.constraints.*;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import security.UserAccount;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity

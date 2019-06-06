@@ -2,10 +2,7 @@
 package controllers.organizer;
 
 import controllers.AbstractController;
-import datatype.CreditCard;
-import domain.Administrator;
 import domain.Organizer;
-import forms.AdministratorForm;
 import forms.OrganizerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -101,14 +101,6 @@ public class MessageBoxService {
         return result;
     }
 
-    public MessageBox findOneByActorAndName(final int actorID, final String name) {
-        Assert.notNull(name);
-        final MessageBox result = this.messageBoxRepository.findOneByActorAndName(actorID, name);
-        Assert.notNull(result);
-
-        return result;
-    }
-
     public Collection<MessageBox> createSystemMessageBox() {
         final Collection<MessageBox> result = new ArrayList<MessageBox>();
         final Collection<Message> messages = new ArrayList<Message>();

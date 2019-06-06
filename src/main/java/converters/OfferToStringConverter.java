@@ -1,7 +1,6 @@
 package converters;
 
 import domain.Offer;
-import domain.SocialProfile;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

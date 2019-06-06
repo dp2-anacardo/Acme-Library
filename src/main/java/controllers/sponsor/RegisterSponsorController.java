@@ -2,10 +2,7 @@
 package controllers.sponsor;
 
 import controllers.AbstractController;
-import datatype.CreditCard;
-import domain.Referee;
 import domain.Sponsor;
-import forms.RefereeForm;
 import forms.SponsorForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AdministratorService;
-import services.RefereeService;
 import services.SponsorService;
 
 import javax.validation.Valid;

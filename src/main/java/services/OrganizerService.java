@@ -1,9 +1,11 @@
 
 package services;
 
-import domain.*;
+import domain.Actor;
+import domain.MessageBox;
+import domain.Organizer;
+import domain.SocialProfile;
 import forms.OrganizerForm;
-import forms.RefereeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import repositories.OrganizerRepository;
-import repositories.RefereeRepository;
 import security.Authority;
-import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;

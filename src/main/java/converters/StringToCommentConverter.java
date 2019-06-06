@@ -1,13 +1,11 @@
 package converters;
 
 import domain.Comment;
-import domain.Offer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import repositories.CommentRepository;
-import repositories.OfferRepository;
 
 import javax.transaction.Transactional;
 

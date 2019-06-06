@@ -1,13 +1,11 @@
 
 package converters;
 
-import domain.Administrator;
 import domain.Reader;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import repositories.AdministratorRepository;
 import repositories.ReaderRepository;
 
 import javax.transaction.Transactional;

@@ -2,7 +2,6 @@
 package services;
 
 import domain.*;
-import forms.OrganizerForm;
 import forms.ReaderForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -10,10 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import repositories.OrganizerRepository;
 import repositories.ReaderRepository;
 import security.Authority;
-import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
